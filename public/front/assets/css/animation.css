@@ -1,0 +1,98 @@
+@keyframes pulse_animation{
+  0% {
+    box-shadow: 0 0 0 0 rgba(254, 224, 0, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 55px rgba(254, 224, 0, 0);
+  }
+}
+
+/* Animate */
+.animate{
+	animation-duration: 0.4s;
+	-webkit-animation-duration: 0.4s;
+	-moz-animation-duration: 0.4s;
+	-o-animation-duration: 0.4s;
+	animation-fill-mode: both;
+	-webkit-animation-fill-mode: both;
+	-moz-animation-fill-mode: both;
+	-o-animation-fill-mode: both;
+}
+
+/* Menu Fixed */
+@keyframes menuFix{
+  0% {
+    top: -20px;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+/* Nav Menu */
+@keyframes slideIn{
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  100% {
+    transform:translateY(0rem);
+    opacity: 1;
+  }
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes slideIn{
+  0% {
+    -webkit-transform: translateY(2rem);
+    -webkit-opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    -webkit-opacity: 1;
+  }
+  0% {
+    -webkit-transform: translateY(2rem);
+    -webkit-opacity: 0;
+  }
+}
+.slideIn{
+  -webkit-animation-name: slideIn;
+  animation-name: slideIn;
+}
+
+/* Back To Top Btn */
+@keyframes bcktop{
+  0% {
+    opacity:0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity:1;
+    transform: translateY(0px);
+  }
+}
+
+/* Fade In */
+@keyframes fadeIn{
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Fade Out */
+@keyframes fadeOut{
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
