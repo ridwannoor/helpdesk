@@ -1,4 +1,12 @@
-
+<style>
+  option {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+</style>
+  
+  
   <div class="modal fade" id="sertifikat_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -21,7 +29,7 @@
               <label for="recipient-name" class="form-control-label">*Klasifikasi :</label>
               <select name="vendorklasifikasi_id" id="klasifikasi" class="form-control m-bootstrap-select m_selectpicker" data-live-search="true" required>
                     @foreach ($vendorklasifikasi as $item)
-                        <option value="{{ $item->id }}">{{ $item->kode . " - " . $item->name }}</option>
+                        <option data-content="{{ $item->kode . ' - ' . (strlen($item->name) > 90 ? substr($item->name,0,90).' ...' : $item->name) }}" value="{{ $item->id }}"></option>
                     @endforeach
               </select>
             </div>
