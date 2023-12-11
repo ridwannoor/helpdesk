@@ -8,6 +8,7 @@ use App\Models\Banego;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Menu;
 use App\Models\Lokasi;
+use App\Models\Bidok;
 use App\Models\Divisi;
 use App\Models\Dokpekerjaan;
 use App\Models\Vendor;
@@ -57,6 +58,7 @@ class BanegoController extends Controller
     public function create()
     {
         $lokasis = Lokasi::all();
+        $bidoks = Bidok::all();
         $vendors = Vendor::orderBy('namaperusahaan', 'ASC')->get();
         $users = Auth::user()->userdetails()->with('menu')->get();           
         $noUrutAkhir = $this->GenerateNumber();
@@ -66,7 +68,7 @@ class BanegoController extends Controller
         $doks = Dokpekerjaan::orderBy('detail', 'ASC')->get();
         $judul = 'Tambah BA Nego';
         $jams = Jaminan::all();
-        return view('banego.add', compact('judul','users','pref','lokasis', 'vendors', 'doks', 'divisis', 'noUrutAkhir', 'jams')); 
+        return view('banego.add', compact('judul','bidoks','users','pref','lokasis', 'vendors', 'doks', 'divisis', 'noUrutAkhir', 'jams')); 
     }
 
     /**
