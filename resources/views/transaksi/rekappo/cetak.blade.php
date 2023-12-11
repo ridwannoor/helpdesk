@@ -6,43 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{$judul}}</title>
 
-    <!--begin::Global Theme Styles -->
-    {{-- <link href="{{ asset('assets/vendors/base/vendors.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/demo/default/base/style.bundle.css') }}" rel="stylesheet" type="text/css" /> --}}
-    <!--end::Global Theme Styles -->
-    {{-- <link rel="stylesheet" href="https://code.jquery.com/jquery-3.3.1.js"> --}}
-    {{-- <link href="{{ asset('assets/vendors/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"
-    type="text/css" /> --}}
-    {{-- https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css --}}
-    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/> --}}
-    {{-- <link href="{{asset('assets/vendors/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet"
-    type="text/css" /> --}}
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css}}">
-    {{-- <link href="{{ asset('assets/vendors/base/vendors.bundle.css') }}" rel="stylesheet" type="text/css" /> --}}
-    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> --}}
-
-    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script> --}}
-
-    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> --}}
-    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/usm/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> --}}
-    {{-- <style type="text/css">
-        p{
-          font-family: sans-serif;
-          line-height: 1.75em;
-          font-size:   1rem ;
-        }
-        i { 
-          font-family: sans;
-          color: orange;
-        }
-      </style> --}}
     <style>
         body {
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -127,16 +90,6 @@
                 src="{{ public_path('data_file/'.$rekappos->preference->image) }}" width="300px" alt=""></p>
     </header>
     <div id="container">
-        {{-- <div class="container-fluid"> --}}
-        {{-- <div class="row" style="margin:2em">      
-       <div class="col-sm-12">
-         <img src="{{ public_path('data_file/'.$rekappos->preference->image) }}" class="pull-right" width="300px"
-        alt="">
-    </div>
-    </div> --}}
-    {{-- <div class="row" style="margin:3em">
-        <div class="col-sm-12 ">
-            {{-- <h1 class="align-bottom text-center"><strong>{{$judul}}</strong></h1> --}}
 
     <div class="row">
         <h1 style="text-align: center"><strong>{{$judul}} (PO)</strong></h1>
@@ -144,18 +97,13 @@
             <table class="table" border="1">
                 <tbody>
                     <tr>
-                        {{-- <td>Vendor : </td> --}}
                         <td colspan="4" style="vertical-align : top;text-align:justify;">
                             <strong class="text-uppercase">Vendor</strong><br>
                             {{ $rekappos->vendor->namaperusahaan }}, {{ $rekappos->vendor->badanusaha->kode }} <br>
                             {{ $rekappos->vendor->alamat }} <br>
                             {{ $rekappos->vendor->email }}<br>
                             {{ $rekappos->vendor->notelp }}<br>
-                            {{-- {{ $rekappos->vendor->bank->name }} <br>
-                            {{ $rekappos->vendor->no_rek }} <br>
-                            {{ $rekappos->vendor->pemilik_rek }} --}}
                         </td>
-                        {{-- <td width="50px"></td> --}}
                         <td colspan="4" style="vertical-align : top;text-align:justify;">
                             <strong class="text-uppercase">Pemesanan</strong><br>
                             {{ $rekappos->preference->nama_perusahaan }}<br>
@@ -166,13 +114,11 @@
                     </tr>
                     <tr>
                         <td colspan="4" width=50%>Purchase Order : <span>{{$rekappos->no_po}}</span><br></td>
-                        {{-- <td></td> --}}
                         <td colspan="4" width=50%>No. Kontrak : <span>{{$rekappos->no_kontrak}}</span><br></td>
                     </tr>
                     <tr>
                         <td colspan="4" width=50%>Tanggal :
                             <span>{{  date("d-m-Y", strtotime($rekappos->tanggal))}}</span></td>
-                        {{-- <td></td> --}}
                         <td colspan="4" width=50%>Waktu Pelaksanaan :
                             <span>{{  date("d-m-Y", strtotime($rekappos->start_date))}}
                                 /
@@ -182,7 +128,6 @@
                     <tr>
                         <td colspan="4" width=50%>Pekerjaan : {{ $rekappos->nama_pekerjaan }} -
                             {{ $rekappos->lokasi->kode }}</td>
-                        {{-- <td></td> --}}
                         <td colspan="4" width=50%>Pajak :
                             @if ($rekappos->pajak == "exclude")
                             <span>Exclude Tax (V0)</span>
@@ -204,17 +149,14 @@
                         </td>
                     </tr>
                 </tbody>
-                {{-- </table>
-            <table class="table" border="1" > --}}
                 <thead>
                     <tr>
-                        <th width="10px" style="vertical-align : middle;text-align:center; ">No</th>
-                        <th width="400px" colspan="3" style="vertical-align : middle;text-align:center;">Material</th>
-                        <th width="10px" style="vertical-align : middle;text-align:center;">Satuan</th>
-                        {{-- <th width="50px" style="vertical-align : middle;text-align:center;">Ppn</th> --}}
-                        <th width="10px" style="vertical-align : middle;text-align:center; ">Qty</th>
-                        <th width="140px" style="vertical-align : middle;text-align:center;">Harga</th>
-                        <th width="140px" style="vertical-align : middle;text-align:center;">Jumlah</th>
+                        <th  style="vertical-align : middle;text-align:center; ">No</th>
+                        <th  colspan="3" style="vertical-align : middle;text-align:center;">Material</th>
+                        <th  style="vertical-align : middle;text-align:center;">Satuan</th>
+                        <th  style="vertical-align : middle;text-align:center; ">Qty</th>
+                        <th  style="vertical-align : middle;text-align:center;">Harga</th>
+                        <th  style="vertical-align : middle;text-align:center;">Jumlah</th>
                     </tr>
                 </thead>
                 @php
@@ -235,13 +177,6 @@
                         <td colspan="3" style="vertical-align : middle;text-align:left;">
                             {!! $item->hargabarang->nama_brg !!}</td>
                         <td style="vertical-align : middle;text-align:center;">{{ $item->satuan }}</td>
-                        {{-- <td style="vertical-align : middle;text-align:center;">
-                            @if ($rekappos->pajak == 0)
-                            <span>V0</span>
-                            @else
-                            <span>V1</span>
-                            @endif
-                        </td> --}}
                         <td style="vertical-align : middle;text-align:center;">{{ $item->qty }}</td>
                         <td style="vertical-align : middle;text-align:right;">{{$rekappos->currency->name . " " . format_uang($item->harga) }}</td>
                         <td style="vertical-align : middle;text-align:right;">{{$rekappos->currency->name . " " . format_uang($jumlah) }}</td>
@@ -323,10 +258,6 @@
                     @endif
                     @if($rekappos->biaya_kirim)
                     <tr>
-                        {{-- <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td> --}}
                         <td colspan="7" style="vertical-align : middle;text-align:right;">Biaya Kirim</td>
                         <td style="vertical-align : middle;text-align:right;">{{$rekappos->currency->name . " " . format_uang($rekappos->biaya_kirim) }}
                         </td>
@@ -334,10 +265,6 @@
                     @endif
                     @if($rekappos->custom)
                     <tr>
-                        {{-- <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td> --}}
                         <td colspan="7" style="vertical-align : middle;text-align:right;">{{ $rekappos->custom }}</td>
                         <td style="vertical-align : middle;text-align:right;">{{$rekappos->currency->name . " " . format_uang($rekappos->custom1) }}
                         </td>
@@ -345,20 +272,12 @@
                     @endif
                     @if($rekappos->custom2)
                     <tr>
-                        {{-- <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td> --}}
                         <td colspan="7" style="vertical-align : middle;text-align:right;">{{ $rekappos->custom2 }}</td>
                         <td style="vertical-align : middle;text-align:right;">{{$rekappos->currency->name . " " . format_uang($rekappos->custom3) }}
                         </td>
                     </tr>
                     @endif
                     <tr>
-                        {{-- <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td> --}}
                         <td colspan="7" style="vertical-align : middle;text-align:right;"><strong>TOTAL</strong> </td>
                         <td style="vertical-align : middle;text-align:right;">
                             <strong>{{$rekappos->currency->name . " " . format_uang($total) }}</strong></td>
@@ -367,8 +286,6 @@
                         <td colspan="8" style="vertical-align : middle;text-align:left;"><strong>Terbilang :</strong>
                             <br><span style="text-transform: capitalize"><i>
                                     {{  $rekappos->total  }}</span> </i> </td>
-                        {{-- <td style="vertical-align : middle;text-align:right;"><strong>{{ format_uang($rekappos->total) }}</strong>
-                        </td> --}}
                     </tr>
                     <tr>
                         <td colspan="8" height="150px" style="vertical-align : top;text-align:left;">
