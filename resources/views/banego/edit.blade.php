@@ -149,11 +149,11 @@
                                     <input type="text" name="jml_penawaran" class="form-control m-input"
                                         placeholder="Jumlah Penawaran" value="{{ $lok->jml_penawaran }}">
                                 </div>
-                                {{-- <div class="col-lg-3">
+                                <div class="col-lg-3">
                                     <label>No SPPH Nego</label>
                                     <input type="text" name="spph_nego" class="form-control m-input"
                                         placeholder="No SPPH Nego" value="{{ $lok->spph_nego }}">
-                                </div> --}}
+                                </div>
                                 <div class="col-lg-3">
                                     <label>Jumlah Nego</label>
                                     <input type="text" name="jml_nego" class="form-control m-input"
@@ -284,6 +284,14 @@
                                             <span></span>
                                         </label>
                                         @endif
+                                        {{-- <label class="m-radio">
+                                                <input type="radio" name="pajak" value="include">Termasuk Pajak
+                                                <span></span>
+                                            </label>
+                                            <label class="m-radio">
+                                                <input type="radio" name="pajak" value="exclude"> Tidak Termasuk Pajak
+                                                <span></span>
+                                            </label> --}}
                                     </div>
                                 </div>
                             </div>
@@ -327,24 +335,39 @@
                             <div class="form-group m-form__group row">
                                 <div class="col-lg-4">
                                     <label>Jaminan</label>
-                                    <select name="jaminan_id" class="form-control m-bootstrap-select m_selectpicker">
-                                        <option value="{{ $lok->jaminan_id }}">{{ $lok->jaminan->name }}</option>
-                                        @foreach ($jams as $item)
-                                            @if ($item->id != $lok->jaminan_id)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @endif                                          
-                                        @endforeach                                      
-                                    </select>
+                                    <div class="m-radio-inline">
+                                        @if ($lok->jaminan == "include")
+                                        <label class="m-radio">
+                                            <input type="radio" name="jaminan" value="include" checked>Include Jaminan
+                                            <span></span>
+                                        </label>
+                                        @else
+                                        <label class="m-radio">
+                                            <input type="radio" name="jaminan" value="include">Include Jaminan
+                                            <span></span>
+                                        </label>
+                                        @endif
+                                        @if ($lok->jaminan == "exclude")
+                                        <label class="m-radio">
+                                            <input type="radio" name="jaminan" value="exclude" checked>Exclude Jaminan
+                                            <span></span>
+                                        </label>
+                                        @else
+                                        <label class="m-radio">
+                                            <input type="radio" name="jaminan" value="exclude">Exclude Jaminan
+                                            <span></span>
+                                        </label>
+                                        @endif
+                                    </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <label>Biaya Dokument</label>
-                                    <select name="bidok_id" class="form-control m-bootstrap-select m_selectpicker">
-                                        <option value="{{ $lok->bidok_id }}">{{ $lok->bidok->name }}</option>
-                                        @foreach ($bidoks as $item)
-                                            @if ($item->id != $lok->bidok_id)
-                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                            @endif                                          
-                                        @endforeach   
+                                    <select name="biaya_dok" class="form-control m-bootstrap-select m_selectpicker">
+                                        <option value="">0</option>
+                                        <option value="500000">500.000</option>
+                                        <option value="2000000">2.000.000</option>
+                                        <option value="5000000">5.000.000</option>
+                                        <option value="7000000">7.000.000</option>
                                     </select>
                                     {{-- <input type="text" name="biaya_dok" class="form-control m-input"
                                         onkeypress="return hanyaAngka(event)" value="{{ $lok->biaya_dok }}"> --}}
