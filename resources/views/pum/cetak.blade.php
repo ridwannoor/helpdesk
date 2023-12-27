@@ -109,7 +109,7 @@
                             <tr>
                                 <td>Nama Pekerjaan </td>
                                 <td>:</td>
-                                <td>{{$pums->pumheader->nama_pek}}</td>    
+                                <td>{{$pums->nama_pek}}</td>    
                             </tr>   
                             <tr>
                                 <td>Tanggal :</td>
