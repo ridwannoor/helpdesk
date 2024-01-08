@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Auth;
 
 class HargabarangController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
     public function search(Request $request)
     {
@@ -64,7 +68,10 @@ class HargabarangController extends Controller
 
     public function index(Request $request)
     {
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
+        $users = Auth::user();
+        echo json_encode($users);
+        return true;
         $menu = Menu::where('link', '/hargabarang')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
 
