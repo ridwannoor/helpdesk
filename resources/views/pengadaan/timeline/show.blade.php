@@ -93,7 +93,7 @@
                                                     @foreach ($times->tender->tenderpenawaran as $item)
                                                         {{-- @foreach ($item->vendor as $v) --}}
                                                             {{-- @foreach ($v as $c) --}}
-                                                            {{ " - " . $item->namaperusahaan . ", " . $item->vendor->badanusaha->kode }} <br>
+                                                            {{ " - " . $item->namaperusahaan . ", " . $item->badanusaha->kode }} <br>
                                                             {{-- @endforeach                                  --}}
                                                         {{-- @endforeach --}}
                                                     @endforeach
