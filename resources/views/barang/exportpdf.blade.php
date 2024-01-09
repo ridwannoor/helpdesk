@@ -47,7 +47,7 @@
                 <td>{{ $item->aset_tag }}</td>
                 <td>{{ "Rp " . format_uang($item->serial) }}</td>
                 <td>{{ date('d-m-Y', strtotime($item->start_date)) . " s/d " . date('d-m-Y', strtotime($item->end_date)) }}</td>
-                <td>{{ $item->namaperusahaan . ", " . $item->vendor->badanusaha->kode }}</td>
+                <td>{{ $item->vendor->namaperusahaan . ", " . $item->vendor->badanusaha->kode }}</td>
                 <td>{{ $item->kondisi }}</td>
             </tr>
         @endforeach

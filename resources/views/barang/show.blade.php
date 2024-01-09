@@ -226,7 +226,7 @@
                                   @foreach ($brg->barangmaintenance as $item)
                                       <tr>
                                           <td>{{ $item->barang->nama_brg }}</td>
-                                          <td>{{ $item->namaperusahaan }}</td>
+                                          <td>{{ $item->vendor->namaperusahaan }}</td>
                                           <td>{{ $item->tipemaintenance->kode }}</td>
                                           <td>{{ $item->title }}</td>
                                           <td>{{ $item->start_date }}</td>
