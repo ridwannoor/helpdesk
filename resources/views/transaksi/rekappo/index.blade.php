@@ -236,7 +236,7 @@
                             {{ $item->nama_pekerjaan }}
                         </td>
                         <td style="vertical-align : middle;text-align:center;"> 
-                          {{ $item->namaperusahaan }}, {{ $item->badanusaha->kode }}
+                          {{ $item->vendor->namaperusahaan }}, {{ $item->vendor->badanusaha->kode }}
                         </td>
                         <td style="vertical-align : middle;text-align:center;"> 
                             <span class="m-badge m-badge--metal  m-badge--wide">{{ $item->lokasi->kode }}</span>

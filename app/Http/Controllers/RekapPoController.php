@@ -60,7 +60,7 @@ class RekapPoController extends Controller
         $crud = $users->where('menu_id', $menu->id)->first(); 
       //  $parent = $users->menu->where(['parentmenu' => 0])->get();
         $lokasis = Lokasi::orderBy('kode', 'ASC')->get();
-        $rekappos = Rekappo::orderBy('created_at', 'DESC')->get();
+        $rekappos = Rekappo::orderBy('created_at', 'DESC')->with('vendor.badanusaha')->get();
         $judul = 'Rekap PO';
         return view('transaksi.rekappo.index', compact('judul', 'rekappos','users','pref','crud','lokasis'));
     }
