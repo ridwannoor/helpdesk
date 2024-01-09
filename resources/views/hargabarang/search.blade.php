@@ -127,7 +127,7 @@
                             <td>{{$item->currency->name . " " . number_format($item->harga_lama)  }}</td>
                             {{-- <td>{{ $item->harga->harga }}</td> --}}
                             <td>{{$item->currency->name . " " . number_format($item->harga) }}</td>
-                            <td>{{ $item->vendor->namaperusahaan }}</td>
+                            <td>{{ $item->namaperusahaan }}</td>
                             <td>{{ $item->lokasi->kode }}</td>
                             <td>{{$item->updated_at}}</td>
                             <td width='130px'>

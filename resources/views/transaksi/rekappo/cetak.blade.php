@@ -174,8 +174,7 @@
                     @endphp
                     <tr>
                         <td style="vertical-align : middle;text-align:center;">{{$no++}}</td>
-                        <td colspan="3" style="vertical-align : middle;text-align:left;">
-                            {!! $item->hargabarang->nama_brg !!}</td>
+                        <td colspan="3" style="vertical-align : middle;text-align:left;">{!! $item->hargabarang->nama_brg !!}</td>
                         <td style="vertical-align : middle;text-align:center;">{{ $item->satuan }}</td>
                         <td style="vertical-align : middle;text-align:center;">{{ $item->qty }}</td>
                         <td style="vertical-align : middle;text-align:right;">{{$rekappos->currency->name . " " . format_uang($item->harga) }}</td>

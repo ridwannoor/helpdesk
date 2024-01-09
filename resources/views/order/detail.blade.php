@@ -123,7 +123,7 @@
                                         <div class="m-stack__item m-stack__item--left m-stack__item--middle">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                  <strong> {{ $item->vendor->namaperusahaan }}, 
+                                                  <strong> {{ $item->namaperusahaan }}, 
                                                     {{ $item->lokasi->kode }}</strong> <br>
                                                     {{ $item->nama_brg }}
                                                 </div>

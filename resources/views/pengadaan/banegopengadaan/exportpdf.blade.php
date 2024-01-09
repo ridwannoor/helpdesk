@@ -50,7 +50,7 @@
                 {{ $item->cara_bayar1 }} <br> 
                 {{ "Pajak : " . $item->pajak }} <br>
                 {{ $item->pajak1 }}</td>
-              <td>{{ $item->vendor->namaperusahaan . ", " . $item->vendor->badanusaha->kode }}</td>             
+              <td>{{ $item->namaperusahaan . ", " . $item->vendor->badanusaha->kode }}</td>             
               {{-- <td>{{ $item->bod->code }}</td> --}}
               <td>{{ $item->hargapabrik . " - " . $item->deskripsi }}</td>
               <td>{{ $item->suratpenawaran }} <br> 
