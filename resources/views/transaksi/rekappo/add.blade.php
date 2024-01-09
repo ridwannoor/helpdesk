@@ -90,9 +90,9 @@
                                         id="vendor_id" data-live-search="true" required>
                                         <option value="">Please Select</option>
                                         @foreach ($vendors as $item)
-                                        {{-- <input type="hidden" name="namaperusahaan" value="{{ $item->vendor->namaperusahaan }}">
+                                        {{-- <input type="hidden" name="namaperusahaan" value="{{ $item->namaperusahaan }}">
                                         --}}
-                                        <option value="{{ $item->id }}">{{ $item->vendor->namaperusahaan }}, {{ $item->vendor->badanusaha->kode }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->namaperusahaan }}, {{ $item->badanusaha->kode }}</option>
                                         @endforeach
                                     </select>
                                 </div>
