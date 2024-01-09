@@ -238,6 +238,8 @@
                         <td style="vertical-align : middle;text-align:center;"> 
                         @if ($item->vendor)
                             {{ $item->vendor->namaperusahaan }}, {{ $item->vendor->badanusaha->kode }}
+                        @else
+                            Vendor Sudah Dihapus
                         @endif
                         </td>
                         <td style="vertical-align : middle;text-align:center;"> 
