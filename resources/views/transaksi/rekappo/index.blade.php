@@ -236,7 +236,9 @@
                             {{ $item->nama_pekerjaan }}
                         </td>
                         <td style="vertical-align : middle;text-align:center;"> 
-                          {{ $item->vendor->namaperusahaan }}, {{ $item->vendor->badanusaha->kode }}
+                        @if ($item->vendor)
+                            {{ $item->vendor->namaperusahaan }}, {{ $item->vendor->badanusaha->kode }}
+                        @endif
                         </td>
                         <td style="vertical-align : middle;text-align:center;"> 
                             <span class="m-badge m-badge--metal  m-badge--wide">{{ $item->lokasi->kode }}</span>
