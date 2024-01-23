@@ -31,6 +31,6 @@
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css}}">
                  --}}
                  {{-- {!! Charts::assets() !!} --}}
-    <link rel="shortcut icon" href="{{ asset('assets/demo/default/media/img/logo/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets/demo/default/media/img/logo/favicon.png') }}" />
     @yield('header-script')
 </head>
