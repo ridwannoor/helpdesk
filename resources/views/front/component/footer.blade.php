@@ -145,7 +145,7 @@
             <div class="col-lg-4">
                 <div class="sub-foot-right">
                     <ul>
-                        <li>&copy; <a href="http://atharva.id">atharva.id</a></li>
+                        <li>&copy; <a href="https://approperti.co.id">approperti.co.id</a></li>
                     </ul>
                 </div>
             </div>

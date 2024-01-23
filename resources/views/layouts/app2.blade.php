@@ -47,7 +47,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
 
-    <link rel="shortcut icon" href="assets/demo/default/media/img/logo/favicon.ico" />
+    <link rel="shortcut icon" href="assets/demo/default/media/img/logo/favicon.png" />
 </head> --}}
 
 @include('component.head')
