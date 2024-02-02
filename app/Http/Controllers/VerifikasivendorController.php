@@ -266,8 +266,10 @@ class VerifikasivendorController extends Controller
     public function exportPDF(Request $request) {
         $start = date('Y-m-d',strtotime($request->start));
         $end = date('Y-m-d',strtotime($request->end));
-        $nodins = Vendor::whereDate('tgl_verifikasi','>=',$start)->whereDate('tgl_verifikasi','<=',$end)->get();
-    	$pdf = PDF::loadview('vendor.verifikasi.exportpdf', compact('nodins', 'start', 'end'))->setPaper('A4','landscape');
+        $vendors = Vendor::whereDate('tgl_verifikasi','>=',$start)->whereDate('tgl_verifikasi','<=',$end)->get();
+        // echo json_encode($vendors);
+        // return;
+    	$pdf = PDF::loadview('vendor.verifikasi.exportpdf', compact('vendors', 'start', 'end'))->setPaper('A4','landscape');
     	return $pdf->stream();
        
     }
