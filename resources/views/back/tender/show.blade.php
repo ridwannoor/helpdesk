@@ -133,6 +133,30 @@
                                 </tbody>
                         </table>
                         </div>
+
+                        <div class="col-lg-4">
+                            <table  class="table table-striped table-bordered table-hover table-checkable">
+                                <thead>
+                                    <th style="background: rgb(205, 148, 234)" class="text-white">
+                                        File Pendukung
+                                    </th>                      
+                                </thead>
+                                <tbody>
+                                    <td>
+                                        <div class="m-widget4">
+                                            @foreach ($tenders->tenderfile as $item)
+                                                <div class="m-widget4__item">
+                                                    <div class="m-widget4__info">
+                                                            <a href="{{ url('data_file/pdf/'.$item->filepdf) }}" target="_blank"><span class="m-widget4__text">  {{ $item->nama_file   }}</span></a>
+                                                </div>
+                                                    
+                                                </div>
+                                                @endforeach
+                                        </div>
+                                    </td>
+                                </tbody>
+                            </table>
+                        </div>
                   
                         <div class="col-lg-8"> 
                             <table class="table table-striped table-bordered table-hover table-checkable">
