@@ -124,6 +124,7 @@
                                             <option value="proses">Progress</option>
                                             <option value="pending">Pending</option>
                                             <option value="done">Done</option>
+                                            <option value="gagal">Gagal Tender</option>
                                             @if ($crud->publish > 0)
                                                 <option value="cancel">Cancel</option>
                                                 <option value="revisi">Revisi</option>

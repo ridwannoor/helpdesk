@@ -167,6 +167,23 @@
                             </div>
                             <!--end::New Users-->
                         </div>
+                        <div class="col-md-12 col-lg-6 col-xl-4">
+                            <!--begin::New Users-->
+                            <div class="m-widget24">
+                                <div class="m-widget24__item">
+                                    <h4 class="m-widget24__title">
+                                        <i class="fa fa-list" aria-hidden="true"></i> &nbsp; Gagal Tender
+                                    </h4><br>
+                                    <span class="m-widget24__stats m--font-success">
+                                        <a href="/notadinas/gagal"> {{  $nodins->where('status', 'gagal')->count() }} </a>
+                                    </span>
+                                    <div class="m--space-10"></div>
+                                    <div class="progress m-progress--sm">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::New Users-->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -300,6 +317,8 @@
                                 <span class="m-badge m-badge--danger m-badge--wide">Cancel</span>
                             @elseif ($item->status == "revisi")
                                 <span class="m-badge m-badge--warning m-badge--wide">Revisi</span>
+                            @elseif ($item->status == "gagal")
+                                <span class="m-badge m-badge--Secondary m-badge--wide">Gagal Tender</span>
                             @else
                                 <span class="m-badge m-badge--success m-badge--wide">Done</span>
                             @endif

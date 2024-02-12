@@ -147,6 +147,7 @@
                                                 <option value="proses">Progress</option>
                                                 <option value="pending">Pending</option>
                                                 <option value="done">Done</option>
+                                                <option value="gagal">Gagal Tender</option>
                                                 @if ($crud->publish > 0)
                                                 <option value="cancel">Cancel</option>
                                                 <option value="revisi">Revisi</option>
@@ -156,6 +157,7 @@
                                                 <option value="pending">Pending</option>
                                                 <option value="done">Done</option>
                                                 <option value="open">Open</option>
+                                                <option value="gagal">Gagal Tender</option>
                                                 @if ($crud->publish > 0)
                                                 <option value="cancel">Cancel</option>
                                                 <option value="revisi">Revisi</option>
@@ -165,6 +167,7 @@
                                                 <option value="done">Done</option>
                                                 <option value="open">Open</option>
                                                 <option value="proses">Progress</option>
+                                                <option value="gagal">Gagal Tender</option>
                                                 @if ($crud->publish > 0)
                                                 <option value="cancel">Cancel</option>
                                                 <option value="revisi">Revisi</option>
@@ -174,6 +177,7 @@
                                                 <option value="done">Done</option>
                                                 <option value="open">Open</option>
                                                 <option value="proses">Progress</option>
+                                                <option value="gagal">Gagal Tender</option>
                                                 @if ($crud->publish > 0)
                                                     <option value="cancel">Cancel</option>
                                                     <option value="revisi">Revisi</option>
@@ -184,14 +188,26 @@
                                                 <option value="done">Done</option>
                                                 <option value="open">Open</option>
                                                 <option value="proses">Progress</option>
+                                                <option value="gagal">Gagal Tender</option>
                                                 @if ($crud->publish > 0)
                                                 <option value="cancel">Cancel</option> 
-                                                @endif                                              
+                                                @endif 
+                                            @elseif ($nodins->status == "gagal")                                          
+                                                <option value="gagal">Gagal Tender</option>
+                                                <option value="pending">Pending</option>
+                                                <option value="done">Done</option>
+                                                <option value="open">Open</option>
+                                                <option value="proses">Progress</option>
+                                                @if ($crud->publish > 0)
+                                                    <option value="cancel">Cancel</option>
+                                                    <option value="revisi">Revisi</option>
+                                                @endif                                             
                                             @else
                                                 <option value="done">Done</option>
                                                 <option value="open">Open</option>
                                                 <option value="proses">Progress</option>
                                                 <option value="pending">Pending</option>
+                                                <option value="gagal">Gagal Tender</option>
                                                 @if ($crud->publish > 0)
                                                 <option value="cancel">Cancel</option>
                                                 <option value="revisi">Revisi</option>   
