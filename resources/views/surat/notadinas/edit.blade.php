@@ -140,7 +140,7 @@
                                      
                                     </div> --}}
                                     <div class="col-lg-2">
-                                        <label>Status {{$users}}</label>
+                                        <label>Status</label>
                                         <select name="status" id="status" class="form-control m-bootstrap-select m_selectpicker">
                                             @if ($nodins->status == "open")
                                                 <option value="open">Open</option>
