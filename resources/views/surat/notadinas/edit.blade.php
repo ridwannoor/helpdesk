@@ -140,65 +140,65 @@
                                      
                                     </div> --}}
                                     <div class="col-lg-2">
-                                        <label>Status</label>
+                                        <label>Status {{$users}}</label>
                                         <select name="status" id="status" class="form-control m-bootstrap-select m_selectpicker">
                                             @if ($nodins->status == "open")
                                                 <option value="open">Open</option>
                                                 <option value="proses">Progress</option>
                                                 <option value="pending">Pending</option>
-                                                <option value="done">Done</option>
                                                 <option value="gagal">Gagal Tender</option>
                                                 @if ($crud->publish > 0)
+                                                <option value="done">Done</option>
                                                 <option value="cancel">Cancel</option>
                                                 <option value="revisi">Revisi</option>
                                                 @endif
                                             @elseif ($nodins->status == "proses")
                                                 <option value="proses">Progress</option>
                                                 <option value="pending">Pending</option>
-                                                <option value="done">Done</option>
                                                 <option value="open">Open</option>
                                                 <option value="gagal">Gagal Tender</option>
                                                 @if ($crud->publish > 0)
+                                                <option value="done">Done</option>
                                                 <option value="cancel">Cancel</option>
                                                 <option value="revisi">Revisi</option>
                                                 @endif
                                             @elseif ($nodins->status == "pending")                                          
                                                 <option value="pending">Pending</option>
-                                                <option value="done">Done</option>
                                                 <option value="open">Open</option>
                                                 <option value="proses">Progress</option>
                                                 <option value="gagal">Gagal Tender</option>
                                                 @if ($crud->publish > 0)
+                                                <option value="done">Done</option>
                                                 <option value="cancel">Cancel</option>
                                                 <option value="revisi">Revisi</option>
                                                 @endif
                                             @elseif ($nodins->status == "cancel")                                          
                                                 <option value="pending">Pending</option>
-                                                <option value="done">Done</option>
                                                 <option value="open">Open</option>
                                                 <option value="proses">Progress</option>
                                                 <option value="gagal">Gagal Tender</option>
                                                 @if ($crud->publish > 0)
-                                                    <option value="cancel">Cancel</option>
-                                                    <option value="revisi">Revisi</option>
+                                                <option value="done">Done</option>
+                                                <option value="cancel">Cancel</option>
+                                                <option value="revisi">Revisi</option>
                                                 @endif
                                             @elseif ($nodins->status == "revisi")        
                                                 <option value="revisi">Revisi</option>                                  
                                                 <option value="pending">Pending</option>
-                                                <option value="done">Done</option>
                                                 <option value="open">Open</option>
                                                 <option value="proses">Progress</option>
                                                 <option value="gagal">Gagal Tender</option>
                                                 @if ($crud->publish > 0)
+                                                <option value="done">Done</option>
                                                 <option value="cancel">Cancel</option> 
                                                 @endif 
                                             @elseif ($nodins->status == "gagal")                                          
                                                 <option value="gagal">Gagal Tender</option>
                                                 <option value="pending">Pending</option>
-                                                <option value="done">Done</option>
                                                 <option value="open">Open</option>
                                                 <option value="proses">Progress</option>
                                                 @if ($crud->publish > 0)
+                                                    <option value="done">Done</option>
                                                     <option value="cancel">Cancel</option>
                                                     <option value="revisi">Revisi</option>
                                                 @endif                                             
