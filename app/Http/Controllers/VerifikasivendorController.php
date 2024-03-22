@@ -52,7 +52,9 @@ class VerifikasivendorController extends Controller
         $users = Auth::user()->userdetails()->with('menu')->get();
 	    $menu = Menu::where('link', '/verifikasivendor')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
-        $vendors = Vendor::orderBy('updated_at', 'ASC')->get();
+        $vendors = Vendor::where('is_published', 0)->whereNotNull('terms')->orderBy('updated_at', 'DESC')->get();
+        // echo json_encode($vendors);
+        // return;
 	//dd($vendors);
         $menus = Menu::all();
         $badan = Badanusaha::all();
