@@ -95,16 +95,29 @@
         <h1 style="text-align: center"><strong>{{$judul}} (PO)</strong></h1>
         <div class="table-responsive">
             <table class="table" border="1">
+                <thead style="visibility: hidden;">
+                    <tr>
+                        <th width="5%"></th>
+                        <th width="14%"></th>
+                        <th width="12%"></th>
+                        <th width="12%"></th>
+
+                        <th width="7%"></th>
+                        <th width="7%"></th>
+                        <th width="21%"></th>
+                        <th width="22%"></th>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr>
-                        <td colspan="4" style="vertical-align : top;text-align:justify;">
+                        <td width="40%" colspan="4" style="vertical-align : top;text-align:justify;">
                             <strong class="text-uppercase">Vendor</strong><br>
                             {{ $rekappos->vendor->namaperusahaan }}, {{ $rekappos->vendor->badanusaha->kode }} <br>
                             {{ $rekappos->vendor->alamat }} <br>
                             {{ $rekappos->vendor->email }}<br>
                             {{ $rekappos->vendor->notelp }}<br>
                         </td>
-                        <td colspan="4" style="vertical-align : top;text-align:justify;">
+                        <td width="60%" colspan="4" style="vertical-align : top;text-align:justify;">
                             <strong class="text-uppercase">Pemesanan</strong><br>
                             {{ $rekappos->preference->nama_perusahaan }}<br>
                             {{ $rekappos->preference->address }}<br>
