@@ -126,9 +126,9 @@
         {{-- <p> --}}
         {{-- <div class="container"> --}}
             <ol type="1" style="text-align: justify ;">
-                <li>Divisi Procurement & Logistic telah menerima {{ $banegopengadaans->dasar->kode  }} dari Unit Spesifikasi Teknis (UST) yaitu sejumlah
+                <li>Divisi Supply Chain Management telah menerima {{ $banegopengadaans->dasar->kode  }} dari Unit Spesifikasi Teknis (UST) yaitu sejumlah
                     {{ "Rp " . format_uang($banegopengadaans->nilai_rap)  }} -  ({{ terbilang($banegopengadaans->nilai_rap) . " rupiah" }}) {{ $banegopengadaans->pajak_rap }}, yang kemudian dijadikan sebagai dasar melakukan klarifikasi dan negosiasi harga penawaran</li>
-                <li>Divisi Procurement & Logistic beserta Unit Spesifikasi Teknis (UST) telah melakukan klarifikasi terhadap penawaran yang disampaikan oleh peserta pengadaan.</li>
+                <li>Divisi Supply Chain Management beserta Unit Spesifikasi Teknis (UST) telah melakukan klarifikasi terhadap penawaran yang disampaikan oleh peserta pengadaan.</li>
                 <li><span>Penawaran harga sebelum negosiasi:</span>   <br>
                     <table class="table">
                         <tbody>	 

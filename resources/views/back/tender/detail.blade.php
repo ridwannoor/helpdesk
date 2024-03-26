@@ -87,7 +87,7 @@
                                    
                             </div>
                             <div class="card-footer text-muted">
-                                Vice President Procurement & Logistic <br>
+                                Vice President Supply Chain Management <br>
                                 PT Angkasa Pura Properti <br>
                                 TTD
                             </div>

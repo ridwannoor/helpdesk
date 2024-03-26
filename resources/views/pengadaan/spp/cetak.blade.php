@@ -152,7 +152,7 @@
                     @foreach ($spp->sppdetail as $item)
                     <li style="text-align: justify">{{ $item->suratpend }}</li>
                     @endforeach
-                    {{-- <li style="text-align: justify">Nota Dinas Vice President Procurement & Logistic Pengadaan Nomor : {{ $spp->no_nodin }}, tanggal {{ date('d-m-Y', strtotime($spp->tanggal))  }} perihal  {{ $spp->perihal }}.</li>
+                    {{-- <li style="text-align: justify">Nota Dinas Vice President Supply Chain Management Pengadaan Nomor : {{ $spp->no_nodin }}, tanggal {{ date('d-m-Y', strtotime($spp->tanggal))  }} perihal  {{ $spp->perihal }}.</li>
                     <li style="text-align: justify">Disposisi Persetujuan {{ $spp->bod->jabatan }} tanggal {{ date('d-m-Y', strtotime($spp->tgl_dispo)) }}.</li> --}}
                 </ol>
                 <p style="text-align: justify">Dengan ini diberitahukan bahwa dengan memperhatikan ketentuan Prosedur Pengadaan Barang dan /atau Jasa yang berlaku dilingkungan PT Angkasa Pura Properti, 

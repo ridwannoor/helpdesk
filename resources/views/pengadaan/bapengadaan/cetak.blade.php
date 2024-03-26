@@ -128,11 +128,11 @@
         <p><strong>A. Jalannya Rapat Penjelasan Pekerjaan (Aanwijzing)</strong></p>
         {{-- <table class="table"> --}}
             <ol type="1">
-                <li  style="margin: 20px;text-align: justify;">Rapat dibuka oleh Vice President Procurement & Logistic pada pukul {{ date('H:i', strtotime($bapengadaans->tanggal)) }} WIB dan dilanjutkan 
+                <li  style="margin: 20px;text-align: justify;">Rapat dibuka oleh Vice President Supply Chain Management pada pukul {{ date('H:i', strtotime($bapengadaans->tanggal)) }} WIB dan dilanjutkan 
                     dengan pemberian penjelasan mengenai peraturan umum dan persyaratan administrasi, kemudian dilanjutkan dengan penjelasan 
                     persyaratan teknis beserta dokumen penawaran harga pekerjaan oleh Unit Spesifikasi Teknis. Kepada Peserta Pengadaan 
                     diberikan kesempatan untuk bertanya tentang hal-hal yang belum jelas dalam persyaratan penawaran administrasi, teknis, serta harga.</li>
-                    <li  style="margin: 20px;text-align: justify;">Pertanyaan yang diajukan oleh Peserta telah dijawab oleh Divisi Procurement & Logistic dan Unit Spesifikasi Teknis.</li>
+                    <li  style="margin: 20px;text-align: justify;">Pertanyaan yang diajukan oleh Peserta telah dijawab oleh Divisi Supply Chain Management dan Unit Spesifikasi Teknis.</li>
                     <li  style="margin: 20px;text-align: justify;">Peserta menyatakan telah mempelajari dan memahami  terhadap keseluruhan isi dan ketentuan yang dicantumkan di dalam Dokumen 
                         Pengadaan beserta lampirannya (RKS/KAK, BoQ Kosong, dokumen teknis lainnya).</li>
                         <li  style="margin: 20px;text-align: justify;">Secara lengkap hasil pemberian Penjelasan tersebut termuat dalam Dokumen Pengadaan beserta lampirannya yang 

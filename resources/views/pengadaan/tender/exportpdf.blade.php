@@ -152,7 +152,7 @@
           </ol>
           <p>Jakarta,  {{ date('d M Y', strtotime($tenders->tgl_paket)) }}</p>
         
-        <p> Vice President Procurement & Logistic <br>
+        <p> Vice President Supply Chain Management <br>
         PT Angkasa Pura Properti <br>
         TTD
       </p>
