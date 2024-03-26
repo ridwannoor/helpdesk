@@ -261,69 +261,64 @@
             <li style="margin-bottom: 1 rem"> Pengiriman Barang/Material ke lokasi pekerjaan dilakukan oleh : <strong>{{ $lok->pengirim  }}</strong></li>
             <li style="margin-bottom: 1 rem"> <strong>{{ $lok->vendor->namaperusahaan }}, {{ $lok->vendor->badanusaha->kode }}</strong> selanjutnya akan mengirimkan surat penawaran harga setelah
                 negosiasi.</li>
-                @if ($lok->catatan)
+                @if (preg_replace('/[^A-Za-z0-9 ]/', '', $lok->catatan)) 
             <li style="text-align: justify; margin-bottom: 1 rem"> {!! $lok->catatan !!}</li>            
                 @endif
             <li style="margin-bottom: 1 rem"> Ruang lingkup pekerjaan telah sesuai dengan BoQ dan Syarat-syarat teknis
-                telah disetujui oleh kedua belah pihak (terlampir)</li>
+                telah disetujui oleh kedua belah pihak (terlampir){{$lok->jaminan_id}}</li>
            
                 @php
                 $jam = $lok->jml_nego * 5/100 ;
                 $dp =  $lok->jml_nego * $lok->nilaidp/100;
+                $bidok = preg_replace('/[^\d\w]+/', '', $lok->bidok->name);
                 @endphp
 
-                @if ( $lok->jaminan == '1')
+                @if ( $lok->jaminan_id == '1')
                     @foreach ($lok->dokpekerjaans as $item)            
-                    @if ($item->kode == "Kontrak" OR $lok->dokpekerjaans == "SPK")
-
-                    <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA 
-                    @if ($lok->downpayment =="include")
-                    Membayarkan Jaminan DP {{ $lok->nilaidp ." %" }} sebesar {{ "Rp ". format_uang($dp) }} dapat berupa Bank Garansi, Asuransi, ataupun Tunai, dan
-                    @endif
-                    {{-- <li> --}}
-                    menyerahkan Biaya Administrasi Dokumen Kontrak sebesar {{ "Rp ". format_uang($lok->biaya_dok)  }}
-                    ({{terbilang($lok->biaya_dok) . "rupiah"}}) ke rekening BNI nomor : 03333-55569 a/n PT. Angkasa Pura Properti.
-                    </li> 
-                    @endif
+                        @if ($item->kode == "Kontrak" OR $lok->dokpekerjaans == "SPK")
+                            <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA 
+                            @if ($lok->downpayment =="include")
+                                Membayarkan Jaminan DP {{ $lok->nilaidp ." %" }} sebesar {{ "Rp ". format_uang($dp) }} dapat berupa Bank Garansi, Asuransi, ataupun Tunai, dan
+                            @endif
+                            menyerahkan Biaya Administrasi Dokumen Kontrak sebesar {{ "Rp ". format_uang($bidok)  }}
+                            ({{terbilang($bidok) . "rupiah"}}) ke rekening BNI nomor : 03333-55569 a/n PT. Angkasa Pura Properti.
+                            </li> 
+                        @endif
                     @endforeach
-                @elseif ( $lok->jaminan = '2')
-                @foreach ($lok->dokpekerjaans as $item)            
-                @if ($item->kode == "Kontrak" OR $lok->dokpekerjaans == "SPK")
-
-                <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA 
-                @if ($lok->downpayment =="include")
-                Membayarkan Jaminan DP {{ $lok->nilaidp ." %" }} sebesar {{ "Rp ". format_uang($dp) }} dapat berupa Bank Garansi, Asuransi, ataupun Tunai, dan
-                @endif
-                {{-- <li> --}}
-                   Menyerahkan Jaminan Pelaksanaan sebesar 5% (lima
-                    persen) dari nilai pekerjaan atau senilai {{ "Rp ". format_uang($jam)  }}
-                    ({{ terbilang($jam) . "rupiah"}}). dapat berupa bank garansi,
-                    asuransi, atau pun tunai dengan jangka waktu jaminan pelaksanaan adalah ditambah minimal 1 (satu) bulan lebih lama dari 
-                    Jangka Waktu berakhirnya kontrak.
-                </li> 
-                @endif
-                @endforeach
-                @elseif ( $lok->jaminan = '3')
-                @foreach ($lok->dokpekerjaans as $item)            
-                @if ($item->kode == "Kontrak" OR $lok->dokpekerjaans == "SPK")
-
-                <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA 
-                @if ($lok->downpayment =="include")
-                Membayarkan Jaminan DP {{ $lok->nilaidp ." %" }} sebesar {{ "Rp ". format_uang($dp) }} dapat berupa Bank Garansi, Asuransi, ataupun Tunai, dan
-                @endif
-                {{-- <li> --}}
-                   Menyerahkan Jaminan Pelaksanaan sebesar 5% (lima
-                    persen) dari nilai pekerjaan atau senilai {{ "Rp ". format_uang($jam)  }}
-                    ({{ terbilang($jam) . "rupiah"}}). dapat berupa bank garansi,
-                    asuransi, atau pun tunai dengan jangka waktu jaminan pelaksanaan adalah ditambah minimal 1 (satu) bulan lebih lama dari Jangka Waktu berakhirnya kontrak
-                    dan membayarkan biaya dokument kontrak sebesar {{ "Rp ". format_uang($lok->biaya_dok)  }}
-                    ({{terbilang($lok->biaya_dok) . "rupiah"}})
-                    ke rekening BNI nomor : 03333-55569
-                    a/n PT. Angkasa Pura Properti.
-                </li> 
-                @endif
-                @endforeach
-                @elseif ($lok->jaminan = '4')
+                @elseif ( $lok->jaminan_id == '2')
+                    @foreach ($lok->dokpekerjaans as $item)            
+                        @if ($item->kode == "Kontrak" OR $lok->dokpekerjaans == "SPK")
+                            <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA 
+                            @if ($lok->downpayment =="include")
+                                Membayarkan Jaminan DP {{ $lok->nilaidp ." %" }} sebesar {{ "Rp ". format_uang($dp) }} dapat berupa Bank Garansi, Asuransi, ataupun Tunai, dan
+                            @endif
+                            Menyerahkan Jaminan Pelaksanaan sebesar 5% (lima
+                            persen) dari nilai pekerjaan atau senilai {{ "Rp ". format_uang($jam)  }}
+                            ({{ terbilang($jam) . "rupiah"}}). dapat berupa bank garansi,
+                            asuransi, atau pun tunai dengan jangka waktu jaminan pelaksanaan adalah ditambah minimal 1 (satu) bulan lebih lama dari 
+                            Jangka Waktu berakhirnya kontrak.
+                            </li> 
+                        @endif
+                    @endforeach
+                @elseif ( $lok->jaminan_id == '3')
+                    @foreach ($lok->dokpekerjaans as $item)            
+                        @if ($item->kode == "Kontrak" OR $lok->dokpekerjaans == "SPK")
+                            <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA 
+                            @if ($lok->downpayment =="include")
+                                Membayarkan Jaminan DP {{ $lok->nilaidp ." %" }} sebesar {{ "Rp ". format_uang($dp) }} dapat berupa Bank Garansi, Asuransi, ataupun Tunai, dan
+                            @endif
+                            Menyerahkan Jaminan Pelaksanaan sebesar 5% (lima
+                            persen) dari nilai pekerjaan atau senilai {{ "Rp ". format_uang($jam)  }}
+                            ({{ terbilang($jam) . "rupiah"}}). dapat berupa bank garansi,
+                            asuransi, atau pun tunai dengan jangka waktu jaminan pelaksanaan adalah ditambah minimal 1 (satu) bulan lebih lama dari Jangka Waktu berakhirnya kontrak
+                            dan membayarkan biaya dokument kontrak sebesar {{ "Rp ". format_uang($bidok)  }}
+                            ({{terbilang($bidok) . "rupiah"}})
+                            ke rekening BNI nomor : 03333-55569
+                            a/n PT. Angkasa Pura Properti.
+                            </li> 
+                        @endif
+                    @endforeach
+                @elseif ($lok->jaminan_id == '4')
                 @foreach ($lok->dokpekerjaans as $item)            
                     @if ($item->kode == "Kontrak" OR $lok->dokpekerjaans == "SPK")
                     <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA 
@@ -348,8 +343,8 @@
                     persen) dari nilai pekerjaan atau senilai {{ "Rp ". format_uang($jam)  }}
                     ({{ terbilang($jam) . "rupiah"}}). dapat berupa bank garansi,
                     asuransi, atau pun tunai dengan jangka waktu jaminan pelaksanaan adalah ditambah minimal 1 (satu) bulan lebih lama dari Jangka Waktu berakhirnya kontrak
-                    dan membayarkan biaya dokument kontrak sebesar {{ "Rp ". format_uang($lok->biaya_dok)  }}
-                    ({{terbilang($lok->biaya_dok) . "rupiah"}})
+                    dan membayarkan biaya dokument kontrak sebesar {{ "Rp ". format_uang($bidok) }}
+                    ({{terbilang($bidok) . "rupiah"}})
                     ke rekening BNI nomor : 03333-55569
                     a/n PT. Angkasa Pura Properti.
 
@@ -375,14 +370,14 @@
         <p><strong>Angkasa Pura Properti, PT</strong></p>
         <table class="table">
             @foreach ($lok->divisis as $item)
+            @if ($item->detail != "Area Manager")
             <tbody>
                 <tr>
                     <td height="70px" width="300px">- {{ strtoupper($item->detail) }}</td>
                     <td>_________________</td>
                 </tr>
-                {{-- <th>{{  $lok->divisis->implode('detail' ,  ', ' ) }}</th> --}}
-                {{-- <th>{{ $lok->vendor->namaperusahaan }}</th> --}}
             </tbody>
+            @endif
             @endforeach
         </table>
         <p><strong>Pihak Mitra Pengadaan</strong></p>

@@ -177,7 +177,9 @@ class BanegoController extends Controller
         //  $parent = $users->menu->where(['parentmenu' => 0])->get();
         $userbrg = Auth::user()->lokasis()->with('barang')->get();
         $pref = Preference::first();
-        $lok = Banego::find($id);
+        $lok = Banego::with('dokpekerjaans','vendor','jaminan','bidok')->find($id);
+        // echo json_encode($lok);
+        // return;
         $divisis = Divisi::all();
         $judul = 'BA Nego';
         return view('banego.show', compact('judul','pref','users','userbrg','crud', 'lok', 'divisis')); 
@@ -191,7 +193,9 @@ class BanegoController extends Controller
         //  $parent = $users->menu->where(['parentmenu' => 0])->get();
         $userbrg = Auth::user()->lokasis()->with('barang')->get();
         $pref = Preference::find(1);
-        $lok = Banego::with('preference', 'dokpekerjaans', 'divisis')->find($id);
+        $lok = Banego::with('preference', 'dokpekerjaans', 'divisis', 'bidok', 'jaminan')->find($id);
+        // echo json_encode($lok);
+        // return true;
         $divisis = Divisi::all();
         $judul = 'BA Nego';
         // $bulan = $this->tanggal_local();
@@ -256,7 +260,9 @@ class BanegoController extends Controller
          $lok = Banego::find($id);
          $doks = Dokpekerjaan::pluck('kode', 'id')->all();    
          $divisis = Divisi::pluck('kode', 'id')->all();    
-         return view('banego.edit', compact('lok', 'judul','users','pref', 'doks', 'vendors', 'divisis'));
+         $jams = Jaminan::all();
+         $bidoks = Bidok::all();
+         return view('banego.edit', compact('lok', 'judul','users','pref', 'doks', 'vendors', 'divisis', 'jams', 'bidoks'));
     }
 
     /**

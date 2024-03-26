@@ -333,7 +333,7 @@
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
-                                <div class="col-lg-4">
+                                <!-- <div class="col-lg-4">
                                     <label>Jaminan</label>
                                     <div class="m-radio-inline">
                                         @if ($lok->jaminan == "include")
@@ -359,8 +359,32 @@
                                         </label>
                                         @endif
                                     </div>
+                                </div> -->
+                                <div class="col-lg-4">
+                                    <label>Jaminan</label>
+                                    <select name="jaminan_id" class="form-control m-bootstrap-select m_selectpicker">
+                                        @foreach ($jams as $item)
+                                            @if ($lok->jaminan_id == $item->id)
+                                                <option value="{{ $item->id }}" selected="selected">{{ $item->name }}</option>
+                                            @else
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endif
+                                        @endforeach                                      
+                                    </select>
                                 </div>
                                 <div class="col-lg-4">
+                                    <label>Biaya Dokument</label>
+                                    <select name="bidok_id" class="form-control m-bootstrap-select m_selectpicker">
+                                        @foreach ($bidoks as $item)
+                                            @if ($lok->bidok_id == $item->id)
+                                                <option value="{{ $item->id }}" selected="selected">{{ $item->name }}</option>
+                                            @else
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endif
+                                        @endforeach   
+                                    </select>
+                                </div>
+                                <!-- <div class="col-lg-4">
                                     <label>Biaya Dokument</label>
                                     <select name="biaya_dok" class="form-control m-bootstrap-select m_selectpicker">
                                         <option value="">0</option>
@@ -371,7 +395,7 @@
                                     </select>
                                     {{-- <input type="text" name="biaya_dok" class="form-control m-input"
                                         onkeypress="return hanyaAngka(event)" value="{{ $lok->biaya_dok }}"> --}}
-                                </div>
+                                </div> -->
 
                                 @php
                                 if(isset($lok)) {
