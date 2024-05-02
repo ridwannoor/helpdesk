@@ -37,6 +37,25 @@ class NotadinasController extends Controller
         $menu = Menu::where('link', '/notadinas')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
         $nodins = Notaheader::with('notafile')->orderBy('created_at','DESC')->get();
+
+        foreach ($nodins as $nodin) {
+            $temp = [];
+            if (strpos($nodin->lokasi_id, '[') !== false) {
+                // String contains '[', so convert it to an array
+                $lokasi_array = json_decode($nodin->lokasi_id, true);
+                foreach ($lokasi_array as $lok) {
+                    $temp[] = Lokasi::where('id', $lok)->first();
+                }
+                
+            }else{
+                $temp[] = Lokasi::where('id', $nodin->lokasi_id)->first();
+            }
+            $nodin->lokasi = $temp;
+        }
+
+
+        // var_dump($menu);
+        // return true;
         // $pendings = Notaheader::where('status', 'pending')->get();
         // $opens = Notaheader::where('status', 'open')->get();
         // $progress = Notaheader::where('status', 'proses')->get();
@@ -69,6 +88,9 @@ class NotadinasController extends Controller
      */
     public function store(Request $request)
     {
+        $request->lokasi_id = "[".implode(",",$request->lokasi_id)."]";
+        // echo json_encode($request->lokasi_id);
+        // return true;
         $no_nodin = $request->no_nodin;
         $nodins = Notaheader::where('no_nodin',$no_nodin)->first();
 
@@ -157,11 +179,28 @@ class NotadinasController extends Controller
         $crud = $users->where('menu_id', $menu->id)->first();
         // $parent = $users->menu->where(['parentmenu' => 0])->get();
         $pref = Preference::first();
-         $judul = 'Edit Nota Dinas';
-         $nodins = Notaheader::with('notafile', 'divisi', 'lokasi')->find($id);
+        $judul = 'Edit Nota Dinas';
+        $nodins = Notaheader::with('notafile', 'divisi')->find($id);
+
+        $temp = [];
+        if (strpos($nodins->lokasi_id, '[') !== false) {
+            // String contains '[', so convert it to an array
+            $lokasi_array = json_decode($nodins->lokasi_id, true);
+            foreach ($lokasi_array as $lok) {
+                $temp[] = Lokasi::where('id', $lok)->first();
+            }
+            
+        }else{
+            $temp[] = Lokasi::where('id', $nodins->lokasi_id)->first();
+        }
+        $nodins->lokasi = $temp;
+
+        // var_dump($nodins);
+        // return true;
+
         $divisis = Divisi::orderBy('kode', 'ASC')->get();
         $lokasis = Lokasi::orderBy('kode', 'ASC')->get();
-         return view('surat.notadinas.edit', compact('nodins', 'judul','users','pref', 'divisis', 'lokasis', 'crud'));
+        return view('surat.notadinas.edit', compact('nodins', 'judul','users','pref', 'divisis', 'lokasis', 'crud'));
     }
 
     /**
@@ -193,6 +232,9 @@ class NotadinasController extends Controller
       
         //     $content = $dom->saveHTML();
         $nodins = Notaheader::where('id','=', $request->id)->first();
+        
+        $request->lokasi_id = "[".implode(",",$request->lokasi_id)."]";
+
         $nodins->no_nodin = $request->no_nodin;
         $nodins->nama_pek = $request->nama_pek;
         $nodins->tgl_terima = $request->tgl_terima;

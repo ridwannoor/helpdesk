@@ -41,10 +41,10 @@ class Notaheader extends Model
         return $this->belongsTo('App\Models\Divisi');
     }
 
-    public function lokasi()
-    {
-        return $this->belongsTo('App\Models\Lokasi');
-    }
+    // public function lokasi()
+    // {
+    //     return $this->belongsTo('App\Models\Lokasi');
+    // }
 
     public function notafile()
     {

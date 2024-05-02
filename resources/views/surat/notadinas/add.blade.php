@@ -100,12 +100,17 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Lokasi</label>
-                                        <select name="lokasi_id" class="form-control m-bootstrap-select m_selectpicker"
+                                        <!-- <select name="lokasi_id" class="form-control m-bootstrap-select m_selectpicker"
                                         id="lokasi_id" data-live-search="true" required>
-                                        <option value="">Please Select</option>
-                                        @foreach ($lokasis as $item)
-                                        <option value="{{ $item->id }}">{{ $item->kode }}</option>
-                                        @endforeach
+                                        <option value="">Please Select</option> -->
+                                        
+                                        <div class="input-group m-input-group m-input-group--square">
+                                            <select name="lokasi_id[]" class="form-control m-bootstrap-select m_selectpicker" id="lokasi_id" multiple>
+                                                @foreach ($lokasis as $item)
+                                                <option value="{{ $item->id }}">{{ $item->kode }}</option>
+                                                @endforeach                                    
+                                            </select>
+                                        </div>
                                     </select>
                                     </div>
                                     <div class="col-lg-3">

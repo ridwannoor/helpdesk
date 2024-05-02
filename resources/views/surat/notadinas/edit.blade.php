@@ -100,15 +100,19 @@
                                     </div>
                                     <div class="col-lg-2">
                                         <label>Lokasi</label>
-                                        <select name="lokasi_id" class="form-control m-bootstrap-select m_selectpicker"
-                                        id="lokasi_id" data-live-search="true" required>
-                                        <option value="{{ $nodins->lokasi_id }}">{{ $nodins->lokasi->kode }}</option>
-                                        @foreach ($lokasis as $item)
-                                            @if ($nodins->lokasi_id != $item->id)
-                                            <option value="{{ $item->id }}">{{ $item->kode }}</option>
-                                            @endif 
-                                        @endforeach
-                                    </select>
+
+
+                                        <div class="input-group m-input-group m-input-group--square">
+                                            <select name="lokasi_id[]" class="form-control m-bootstrap-select m_selectpicker" id="lokasi_id" multiple>
+                                            @foreach ($lokasis as $item)
+                                                @if (collect($nodins->lokasi)->contains('id', $item->id))
+                                                    <option value="{{ $item->id }}" selected>{{ $item->kode }}</option>
+                                                @else
+                                                    <option value="{{ $item->id }}">{{ $item->kode }}</option>
+                                                @endif                                    
+                                            @endforeach                                   
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <label>Unit Prolog</label>
