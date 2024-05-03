@@ -87,7 +87,11 @@
                             </tbody>
                             <tbody>
                                 <td>Lokasi</td>
-                                <td>{{ $nodins->lokasi->kode }}</td>
+                                <td>
+                                    @foreach ($nodins->lokasi as $lok)
+                                        {{ $lok->kode }}
+                                    @endforeach  
+                                </td>
                             </tbody>
                             <tbody>
                                 <td>PIC Manager</td>
