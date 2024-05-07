@@ -162,8 +162,21 @@ class NotadinasController extends Controller
         //   $brgmaintenances = Barangmaintenance::all();
         //   $brgmutasis = Barangmutasi::all();
 
-          $nodins = Notaheader::with('notafile', 'divisi', 'lokasi')->find($id);
-          return view('surat.notadinas.show', compact('nodins','users','pref','judul'));
+          $nodins = Notaheader::with('notafile', 'divisi')->find($id);
+          $temp = [];
+            if (strpos($nodins->lokasi_id, '[') !== false) {
+                // String contains '[', so convert it to an array
+                $lokasi_array = json_decode($nodins->lokasi_id, true);
+                foreach ($lokasi_array as $lok) {
+                    $temp[] = Lokasi::where('id', $lok)->first();
+                }
+                
+            }else{
+                $temp[] = Lokasi::where('id', $nodins->lokasi_id)->first();
+            }
+            $nodins->lokasi = $temp;
+
+        return view('surat.notadinas.show', compact('nodins','users','pref','judul'));
     }
 
     /**
