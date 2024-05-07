@@ -25,7 +25,7 @@ class LogActivity
 
     public static function logActivityLists()
     {
-    	return LogActivityModel::latest()->get();
+    	return LogActivityModel::latest()->take(10)->get();
     }
 
 
