@@ -72,8 +72,11 @@ class TenderController extends Controller
         $menus = Menu::all();
         $badan = Badanusaha::all();
         $judul = 'Tender';
+        $user_email = auth()->user()->email;
+
+        // echo json_encode(auth()->user()->email);
       
-        return view('pengadaan.tender.index', compact('tenders','judul','users','pref','badan', 'crud'));
+        return view('pengadaan.tender.index', compact('tenders','judul','users','pref','badan', 'crud', 'user_email'));
     }
 
     /**
@@ -148,6 +151,8 @@ class TenderController extends Controller
         $tenders->jangka_pelaksanaan = $request->jangka_pelaksanaan;
         $tenders->jangka_pemeliharaan = $request->jangka_pemeliharaan;
         $tenders->jaminan_pelaksanaan = $request->jaminan_pelaksanaan;
+
+        $tenders->created_by = auth()->user()->email;
         // dd($tenders);
         $tenders->save();
         $tenders->jenispekerjaans()->attach($request->jenispekerjaan_id);
@@ -231,7 +236,10 @@ class TenderController extends Controller
         $vendors = Vendorklasifikasi::all();
         $syarats = Syarattender::all();
         $tenders = Tender::with('tenderdetail')->find($id);
-        $jenispekerjaans = Jenispekerjaan::pluck('name', 'id')->all();    
+        $jenispekerjaans = Jenispekerjaan::pluck('name', 'id')->all();
+        
+        // echo json_encode($tenders);
+
         return view('pengadaan.tender.edit', compact('judul','users','pref', 'evaluasis', 'dasars', 'metodes', 'jnspek', 'syarats', 'lokasis', 'anggarans', 'vendors', 'status', 'tenders', 'jenispekerjaans', 'divisis')); 
     }
 

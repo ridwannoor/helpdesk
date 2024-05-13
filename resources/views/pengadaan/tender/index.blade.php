@@ -230,6 +230,18 @@
                                                                     </a>
                                                                 </li>
                                                                 @endif
+
+                                                                @if ($user_email == $tds->created_by AND $tds->is_published == 1)
+                                                                <li class="m-nav__item">
+                                                                    <a href="/tender/publish/{{ $tds->id }}" class="m-nav__link">
+                                                                        <i class="m-nav__link-icon flaticon-share"></i>
+                                                                        @if ($tds->is_published == 1)
+                                                                            <span class="m-nav__link-text">Unpublish</span>   
+                                                                        @endif                                                                    
+                                                                    </a>
+                                                                </li>
+                                                                @endif
+
                                                                 @if ($crud->approval > 0)
                                                                 <li class="m-nav__item">
                                                                     <a href="/tender/approval/{{ $tds->id }}" class="m-nav__link">

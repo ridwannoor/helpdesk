@@ -73,7 +73,7 @@
                                         <label>Tanggal Penutupan Pendaftaran </label>        
                                         <div class="input-group date" data-z-index="1100">
                                             <input type="text" class="form-control m-input" readonly name="tgl_daftar"
-                                                id="m_datetimepicker_2" value="{{ $tenders->visual }}"/>
+                                                id="m_datetimepicker_2" value="{{ $tenders->tgl_daftar }}"/>
                                             <div class="input-group-append">
                                                 <span class="input-group-text"><i
                                                         class="la la-calendar-check-o glyphicon-th"></i></span>
@@ -254,21 +254,40 @@
                                         {{-- <label>Catatan</label>  --}}
                                         <div class="form-group m-form__group has-success">
                                             <label class="form-control-label" for="inputSuccess1">Kategori Tender</label>
+                                            @php
+                                                $catender = json_decode($tenders->catender);
+                                            @endphp
                                               <div class="m-checkbox-inline">
                                                 <label class="m-checkbox">
-                                                       <input type="checkbox" name="catender[]" value="Besar"> Besar 
+                                                        @if (in_array("Besar", $catender))  
+                                                        <input type="checkbox" name="catender[]" value="Besar" checked> Besar
+                                                        @else
+                                                        <input type="checkbox" name="catender[]" value="Besar"> Besar 
+                                                        @endif
                                                     <span></span>
                                                 </label>
                                                 <label class="m-checkbox">
-                                                       <input type="checkbox" name="catender[]" value="Menengah"> Menengah
+                                                        @if (in_array("Menengah", $catender))  
+                                                        <input type="checkbox" name="catender[]" value="Menengah" checked> Menengah
+                                                        @else
+                                                        <input type="checkbox" name="catender[]" value="Menengah"> Menengah 
+                                                        @endif
                                                     <span></span>
                                                 </label>
                                                 <label class="m-checkbox">
-                                                       <input type="checkbox" name="catender[]" value="Kecil"> Kecil
+                                                        @if (in_array("Kecil", $catender))  
+                                                        <input type="checkbox" name="catender[]" value="Kecil" checked> Kecil
+                                                        @else
+                                                        <input type="checkbox" name="catender[]" value="Kecil"> Kecil 
+                                                        @endif
                                                     <span></span>
                                                 </label>
                                                 <label class="m-checkbox">
-                                                    <input type="checkbox" name="catender[]" value="Non"> Non 
+                                                        @if (in_array("Non", $catender))  
+                                                        <input type="checkbox" name="catender[]" value="Non" checked> Non
+                                                        @else
+                                                        <input type="checkbox" name="catender[]" value="Non"> Non 
+                                                        @endif
                                                  <span></span>
                                              </label>
                                             </div>
