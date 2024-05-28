@@ -82,9 +82,9 @@
                                         id="divisi_id" data-live-search="true" required>
                                         <option value="">Please Select</option>
                                         @foreach ($divisis as $item)
-                                            @if ($item->id >= 16)
+                                            {{--@if ($item->id >= 16) --}}
                                                 <option value="{{ $item->id }}">{{ $item->detail }}</option>
-                                            @endif
+                                            {{--@endif --}}
                                         @endforeach
                                     </select>
                                     </div>
