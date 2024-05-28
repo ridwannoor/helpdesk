@@ -41,7 +41,7 @@ class Domail extends Mailable
     {
         // $doheaders = Doheader::find($id);
         // $pref = Preference::where('id', 1)->get();
-        return $this->from('logistik@approperti.co.id')
+        return $this->from('procurement@approperti.co.id')
             ->view('transaksi.deliveryorder.email')
             ->with([
                 'no_do' => $this->no_do,
