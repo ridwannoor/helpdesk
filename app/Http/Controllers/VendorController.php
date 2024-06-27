@@ -84,19 +84,19 @@ class VendorController extends Controller
         $users = Auth::user()->userdetails()->with('menu')->get();
 	    $menu = Menu::where('link', '/vendor')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
-        $vendors = Vendor::orderBy('is_published', 'DESC')->paginate(200);
+        // $vendors = Vendor::orderBy('is_published', 'DESC')->paginate(200);
         $vendors1 = Vendor::orderBy('is_published', 'DESC')->get();
         $cat   = Category::orderBy('kode','ASC')->get();
-        $provinsi   = Provinsi::orderBy('name','ASC')->get();
-        $jns = Jenisusaha::orderBy('kode','ASC')->get();
-        $jpeks = Jenispekerjaan::orderBy('name','ASC')->get();
-        $sert = Vendorklasifikasi::orderBy('kode','ASC')->get();
-        $lisens = Vendorjenis::orderBy('keterangan','ASC')->get();
+        // $provinsi   = Provinsi::orderBy('name','ASC')->get();
+        // $jns = Jenisusaha::orderBy('kode','ASC')->get();
+        // $jpeks = Jenispekerjaan::orderBy('name','ASC')->get();
+        // $sert = Vendorklasifikasi::orderBy('kode','ASC')->get();
+        // $lisens = Vendorjenis::orderBy('keterangan','ASC')->get();
 	//dd($vendors);
-        $menus = Menu::all();
-        $badan = Badanusaha::all();
+        // $menus = Menu::all();
+        // $badan = Badanusaha::all();
         $judul = 'Vendor All';
-        return view('vendor.all', compact('vendors', 'vendors1','judul','users','pref','badan', 'crud', 'cat', 'provinsi', 'jns', 'jpeks', 'sert', 'lisens'));
+        return view('vendor.all', compact('vendors1','judul','users','pref', 'crud', 'cat'));
     }
 
     public function search(Request $request)
