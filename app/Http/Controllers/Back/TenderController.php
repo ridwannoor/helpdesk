@@ -129,7 +129,9 @@ class TenderController extends Controller
                 foreach ($request->file_pdf as $key => $value) {
                     $name = $value->getClientOriginalName();
                     $extension = $value->getClientOriginalExtension();
-                    $filename = 'TNDR_'. $vends . "_" . $name ; 
+                    // $filename = 'TNDR_'. $vends . "_" . $name ; 
+                    $tempfilename = 'TNDR_'. $vends . "_" . $name ; 
+                    $filename = md5($tempfilename . date('Ymd')) . '.' . pathinfo($tempfilename, PATHINFO_EXTENSION);
                     $tujuan_upload = 'data_file/pdf';
                     $value->move($tujuan_upload,$filename);
     
