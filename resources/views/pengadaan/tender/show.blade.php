@@ -1,5 +1,16 @@
 @extends('layouts.app2')
 
+<style>
+    .blur-effect {
+        filter: blur(10px);
+        transition: filter 0.3s ease;
+    }
+
+    .blur-effect:hover {
+        filter: blur(0);
+    }
+</style>
+
 @section('m-subheader')
 <div class="m-subheader ">
     <div class="d-flex align-items-center">
@@ -243,7 +254,7 @@
                                                 </span>
                                                 <h3 class="m-portlet__head-text">
                                                  
-                                                        {{ $v->vendor->namaperusahaan . " - " .  $v->nilai_penawaran }}                                                  
+                                                        {{ $v->vendor->namaperusahaan . " - " }} <b class="blur-effect">{{ $v->nilai_penawaran }}</b>
                                                   
                                                 </h3>
                                             </div>			
