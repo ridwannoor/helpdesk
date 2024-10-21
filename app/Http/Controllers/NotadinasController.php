@@ -416,6 +416,8 @@ class NotadinasController extends Controller
     }
     
     public function uploadsimpan(Request $request){
+        // echo $request->nama_nodin;
+        // return true;
         $nodins = Notaheader::where('id','=', $request->id)->first();
         $nodins->no_nodin = $request->no_nodin;
         $nodins->save();
@@ -434,13 +436,14 @@ class NotadinasController extends Controller
             $file->move($tujuan_upload,$filename);
            $data = array(
                    'notaheader_id'=>$nodins->id,
-                   'filename'=>$filename
+                   'filename'=>$filename,
+                   'keterangan'=>$request->nama_nodin
                );
                Notafile::insert($data);
            }
         }
         \LogActivity::addToLog($nodins->no_nodin);
-        return redirect('/notadinas')->with('success', 'Data Berhasil Diperbarui');
+        return redirect('/notadinas/upload/'.$nodins->id)->with('success', 'Data Berhasil Diperbarui');
     }
 
     public function destroy($id)

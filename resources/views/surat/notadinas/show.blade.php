@@ -120,7 +120,7 @@
                                         @foreach ($nodins->notafile as $item)
                                             <div class="m-widget4__item">
                                                 <div class="m-widget4__info">
-                                                        <a href="{{ url('data_file/pdf/'.$item->filename) }}" target="_blank"><span class="m-widget4__text">  {{ $item->filename   }}</span></a>
+                                                        <a href="{{ url('data_file/pdf/'.$item->filename) }}" target="_blank"><span class="m-widget4__text">  {{ empty($item->keterangan) ? $item->filename : $item->keterangan }}</span></a>
                                                 </div>
                                                 <div class="m-widget4__ext" >
                                                     <a href="/notadinas/destroyfile/{{$item->id}}" class="m-widget4__icon delete-confirm">

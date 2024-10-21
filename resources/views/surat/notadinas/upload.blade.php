@@ -65,10 +65,16 @@
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">
+                                <div class="col-lg-6">
+                                    <label>Nama File</label>
+                                    <input type="text" name="nama_nodin" class="form-control m-input" placeholder="Nama File yang dilampirkan" required>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
                                 <div class="col-lg-12">
                                     <label for="example-text-input">Upload File</label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="filename[]" id="customFile" multiple>
+                                        <input type="file" class="custom-file-input" name="filename[]" id="customFile" required>
                                         <label class="custom-file-label" for="customFile">Choose file</label>
                                     </div>
                                 </div>                               
@@ -84,7 +90,7 @@
                     <div class="btn-group pull-right">
                         {{-- <a href="/rekappo/edit/detail/{{ $nodins->id }}" class="btn btn-primary">Next</a>
                         --}}
-                        <a href="/rekappo" class="btn btn-default">Back</a>
+                        <a href="/notadinas" class="btn btn-default">Back</a>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
