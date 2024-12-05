@@ -139,7 +139,7 @@
                 </div>
                 <div class="col-sm-9">
                     <strong><a href="/hargabarang/show/{{ $item->id }}">{!! $item->nama_brg !!}</a></strong><br>
-                    {{ $item->vendors->namaperusahaan }}, {{ $item->lokasi->kode }}
+                    {{ $item->vendor->namaperusahaan }}, {{ $item->lokasi->kode }}
                 </div>
 			 </div>
 			</td>
