@@ -263,8 +263,8 @@
                                             
                                             @endif --}}
                                         </p>
-                                        <p>{{ $no++ }}. Jaminan : {{ $lok->jaminan->name }}</p>
-                                        <p>{{ $no++ }}. Biaya Dokumen : {{ $lok->bidok->name }}</p>
+                                        <p>{{ $no++ }}. Jaminan : {{ $lok->jaminan->name ?? '' }}</p>
+                                        <p>{{ $no++ }}. Biaya Dokumen : {{ $lok->bidok->name ?? '' }}</p>
                                         <p>
                                             Berita Acara Klarifikasi dan Negosiasi Harga ini merupakan satu kesatuan dan
                                             menjadi bagian yang tidak
