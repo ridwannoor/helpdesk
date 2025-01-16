@@ -26,7 +26,7 @@
 @endsection
 
 @section('m-content')
-<div id="app" class="m-content">   
+<div id="app" v-cloak class="m-content">   
         <div class="row">
             <div class="col-lg-12">
                 @include('component.alertnotification')
@@ -297,7 +297,7 @@
                                                     </td>
                                                     <td>
                                                         <input type="hidden" :name="'attach_file'+i" v-model="tl.attach_file">
-                                                        <input type="file" v-model="tl.file" :name="'file'+i" class="form-control m-input" placeholder="file">
+                                                        <input type="file" v-model="tl.file" :name="'file'+i" class="form-control m-input" placeholder="file" accept="application/pdf">
                                                         <a v-if="tl.attach_file" :href="url+'/'+tl.attach_file" target="_blank"><span class="m-widget4__text">@{{tl.attach_file}}</span></a>
                                                     </td>
                                                     <td><button class="btn btn-danger" @click="deleteRow(i)"><i class="m-nav__link-icon la la-trash"></i></button></td>
