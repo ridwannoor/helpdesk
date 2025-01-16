@@ -26,7 +26,7 @@
 @endsection
 
 @section('m-content')
-<div class="m-content">   
+<div id="app" class="m-content">   
         <div class="row">
             <div class="col-lg-12">
                 @include('component.alertnotification')
@@ -238,7 +238,75 @@
                                         <input type="text" name="pic_off" class="form-control m-input" value="{{ $nodins->pic_off }}">
                                         {{-- <span class="m-form__help">Please enter your full name</span> --}}
                                     </div>
-                                </div>                                
+                                </div>     
+                                
+                                <div class="form-group m-form__group row">
+                                    <div class="col-lg-12">
+                                        <div class="btn-group">
+                                            <button @click="addRow" type="button" class="btn btn-primary">
+                                                Add Row
+                                            </button>
+                                        </div>
+        
+                                        <table class="table table-striped-table-bordered table-hover">
+                                            <thead>
+                                                <tr style="text-align:center;">
+                                                    <th width="20%">Tanggal</th>
+                                                    <th width="25%">Item</th>
+                                                    <th width="25%">Status</th>
+                                                    <th width="25%">File</th>
+                                                    <th width="5%">Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="(i,tl) in timeline">
+                                                    {{-- <td>{{i}}</td> --}}
+                                                    <td>
+                                                        {{-- <input type="text" v-model="issue.a" class="form-control m-input" placeholder="Issue" required> --}}
+                                                        <input type="hidden" name="jml_timeline" v-model="i">
+                                                        <input type="date" v-model="tl.tanggal" :name="'tanggal'+i" class="form-control m-input" placeholder="tanggal">
+                                                    </td>
+                                                    <td>
+                                                        <input list="items" v-model="tl.item" class="form-control m-input" id="lokasi_rapat" :name="'item'+i" placeholder="Ketik atau pilih Item">                                                            
+                                                        <datalist id="items">
+                                                            <option>Nota Dinas Permintaan Pengadaan</option>
+                                                            <option>Risalah Rapat Persiapan Pengadaan</option>
+                                                            <option>Surat Permintaan Penawaran Harga</option>
+                                                            <option>Berita Acara Aanwijzing</option>
+                                                            <option>Surat Penawaran Harga Vendor</option>
+                                                            <option>Berita Acara Pembukaan Penawaran</option>
+                                                            <option>Nota Dinas Permintaan Penilaian Teknis</option>
+                                                            <option>Hasil Penilaian Teknis dari UST</option>
+                                                            <option>Berita Acara Evaluasi Penawaran</option>
+                                                            <option>Surat Pengumuman Hasil Evaluasi & Undangan Negosiasi</option>
+                                                            <option>Berita Acara Klarifikasi</option>
+                                                            <option>Berita Acara Negosiasi</option>
+                                                            <option>Surat Pengumuman Pemenang</option>
+                                                            <option>Surat Penunjukan Pemenang</option>
+                                                            <option>Kontrak</option>                                
+                                                        </datalist>
+                                                    </td>
+                                                    <td>
+                                                        <select v-model="tl.status" :name="'status'+i" class="form-control bootstrap-select selectpicker">
+                                                            <option value="Dalam proses">Dalam proses</option>                                  
+                                                            <option value="Review Legal">Review Legal</option>                                  
+                                                            <option value="Selesai">Selesai</option>                                  
+                                                            <option value="Pending">Pending</option>                                  
+                                                            <option value="Batal">Batal</option>                                  
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" :name="'attach_file'+i" v-model="tl.attach_file">
+                                                        <input type="file" v-model="tl.file" :name="'file'+i" class="form-control m-input" placeholder="file">
+                                                        <a v-if="tl.attach_file" :href="url+'/'+tl.attach_file" target="_blank"><span class="m-widget4__text">@{{tl.attach_file}}</span></a>
+                                                    </td>
+                                                    <td><button class="btn btn-danger" @click="deleteRow(i)"><i class="m-nav__link-icon la la-trash"></i></button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>                                    
+                                    </div>
+                                </div>  
+
                             </div>
                         </div>
                         <div class="m-portlet__foot m-portlet__foot--fit">
@@ -269,6 +337,55 @@
 
 @section('footer-script')
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="{{ asset('assets/vue/vue.min.js') }}" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var vuez = new Vue({
+            el: '#app',
+            data: {
+                title: null,
+                url: '<?= url("data_file/pdf/"); ?>',
+                // timeline: [{
+                //     tanggal: null,
+                //     item: null,
+                //     status: null,
+                //     attach_file: null
+                // }],
+                timeline: <?= json_encode($nodins->notatimelines); ?>,
+            },
+            created() {
+                
+            },
+            watch: {
+    
+            },
+            methods: {
+                addRow() {
+                    var vm = this;
+                    // vm.timeline = vm.temp;
+                    vm.timeline.push({
+                        tanggal: null,
+                        item: null,
+                        status: null,
+                        attach_file: null,
+                        file: null
+                    });
+                    // Reinitialize selectpicker after DOM update
+                    vm.$nextTick(() => {
+                        $('.selectpicker').selectpicker('refresh');
+                    });
+                },
+                deleteRow(index) {
+                    var vm = this;
+                    this.timeline.splice(index, 1); // Menghapus elemen berdasarkan indeks
+                    // Reinitialize selectpicker after DOM update
+                    vm.$nextTick(() => {
+                        $('.selectpicker').selectpicker('refresh');
+                    });
+                },
+            }
+        });
+    </script>
     <script>
         $('#summernote').summernote({
                 height: "100px"

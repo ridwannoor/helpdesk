@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Menu;
 use App\Models\Lokasi;
 use App\Models\Vendor;
+use App\Models\Surat\Notatimelines;
 use App\Models\Surat\Notaheader;
 use App\Models\Surat\Notafile;
 use App\Models\Badanusaha;
@@ -193,7 +194,9 @@ class NotadinasController extends Controller
         // $parent = $users->menu->where(['parentmenu' => 0])->get();
         $pref = Preference::first();
         $judul = 'Edit Nota Dinas';
-        $nodins = Notaheader::with('notafile', 'divisi')->find($id);
+        $nodins = Notaheader::with('notafile', 'divisi','notatimelines')->find($id);
+        // var_dump($nodins->notatimelines);
+        // return;
 
         $temp = [];
         if (strpos($nodins->lokasi_id, '[') !== false) {
@@ -244,6 +247,8 @@ class NotadinasController extends Controller
         //      }
       
         //     $content = $dom->saveHTML();
+        // var_dump($_FILES['file0']);
+        // return;
         $nodins = Notaheader::where('id','=', $request->id)->first();
         
         $request->lokasi_id = "[".implode(",",$request->lokasi_id)."]";
@@ -260,6 +265,28 @@ class NotadinasController extends Controller
         $nodins->status = $request->status;
         $nodins->kesimpulan = $request->kesimpulan;
         $nodins->save();
+
+        for ($i=0; $i <= $request->jml_timeline; $i++) { 
+            if (isset($_POST['tanggal'.$i])) {
+                Notatimelines::where('notaheader_id', $nodins->id)->delete();
+
+                $filename = $_POST['attach_file'.$i];
+                if (isset($_FILES['file'.$i]) && $_FILES['file'.$i]['error'] == UPLOAD_ERR_OK && $_FILES['file'.$i]['size'] > 0) {
+                    $extension = pathinfo($_FILES['file'.$i]['name'], PATHINFO_EXTENSION);
+                    $filename = 'TL_'.$i. date('YmdHis').".".$extension; 
+                    $tujuan_upload = 'data_file/pdf/'.$filename;
+                    move_uploaded_file($_FILES['file'.$i]['tmp_name'], $tujuan_upload);
+                }
+
+                $notatimelines = new Notatimelines();
+                $notatimelines->notaheader_id = $nodins->id;
+                $notatimelines->tanggal = $_POST['tanggal'.$i];
+                $notatimelines->item = $_POST['item'.$i];
+                $notatimelines->status = $_POST['status'.$i];
+                $notatimelines->attach_file = $filename;
+                $notatimelines->save();
+            }
+        }
 
         // $lok = Notaheader::where('id', $request->id)->update([
         //     'no_nodin' => $request->no_nodin,

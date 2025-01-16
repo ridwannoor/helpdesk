@@ -50,4 +50,9 @@ class Notaheader extends Model
     {
         return $this->hasMany('App\Models\Surat\Notafile');
     }
+
+    public function notatimelines()
+    {
+        return $this->hasMany('App\Models\Surat\Notatimelines');
+    }
 }
