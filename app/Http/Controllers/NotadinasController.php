@@ -266,10 +266,9 @@ class NotadinasController extends Controller
         $nodins->kesimpulan = $request->kesimpulan;
         $nodins->save();
 
+        Notatimelines::where('notaheader_id', $nodins->id)->delete();
         for ($i=0; $i <= $request->jml_timeline; $i++) { 
             if (isset($_POST['tanggal'.$i])) {
-                Notatimelines::where('notaheader_id', $nodins->id)->delete();
-
                 $filename = $_POST['attach_file'.$i];
                 if (isset($_FILES['file'.$i]) && $_FILES['file'.$i]['error'] == UPLOAD_ERR_OK && $_FILES['file'.$i]['size'] > 0) {
                     $extension = pathinfo($_FILES['file'.$i]['name'], PATHINFO_EXTENSION);
