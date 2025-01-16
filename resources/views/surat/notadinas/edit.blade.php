@@ -264,10 +264,10 @@
                                                     <td>
                                                         {{-- <input type="text" v-model="issue.a" class="form-control m-input" placeholder="Issue" required> --}}
                                                         <input type="hidden" name="jml_timeline" v-model="i">
-                                                        <input type="date" v-model="tl.tanggal" :name="'tanggal'+i" class="form-control m-input" placeholder="tanggal">
+                                                        <input type="date" v-model="tl.tanggal" :name="'tanggal'+i" class="form-control m-input" placeholder="tanggal" required>
                                                     </td>
                                                     <td>
-                                                        <input list="items" v-model="tl.item" class="form-control m-input" id="lokasi_rapat" :name="'item'+i" placeholder="Ketik atau pilih Item">                                                            
+                                                        <input list="items" v-model="tl.item" class="form-control m-input" id="lokasi_rapat" :name="'item'+i" placeholder="Ketik atau pilih Item" required>                                                            
                                                         <datalist id="items">
                                                             <option>Nota Dinas Permintaan Pengadaan</option>
                                                             <option>Risalah Rapat Persiapan Pengadaan</option>
@@ -287,7 +287,7 @@
                                                         </datalist>
                                                     </td>
                                                     <td>
-                                                        <select v-model="tl.status" :name="'status'+i" class="form-control bootstrap-select selectpicker">
+                                                        <select v-model="tl.status" :name="'status'+i" class="form-control bootstrap-select selectpicker" required>
                                                             <option value="Dalam proses">Dalam proses</option>                                  
                                                             <option value="Review Legal">Review Legal</option>                                  
                                                             <option value="Selesai">Selesai</option>                                  
