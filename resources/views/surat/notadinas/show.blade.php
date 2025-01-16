@@ -33,7 +33,7 @@
 @endsection
 
 @section('m-content')
-<div class="m-content">   
+<div id="app" v-cloak class="m-content">   
         <div class="row">
             <div class="col-lg-12">
                 @include('component.alertnotification')
@@ -134,6 +134,24 @@
                                 </td>
                             </tbody>
                         </table>
+                        <table class="table table-striped- table-bordered table-hover table-checkable">
+                            <thead>
+                                <tr style="text-align:center;">
+                                    <th width="20%">Tanggal</th>
+                                    <th width="30%">Item</th>
+                                    <th width="25%">Status</th>
+                                    <th width="25%">File</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(i,tl) in timeline">
+                                    <td> @{{tl.tanggal}}</td>
+                                    <td> @{{tl.item}}</td>
+                                    <td> @{{tl.status}}</td>
+                                    <td> <a v-if="tl.attach_file" :href="url+'/'+tl.attach_file" target="_blank"><span class="m-widget4__text">@{{tl.attach_file}}</span></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <!--begin::Form-->
                
@@ -145,5 +163,27 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('assets/vue/vue.min.js') }}" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var vuez = new Vue({
+            el: '#app',
+            data: {
+                title: null,
+                url: '<?= url("data_file/pdf/"); ?>',
+                timeline: <?= json_encode($nodins->notatimelines); ?>,
+            },
+            created() {
+                
+            },
+            watch: {
+    
+            },
+            methods: {
+
+            }
+        });
+    </script>
     
 @endsection
