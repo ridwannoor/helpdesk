@@ -197,6 +197,25 @@ Route::get('/notadinas/progress', 'NotadinasController@progress')->name('notadin
 Route::get('/notadinas/done', 'NotadinasController@done')->name('notadinas.done');
 Route::get('/notadinas/revisi', 'NotadinasController@revisi')->name('notadinas.revisi');
 
+//Nota Dinas
+Route::get('/mom', 'MomController@index')->name('mom');
+Route::get('/mom/create', 'MomController@create')->name('mom.create');
+Route::post('/mom/store', 'MomController@store')->name('mom.store');
+Route::get('/mom/edit/{id}', 'MomController@edit')->name('mom.edit');
+Route::put('/mom/update', 'MomController@update')->name('mom.update');
+Route::get('/mom/show/{id}', 'MomController@show')->name('mom.show');
+Route::get('/mom/destroy/{id}', 'MomController@destroy')->name('mom.destroy');
+Route::get('/mom/upload/{id}', 'MomController@upload')->name('mom.upload');
+Route::put('/mom/upload/simpan', 'MomController@uploadsimpan')->name('mom.uploadsimpan');
+Route::get('/mom/destroyfile/{id}', 'MomController@destroyfile')->name('mom.destroyfile');
+Route::get('/mom/exportPDF', 'MomController@exportPDF')->name('mom.export');
+Route::get('/mom/pending', 'MomController@pending')->name('mom.pending');
+Route::get('/mom/open', 'MomController@open')->name('mom.open');
+Route::get('/mom/cancel', 'MomController@cancel')->name('mom.cancel');
+Route::get('/mom/progress', 'MomController@progress')->name('mom.progress');
+Route::get('/mom/done', 'MomController@done')->name('mom.done');
+Route::get('/mom/revisi', 'MomController@revisi')->name('mom.revisi');
+
 //Tender
 Route::get('/tender', 'TenderController@index')->name('tender.index');
 Route::get('/tender/add', 'TenderController@create')->name('tender.add');
