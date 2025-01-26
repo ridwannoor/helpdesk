@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FrontController extends Controller
 {
-  
+
     public function index()
     {
         $pref = Preference::first();
@@ -43,7 +43,7 @@ class FrontController extends Controller
         $faqs = Faq::all();
         return view('front.faq', compact('pref', 'faqs'));
     }
-    
+
     public function pengumuman()
     {
         $pref = Preference::first();
@@ -51,18 +51,21 @@ class FrontController extends Controller
         // $tender1 = Tender::where('is_published', '1')->get();
         $closed = Tender::where('is_published', '1')->where('statustender_id', 1)->count();
         $open = Tender::where('is_published', '1')->where('statustender_id', 4)->count();
-        $cancel = Tender::where('is_published', '1')->where('statustender_id', 3)->count();  
+        $cancel = Tender::where('is_published', '1')->where('statustender_id', 3)->count();
         $pending = Tender::where('is_published', '1')->where('statustender_id', 2)->count();
-        $invest = Tender::where('is_published', '1')->where('anggaran_id', 1)->count();  
+        $invest = Tender::where('is_published', '1')->where('anggaran_id', 1)->count();
         $eksplo = Tender::where('is_published', '1')->where('anggaran_id', 2)->count();
         return view('front.pengumuman', compact('pref', 'tenders', 'closed', 'open', 'cancel', 'pending', 'invest', 'eksplo'));
     }
 
     public function pengdetail($id)
-    {   
+    {
         $pref = Preference::first();
         $tenders = Tender::find($id);
         $tends = Tender::where('is_published', '1')->orderBy('created_at', 'DESC')->paginate(5);
+        if ($id == 35) {
+            return view('front.pengdetailkhusus', compact('pref', 'tenders', 'tends'));
+        }
         return view('front.pengdetail', compact('pref', 'tenders', 'tends'));
     }
 
@@ -81,7 +84,7 @@ class FrontController extends Controller
         $category = Category::all();
         return view('front.register', compact('pref', 'lok', 'badan', 'jenis', 'category'));
     }
- 
+
     public function create(Request $request)
     {
         $vendors = new Vendor();
@@ -96,7 +99,7 @@ class FrontController extends Controller
         $this->guard()->login($vendor);
 
         return redirect('/vendor/home');
-               
+
     }
 
 }
