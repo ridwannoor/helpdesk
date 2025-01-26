@@ -25,7 +25,7 @@
                             @endphp
                             <div class="card-body">
                                 <div class="row justify-content-center">
-                                    <iframe src="{{ url('data_file/pdf_tenders/Mitra Kerja Amboja in Jogja.pdf') }}" width="50%" height="600">
+                                    <iframe src="{{ url('data_file/pdf_tenders/Mitra Kerja Amboja in Jogja.pdf') }}" width="50%" height="1200">
                                             This browser does not support PDFs. Please download the PDF to view it: <a href="{{ url('data_file/pdf_tenders/Mitra Kerja Amboja in Jogja.pdf') }}">Download PDF</a>
                                     </iframe>
                                 </div>
