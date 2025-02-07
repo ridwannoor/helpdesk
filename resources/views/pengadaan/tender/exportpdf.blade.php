@@ -63,9 +63,9 @@
           }
 
   footer {
-              position: fixed; 
-              bottom: 0cm; 
-              left: 0cm; 
+              position: fixed;
+              bottom: 0cm;
+              left: 0cm;
               right: 0cm;
               height: 2cm;
           }
@@ -81,7 +81,7 @@
   <div class="container">
   <header class="mt-0">
     <p style="text-align: right; font-size: 8pt"><img src="{{ public_path('data_file/'.$pref->image) }}" width="300px" alt=""></p>
-  </header>   
+  </header>
 </div>
     <div class="row">
       <div class="col-lg-12">
@@ -90,7 +90,7 @@
           <strong>Nomor : {{ $tenders->nomor_pr }}</strong>
         </p>
         <p>
-          PT Angkasa Pura Properti mengundang Calon Penyedia Barang dan/atau Jasa untuk mengikuti
+          PT a mengundang Calon Penyedia Barang dan/atau Jasa untuk mengikuti
           Pengadaan Pekerjaan sebagai berikut :
         </p>
         <table class="table" style="border: 1px; border-color: black">
@@ -109,23 +109,23 @@
               <td>{{ $tenders->nama_paket }}</td>
               <td>{{ $tenders->lokasi_pekerjaan }}</td>
               <td>{{ "Rp " . number_format($tenders->pagu)  }}</td>
-              <td>   
+              <td>
                 @foreach ($tenders->tenderdetail as $item)
-                {{ $item->vendorklasifikasi->kode }} 
+                {{ $item->vendorklasifikasi->kode }}
                {{ $item->vendorklasifikasi->name }} <br>
-                        
-                @endforeach  
+
+                @endforeach
               </td>
             </tr>
           </tbody>
         </table>
         <p>Syarat – syarat Peserta {{ $tenders->metodepengadaan->name }}:</p>
-     
+
           <ol type="1">
             <li>Calon Peserta harus memiliki klasifikasi dan kualifikasi usaha yang
               dipersyaratkan;
               </li>
-              <li>Calon Peserta wajib terverifikasi di e-procurement PT Angkasa Pura Properti
+              <li>Calon Peserta wajib terverifikasi di e-procurement PT a
                 pada website: http://eproc.approperti.co.id bagi perusahaan yang belum mendaftar,
                 dipersilahkan mendaftar terlebih dahulu;</li>
                 <li>Pelelangan ini menggunakan Peraturan berdasarkan Keputusan Direksi PT Angkasa Pura
@@ -133,27 +133,27 @@
                 {{ $tenders->statustender->name }}
                   </li>
                   @if ( $tenders->catatan )
-                  <li>  
-                    
-                    <p>{{ $tenders->catatan }} </p>  
+                  <li>
+
+                    <p>{{ $tenders->catatan }} </p>
                  </li>
                  @endif
                   <li>
-                    Melakukan registrasi pekerjaan sebagai tanda keikutsertaan {{ $tenders->nama_paket }}, pada sistem e-Procurement PT Angkasa Pura Properti yang dapat diakses di website: <strong> http://eproc.approperti.co.id/pengumuman</strong> selambat-lambatnya hari <strong>
-                      {{ hariIndo(date('l', strtotime($tenders->tgl_daftar))) }}, 
+                    Melakukan registrasi pekerjaan sebagai tanda keikutsertaan {{ $tenders->nama_paket }}, pada sistem e-Procurement PT a yang dapat diakses di website: <strong> http://eproc.approperti.co.id/pengumuman</strong> selambat-lambatnya hari <strong>
+                      {{ hariIndo(date('l', strtotime($tenders->tgl_daftar))) }},
                       {{ date('d M Y', strtotime($tenders->tgl_daftar)) }}
                       Pukul
                       {{ date('H:i:s', strtotime($tenders->tgl_daftar)) }} WIB;</p> </strong>
-                  
+
                   </li>
-                  <li>Demikian, untuk diketahui dan atas perhatiannya diucapkan terimakasih.</p>     
+                  <li>Demikian, untuk diketahui dan atas perhatiannya diucapkan terimakasih.</p>
                 </li>
-              
+
           </ol>
           <p>Jakarta,  {{ date('d M Y', strtotime($tenders->tgl_paket)) }}</p>
-        
+
         <p> Vice President Supply Chain Management <br>
-        PT Angkasa Pura Properti <br>
+        PT a <br>
         TTD
       </p>
       <div class="page-break"></div>
@@ -166,7 +166,7 @@
             {{ $tenders->nomor_pr }}
             </td>
           </tr>
-        
+
           <tr>
           <td>Jenis Pekerjaan</td>
           <td>
@@ -255,9 +255,9 @@
                       <td scope="row">{{ $item->vendorklasifikasi->kode }}</td>
                       <td>{{ $item->vendorklasifikasi->name }}</td>
                   </tr>
-               
-                  @endforeach  
-                  
+
+                  @endforeach
+
               </tbody>
       </table>
       <h5>Syarat Tender</h5>
@@ -274,12 +274,12 @@
                   <tr>
                       <td scope="row">{{ $item->syarattender->kode_syarat }}</td>
                       <td>{{ $item->syarattender->detail_syarat }}</td>
-                      {{-- <td>  
-                          <a href="{{ url('data_file/pdf/'.$item->file_syarat) }}" target="_blank"><span class="m-widget4__text">  {{ $item->syarattender->file_syarat }}</span></a> 
+                      {{-- <td>
+                          <a href="{{ url('data_file/pdf/'.$item->file_syarat) }}" target="_blank"><span class="m-widget4__text">  {{ $item->syarattender->file_syarat }}</span></a>
                       </td> --}}
                   </tr>
                   @endforeach
-               
+
               </tbody>
       </table>
       @foreach ($tenders->tenderpenawaran as $v)
@@ -325,7 +325,7 @@
           </tbody>
         </table>
       {{-- </ol> --}}
-   
+
       <table class="table" style="font-size: 18px">
         <thead>
             <tr>
@@ -338,7 +338,7 @@
             </tr>
             </thead>
             <tbody>
-                @foreach ($sorted as $item)    
+                @foreach ($sorted as $item)
                 @if ($v->vendor_id == $item->vendor_id)
                     <tr>
                         <td>
@@ -351,14 +351,14 @@
                         <td>
                           {{ $item->catatan }}
                         </td>
-                    </tr>      
+                    </tr>
                 @endif
-                @endforeach   
+                @endforeach
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="4" style=""><strong> Kesimpulan</strong></td>
-            
+
                 </tr>
                 <tr>
                     <td colspan="3" style="">Dokumen Teknis</td>
@@ -386,7 +386,7 @@
             </tfoot>
     </table>
     @endforeach
-{{-- 
+{{--
     <div class="page-break"></div>
     <table class="table" style="font-size: 18px; border-color: #333">
       <thead>
@@ -489,8 +489,8 @@
       </tbody>
     </table>
       </div> --}}
-     
-   
+
+
     </div>
 </body>
 </html>

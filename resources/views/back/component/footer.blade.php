@@ -3,7 +3,7 @@
         <div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
             <div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
                 <span class="m-footer__copyright">
-                     <strong>PT ANGKASA PURA PROPERTI - EPROC</strong> 2022 &copy; <a href="https://approperti.co.id" target="__blank"
+                     <strong>PT IAS Property Indonesia - EPROC</strong> 2022 &copy; <a href="https://approperti.co.id" target="__blank"
                         class="m-link">approperti.co.id</a>
                 </span>
             </div>

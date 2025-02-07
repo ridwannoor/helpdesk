@@ -125,7 +125,7 @@
             telah diadakan Rapat Klarifikasi & Negosiasi Harga terhadap Dokumen Penawaran Harga untuk pekerjaan tersebut di atas yang dihadiri oleh: </p>
         {{-- <p> --}}
         {{-- <div class="container"> --}}
-        <p><strong>I. Angkasa Pura Properti, PT :</strong></p>
+        <p><strong>I. IAS Property Indonesia, PT :</strong></p>
         {{-- <table class="table"> --}}
        <ol type="1">
             @foreach ($banegopengadaans->divisis as $item)
@@ -235,14 +235,14 @@
             @endif --}}
             {{-- <li style="text-align: justify ; text-transform: capitalize"><span>Pihak Kedua membayarkan Jaminan pelaksanaan sebesar 5% (lima persen) dari nilai pekerjaan atau senilai {{ $banegopengadaans->jaminandp1 . " %" }} sebesar {{ "Rp " . format_uang($jam) . " (" . terbilang($jam) . ") "  }} dapat berupa bank garansi, asuransi, ataupun tunai.
             dengan jangka waktu jaminan pelaksanaan {{ $banegopengadaans->bapengadaan->jangka_pelaksanaan }} hari kalender dengan jangka waktu Jaminan Pelaksanaan selama jangka waktu 
-            pelaksanaan ditambah 30 hari kalender dan membayarkan biaya dokument kontrak sebesar {{ "Rp " . format_uang($banegopengadaans->bapengadaan->biaya_dokumen)  }} ke rekening BNI nomor : 03333-55569 a/n PT ANGKASA PURA PROPERTI</span></li>
+            pelaksanaan ditambah 30 hari kalender dan membayarkan biaya dokument kontrak sebesar {{ "Rp " . format_uang($banegopengadaans->bapengadaan->biaya_dokumen)  }} ke rekening BNI nomor : 03333-55569 a/n PT IAS Property Indonesia</span></li>
              --}}
             <li style="text-align: justify ; text-transform: capitalize"><span>Berita Acara Klarifikasi dan Negosiasi Harga ini merupakan satu kesatuan dan menjadi bagian yang tidak terpisahkan dari Kontrak serta mempunyai kekuatan hukum yang mengikat Para Pihak.</span></li>
             
         </ol>                         
         <p>Demikian Berita Acara ini dibuat dengan sebenar-benarnya untuk dipergunakan sebagaimana mestinya.</p>
       
-        <p><strong>I. Angkasa Pura Properti, PT</strong></p>
+        <p><strong>I. IAS Property Indonesia, PT</strong></p>
         {{-- <table class="table"> --}}
             <ol>
             @foreach ($banegopengadaans->divisis as $item)

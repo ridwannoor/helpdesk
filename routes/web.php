@@ -30,6 +30,8 @@ Route::get('/paket', 'FrontController@paket');
 
 Route::get('/vendor/login', 'Auth\VendorAuthController@login')->name('vendor.login');
 Route::post('/vendor/login', 'Auth\VendorAuthController@home')->name('vendor.submit');
+Route::get('/vendor/api_login', 'Auth\VendorAuthController@api_login');
+
 Route::get('/vendor/dashboard', 'Back\HomepageController@index')->name('vendor.dashboard');
 Route::post('/vendor/logout', 'Auth\VendorAuthController@logout')->name('vendor.logout');
 Route::get('/vendor/lupapassword', 'Auth\VendorAuthController@lupapassword')->name('vendor.lupa');

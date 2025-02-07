@@ -35,7 +35,7 @@ class MomController extends Controller
     public function index()
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $menu = Menu::where('link', '/notadinas')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
         $moms = Moms::orderBy('created_at','DESC')->get();
@@ -59,7 +59,7 @@ class MomController extends Controller
         // return;
 
         $judul = 'Minutes of Meeting';
-        return view('surat.mom.index', compact('judul','moms','users','pref', 'crud' )); 
+        return view('surat.mom.index', compact('judul','moms','users','pref', 'crud' ));
     }
 
     public function create()
@@ -68,7 +68,7 @@ class MomController extends Controller
         $vendors = Vendor::all();
         $pics = User::where('isSCM','1')->where('status','active')->orderBy('name', 'asc')->get();
         $divisis = Divisi::orderBy('kode', 'ASC')->get();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $menu = Menu::where('link', '/notadinas')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
         // echo json_encode($temp);
@@ -76,7 +76,7 @@ class MomController extends Controller
        // $parent = $users->menu->where(['parentmenu' => 0])->get();
         $pref = Preference::first();
         $judul = 'Tambah Minutes of Meeting';
-        return view('surat.mom.add', compact('judul','users','divisis', 'pref','lokasis', 'vendors', 'crud', 'pics')); 
+        return view('surat.mom.add', compact('judul','users','divisis', 'pref','lokasis', 'vendors', 'crud', 'pics'));
     }
 
     /**
@@ -96,11 +96,11 @@ class MomController extends Controller
         if ($request->hasFile('attach_file') && $request->file('attach_file')->isValid()) {
             $file = $request->file('attach_file');
             $extension = $file->getClientOriginalExtension();
-            $filename = 'MOM_'. date('YmdHis').".".$extension; 
+            $filename = 'MOM_'. date('YmdHis').".".$extension;
             $tujuan = $request->file('attach_file')->storeAs('data_file/pdf', $filename);
             $file->move(public_path('data_file/pdf'), $tujuan);
         }
-        
+
         $moms->tgl_jam_rapat = $request->input('tgl_jam_rapat');
         $moms->lokasi = $request->input('lokasi');
         $moms->peserta_rapat = $peserta_rapat;
@@ -127,8 +127,8 @@ class MomController extends Controller
         \LogActivity::addToLog($moms->nama_agenda);
         toast('Data Minutes of Meeting Berhasil Dibuat','success');
         return redirect('/mom');
-        
-        
+
+
     }
 
     /**
@@ -139,7 +139,7 @@ class MomController extends Controller
      */
     public function show($id)
     {
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $pref = Preference::first();
         $judul = 'Detail Minutes of Meeting';
         $moms = Moms::with('momissue')->find($id);
@@ -172,7 +172,7 @@ class MomController extends Controller
 
         // var_dump($moms->peserta_rapat);
         // return;
-        
+
         return view('surat.mom.show', compact('moms','users','pref','judul'));
     }
 
@@ -184,7 +184,7 @@ class MomController extends Controller
      */
     public function edit($id)
     {
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $menu = Menu::where('link', '/notadinas')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
         // $parent = $users->menu->where(['parentmenu' => 0])->get();
@@ -199,7 +199,7 @@ class MomController extends Controller
             foreach ($lokasi_array as $lok) {
                 $temp[] = Lokasi::where('id', $lok)->first();
             }
-            
+
         }else{
             $temp[] = Lokasi::where('id', $nodins->lokasi_id)->first();
         }
@@ -226,7 +226,7 @@ class MomController extends Controller
         //     $dom = new \DomDocument();
         //     @$dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         //     $imageFile = $dom->getElementsByTagName('imageFile');
-      
+
         //     foreach($imageFile as $item => $image){
         //         $data = $img->getAttribute('src');
         //         list($type, $data) = explode(';', $data);
@@ -235,14 +235,14 @@ class MomController extends Controller
         //         $image_name= 'upload_file' . time().$item.'.png';
         //         $path = public_path() . $image_name;
         //         file_put_contents($path, $imgeData);
-                
+
         //         $image->removeAttribute('src');
         //         $image->setAttribute('src', $image_name);
         //      }
-      
+
         //     $content = $dom->saveHTML();
         $nodins = Notaheader::where('id','=', $request->id)->first();
-        
+
         $request->lokasi_id = "[".implode(",",$request->lokasi_id)."]";
 
         $nodins->no_nodin = $request->no_nodin;
@@ -282,12 +282,12 @@ class MomController extends Controller
     public function open(Request $request)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
-        // $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
+        // $users = Auth::user()->userdetails()->with('menu')->get();
         $menu = Menu::where('link', '/notadinas')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
         // $nodins = Notaheader::where('status', 'like', '%', $request->status , '%')->orderBy('created_at','DESC')->get();
-        // Product::where('name','like','%'.$this->search .'%')->where('category_id','like','%'.$this->product_cat_id.'%')->orderBy('created_at','DESC')->paginate($this->pagesize);  
+        // Product::where('name','like','%'.$this->search .'%')->where('category_id','like','%'.$this->product_cat_id.'%')->orderBy('created_at','DESC')->paginate($this->pagesize);
         $nodins = Notaheader::with('notafile')->orderBy('created_at','DESC')->get();
         $nods = Notaheader::where('status', 'open')->get();
         $judul = 'Search Nota Dinas';
@@ -300,12 +300,12 @@ class MomController extends Controller
     public function done(Request $request)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
-        // $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
+        // $users = Auth::user()->userdetails()->with('menu')->get();
         $menu = Menu::where('link', '/notadinas')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
         // $nodins = Notaheader::where('status', 'like', '%', $request->status , '%')->orderBy('created_at','DESC')->get();
-        // Product::where('name','like','%'.$this->search .'%')->where('category_id','like','%'.$this->product_cat_id.'%')->orderBy('created_at','DESC')->paginate($this->pagesize);  
+        // Product::where('name','like','%'.$this->search .'%')->where('category_id','like','%'.$this->product_cat_id.'%')->orderBy('created_at','DESC')->paginate($this->pagesize);
         $nodins = Notaheader::with('notafile')->orderBy('created_at','DESC')->get();
         $nods = Notaheader::where('status', 'done')->get();
         // dd($nodins);
@@ -320,12 +320,12 @@ class MomController extends Controller
     public function progress(Request $request)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
-        // $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
+        // $users = Auth::user()->userdetails()->with('menu')->get();
         $menu = Menu::where('link', '/notadinas')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
         // $nodins = Notaheader::where('status', 'like', '%', $request->status , '%')->orderBy('created_at','DESC')->get();
-        // Product::where('name','like','%'.$this->search .'%')->where('category_id','like','%'.$this->product_cat_id.'%')->orderBy('created_at','DESC')->paginate($this->pagesize);  
+        // Product::where('name','like','%'.$this->search .'%')->where('category_id','like','%'.$this->product_cat_id.'%')->orderBy('created_at','DESC')->paginate($this->pagesize);
         $nodins = Notaheader::with('notafile')->orderBy('created_at','DESC')->get();
         $nods = Notaheader::where('status', 'proses')->get();
         // dd($nodins);
@@ -340,12 +340,12 @@ class MomController extends Controller
     public function cancel(Request $request)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
-        // $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
+        // $users = Auth::user()->userdetails()->with('menu')->get();
         $menu = Menu::where('link', '/notadinas')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
         // $nodins = Notaheader::where('status', 'like', '%', $request->status , '%')->orderBy('created_at','DESC')->get();
-        // Product::where('name','like','%'.$this->search .'%')->where('category_id','like','%'.$this->product_cat_id.'%')->orderBy('created_at','DESC')->paginate($this->pagesize);  
+        // Product::where('name','like','%'.$this->search .'%')->where('category_id','like','%'.$this->product_cat_id.'%')->orderBy('created_at','DESC')->paginate($this->pagesize);
         $nodins = Notaheader::with('notafile')->orderBy('created_at','DESC')->get();
         $nods = Notaheader::where('status', 'cancel')->get();
         // dd($nodins);
@@ -360,12 +360,12 @@ class MomController extends Controller
     public function pending(Request $request)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
-        // $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
+        // $users = Auth::user()->userdetails()->with('menu')->get();
         $menu = Menu::where('link', '/notadinas')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
         // $nodins = Notaheader::where('status', 'like', '%', $request->status , '%')->orderBy('created_at','DESC')->get();
-        // Product::where('name','like','%'.$this->search .'%')->where('category_id','like','%'.$this->product_cat_id.'%')->orderBy('created_at','DESC')->paginate($this->pagesize);  
+        // Product::where('name','like','%'.$this->search .'%')->where('category_id','like','%'.$this->product_cat_id.'%')->orderBy('created_at','DESC')->paginate($this->pagesize);
         $nodins = Notaheader::with('notafile')->orderBy('created_at','DESC')->get();
         $nods = Notaheader::where('status', 'pending')->get();
         // dd($nodins);
@@ -380,12 +380,12 @@ class MomController extends Controller
     public function revisi(Request $request)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
-        // $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
+        // $users = Auth::user()->userdetails()->with('menu')->get();
         $menu = Menu::where('link', '/notadinas')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
         // $nodins = Notaheader::where('status', 'like', '%', $request->status , '%')->orderBy('created_at','DESC')->get();
-        // Product::where('name','like','%'.$this->search .'%')->where('category_id','like','%'.$this->product_cat_id.'%')->orderBy('created_at','DESC')->paginate($this->pagesize);  
+        // Product::where('name','like','%'.$this->search .'%')->where('category_id','like','%'.$this->product_cat_id.'%')->orderBy('created_at','DESC')->paginate($this->pagesize);
         $nodins = Notaheader::with('notafile')->orderBy('created_at','DESC')->get();
         $nods = Notaheader::where('status', 'revisi')->get();
         // dd($nodins);
@@ -401,8 +401,8 @@ class MomController extends Controller
     public function upload($id)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
-      //  $parent = $users->menu->where(['parentmenu' => 0])->get();      
+        $users = Auth::user()->userdetails()->with('menu')->get();
+      //  $parent = $users->menu->where(['parentmenu' => 0])->get();
         $nodins = Notaheader::find($id);
         // $bods = Bod::all();
         $judul = 'Upload File Nota Dinas';
@@ -411,24 +411,24 @@ class MomController extends Controller
         $divisis = Divisi::orderBy('kode', 'ASC')->get();
         return view('surat.notadinas.upload', compact('nodins','judul', 'pref','lokasis','divisis','users', 'preferences'));
     }
-    
+
     public function uploadsimpan(Request $request){
         // echo $request->nama_nodin;
         // return true;
         $nodins = Notaheader::where('id','=', $request->id)->first();
         $nodins->no_nodin = $request->no_nodin;
         $nodins->save();
-        
-   
+
+
         if($request->hasfile('filename'))
         {
            foreach ($request->filename as $file) {
             // $file = $request->file('filename');
             // $name = $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
-            $filename = 'ND_'. date('YmdHis').".".$extension; 
+            $filename = 'ND_'. date('YmdHis').".".$extension;
             // $name = $file->getClientOriginalName();
-            // $filename = $request->id.$name; 
+            // $filename = $request->id.$name;
             $tujuan_upload = 'data_file/pdf';
             $file->move($tujuan_upload,$filename);
            $data = array(
@@ -446,14 +446,14 @@ class MomController extends Controller
     public function destroy($id)
     {
         // Divisi::where('id',$id)->delete();
-        $data = Notaheader::find($id);
-        $data->notafile()->delete();
+        $data = Moms::find($id);
+        $data->momissue()->delete();
         $data->delete($data);
-        \LogActivity::addToLog($data->no_nodin);
+        \LogActivity::addToLog($data->nama_agenda);
         // return response()->json(['status'=> 'Divisi Berhasil di Hapus']);
         // Alert::warning('alert', 'Divisi Berhasil di Hapus');
         // toast('Data Nota Dinas Berhasil Dihapus','success');
-        return redirect('/notadinas')->with('message', 'Data Berhasil Dihapus');
+        return redirect('/mom')->with('message', 'Data Berhasil Dihapus');
     }
 
     public function destroyfile($id){
@@ -464,9 +464,9 @@ class MomController extends Controller
     }
 
     public function exportXLS() {
-    
+
         return Excel::download(new NotadinasExport, 'notadinas-collection.xlsx');
-       
+
     }
 
     public function exportPDF(Request $request) {
@@ -475,6 +475,6 @@ class MomController extends Controller
         $nodins = Notaheader::with('notafile', 'divisi', 'lokasi')->whereDate('created_at','>=',$start)->whereDate('created_at','<=',$end)->get();
     	$pdf = PDF::loadview('surat.notadinas.exportpdf', compact('nodins', 'start', 'end'))->setPaper('A4','landscape');
     	return $pdf->stream();
-       
+
     }
 }

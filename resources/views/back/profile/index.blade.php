@@ -7,7 +7,7 @@
 
 @section('m-content')
 <div class="m-content">
-    <div class="row">      
+    <div class="row">
         <div class="col-md-12">
             @include('component.alertnotification')
             <div class="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--rounded">
@@ -29,9 +29,9 @@
                                     <a href="/vendor/profile/edit/{{ Auth::user('vendor')->id }}" class="m-portlet__nav-link btn btn-light m-btn m-btn--pill m-btn--air">
                                       <i class="fa fa-edit" aria-hidden="true"></i>  Edit
                                     </a>
-                                @endif                                
+                                @endif
                             </li>
-                          
+
                         </ul>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                     <!--begin::Section-->
                     <div class="m-section">
                         <div class="row">
-                            <div class="col-md-9">  
+                            <div class="col-md-9">
                                 <ul class="nav nav-tabs nav-fill" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-toggle="tab" href="#profile"><i class="fa fa-home" aria-hidden="true"></i> Profile</a>
@@ -96,10 +96,10 @@
                                                         @if ( Auth::user('vendor')->is_email_verified)
                                                             <span class="m--font-success"> <strong> {{ Auth::user('vendor')->email }}</strong></span> <br>
                                                             <span class="m-badge m-badge--success m-badge--wide">Verified</span>
-                                                        @else                                                            
+                                                        @else
                                                             <span class="m--font-warning"> <strong> {{ Auth::user('vendor')->email }}</strong></span>  <br>
                                                             <form action="/vendor/profile/lupaverifikasi" method="POST" enctype="multipart/form-data">
-                                                                @csrf   
+                                                                @csrf
                                                                 <div class="form-group">
                                                                     <input type="hidden" name="vendor_id" value="{{ Auth::user('vendor')->id}}" />
                                                                     <input type="hidden" name="email" value="{{ Auth::user('vendor')->email }}">
@@ -121,7 +121,7 @@
                                                     <td>Contact Person Alternative</td>
                                                     <td>{{ Auth::user('vendor')->alternative_person . ", " . Auth::user('vendor')->alternative_phone }}</td>
                                                 </tr>
-                                              
+
                                                 <tr>
                                                     <td>Website</td>
                                                     <td>{{ Auth::user('vendor')->website }}</td>
@@ -154,7 +154,7 @@
                                                     <td>Product</td>
                                                     <td>{{ Auth::user('vendor')->product }}</td>
                                                 </tr>
-                                               
+
                                                 <tr>
                                                     <td>Tanggal Dibuat </td>
                                                     <td>{{ Auth::user('vendor')->created_at }}</td>
@@ -233,7 +233,7 @@
                                                                  <div class="m-widget4__ext" >
                                                                      <a href="/vendor/profile/destroyfile/{{$vfile->id}}" class="m-widget4__icon delete-confirm">
                                                                          <i class="la la-close"></i>
-                                                                         
+
                                                                      </a>
                                                                  </div>
                                                              </div>
@@ -254,7 +254,7 @@
                                           <a class="list-group-item list-group-item-action" data-toggle="list" href="#spk" role="tab">SPK</a>
                                           <a class="list-group-item list-group-item-action" data-toggle="list" href="#kontrak" role="tab">Kontrak</a>
                                         </div>
-                                        
+
                                         <!-- Tab panes -->
                                         <div class="tab-content">
                                           <div class="tab-pane active" id="po" role="tabpanel">...</div>
@@ -264,14 +264,14 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
-                           
+
                             <div class="col-md-3">
                                 <div class="alert m-alert--default" role="alert">
                                     <strong>Perhatian!</strong> <br>
                                     - Lengkapi Profile Perusahaan dengan klik tombol <span class="m--font-info"> <i class="fa fa-edit" aria-hidden="true"></i> Edit</span> pada pojok kanan atas. <br>
-                                    - Lengkapi Bank Account dengan <span class="m--font-info"> Upload Cover Tabungan </span> (Company/Personal). 
+                                    - Lengkapi Bank Account dengan <span class="m--font-info"> Upload Cover Tabungan </span> (Company/Personal).
                                 </div>
                                 <div class="card text-left">
                                   <img class="card-img-top" src="{{ url('data_file/pdf/'.Auth::user('vendor')->image) }}" height="150px" width="150px" alt="image">
@@ -296,14 +296,14 @@
                                   </div>
                                 </div>
                             </div>
-                           
+
                         </div>
-                    </div>                   
+                    </div>
                 </div>
-                
+
             </div>
         </div>
-              
+
                 <div class="col-md-12">
                     <div class="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--rounded">
                         <div class="m-portlet__head">
@@ -349,12 +349,12 @@
                                             <li class="nav-item">
                                                 <a class="nav-link" data-toggle="tab" href="#m_tabs_1_8"><i class="fa fa-file" aria-hidden="true"></i> Dok Lainnya</a>
                                             </li>
-                                        </ul>                    
-                        
+                                        </ul>
+
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="m_tabs_1_1" role="tabpanel">
                                             @if (Auth::user('vendor')->is_published == null)
-                                                <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#m_modal_5" >+ Tambah</a> 
+                                                <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#m_modal_5" >+ Tambah</a>
                                             @endif
                                             <table class="table">
                                                 <thead>
@@ -377,7 +377,7 @@
                                                         <tr>
                                                             <td>{{ $no++ }}</td>
                                                             <td><a href="javascript:void(0)" data-id="{{ $vl->id }}" data-toggle="modal" data-target="#m_modal_6{{ $vl->id }}">{{ $vl->vendorjenis->keterangan }}</a></td>
-                                                            <td>{{ $vl->nomor }}</td>   
+                                                            <td>{{ $vl->nomor }}</td>
                                                             <td>{{ $vl->keterangan }}</td>
                                                             <td>{{ date('d-m-Y', strtotime($vl->start)) }}
                                                             @if ($vl->end)
@@ -397,17 +397,17 @@
                                                                 <a href="/vendor/profile/lisensi/destroy/{{ $vl->id }}" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                                 @endif
                                                             </td>
-                                                        </tr>   
-                                                        @endforeach                                                    
+                                                        </tr>
+                                                        @endforeach
                                                     {{-- @endforeach --}}
                                                 </tbody>
-                                              
+
                                             </table>
-                                            
+
                                             </div>
                                             <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
                                                 @if (Auth::user('vendor')->is_published == null)
-                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#pengurus_modal_1" >+ Tambah</a> 
+                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#pengurus_modal_1" >+ Tambah</a>
                                                 @endif
                                                 <table class="table">
                                                     <thead>
@@ -434,7 +434,7 @@
                                                                     <span class="m-badge m-badge--warning m-badge--wide">unverified</span>
                                                                     @else
                                                                         <span class="m-badge m-badge--success m-badge--wide">verified</span>
-                                                                    @endif    
+                                                                    @endif
                                                                 </td>
                                                                 <td>
                                                                     @if (Auth::user('vendor')->is_published == null)
@@ -442,20 +442,20 @@
                                                                     <a href="/vendor/profile/pengurus/destroy/{{ $vp->id }}" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                                     @endif
                                                                 </td>
-                                                            </tr>   
-                                                            @endforeach                                                    
+                                                            </tr>
+                                                            @endforeach
                                                         {{-- @endforeach --}}
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
                                                 @if (Auth::user('vendor')->is_published == null)
-                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#lap_modal_1" >+ Tambah</a> 
+                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#lap_modal_1" >+ Tambah</a>
                                                 @endif
                                                 <table class="table">
                                                     <thead>
                                                         <tr>
-                                                            <th>NO</th>                                                            
+                                                            <th>NO</th>
                                                             <th>KETERANGAN</th>
                                                             <th>TAHUN</th>
                                                             <th>STATUS</th>
@@ -471,13 +471,13 @@
                                                             <tr>
                                                                 <td>{{ $no++ }}</td>
                                                                 <td><a href="#" data-id="{{ $vla->id }}" data-toggle="modal" data-target="#lap_modal_2{{ $vla->id }}">{{ $vla->keterangan }}</a></td>
-                                                                <td>{{ date('Y', strtotime($vla->thn))  }}</td>   
+                                                                <td>{{ date('Y', strtotime($vla->thn))  }}</td>
                                                                 <td>
                                                                     @if ($vla->terms == null)
                                                                         <span class="m-badge m-badge--warning m-badge--wide">unverified</span>
                                                                     @else
                                                                         <span class="m-badge m-badge--success m-badge--wide">verified</span>
-                                                                    @endif    
+                                                                    @endif
                                                                 </td>
                                                                 <td>
                                                                     @if (Auth::user('vendor')->is_published == null)
@@ -485,15 +485,15 @@
                                                                     <a href="/vendor/profile/lap/destroy/{{ $vla->id }}" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                                     @endif
                                                                 </td>
-                                                            </tr>   
-                                                            @endforeach                                                    
+                                                            </tr>
+                                                            @endforeach
                                                         {{-- @endforeach --}}
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div class="tab-pane" id="m_tabs_1_4" role="tabpanel">
                                                 @if (Auth::user('vendor')->is_published == null)
-                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#sertifikat_modal_1" >+ Tambah</a> 
+                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#sertifikat_modal_1" >+ Tambah</a>
                                                 @endif
                                                 <table class="table">
                                                     <thead>
@@ -526,7 +526,7 @@
                                                                     <span class="m-badge m-badge--warning m-badge--wide">unverified</span>
                                                                     @else
                                                                         <span class="m-badge m-badge--success m-badge--wide">verified</span>
-                                                                    @endif    
+                                                                    @endif
                                                                 </td>
                                                                 <td>
                                                                     @if (Auth::user('vendor')->is_published == null)
@@ -534,15 +534,15 @@
                                                                     <a href="/vendor/profile/sertifikat/destroy/{{ $vs->id }}" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                                     @endif
                                                                 </td>
-                                                            </tr>   
-                                                            @endforeach                                                    
+                                                            </tr>
+                                                            @endforeach
                                                         {{-- @endforeach --}}
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div class="tab-pane" id="m_tabs_1_5" role="tabpanel">
                                                 @if (Auth::user('vendor')->is_published == null)
-                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#tenaga_modal_1" >+ Tambah</a> 
+                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#tenaga_modal_1" >+ Tambah</a>
                                                 @endif
                                                 <table class="table">
                                                     <thead>
@@ -577,15 +577,15 @@
                                                                     <a href="/vendor/profile/tenaga/destroy/{{ $vt->id }}" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                                     @endif
                                                                 </td>
-                                                            </tr>   
-                                                            @endforeach                                                    
+                                                            </tr>
+                                                            @endforeach
                                                         {{-- @endforeach --}}
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div class="tab-pane" id="m_tabs_1_6" role="tabpanel">
                                                 @if (Auth::user('vendor')->is_published == null)
-                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#fasil_modal_1" >+ Tambah</a> 
+                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#fasil_modal_1" >+ Tambah</a>
                                                 @endif
                                                 <table class="table">
                                                     <thead>
@@ -620,15 +620,15 @@
                                                                     <a href="/vendor/profile/fasilitas/destroy/{{ $vfol->id }}" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                                     @endif
                                                                 </td>
-                                                            </tr>   
-                                                            @endforeach                                                    
+                                                            </tr>
+                                                            @endforeach
                                                         {{-- @endforeach --}}
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <div class="tab-pane" id="m_tabs_1_7" role="tabpanel">
                                                 @if (Auth::user('vendor')->is_published == null)
-                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#pengal_modal_1" >+ Tambah</a> 
+                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#pengal_modal_1" >+ Tambah</a>
                                                 @endif
                                                 <table class="table">
                                                     <thead>
@@ -655,9 +655,9 @@
                                                                         <span class="m-badge m-badge--warning m-badge--wide">unverified</span>
                                                                         @else
                                                                             <span class="m-badge m-badge--success m-badge--wide">verified</span>
-                                                                        @endif    
+                                                                        @endif
                                                                     </td>
-                                                                    <td> 
+                                                                    <td>
                                                                         @if (Auth::user('vendor')->is_published == null)
                                                                         <a href="javascript:void(0)" data-id="{{ $vpen->id }}" data-toggle="modal" data-target="#pengal_modal_3{{ $vpen->id }}" class="btn btn-accent m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                                                         <a href="/vendor/profile/pengalaman/destroy/{{ $vpen->id }}" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill"><i class="fa fa-trash" aria-hidden="true"></i></a>
@@ -671,7 +671,7 @@
                                             </div>
                                             <div class="tab-pane" id="m_tabs_1_8" role="tabpanel">
                                                 @if (Auth::user('vendor')->is_published == null)
-                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#doc_modal_1" >+ Tambah</a> 
+                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#doc_modal_1" >+ Tambah</a>
                                                 @endif
                                                 <table class="table">
                                                     <thead>
@@ -706,44 +706,44 @@
                                                                     <a href="/vendor/profile/doc/destroy/{{ $vd->id }}" class="btn btn-danger m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                                     @endif
                                                                 </td>
-                                                            </tr>   
-                                                            @endforeach                                                    
+                                                            </tr>
+                                                            @endforeach
                                                         {{-- @endforeach --}}
                                                     </tbody>
                                                 </table>
-                                                
+
                                             </div>
 
-                                        </div>      
-                                   
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                           
+
                         </div>
                         @if ( Auth::user('vendor')->is_published == null)
-                        <div class="m-portlet__foot">                           
-                            <div class="alert m-alert--default" role="alert">                              
-                               
+                        <div class="m-portlet__foot">
+                            <div class="alert m-alert--default" role="alert">
+
                                 @if (Auth::user('vendor')->terms)
                                 <strong>Perhatian!</strong> Data telah dikirimkan
                                 <button id="btnsyarat" class="btn btn-success btn-sm" disabled >Menunggu Verifikasi </button>
-                                                                      
+
                                 @else
-                                <strong>Perhatian!</strong> Lengkapi Profile Perusahaan dan Pastikan Kembali Data Dukung Anda Sebelum 
+                                <strong>Perhatian!</strong> Lengkapi Profile Perusahaan dan Pastikan Kembali Data Dukung Anda Sebelum
                                     @if (Auth::user('vendor')->is_email_verified == null)
-                                    <button id="btnsyarat" class="btn btn-success btn-sm" disabled>Request Verifikasi <i class="fa fa-arrow-right" aria-hidden="true"></i></button> 
+                                    <button id="btnsyarat" class="btn btn-success btn-sm" disabled>Request Verifikasi <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
                                     @else
                                     <button id="btnsyarat" class="btn btn-success btn-sm" data-toggle="modal" data-target="#syarat" >Request Verifikasi <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
                                     @endif
                                 @endif
 
                                 {{-- <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#syarat"> &nbsp; Request Verifikasi <i class="fa fa-arrow-right" aria-hidden="true"></i></button> --}}
-                            </div>                           
+                            </div>
                         </div>
                         @endif
                     </div>
-                    
+
                 </div>
 
                 <div class="col-md-12">
@@ -780,9 +780,9 @@
                                                     <td><i class="fa fa-file" aria-hidden="true"></i>&nbsp; Lisensi</td>
                                                     <td><strong class="m--font-primary">{{ $vendorlisensicount  }}</strong></td>
                                                     <td>
-                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendorlisensi . " unverified" }}</span>         
-                                                        <span class="m-badge m-badge--success m-badge--wide">{{ $vendorlisensi1 . " verified" }}</span> 
-                                                        
+                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendorlisensi . " unverified" }}</span>
+                                                        <span class="m-badge m-badge--success m-badge--wide">{{ $vendorlisensi1 . " verified" }}</span>
+
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -790,8 +790,8 @@
                                                     <td><i class="fa fa-file" aria-hidden="true"></i>&nbsp; Pengurus Perusahaan</td>
                                                     <td><strong class="m--font-primary">{{ $vendorpenguruscount }}</strong></td>
                                                     <td>
-                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendorpengurus . " unverified" }}</span>                                                       
-                                                         <span class="m-badge m-badge--success m-badge--wide">{{ $vendorpengurus1 . " verified" }}</span> 
+                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendorpengurus . " unverified" }}</span>
+                                                         <span class="m-badge m-badge--success m-badge--wide">{{ $vendorpengurus1 . " verified" }}</span>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -799,7 +799,7 @@
                                                     <td><i class="fa fa-file" aria-hidden="true"></i>&nbsp; Laporan Keuangan</td>
                                                     <td><strong class="m--font-primary">{{ $vendorlapcount }}</strong></td>
                                                     <td>
-                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendorlap . " unverified" }}</span>                                                       
+                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendorlap . " unverified" }}</span>
                                                         <span class="m-badge m-badge--success m-badge--wide">{{ $vendorlap1 . " verified" }}</span>
                                                     </td>
                                                 </tr>
@@ -808,7 +808,7 @@
                                                     <td><i class="fa fa-file" aria-hidden="true"></i>&nbsp; Sertifikat Badan Usaha (SBU)</td>
                                                     <td><strong class="m--font-primary">{{ $vendorsertifikatcount }}</strong></td>
                                                     <td>
-                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendorsertifikat . " unverified" }}</span>                                                       
+                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendorsertifikat . " unverified" }}</span>
                                                         <span class="m-badge m-badge--success m-badge--wide">{{ $vendorsertifikat1 . " verified" }}</span>
                                                     </td>
                                                 </tr>
@@ -817,7 +817,7 @@
                                                     <td><i class="fa fa-file" aria-hidden="true"></i>&nbsp; Tenaga Ahli</td>
                                                     <td><strong class="m--font-primary">{{ $vendortenagacount }}</strong></td>
                                                     <td>
-                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendortenaga . " unverified" }}</span>                                                       
+                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendortenaga . " unverified" }}</span>
                                                         <span class="m-badge m-badge--success m-badge--wide">{{ $vendortenaga1 . " verified" }}</span>
                                                     </td>
                                                 </tr>
@@ -826,7 +826,7 @@
                                                     <td><i class="fa fa-file" aria-hidden="true"></i>&nbsp; Fasilitas / Peralatan</td>
                                                     <td><strong class="m--font-primary">{{ $vendorfasilitascount }}</strong></td>
                                                     <td>
-                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendorfasilitas . " unverified" }}</span>                                                       
+                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendorfasilitas . " unverified" }}</span>
                                                         <span class="m-badge m-badge--success m-badge--wide">{{ $vendorfasilitas1 . " verified" }}</span>
                                                     </td>
                                                 </tr>
@@ -835,7 +835,7 @@
                                                     <td><i class="fa fa-file" aria-hidden="true"></i>&nbsp; Pengalaman Perusahaan</td>
                                                     <td><strong class="m--font-primary">{{ $vendorpengalamancount }}</strong></td>
                                                     <td>
-                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendorpengalaman . " unverified" }}</span>                                                       
+                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendorpengalaman . " unverified" }}</span>
                                                         <span class="m-badge m-badge--success m-badge--wide">{{ $vendorpengalaman1 . " verified" }}</span>
                                                     </td>
                                                 </tr>
@@ -844,7 +844,7 @@
                                                     <td><i class="fa fa-file" aria-hidden="true"></i>&nbsp; Dokumen Lainnya</td>
                                                     <td><strong class="m--font-primary">{{ $vendordokcount }}</strong></td>
                                                     <td>
-                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendordok . " unverified" }}</span>                                                       
+                                                        <span class="m-badge m-badge--warning m-badge--wide">{{ $vendordok . " unverified" }}</span>
                                                         <span class="m-badge m-badge--success m-badge--wide">{{ $vendordok1 . " verified" }}</span>
                                                     </td>
                                                 </tr>
@@ -853,10 +853,10 @@
                                     </div>
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <div class="col-md-12">
@@ -868,11 +868,11 @@
                                             @if ( Auth::user('vendor')->is_published == null)
                                                 @if (Auth::user('vendor')->terms)
                                                 <button id="btnsyarat" class="btn btn-success" disabled >Menunggu Verifikasi</button>
-                                               @else     
-                                               @if (Auth::user('vendor')->is_email_verified == null)
-                                               <button id="btnsyarat" class="btn btn-success" disabled>Request Verifikasi <i class="fa fa-arrow-right" aria-hidden="true"></i></button>                                         
                                                @else
-                                                <button id="btnsyarat" class="btn btn-success" data-toggle="modal" data-target="#syarat" >Request Verifikasi <i class="fa fa-arrow-right" aria-hidden="true"></i></button>                                         
+                                               @if (Auth::user('vendor')->is_email_verified == null)
+                                               <button id="btnsyarat" class="btn btn-success" disabled>Request Verifikasi <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                                               @else
+                                                <button id="btnsyarat" class="btn btn-success" data-toggle="modal" data-target="#syarat" >Request Verifikasi <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
                                                 @endif
                                                 @endif
                                             @endif
@@ -900,46 +900,46 @@
                                                                <h6>PERNYATAAN KEBENARAN DOKUMEN </h6>
                                                                <p style="text-align: justify">
                                                                 <ol type="1" style="text-align: justify; font-size: 12px">
-                                                                    <li> Segala dokumen legalitas, dokumen perusahaan dan formulir yang kami sampaikan/ isi adalah benar. 
+                                                                    <li> Segala dokumen legalitas, dokumen perusahaan dan formulir yang kami sampaikan/ isi adalah benar.
                                                                     </li>
-                                                                    <li>Dengan ini menyatakan bahwa kami / perusahaan kami tidak termasuk dalam daftar hitam (black list) yang dikeluarkan oleh PT Angkasa Pura Properti dan atau Instansi/Perusahaan lain.  
+                                                                    <li>Dengan ini menyatakan bahwa kami / perusahaan kami tidak termasuk dalam daftar hitam (black list) yang dikeluarkan oleh PT a dan atau Instansi/Perusahaan lain.
                                                                     </li>
                                                                     <li>
-                                                                        Tidak akan melakukan praktek Korupsi, Kolusi dan Nepotisme (KKN).                                                                
+                                                                        Tidak akan melakukan praktek Korupsi, Kolusi dan Nepotisme (KKN).
                                                                     </li>
-                                                                    <li>Akan melaporkan kepada pihak yang berwajib / berwenang dari PT Angkasa Pura Properti apabila mengetahui adanya indikasi Korupsi, Kolusi dan Nepotisme (KKN) di dalam proses Pengadaan Barang dan/atau Jasa ini. <br>
+                                                                    <li>Akan melaporkan kepada pihak yang berwajib / berwenang dari PT a apabila mengetahui adanya indikasi Korupsi, Kolusi dan Nepotisme (KKN) di dalam proses Pengadaan Barang dan/atau Jasa ini. <br>
                                                                     </li>
                                                                     <li>
                                                                         Dalam proses Pengadaan Barang/Jasa ini, berjanji akan mengikuti proses Pengadaan Barang/Jasa ini secara bersih, transparan dan profesional dalam arti akan mengerahkan segala kemampuan dan sumber daya secara optimal untuk memberikan hasil kerja terbaik mulai dari penyiapan penawaran sampai tahap penyelesaian kegiatan/pekerjaan ini. <br>
                                                                    </li>
                                                                    <li>
                                                                     Kami/Perusahaan Kami akan melakukan pembaharuan dokumen legalitas apabila ada perubahan/penambahan dokumen/dokumen sudah tidak berlaku. <br>
-                                                               
+
                                                                    </li>
-                                                                   <li>Kami/Perusahaan Kami akan tunduk kepada segala ketentuan yang berlaku di PT Angkasa Pura Properti selama tidak bertentangan dengan ketentuan perundang-undangan yang berlaku. <br>
-                                                              
+                                                                   <li>Kami/Perusahaan Kami akan tunduk kepada segala ketentuan yang berlaku di PT a selama tidak bertentangan dengan ketentuan perundang-undangan yang berlaku. <br>
+
 
                                                                    </li>
                                                                    <li> Apabila dikemudian hari, ditemui bahwa dokumen - dokumen dan formulir yang telah kami berikan tidak benar/ palsu, maka kami bersedia dikenakan sanksi sebagai berikut : <br>
                                                                    </li>
                                                                    <ol type="i">
-                                                                    <li>Administrasi , yaitu berupa dimasukkan dalam daftar hitam PT. Angkasa Pura Properti  dan tidak diikutsertakan dalam setiap Pengadaan Barang dan Jasa selama 2 (dua) tahun; </li>
+                                                                    <li>Administrasi , yaitu berupa dimasukkan dalam daftar hitam PT. a  dan tidak diikutsertakan dalam setiap Pengadaan Barang dan Jasa selama 2 (dua) tahun; </li>
                                                                     <li>Dituntut ganti rugi atau digugat secara perdata;</li>
-                                                                    <li>Dilaporkan kepada pihak yang berwajib untuk diproses secara pidana.</li>    
-                                                                </ol> 
+                                                                    <li>Dilaporkan kepada pihak yang berwajib untuk diproses secara pidana.</li>
                                                                 </ol>
-                                                                  
-                                                                
-                                                                </p> 
-                                                              
+                                                                </ol>
+
+
+                                                                </p>
+
                                                                <hr>
                                                                 <label class="m-checkbox">
-                                                                    <input type="checkbox" class="agree" name="terms" id="syaratketentuan" value="accept">Sudah Membaca & Menyetujui Syarat & Ketentuan                                                                     
+                                                                    <input type="checkbox" class="agree" name="terms" id="syaratketentuan" value="accept">Sudah Membaca & Menyetujui Syarat & Ketentuan
                                                                     <span></span>
                                                                 </label>
                                                             </div>
                                                             </div>
-                                                            <div class="modal-footer">                                                               
+                                                            <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                 <input type="submit" class="btn btn-success" value="Konfirmasi">
                                                                 {{-- <input type="submit" class="btn btn-success">Konfirmasi </input> --}}
@@ -947,7 +947,7 @@
                                                             </form>
                                                         </div>
                                                     </div>
-                                                </div> 
+                                                </div>
                                         </div>
                                     </div>
                             </div>
@@ -1083,8 +1083,8 @@
         });
         });
 
-       
-  
+
+
 
     });
 

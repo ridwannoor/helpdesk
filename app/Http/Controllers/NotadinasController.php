@@ -357,6 +357,20 @@ class NotadinasController extends Controller
         // Product::where('name','like','%'.$this->search .'%')->where('category_id','like','%'.$this->product_cat_id.'%')->orderBy('created_at','DESC')->paginate($this->pagesize);  
         $nodins = Notaheader::with('notafile')->orderBy('created_at','DESC')->get();
         $nods = Notaheader::where('status', 'proses')->get();
+        foreach ($nods as $nodin) {
+            $temp = [];
+            if (strpos($nodin->lokasi_id, '[') !== false) {
+                // String contains '[', so convert it to an array
+                $lokasi_array = json_decode($nodin->lokasi_id, true);
+                foreach ($lokasi_array as $lok) {
+                    $temp[] = Lokasi::where('id', $lok)->first();
+                }
+                
+            }else{
+                $temp[] = Lokasi::where('id', $nodin->lokasi_id)->first();
+            }
+            $nodin->lokasi = $temp;
+        }
         // dd($nodins);
         // $bods = Bod::all();
         $judul = 'Search Nota Dinas';

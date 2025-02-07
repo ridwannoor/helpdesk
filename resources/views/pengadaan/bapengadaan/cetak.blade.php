@@ -56,7 +56,7 @@
 
     .table-borderless {
         border:  solid #fff;
-        
+
     }
 
     .table, td, tr, th {
@@ -73,9 +73,9 @@
             }
 
     footer {
-                position: fixed; 
-                bottom: 0cm; 
-                left: 0cm; 
+                position: fixed;
+                bottom: 0cm;
+                left: 0cm;
                 right: 0cm;
                 height: 2cm;
             }
@@ -90,7 +90,7 @@
 {{-- @include('component.head') --}}
 
 <body>
-     
+
     <footer>
         <hr>
         <p style="text-align: right; font-size: 6pt"><i>BERITA ACARA RAPAT PENJELASAN (AANWIZJING) <br> PEKERJAAN
@@ -101,9 +101,9 @@
     <div class="container">
         <header class="mt-0">
             <p style="text-align: right; font-size: 8pt"><img src="{{ public_path('data_file/'.$pref->image) }}" width="300px" alt=""></p>
-        </header>   
+        </header>
         <div class="row">
-             
+
             <table border="1" class="table">
                 <tbody>
                     <tr>
@@ -116,10 +116,10 @@
                     </tr>
                 </tbody>
             </table>
-        </div>       
+        </div>
 
         <p style="text-align: justify; ">Pada hari {{ hariIndo(date('l', strtotime($bapengadaans->tanggal))) }}, tanggal
-            {{ terbilang(date('d', strtotime($bapengadaans->tanggal))) }} bulan {{ bulanIndo(date('F', strtotime($bapengadaans->tanggal)))}} tahun 
+            {{ terbilang(date('d', strtotime($bapengadaans->tanggal))) }} bulan {{ bulanIndo(date('F', strtotime($bapengadaans->tanggal)))}} tahun
             {{ terbilang(date('Y', strtotime($bapengadaans->tanggal))) }}
             ({{ date("d-m-Y", strtotime($bapengadaans->tanggal)) }}) lokasi
             {{ $bapengadaans->lokasi_nego }}, telah diadakan Rapat Penjelasan Pekerjaan (Aanwijzing) pekerjaan sebagaimana tersebut di atas, dengan hasil sebagai berikut:  </p>
@@ -128,14 +128,14 @@
         <p><strong>A. Jalannya Rapat Penjelasan Pekerjaan (Aanwijzing)</strong></p>
         {{-- <table class="table"> --}}
             <ol type="1">
-                <li  style="margin: 20px;text-align: justify;">Rapat dibuka oleh Vice President Supply Chain Management pada pukul {{ date('H:i', strtotime($bapengadaans->tanggal)) }} WIB dan dilanjutkan 
-                    dengan pemberian penjelasan mengenai peraturan umum dan persyaratan administrasi, kemudian dilanjutkan dengan penjelasan 
-                    persyaratan teknis beserta dokumen penawaran harga pekerjaan oleh Unit Spesifikasi Teknis. Kepada Peserta Pengadaan 
+                <li  style="margin: 20px;text-align: justify;">Rapat dibuka oleh Vice President Supply Chain Management pada pukul {{ date('H:i', strtotime($bapengadaans->tanggal)) }} WIB dan dilanjutkan
+                    dengan pemberian penjelasan mengenai peraturan umum dan persyaratan administrasi, kemudian dilanjutkan dengan penjelasan
+                    persyaratan teknis beserta dokumen penawaran harga pekerjaan oleh Unit Spesifikasi Teknis. Kepada Peserta Pengadaan
                     diberikan kesempatan untuk bertanya tentang hal-hal yang belum jelas dalam persyaratan penawaran administrasi, teknis, serta harga.</li>
                     <li  style="margin: 20px;text-align: justify;">Pertanyaan yang diajukan oleh Peserta telah dijawab oleh Divisi Supply Chain Management dan Unit Spesifikasi Teknis.</li>
-                    <li  style="margin: 20px;text-align: justify;">Peserta menyatakan telah mempelajari dan memahami  terhadap keseluruhan isi dan ketentuan yang dicantumkan di dalam Dokumen 
+                    <li  style="margin: 20px;text-align: justify;">Peserta menyatakan telah mempelajari dan memahami  terhadap keseluruhan isi dan ketentuan yang dicantumkan di dalam Dokumen
                         Pengadaan beserta lampirannya (RKS/KAK, BoQ Kosong, dokumen teknis lainnya).</li>
-                        <li  style="margin: 20px;text-align: justify;">Secara lengkap hasil pemberian Penjelasan tersebut termuat dalam Dokumen Pengadaan beserta lampirannya yang 
+                        <li  style="margin: 20px;text-align: justify;">Secara lengkap hasil pemberian Penjelasan tersebut termuat dalam Dokumen Pengadaan beserta lampirannya yang
                             merupakan bagian yang tidak terpisahkan dengan Berita Acara ini.</li>
                         <li  style="margin: 20px;text-align: justify;">Apabila ada perubahan dokumen pada saat rapat penjelasan pekerjaan, maka perubahan tersebut akan menjadi ketentuan yang mengikat.</li>
                         <li  style="margin: 20px;text-align: justify;">Rapat penjelasan pekerjaan ditutup pada pukul {{ date('H:i', strtotime($bapengadaans->tgl_penawaran)) }} WIB</li>
@@ -161,14 +161,14 @@
                             <td scope="row"> {{ $item->dokumen }}</td>
                             <td>{{ $item->sebelum }} </td>
                             <td>{{ $item->menjadi }} </td>
-                        </tr>                                       
+                        </tr>
                    @endforeach
                     </tbody>
                 </table>
                 <p><strong>C. Pertanyaan dan Jawaban</strong></p>
                 @php
                 $no = 1 ;
-            @endphp 
+            @endphp
                 <table border="1"  class="table">
                     <thead>
                         <tr>
@@ -178,25 +178,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                       
+
                    @foreach ($bapengadaans->bapertanyaans as $item)
                    <tr>
                         <td style="width: 50px; text-align: center">{{ $no++ }}</td>
                        <td scope="row"> {{ $item->pertanyaan }}</td>
                        <td>{{ $item->jawaban }} </td>
-                   </tr>                                       
+                   </tr>
               @endforeach
                     </tbody>
                 </table>
-                <p style="text-align: justify;">Berita Acara Rapat Penjelasan (Aanwijzing) ini merupakan satu kesatuan dan menjadi bagian yang 
+                <p style="text-align: justify;">Berita Acara Rapat Penjelasan (Aanwijzing) ini merupakan satu kesatuan dan menjadi bagian yang
                     tidak terpisahkan dari Kontrak serta mempunyai kekuatan hukum yang mengikat Para Pihak.
                 </p>
                 <p style="text-align: justify;">Demikian Berita Acara ini dibuat dengan sebenar-benarnya untuk dipergunakan sebagaimana mestinya.
                 </p>
                 <p><strong>D. Daftar Peserta</strong></p>
-               
-                
-                <p><strong>Angkasa Pura Properti, PT</strong></p>
+
+
+                <p><strong>a, PT</strong></p>
                 <table class="table">
                     @foreach ($bapengadaans->divisis as $item)
                     <tbody>
@@ -223,9 +223,9 @@
                     </tbody>
                     @endforeach
                 </table>
-    </div> 
+    </div>
 
-    
+
 </body>
 
 

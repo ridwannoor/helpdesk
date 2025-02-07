@@ -60,9 +60,9 @@
             }
 
     footer {
-                position: fixed; 
-                bottom: 0cm; 
-                left: 0cm; 
+                position: fixed;
+                bottom: 0cm;
+                left: 0cm;
                 right: 0cm;
                 height: 2cm;
             }
@@ -77,7 +77,7 @@
 {{-- @include('component.head') --}}
 
 <body>
-     
+
     <footer>
         <p style="text-align: right; font-size: 8pt"><i>BERITA ACARA KLARIFIKASI DAN NEGOSIASI HARGA
                             {{ strtoupper($lok->nama_pek)  }}</i> </p>
@@ -86,9 +86,9 @@
     <div class="container">
         <header class="mt-0">
             <p style="text-align: right; font-size: 8pt"><img src="{{ public_path('data_file/'.$pref->image) }}" width="300px" alt=""></p>
-        </header>   
+        </header>
         <div class="row">
-             
+
             <table border="1" class="table">
                 <tbody>
                     <tr>
@@ -101,18 +101,18 @@
                     </tr>
                 </tbody>
             </table>
-        </div>       
+        </div>
 
         <p style="text-align: justify">Pada hari {{ hariIndo(date('l', strtotime($lok->tanggal))) }}, tanggal
-            {{ terbilang(date('d', strtotime($lok->tanggal))) }} bulan {{ bulanIndo(date('F', strtotime($lok->tanggal)))}} tahun 
+            {{ terbilang(date('d', strtotime($lok->tanggal))) }} bulan {{ bulanIndo(date('F', strtotime($lok->tanggal)))}} tahun
             {{ terbilang(date('Y', strtotime($lok->tanggal))) }}
-            ({{ date("d-m-Y", strtotime($lok->tanggal)) }}) 
+            ({{ date("d-m-Y", strtotime($lok->tanggal)) }})
             {{ "bertempat di " . $lok->lokasi_nego }},
             telah diadakan Rapat Klarifikasi dan Negosiasi Harga terhadap Dokumen Penawaran
             Harga untuk Pekerjaan tersebut diatas yang dihadiri oleh : </p>
         {{-- <p> --}}
         {{-- <div class="container"> --}}
-        <p><strong>I. Angkasa Pura Properti, PT :</strong></p>
+        <p><strong>I. a, PT :</strong></p>
         <table class="table">
             @foreach ($lok->divisis as $item)
             <tbody>
@@ -168,12 +168,12 @@
                             <td width="300px">Jumlah Penawaran </td>
                             <td width="30px">:</td>
                             <td>{{ "Rp ". format_uang($lok->jml_penawaran)  }}
-                                ({{ terbilang($lok->jml_penawaran) . " rupiah" }}) 
+                                ({{ terbilang($lok->jml_penawaran) . " rupiah" }})
                                 @if ($lok->pajak == "include")
                                 termasuk pajak yang berlaku.
                                @else
                                 tidak termasuk pajak.
-                               @endif     
+                               @endif
                             </td>
                         </tr>
                         <tr>
@@ -192,23 +192,23 @@
                             <td width="30px">:</td>
                             <td>{{ $lok->vendor->namaperusahaan }}, {{ $lok->vendor->badanusaha->kode }}</td>
                         </tr>
-                  
+
                         <tr>
                             <td width="300px">NPWP</td>
                             <td width="30px">:</td>
                             <td>{{ $lok->vendor->npwp }}</td>
                         </tr>
-                    
+
                         <tr>
                             <td width="300px">Jumlah Penawaran </td>
                             <td width="30px">:</td>
                             <td>{{ "Rp ". format_uang($lok->jml_nego)  }}
-                                ({{ terbilang($lok->jml_nego) . " rupiah" }}) 
+                                ({{ terbilang($lok->jml_nego) . " rupiah" }})
                                 @if ($lok->pajak == "include")
                                 termasuk pajak yang berlaku.
                                @else
                                 tidak termasuk pajak.
-                               @endif     
+                               @endif
                             </td>
                         </tr>
                         {{-- <tr>
@@ -220,7 +220,7 @@
                 </table>
             </li>
             <li style="margin-bottom: 1 rem">Jangka Waktu Pelaksanaan Pekerjaan : {{ date("d-m-Y", strtotime($lok->start_date)) . " - " . date("d-m-Y", strtotime($lok->end_date)) }} <strong>({{ $lok->waktu_pel . " hari kalender" }})</strong> terhitung sejak terbit {{  $lok->dokpekerjaans->implode('kode' ,  ', ' ) }}
-                      
+
                 @foreach ($lok->dokpekerjaans as $item)
                     @if ($item->kode == "PO")
                         @if ($lok->garansi)
@@ -244,10 +244,10 @@
                         @if ($lok->training)
                             <li style="margin-bottom: 1 rem"> Training dilakukan : <strong>{{ $lok->training }}</strong></li>
                         @endif
-                    @endif       
+                    @endif
                 @endforeach
-           
-            
+
+
                 @if ($lok->pajak == "include")
                     <li style="margin-bottom: 1 rem">
                         {{ $lok->vendor->namaperusahaan }}, {{ $lok->vendor->badanusaha->kode }} merupakah Pengusaha Kena Pajak dan menerbitkan Faktur Pajak Pertambahan Nilai (PPN).
@@ -261,12 +261,12 @@
             <li style="margin-bottom: 1 rem"> Pengiriman Barang/Material ke lokasi pekerjaan dilakukan oleh : <strong>{{ $lok->pengirim  }}</strong></li>
             <li style="margin-bottom: 1 rem"> <strong>{{ $lok->vendor->namaperusahaan }}, {{ $lok->vendor->badanusaha->kode }}</strong> selanjutnya akan mengirimkan surat penawaran harga setelah
                 negosiasi.</li>
-                @if (preg_replace('/[^A-Za-z0-9 ]/', '', $lok->catatan)) 
-            <li style="text-align: justify; margin-bottom: 1 rem"> {!! $lok->catatan !!}</li>            
+                @if (preg_replace('/[^A-Za-z0-9 ]/', '', $lok->catatan))
+            <li style="text-align: justify; margin-bottom: 1 rem"> {!! $lok->catatan !!}</li>
                 @endif
             <li style="margin-bottom: 1 rem"> Ruang lingkup pekerjaan telah sesuai dengan BoQ dan Syarat-syarat teknis
                 telah disetujui oleh kedua belah pihak (terlampir){{$lok->jaminan_id}}</li>
-           
+
                 @php
                 $jam = $lok->jml_nego * 5/100 ;
                 $dp =  $lok->jml_nego * $lok->nilaidp/100;
@@ -274,36 +274,36 @@
                 @endphp
 
                 @if ( $lok->jaminan_id == '1')
-                    @foreach ($lok->dokpekerjaans as $item)            
+                    @foreach ($lok->dokpekerjaans as $item)
                         @if ($item->kode == "Kontrak" OR $lok->dokpekerjaans == "SPK")
-                            <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA 
+                            <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA
                             @if ($lok->downpayment =="include")
                                 Membayarkan Jaminan DP {{ $lok->nilaidp ." %" }} sebesar {{ "Rp ". format_uang($dp) }} dapat berupa Bank Garansi, Asuransi, ataupun Tunai, dan
                             @endif
                             menyerahkan Biaya Administrasi Dokumen Kontrak sebesar {{ "Rp ". format_uang($bidok)  }}
-                            ({{terbilang($bidok) . "rupiah"}}) ke rekening BNI nomor : 03333-55569 a/n PT. Angkasa Pura Properti.
-                            </li> 
+                            ({{terbilang($bidok) . "rupiah"}}) ke rekening BNI nomor : 03333-55569 a/n PT. a.
+                            </li>
                         @endif
                     @endforeach
                 @elseif ( $lok->jaminan_id == '2')
-                    @foreach ($lok->dokpekerjaans as $item)            
+                    @foreach ($lok->dokpekerjaans as $item)
                         @if ($item->kode == "Kontrak" OR $lok->dokpekerjaans == "SPK")
-                            <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA 
+                            <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA
                             @if ($lok->downpayment =="include")
                                 Membayarkan Jaminan DP {{ $lok->nilaidp ." %" }} sebesar {{ "Rp ". format_uang($dp) }} dapat berupa Bank Garansi, Asuransi, ataupun Tunai, dan
                             @endif
                             Menyerahkan Jaminan Pelaksanaan sebesar 5% (lima
                             persen) dari nilai pekerjaan atau senilai {{ "Rp ". format_uang($jam)  }}
                             ({{ terbilang($jam) . "rupiah"}}). dapat berupa bank garansi,
-                            asuransi, atau pun tunai dengan jangka waktu jaminan pelaksanaan adalah ditambah minimal 1 (satu) bulan lebih lama dari 
+                            asuransi, atau pun tunai dengan jangka waktu jaminan pelaksanaan adalah ditambah minimal 1 (satu) bulan lebih lama dari
                             Jangka Waktu berakhirnya kontrak.
-                            </li> 
+                            </li>
                         @endif
                     @endforeach
                 @elseif ( $lok->jaminan_id == '3')
-                    @foreach ($lok->dokpekerjaans as $item)            
+                    @foreach ($lok->dokpekerjaans as $item)
                         @if ($item->kode == "Kontrak" OR $lok->dokpekerjaans == "SPK")
-                            <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA 
+                            <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA
                             @if ($lok->downpayment =="include")
                                 Membayarkan Jaminan DP {{ $lok->nilaidp ." %" }} sebesar {{ "Rp ". format_uang($dp) }} dapat berupa Bank Garansi, Asuransi, ataupun Tunai, dan
                             @endif
@@ -314,14 +314,14 @@
                             dan membayarkan biaya dokument kontrak sebesar {{ "Rp ". format_uang($bidok)  }}
                             ({{terbilang($bidok) . "rupiah"}})
                             ke rekening BNI nomor : 03333-55569
-                            a/n PT. Angkasa Pura Properti.
-                            </li> 
+                            a/n PT. a.
+                            </li>
                         @endif
                     @endforeach
                 @elseif ($lok->jaminan_id == '4')
-                @foreach ($lok->dokpekerjaans as $item)            
+                @foreach ($lok->dokpekerjaans as $item)
                     @if ($item->kode == "Kontrak" OR $lok->dokpekerjaans == "SPK")
-                    <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA 
+                    <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA
                         @if ($lok->downpayment =="include")
                         Membayarkan Jaminan DP {{ $lok->nilaidp ." %" }} sebesar {{ "Rp ". format_uang($dp) }} dapat berupa Bank Garansi, Asuransi, ataupun Tunai.
                         @endif
@@ -331,10 +331,10 @@
                 @endif
 
                 {{-- @if ($lok->jaminan == "include")
-                    @foreach ($lok->dokpekerjaans as $item)            
+                    @foreach ($lok->dokpekerjaans as $item)
                     @if ($item->kode == "Kontrak" OR $lok->dokpekerjaans == "SPK")
 
-                    <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA 
+                    <li style="text-align: justify; margin-bottom: 1 rem">    Selanjutnya pihak KEDUA
                     @if ($lok->downpayment =="include")
                     membayarkan jaminan DP {{ $lok->nilaidp ." %" }} sebesar {{ "Rp ". format_uang($dp) }} dapat berupa Bank Garansi, Asuransi, ataupun Tunai,
                     @endif
@@ -346,16 +346,16 @@
                     dan membayarkan biaya dokument kontrak sebesar {{ "Rp ". format_uang($bidok) }}
                     ({{terbilang($bidok) . "rupiah"}})
                     ke rekening BNI nomor : 03333-55569
-                    a/n PT. Angkasa Pura Properti.
+                    a/n PT. a.
 
                 </li>
                     @endif
                     @endforeach
                 @endif --}}
-            
-          
+
+
         </ol>
-        
+
         <p>
             Berita Acara Klarifikasi dan Negosiasi Harga ini merupakan satu kesatuan dan
             menjadi bagian yang tidak
@@ -367,7 +367,7 @@
             sebagaimana mestinya.</p>
 
 
-        <p><strong>Angkasa Pura Properti, PT</strong></p>
+        <p><strong>a, PT</strong></p>
         <table class="table">
             @foreach ($lok->divisis as $item)
             @if ($item->detail != "Area Manager")
@@ -392,7 +392,7 @@
         </table>
     </div>
 
-    
+
 </body>
 
 

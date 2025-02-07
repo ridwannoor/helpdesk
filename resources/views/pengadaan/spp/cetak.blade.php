@@ -155,7 +155,7 @@
                     {{-- <li style="text-align: justify">Nota Dinas Vice President Supply Chain Management Pengadaan Nomor : {{ $spp->no_nodin }}, tanggal {{ date('d-m-Y', strtotime($spp->tanggal))  }} perihal  {{ $spp->perihal }}.</li>
                     <li style="text-align: justify">Disposisi Persetujuan {{ $spp->bod->jabatan }} tanggal {{ date('d-m-Y', strtotime($spp->tgl_dispo)) }}.</li> --}}
                 </ol>
-                <p style="text-align: justify">Dengan ini diberitahukan bahwa dengan memperhatikan ketentuan Prosedur Pengadaan Barang dan /atau Jasa yang berlaku dilingkungan PT Angkasa Pura Properti, 
+                <p style="text-align: justify">Dengan ini diberitahukan bahwa dengan memperhatikan ketentuan Prosedur Pengadaan Barang dan /atau Jasa yang berlaku dilingkungan PT IAS Property Indonesia, 
                     maka ditunjuk sebagai Pemenang pelaksana pekerjaan, adalah :</p>
                 <table class="table table-borderless">
                 <tbody>
@@ -198,15 +198,15 @@
              <p style="text-align: justify"> Sehubungan dengan hal tersebut, dimohon untuk
                 @if ( $spp->banegopengadaan->jaminan == '1')
                     <span> melakukan pembayaran biaya administrasi kontrak pengadaan barang dan 
-                        jasa sebesar Rp {{ number_format($jampel) }},- ({{ terbilang($jampel)  }} rupiah) ke rekening BNI nomor : 03333-55569 a/n PT Angkasa Pura Properti. </span> 
+                        jasa sebesar Rp {{ number_format($jampel) }},- ({{ terbilang($jampel)  }} rupiah) ke rekening BNI nomor : 03333-55569 a/n PT IAS Property Indonesia. </span> 
                 @elseif ( $spp->banegopengadaan->jaminan = '2')
                 <span> melakukan pembayaran jaminan pelaksanaan sebesar 5% (lima persen) dari nilai kontrak 
                     atau senilai {{ number_format($jampel) }},- ({{ terbilang($jampel)  }} rupiah) dan 
-                    jasa sebesar {{ number_format($spp->bidok) }},- ({{ terbilang($spp->bidok)  }} rupiah) ke rekening BNI nomor : 03333-55569 a/n PT Angkasa Pura Properti. </span> 
+                    jasa sebesar {{ number_format($spp->bidok) }},- ({{ terbilang($spp->bidok)  }} rupiah) ke rekening BNI nomor : 03333-55569 a/n PT IAS Property Indonesia. </span> 
                 @elseif ( $spp->banegopengadaan->jaminan = '3')
               <span> melakukan pembayaran jaminan pelaksanaan sebesar 5% (lima persen) dari nilai kontrak 
                 atau senilai Rp {{ number_format($jampel) }},- ({{ terbilang($jampel)  }} rupiah) dan biaya administrasi kontrak pengadaan barang dan 
-                jasa sebesar Rp {{ number_format($spp->bidok) }},- ({{ terbilang($spp->bidok)  }} rupiah) ke rekening BNI nomor : 03333-55569 a/n PT Angkasa Pura Properti. </span> 
+                jasa sebesar Rp {{ number_format($spp->bidok) }},- ({{ terbilang($spp->bidok)  }} rupiah) ke rekening BNI nomor : 03333-55569 a/n PT IAS Property Indonesia. </span> 
                 @else
               
                 @endif

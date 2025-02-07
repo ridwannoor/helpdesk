@@ -1,12 +1,12 @@
 
-<p>Email {{ $name }} dari EPROC PT.ANGKASA PURA PROPERTI</p>
-  
-<p> 
+<p>Email {{ $name }} dari EPROC PT.a</p>
+
+<p>
     Judul : {{ $name }} <br>
-    Deskripsi :  {{ $deskripsi }} 
+    Deskripsi :  {{ $deskripsi }}
 </p>
 
-<p>Terima kasih, 
+<p>Terima kasih,
 </p>
 
 <p>Mohon tidak membalas pesan ini, ini adalah pesan otomatis</p>

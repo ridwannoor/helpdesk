@@ -84,6 +84,32 @@ class VendorAuthController extends Controller
         
     }
 
+    public function api_login(Request $request)
+    {
+        
+        $email = $request->email;
+        $pwd   = $request->password;
+        Auth::guard('vendor')->logout();
+        session()->flush();
+
+        if (Auth::guard('vendor')->attempt(['email' => $email, 'password' => $pwd])) {
+            // return redirect('/vendor/dashboard');
+            // return redirect()->intended('/vendor/dashboard')->with('success', 'You Have Successfully Login');
+            return response()->json([
+                'status' => true,
+                'data' => $email 
+            ]);
+        }else{
+            // return back()->withErrors(['email' => 'Email or password are wrong.']);
+            return response()->json([
+                'status' => false,
+                'data' => null 
+            ]);
+            // return redirect
+        }
+        
+    }
+
        public function create(Request $request)
     {
 	$name = $request->namaperusahaan ;

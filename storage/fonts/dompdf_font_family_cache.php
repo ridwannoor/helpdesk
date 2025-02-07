@@ -1,4 +1,5 @@
-<?php return array (
+<?php return function ($fontDir, $rootDir) {
+return array (
   'sans-serif' => array(
     'normal' => $rootDir . '/lib/fonts/Helvetica',
     'bold' => $rootDir . '/lib/fonts/Helvetica-Bold',
@@ -78,6 +79,7 @@
     'normal' => $rootDir . '/lib/fonts/DejaVuSerif',
   ),
   'glyphicons halflings' => array(
-    'normal' => $fontDir . '/glyphicons-halflings-normal_91a063d0f3772b152f606edc0383c99d',
+    'normal' => $fontDir . '/glyphicons_halflings_normal_91a063d0f3772b152f606edc0383c99d',
   ),
-) ?>
+);
+}; ?>

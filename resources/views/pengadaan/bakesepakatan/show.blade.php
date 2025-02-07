@@ -33,7 +33,7 @@
 @endsection
 
 @section('m-content')
-    <div class="m-content">   
+    <div class="m-content">
         <div class="row">
             <div class="col-lg-12">
                 @include('component.alertnotification')
@@ -41,7 +41,7 @@
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     </button>
-                    <strong>Alert!</strong> {{ $message }}.					  	
+                    <strong>Alert!</strong> {{ $message }}.
                 </div>
                 @endif --}}
                 <!--begin::Portlet-->
@@ -49,8 +49,8 @@
                     <div class="m-portlet__body m-portlet__body--no-padding">
                         <div class="m-invoice-2">
                             <div class="m-invoice__wrapper">
-                                <div class="m-invoice__head" style="background-image: url(assets/app/media/img/logos/bg-6.html);">	
-                                    <div class="m-invoice__container m-invoice__container--centered">			 		 
+                                <div class="m-invoice__head" style="background-image: url(assets/app/media/img/logos/bg-6.html);">
+                                    <div class="m-invoice__container m-invoice__container--centered">
                                         <div class="m-invoice__logo">
                                             {{-- <a href="#"> --}}
                                                 <p style="text-align: center ; text-transform:uppercase ">BERITA ACARA KESEPAKATAN <br>
@@ -68,12 +68,12 @@
 
                                             {{-- </a>				  --}}
                                             {{-- <a href="#">
-                                                <img  src="assets/app/media/img/logos/logo_client_color.png">  	
+                                                <img  src="assets/app/media/img/logos/logo_client_color.png">
                                             </a> --}}
-                                        </div> 
-                                     
+                                        </div>
 
-                                    </div>					 	
+
+                                    </div>
                                 </div>
                                 @php
                                     $no = 1;
@@ -85,9 +85,9 @@
                                             Nama : {{ $ba->bod->name }}  <br>
                                             Jabatan : {{ $ba->bod->jabatan . " - " . $pref->nama_perusahaan}} <br>
                                             Dalam hal ini bertindak untuk dan atas nama {{ $pref->nama_perusahaan }} untuk selanjutnya disebut sebagai PIHAK PERTAMA.
-                                        </li>  
+                                        </li>
                                         <li>
-                                           
+
                                             @foreach ($ba->banegopengadaan->vendor->vendorpengurus as $item)
                                                 @if ($item->ttd == 1)
                                                 Nama : {{ $item->nama  }}  <br>
@@ -95,51 +95,51 @@
                                                 Dalam hal ini bertindak untuk dan atas nama {{ $ba->banegopengadaan->vendor->namaperusahaan . ", " . $ba->banegopengadaan->vendor->badanusaha->kode }} untuk selanjutnya disebut sebagai PIHAK KEDUA.
                                                 @endif
                                             @endforeach
-                                        </li>  
-                                    </ol>  
-                                    <p>PIHAK PERTAMA dan PIHAK KEDUA untuk selanjutnya secara bersama-sama disebut sebagai PARA PIHAK.</p>   
-                                    <p>PARA PIHAK masing-masing bertindak dalam kedudukannya sebagaimana tersebut di atas, terlebih dahulu menerangkan hal-hal sebagai berikut:</p>  
+                                        </li>
+                                    </ol>
+                                    <p>PIHAK PERTAMA dan PIHAK KEDUA untuk selanjutnya secara bersama-sama disebut sebagai PARA PIHAK.</p>
+                                    <p>PARA PIHAK masing-masing bertindak dalam kedudukannya sebagaimana tersebut di atas, terlebih dahulu menerangkan hal-hal sebagai berikut:</p>
                                     <ol type="I">
                                         {{-- <li>Bahwa pada {{ $ba->banegopengadaan->tgl_sph }} telah disampaikan Surat Permintaan Penawaran Harga nomor:  {{ $ba->banegopengadaan->spph }}  yang disampaikan oleh PIHAK PERTAMA kepada PIHAK KEDUA.</li>     --}}
                                         <li>Bahwa pada tanggal {{ date('d-m-Y' , strtotime($ba->banegopengadaan->tgl_sph ))  }} telah diterima Surat Penawaran Harga nomor : {{ $ba->banegopengadaan->spph }} yang dibuat oleh PIHAK KEDUA.</li>
                                         <li>Bahwa pada tanggal  {{ date('d-m-Y' , strtotime($ba->banegopengadaan->tanggal )) }} telah dibuat Berita Acara Klarifikasi & Negosiasi nomor {{ $ba->banegopengadaan->nomor_ba }} yang disetujui oleh perwakilan PARA PIHAK</li>
                                         <li>Bahwa pada tanggal {{ date('d-m-Y' , strtotime($ba->banegopengadaan->tgl_sph_nego ))  }} telah diterima Surat Penawaran Harga Setelah Negosiasi nomor : {{ $ba->banegopengadaan->spph_nego }} yang dibuat oleh PIHAK KEDUA.</li>
-                                    </ol>     
-                                    <p>Sehubungan dengan hal-hal tersebut di atas, PARA PIHAK sepakat untuk bekerjasama  dengan ketentuan sebagai berikut: </p>      
+                                    </ol>
+                                    <p>Sehubungan dengan hal-hal tersebut di atas, PARA PIHAK sepakat untuk bekerjasama  dengan ketentuan sebagai berikut: </p>
                                     <ol type="I">
-                                        <li>PIHAK KEDUA bersedia untuk melaksanakan Pekerjaan Perbaikan Jalan Akses Bandara Pada Pekerjaan 
-                                            Design & Build Revitalisasi dan Beautifikasi Terminal Internasional, Domestik, GAT & Fasilitas 
-                                            Penunjang di Bandara Internasional I Gusti Ngurah Rai - Bali, dengan ruang lingkup sesuai Bill of Quantity (BoQ) 
-                                            dengan Kerangka Acuan Kerja (KAK) serta syarat-syarat teknis lainnya yang telah disetujui oleh Unit Spesifikasi 
-                                            Teknis (UST) terkait (terlampir). </li>  
-                                        <li>PARA PIHAK sepakat bahwa Jangka waktu pelaksanaan pekerjaan adalah dari 73 (tujuh puluh tiga) hari kalender. 
+                                        <li>PIHAK KEDUA bersedia untuk melaksanakan Pekerjaan Perbaikan Jalan Akses Bandara Pada Pekerjaan
+                                            Design & Build Revitalisasi dan Beautifikasi Terminal Internasional, Domestik, GAT & Fasilitas
+                                            Penunjang di Bandara Internasional I Gusti Ngurah Rai - Bali, dengan ruang lingkup sesuai Bill of Quantity (BoQ)
+                                            dengan Kerangka Acuan Kerja (KAK) serta syarat-syarat teknis lainnya yang telah disetujui oleh Unit Spesifikasi
+                                            Teknis (UST) terkait (terlampir). </li>
+                                        <li>PARA PIHAK sepakat bahwa Jangka waktu pelaksanaan pekerjaan adalah dari 73 (tujuh puluh tiga) hari kalender.
                                             Dan Jangka waktu pemeliharaan pekerjaan adalah selama 290 (dua ratus sembilan puluh) hari kalender.</li>
-                                        <li>PARA PIHAK sepakat bahwa biaya pekerjaan adalah Rp 4.430.366.074,- 
-                                            (empat miliar empat ratus tiga puluh juta tiga ratus enam puluh enam ribu tujuh puluh empat rupiah), 
+                                        <li>PARA PIHAK sepakat bahwa biaya pekerjaan adalah Rp 4.430.366.074,-
+                                            (empat miliar empat ratus tiga puluh juta tiga ratus enam puluh enam ribu tujuh puluh empat rupiah),
                                             termasuk pajak- pajak yang berlaku.</li>
                                         <li>PARA PIHAK sepakat bahwa tata cara pembayaran atas biaya pekerjaan diatur dengan ketentuan sebagai berikut :
                                                <ol type="I">
                                             @foreach ($ba->banegopengadaan->bapengadaan->badetailpengadaans as $item)
-                                        
+
                                                 <li> {{ $item->termin }}  </li>
-                                          
+
                                              @endforeach
                                             </ol>
                                         </li>
-                                        <li>Selanjutnya PIHAK KEDUA membayarkan jaminan pelaksanaan sebesar 5% (lima persen) dari nilai pekerjaan dapat 
-                                            berupa Bank Garansi, Asuransi atau pun Tunai, dengan jangka waktu Jaminan Pelaksanaan selama jangka waktu 
-                                            pelaksanaan ditambah 30 hari kalender dan membayarkan biaya dokumen kontrak sebesar Rp 7.000.000,- (tujuh juta rupiah) 
-                                            ke rekening BNI nomor : 03333-55569 a/n PT. Angkasa Pura Properti. Jaminan pelaksanaan dan biaya dokumen kontrak ini 
+                                        <li>Selanjutnya PIHAK KEDUA membayarkan jaminan pelaksanaan sebesar 5% (lima persen) dari nilai pekerjaan dapat
+                                            berupa Bank Garansi, Asuransi atau pun Tunai, dengan jangka waktu Jaminan Pelaksanaan selama jangka waktu
+                                            pelaksanaan ditambah 30 hari kalender dan membayarkan biaya dokumen kontrak sebesar Rp 7.000.000,- (tujuh juta rupiah)
+                                            ke rekening BNI nomor : 03333-55569 a/n PT. a. Jaminan pelaksanaan dan biaya dokumen kontrak ini
                                             selambat-lambatnya diserahkan 7 hari kalender setelah Berita Acara Kesepakatan ini diterbitkan.</li>
-                                        <li>Dengan diterbitkannya Berita Acara Kesepakatan ini, maka kami harap agar pelaksana pekerjaan dapat menghubungi Divisi 
+                                        <li>Dengan diterbitkannya Berita Acara Kesepakatan ini, maka kami harap agar pelaksana pekerjaan dapat menghubungi Divisi
                                             Construction selaku Unit Spesifikasi Teknis (UST) untuk dapat melakukan koordinasi persiapan pekerjaan.</li>
-                                    </ol> 
-                                    <p>Demikian Berita Acara Kesepakatan ini dibuat, untuk dapat digunakan sebagaimana seharusnya.</p> 
-                                    <p style="text-align: center">Jakarta, 20 Mei 2022</p>   
-                                    <p></p>               
-                                </div>	 
-                                <div class="m-invoice__footer">						 
-                                    <div class="m-invoice__table  m-invoice__table--centered table-responsive"> 
+                                    </ol>
+                                    <p>Demikian Berita Acara Kesepakatan ini dibuat, untuk dapat digunakan sebagaimana seharusnya.</p>
+                                    <p style="text-align: center">Jakarta, 20 Mei 2022</p>
+                                    <p></p>
+                                </div>
+                                <div class="m-invoice__footer">
+                                    <div class="m-invoice__table  m-invoice__table--centered table-responsive">
                                         <table class="table table-striped- table-bordered table-hover table-checkabl">
                                             <thead>
                                                 <th style="background: rgba(89, 199, 39, 0.842)">
@@ -157,7 +157,7 @@
                                                                 <div class="m-widget4__ext" >
                                                                     <a href="/bakesepakatan/destroyfile/{{$item->id}}" class="m-widget4__icon delete-confirm">
                                                                         <i class="la la-close"></i>
-                                                                        
+
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -165,18 +165,18 @@
                                                     </div>
                                                 </td>
                                             </tbody>
-                                        </table> 
-                                    </div>							 				 					
-                                </div>	                          				 				 					
-                            </div>				 
-                        </div>	 
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
                 <!--end::Portlet-->
         </div>
     </div>
-    
+
 @endsection
 
 

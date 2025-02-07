@@ -23,7 +23,7 @@
         page-break-after: always;
     }
 
-    
+
     .pagenum:before {
         content: counter(page);
     }
@@ -70,11 +70,11 @@
         /* padding: 5px; */
         margin-bottom: 15px;
     }
-            
+
     footer {
-                position: fixed; 
-                bottom: 0cm; 
-                left: 0cm; 
+                position: fixed;
+                bottom: 0cm;
+                left: 0cm;
                 right: 0cm;
                 height: 2cm;
             }
@@ -89,11 +89,11 @@
 {{-- @include('component.head') --}}
 
 <body>
-     
+
     <footer>
         <hr>
         <p style="text-align: right; font-size: 6pt"><i>
-          <span>BERITA ACARA KLARIFIKASI DAN NEGOSIASI </span> <br>  {{ strtoupper( $banegopengadaans->judul_pekerjaan)  }}</i> 
+          <span>BERITA ACARA KLARIFIKASI DAN NEGOSIASI </span> <br>  {{ strtoupper( $banegopengadaans->judul_pekerjaan)  }}</i>
             <br>  <span class="pagenum"></span>
         </p>
         {{-- <img src="{{ url('data_file/' . $pref->image) }}" width="100%" height="100%"/> --}}
@@ -101,9 +101,9 @@
     <div class="container">
         <header class="mt-0">
             <p style="text-align: right; font-size: 8pt"><img src="{{ public_path('data_file/'.$pref->image) }}" width="300px" alt=""></p>
-        </header>   
+        </header>
         <div class="row">
-             
+
             <table border="1" class="table">
                 <tbody>
                     <tr>
@@ -116,10 +116,10 @@
                     </tr>
                 </tbody>
             </table>
-        </div>       
+        </div>
 
         <p style="text-align: justify ; ">Pada hari {{ hariIndo(date('l', strtotime($banegopengadaans->tanggal))) }}, tanggal
-            {{ terbilang(date('d', strtotime($banegopengadaans->tanggal))) }} bulan {{ bulanIndo(date('F', strtotime($banegopengadaans->tanggal)))}} tahun 
+            {{ terbilang(date('d', strtotime($banegopengadaans->tanggal))) }} bulan {{ bulanIndo(date('F', strtotime($banegopengadaans->tanggal)))}} tahun
             {{ terbilang(date('Y', strtotime($banegopengadaans->tanggal))) }}
             ({{ date("d-m-Y", strtotime($banegopengadaans->tanggal)) }}) lokasi  {{ $banegopengadaans->lokasi_nego }},
             telah diadakan Rapat Klarifikasi & Negosiasi Harga terhadap Dokumen Penawaran Harga untuk pekerjaan sebagaimana tersebut di atas, dengan hasil sebagai berikut:</p>
@@ -131,53 +131,53 @@
                 <li>Divisi Supply Chain Management beserta Unit Spesifikasi Teknis (UST) telah melakukan klarifikasi terhadap penawaran yang disampaikan oleh peserta pengadaan.</li>
                 <li><span>Penawaran harga sebelum negosiasi:</span>   <br>
                     <table class="table">
-                        <tbody>	 
+                        <tbody>
                             <tr>
                                  <td>Nama Perusahaan</td>
                                  <td>{{ $banegopengadaans->vendor->namaperusahaan }}, {{ $banegopengadaans->vendor->badanusaha->kode }}</td>
-                            </tr>	
+                            </tr>
                             <tr>
                                  <td>NPWP</td>
                                  <td>{{ $banegopengadaans->vendor->npwp }}</td>
-                            </tr>	
+                            </tr>
                             {{-- @if ($banegopengadaans->spph) --}}
                                 <tr>
                                     <td>SPH</td>
                                     <td>{{ $banegopengadaans->spph }}</td>
-                                </tr>	
+                                </tr>
                             {{-- @endif                   --}}
                             <tr>
                                 <td>Nilai Penawaran</td>
                                 <td>{{ "Rp ". format_uang($banegopengadaans->jml_penawaran)  }}
                                     ({{ terbilang($banegopengadaans->jml_penawaran) . " rupiah" }}) harga sudah termasuk pajak. </td>
-                            </tr>							 
-                        </tbody> 
+                            </tr>
+                        </tbody>
                     </table>
-                </li> 
+                </li>
                 <li><span>Penawaran harga sesudah negosiasi :</span>   <br>
 
                     <table class="table">
-                        <tbody>	 
+                        <tbody>
                             <tr>
                                  <td>Nama Perusahaan</td>
                                  <td>{{ $banegopengadaans->vendor->namaperusahaan }}, {{ $banegopengadaans->vendor->badanusaha->kode }}</td>
-                            </tr>	
+                            </tr>
                             <tr>
                                  <td>NPWP</td>
                                  <td>{{ $banegopengadaans->vendor->npwp }}</td>
-                            </tr>	
+                            </tr>
                             {{-- @if ($banegopengadaans->spph_nego)
                                 <tr>
                                     <td>SPH Nego</td>
                                     <td>{{ $banegopengadaans->spph_nego }}</td>
-                                </tr>	
+                                </tr>
                             @endif                    --}}
                             <tr>
                                 <td>Nilai Negosiasi</td>
                                 <td>{{ "Rp ". format_uang($banegopengadaans->jml_nego)  }}
                                     ({{ terbilang($banegopengadaans->jml_nego) . " rupiah" }}) harga sudah termasuk pajak.</td>
-                            </tr>							 
-                        </tbody> 
+                            </tr>
+                        </tbody>
                     </table>
                 </li>
                 @if ($banegopengadaans->jawa_pel)
@@ -186,17 +186,17 @@
               @if ($banegopengadaans->jawa_pem)
                 <li><span> Jangka Waktu Pemeliharaan : {{ $banegopengadaans->jawa_pem  }} </span>  </li>
               @endif
-             
+
                 <li><span>Tata Cara Pembayaran :</span> <br>
                    <ol type="I">
-                    @foreach ($banegopengadaans->banegodetail as $item)   
-    
-                    <li style="margin-top:14px; text-align: justify">  {{ $item->carabayar }}   </li>    
-                          
+                    @foreach ($banegopengadaans->banegodetail as $item)
+
+                    <li style="margin-top:14px; text-align: justify">  {{ $item->carabayar }}   </li>
+
                     @endforeach
                  </ol>
                 </li>
-                <li>Ruang lingkup pekerjaan yang ditawarkan oleh Pihak Penyedia telah sesuai dengan ruang lingkup pekerjaan yang tercantum di dalam Kerangka Acuan Kerja (KAK)/Rencana Kerja dan Syarat-Syarat (RKS) yang dipersyaratkan oleh Unit Spesifikasi Teknis (UST).</li>  
+                <li>Ruang lingkup pekerjaan yang ditawarkan oleh Pihak Penyedia telah sesuai dengan ruang lingkup pekerjaan yang tercantum di dalam Kerangka Acuan Kerja (KAK)/Rencana Kerja dan Syarat-Syarat (RKS) yang dipersyaratkan oleh Unit Spesifikasi Teknis (UST).</li>
                 <li>Jenis Kontrak Pekerjaan yang dimaksud adalah Kontrak {{ $banegopengadaans->kontrak->name }}</li>
                 <li>Penyedia Barang dan/atau Jasa selanjutnya akan mengirimkan Surat Penawaran Harga setelah klarifikasi & negosiasi. </li>
                 <li><span> Penyedia Barang dan/atau Jasa menyatakan bahwa : </span> <br>
@@ -209,40 +209,40 @@
                 <li>Catatan : <br>
                     {!! $banegopengadaans->catatan !!}</li>
                 @endif
-             
+
                 @if ( $banegopengadaans->jaminan == '1')
                     <li>Penyedia Barang dan/atau Jasa akan menyerahkan Biaya Administrasi Dokumen Kontrak sesuai dengan persyaratan yang tercantum dalam Dokumen Pengadaan.
-                    </li> 
+                    </li>
                 @elseif ( $banegopengadaans->jaminan = '2')
                     <li>Penyedia Barang dan/atau Jasa akan menyerahkan Jaminan Pelaksanaan sebesar 5% dari nilai Kontrak/SPK  sesuai dengan persyaratan yang tercantum dalam Dokumen Pengadaan.
-                    </li> 
+                    </li>
                 @elseif ( $banegopengadaans->jaminan = '3')
                     <li>Penyedia Barang dan/atau Jasa akan menyerahkan Jaminan Pelaksanaan sebesar 5% dari nilai Kontrak/SPK dan menyerahkan Biaya Administrasi Dokumen Kontrak sesuai dengan persyaratan yang tercantum dalam Dokumen Pengadaan.
-                    </li> 
+                    </li>
                 @else
                     <span></span>
                 @endif
-                <li>Berita Acara Klarifikasi & Negosiasi ini merupakan satu kesatuan dan menjadi bagian yang tidak terpisahkan dari Kontrak serta mempunyai kekuatan hukum yang mengikat Para Pihak. Dan ketentuan-ketentuan lain yang belum tertuang dalam 
+                <li>Berita Acara Klarifikasi & Negosiasi ini merupakan satu kesatuan dan menjadi bagian yang tidak terpisahkan dari Kontrak serta mempunyai kekuatan hukum yang mengikat Para Pihak. Dan ketentuan-ketentuan lain yang belum tertuang dalam
                     Berita Acara Klarifikasi & Negosiasi ini akan dijelaskan secara terperinci di dalam kontrak.</li>
             </ol>
             <p>Demikian Berita Acara ini dibuat dengan sebenar-benarnya untuk dipergunakan sebagaimana mestinya.</p>
 
         <p><strong>Daftar Peserta :</strong></p>
-        <p><strong>I. PT Angkasa Pura Properti :</strong></p>
+        <p><strong>I. PT a :</strong></p>
         <table class="table table-borderless">
-            @foreach ($banegopengadaans->divisis as $item)           
+            @foreach ($banegopengadaans->divisis as $item)
             <tbody>
                 <tr>
                     <td height="70px" width="300px">- {{ strtoupper($item->detail) }}</td>
                     <td>_________________</td>
                 </tr>
-            </tbody>  
+            </tbody>
             @endforeach
-            </table> 
+            </table>
 
-      
+
      <p><strong>II. Peserta Pengadaan :</strong></p>
-      
+
         <table class="table table-borderless">
             <tbody>
                 <tr>
@@ -251,7 +251,7 @@
             </tr>
             </tbody>
             </table>
-    
+
 </body>
 
 

@@ -698,7 +698,7 @@ class VendorController extends Controller
         Mail::send('vendor.sendmail', $data, function($message) use ($data){
             // $message->from($data['email']);
             $message->to( $data['postersemail'] );
-            $message->subject('Informasi Eproc PT Angkasa Pura Properti');
+            $message->subject('Informasi Eproc PT IAS Property Indonesia');
         });
     
         dd($data);

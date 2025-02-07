@@ -288,12 +288,7 @@
                         </td>
                         <td>{{ $item->divisi->detail }}</td>
                         <td>{{ $item->unit_st }}</td>
-                        <td> 
-                            {{-- <span class="m-badge m-badge--metal m-badge--wide">{{ $item->lokasi->kode }}</span> --}}
-                            @foreach ($item->lokasi as $lok)
-                                <span class="m-badge m-badge--metal m-badge--wide">{{ $lok->kode }}</span>
-                            @endforeach  
-                        </td>
+                        <td> <span class="m-badge m-badge--metal m-badge--wide">{{ $item->lokasi->kode }}</span></td>
                         <td>
                             @if ($item->status == "open")
                                 <span class="m-badge m-badge--default m-badge--wide">Open</span>

@@ -1,4 +1,4 @@
- 
+
 <!-- START CLIENTS -->
 <div id="clients" class="light-bg">
     <div class="container">
@@ -44,8 +44,8 @@
                     {{-- <div class="mb-4"> --}}
                         <img src="{{ url('data_file/'.$pref->image) }}"  height="100px" alt="" />
                     {{-- </div> --}}
-                    <p style="text-align: justify">PT Angkasa Pura Properti merupakan anak perusahaan dari PT Angkasa Pura I (Persero) yang beroperasi secara efektif pada 6 Januari 2012. 
-                        Pendirian Angkasa Pura Property merupakan pengembangan lini bisnis Angkasa Pura I yang awalnya hanya memperoleh pendapatan dari kegiatan aeronautika.</p>
+                    <p style="text-align: justify">PT IAS Property Indonesia merupakan anak perusahaan dari PT Angkasa Pura I (Persero) yang beroperasi secara efektif pada 6 Januari 2012.
+                        Pendirian IAS Property Indonesia merupakan pengembangan lini bisnis Angkasa Pura I yang awalnya hanya memperoleh pendapatan dari kegiatan aeronautika.</p>
                     <ul class="social-icons">
                         <li><a href="https://www.instagram.com/ap.property/?hl=en" target="__blank"><i class="mdi mdi-instagram"></i></a></li>
                         <li><a href="https://www.linkedin.com/company/pt-angkasa-pura-properti" target="__blank"><i class="mdi mdi-linkedin"></i></a></li>
@@ -136,7 +136,7 @@
             <div class="col-lg-8">
                 <div class="sub-foot-left">
                     <ul>
-                        <li>PT ANGKASA PURA PROPERTI - EPROC  &copy; 2022 {{ $pref->nama_perusahaam }}. All Right Reserved.</li>
+                        <li>PT IAS Property Indonesia - EPROC  &copy; 2022 {{ $pref->nama_perusahaam }}. All Right Reserved.</li>
                     </ul>
                 </div>
             </div>

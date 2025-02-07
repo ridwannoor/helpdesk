@@ -12,7 +12,7 @@ class PreferencesTableSeeder extends Seeder
     public function run()
     {
         // $data = [
-        //     ['nama_perusahaan'=>'PT ANGKASA PURA PROPERTI','email'=>'approperti@gmail.com','address'=>'Jl. Selangit Blok B.9 No.7','image'=>'','phone'=>'087788518142']
+        //     ['nama_perusahaan'=>'PT IAS Property Indonesia','email'=>'approperti@gmail.com','address'=>'Jl. Selangit Blok B.9 No.7','image'=>'','phone'=>'087788518142']
            
         // ];
 
