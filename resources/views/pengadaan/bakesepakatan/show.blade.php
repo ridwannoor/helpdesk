@@ -129,7 +129,7 @@
                                         <li>Selanjutnya PIHAK KEDUA membayarkan jaminan pelaksanaan sebesar 5% (lima persen) dari nilai pekerjaan dapat
                                             berupa Bank Garansi, Asuransi atau pun Tunai, dengan jangka waktu Jaminan Pelaksanaan selama jangka waktu
                                             pelaksanaan ditambah 30 hari kalender dan membayarkan biaya dokumen kontrak sebesar Rp 7.000.000,- (tujuh juta rupiah)
-                                            ke rekening BNI nomor : 03333-55569 a/n PT. a. Jaminan pelaksanaan dan biaya dokumen kontrak ini
+                                            ke rekening BNI nomor : 03333-55569 a/n PT. IAS Property Indonesia. Jaminan pelaksanaan dan biaya dokumen kontrak ini
                                             selambat-lambatnya diserahkan 7 hari kalender setelah Berita Acara Kesepakatan ini diterbitkan.</li>
                                         <li>Dengan diterbitkannya Berita Acara Kesepakatan ini, maka kami harap agar pelaksana pekerjaan dapat menghubungi Divisi
                                             Construction selaku Unit Spesifikasi Teknis (UST) untuk dapat melakukan koordinasi persiapan pekerjaan.</li>

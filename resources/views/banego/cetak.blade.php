@@ -112,7 +112,7 @@
             Harga untuk Pekerjaan tersebut diatas yang dihadiri oleh : </p>
         {{-- <p> --}}
         {{-- <div class="container"> --}}
-        <p><strong>I. a, PT :</strong></p>
+        <p><strong>I. IAS Property Indonesia, PT :</strong></p>
         <table class="table">
             @foreach ($lok->divisis as $item)
             <tbody>
@@ -281,7 +281,7 @@
                                 Membayarkan Jaminan DP {{ $lok->nilaidp ." %" }} sebesar {{ "Rp ". format_uang($dp) }} dapat berupa Bank Garansi, Asuransi, ataupun Tunai, dan
                             @endif
                             menyerahkan Biaya Administrasi Dokumen Kontrak sebesar {{ "Rp ". format_uang($bidok)  }}
-                            ({{terbilang($bidok) . "rupiah"}}) ke rekening BNI nomor : 03333-55569 a/n PT. a.
+                            ({{terbilang($bidok) . "rupiah"}}) ke rekening BNI nomor : 03333-55569 a/n PT. IAS Property Indonesia.
                             </li>
                         @endif
                     @endforeach
@@ -314,7 +314,7 @@
                             dan membayarkan biaya dokument kontrak sebesar {{ "Rp ". format_uang($bidok)  }}
                             ({{terbilang($bidok) . "rupiah"}})
                             ke rekening BNI nomor : 03333-55569
-                            a/n PT. a.
+                            a/n PT. IAS Property Indonesia.
                             </li>
                         @endif
                     @endforeach
@@ -346,7 +346,7 @@
                     dan membayarkan biaya dokument kontrak sebesar {{ "Rp ". format_uang($bidok) }}
                     ({{terbilang($bidok) . "rupiah"}})
                     ke rekening BNI nomor : 03333-55569
-                    a/n PT. a.
+                    a/n PT. IAS Property Indonesia.
 
                 </li>
                     @endif
@@ -367,7 +367,7 @@
             sebagaimana mestinya.</p>
 
 
-        <p><strong>a, PT</strong></p>
+        <p><strong>IAS Property Indonesia, PT</strong></p>
         <table class="table">
             @foreach ($lok->divisis as $item)
             @if ($item->detail != "Area Manager")

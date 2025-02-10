@@ -1,4 +1,4 @@
-<p>INFORMASI EPROC PT.a</p>
+<p>INFORMASI EPROC PT.IAS Property Indonesia</p>
 
 <p> ini Adalah Email Otomatis, Mohon untuk tidak membalas pesan ini.
 </p>

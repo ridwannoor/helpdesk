@@ -196,7 +196,7 @@
                 <p><strong>D. Daftar Peserta</strong></p>
 
 
-                <p><strong>a, PT</strong></p>
+                <p><strong>IAS Property Indonesia, PT</strong></p>
                 <table class="table">
                     @foreach ($bapengadaans->divisis as $item)
                     <tbody>

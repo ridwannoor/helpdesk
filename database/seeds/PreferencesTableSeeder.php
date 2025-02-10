@@ -13,7 +13,7 @@ class PreferencesTableSeeder extends Seeder
     {
         // $data = [
         //     ['nama_perusahaan'=>'PT IAS Property Indonesia','email'=>'approperti@gmail.com','address'=>'Jl. Selangit Blok B.9 No.7','image'=>'','phone'=>'087788518142']
-           
+
         // ];
 
         // foreach($data as $d){
@@ -22,7 +22,7 @@ class PreferencesTableSeeder extends Seeder
                 'email' => 'approperti@gmail.com',
                 'address' => 'Jl. Selangit Blok B9 No.7',
                 'image' => '',
-                'phone' => '087788518142'               
+                'phone' => '087788518142'
             ]);
         // }
     }

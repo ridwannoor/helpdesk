@@ -1,6 +1,6 @@
 <p>Selamat {{ $vendorbods->namaperusahaan . ',' . $vendorbods->badanusaha->kode }}</p>
 
-<p> Berhasil menjadi rekanan PT a <br>
+<p> Berhasil menjadi rekanan PT IAS Property Indonesia <br>
 </p>
 
 <p>Jika ada kendala silahkan email ke : procurement@approperti.co.id,

@@ -902,12 +902,12 @@
                                                                 <ol type="1" style="text-align: justify; font-size: 12px">
                                                                     <li> Segala dokumen legalitas, dokumen perusahaan dan formulir yang kami sampaikan/ isi adalah benar.
                                                                     </li>
-                                                                    <li>Dengan ini menyatakan bahwa kami / perusahaan kami tidak termasuk dalam daftar hitam (black list) yang dikeluarkan oleh PT a dan atau Instansi/Perusahaan lain.
+                                                                    <li>Dengan ini menyatakan bahwa kami / perusahaan kami tidak termasuk dalam daftar hitam (black list) yang dikeluarkan oleh PT IAS Property Indonesia dan atau Instansi/Perusahaan lain.
                                                                     </li>
                                                                     <li>
                                                                         Tidak akan melakukan praktek Korupsi, Kolusi dan Nepotisme (KKN).
                                                                     </li>
-                                                                    <li>Akan melaporkan kepada pihak yang berwajib / berwenang dari PT a apabila mengetahui adanya indikasi Korupsi, Kolusi dan Nepotisme (KKN) di dalam proses Pengadaan Barang dan/atau Jasa ini. <br>
+                                                                    <li>Akan melaporkan kepada pihak yang berwajib / berwenang dari PT IAS Property Indonesia apabila mengetahui adanya indikasi Korupsi, Kolusi dan Nepotisme (KKN) di dalam proses Pengadaan Barang dan/atau Jasa ini. <br>
                                                                     </li>
                                                                     <li>
                                                                         Dalam proses Pengadaan Barang/Jasa ini, berjanji akan mengikuti proses Pengadaan Barang/Jasa ini secara bersih, transparan dan profesional dalam arti akan mengerahkan segala kemampuan dan sumber daya secara optimal untuk memberikan hasil kerja terbaik mulai dari penyiapan penawaran sampai tahap penyelesaian kegiatan/pekerjaan ini. <br>
@@ -916,14 +916,14 @@
                                                                     Kami/Perusahaan Kami akan melakukan pembaharuan dokumen legalitas apabila ada perubahan/penambahan dokumen/dokumen sudah tidak berlaku. <br>
 
                                                                    </li>
-                                                                   <li>Kami/Perusahaan Kami akan tunduk kepada segala ketentuan yang berlaku di PT a selama tidak bertentangan dengan ketentuan perundang-undangan yang berlaku. <br>
+                                                                   <li>Kami/Perusahaan Kami akan tunduk kepada segala ketentuan yang berlaku di PT IAS Property Indonesia selama tidak bertentangan dengan ketentuan perundang-undangan yang berlaku. <br>
 
 
                                                                    </li>
                                                                    <li> Apabila dikemudian hari, ditemui bahwa dokumen - dokumen dan formulir yang telah kami berikan tidak benar/ palsu, maka kami bersedia dikenakan sanksi sebagai berikut : <br>
                                                                    </li>
                                                                    <ol type="i">
-                                                                    <li>Administrasi , yaitu berupa dimasukkan dalam daftar hitam PT. a  dan tidak diikutsertakan dalam setiap Pengadaan Barang dan Jasa selama 2 (dua) tahun; </li>
+                                                                    <li>Administrasi , yaitu berupa dimasukkan dalam daftar hitam PT. IAS Property Indonesia  dan tidak diikutsertakan dalam setiap Pengadaan Barang dan Jasa selama 2 (dua) tahun; </li>
                                                                     <li>Dituntut ganti rugi atau digugat secara perdata;</li>
                                                                     <li>Dilaporkan kepada pihak yang berwajib untuk diproses secara pidana.</li>
                                                                 </ol>

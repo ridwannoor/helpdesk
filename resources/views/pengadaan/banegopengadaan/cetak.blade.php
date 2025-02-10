@@ -228,7 +228,7 @@
             <p>Demikian Berita Acara ini dibuat dengan sebenar-benarnya untuk dipergunakan sebagaimana mestinya.</p>
 
         <p><strong>Daftar Peserta :</strong></p>
-        <p><strong>I. PT a :</strong></p>
+        <p><strong>I. PT IAS Property Indonesia :</strong></p>
         <table class="table table-borderless">
             @foreach ($banegopengadaans->divisis as $item)
             <tbody>

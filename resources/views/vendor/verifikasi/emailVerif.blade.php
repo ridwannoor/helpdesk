@@ -1,5 +1,5 @@
 
-<p>Jadwal Verifikasi Dokumen pada EPROC PT.a</p>
+<p>Jadwal Verifikasi Dokumen pada EPROC PT.IAS Property Indonesia</p>
 
 <p> Silahkan datang pada waktu yang sudah kami jadwalkan. <br>
     Tanggal Verifikasi : {{ $tgl_verifikasi }} <br>

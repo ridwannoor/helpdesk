@@ -1,5 +1,5 @@
 
-<p>Email {{ $name }} dari EPROC PT.a</p>
+<p>Email {{ $name }} dari EPROC PT.IAS Property Indonesia</p>
 
 <p>
     Judul : {{ $name }} <br>

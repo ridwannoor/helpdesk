@@ -84,7 +84,7 @@
                                     </p>
                                    <p>
                                     {{-- <br> --}}
-                                        <span>I. PT a</span> <br>
+                                        <span>I. PT IAS Property Indonesia</span> <br>
                                         @foreach ($ba->divisis as $item)
                                                 <span><strong>{{"- " . $item->detail }}</strong> </span><br>
                                         @endforeach

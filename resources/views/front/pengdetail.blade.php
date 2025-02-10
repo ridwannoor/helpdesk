@@ -25,7 +25,7 @@
                             @endphp
                             <div class="card-body">
                                 {{-- <h4 class="card-title">Title</h4> --}}
-                                <p class="card-text">PT a mengundang Penyedia Barang dan/atau Jasa untuk mengikuti
+                                <p class="card-text">PT IAS Property Indonesia mengundang Penyedia Barang dan/atau Jasa untuk mengikuti
                                     Pengadaan Pekerjaan sebagai berikut :</p>
                                     <table class="table table-striped- table-bordered table-hover table-checkable">
                                         <thead>
@@ -58,7 +58,7 @@
 
                                         <p>Calon Peserta harus memiliki klasifikasi dan kualifikasi usaha yang
                                             dipersyaratkan;</p>
-                                            <p>Calon Peserta wajib terverifikasi di e-procurement PT a
+                                            <p>Calon Peserta wajib terverifikasi di e-procurement PT IAS Property Indonesia
                                                 pada website: <strong>http://eproc.approperti.co.id</strong>  bagi perusahaan yang belum mendaftar,
                                                 dipersilahkan mendaftar terlebih dahulu;
                                                 </p>
@@ -74,7 +74,7 @@
                                                 @if ( $tenders->catatan )
                                                   <p>{{ $tenders->catatan }} </p>
                                                 @endif
-                                                <p>Melakukan registrasi pekerjaan sebagai tanda keikutsertaan {{ $tenders->nama_paket }}, pada sistem e-Procurement PT a yang dapat diakses di website: <strong> http://eproc.approperti.co.id/pengumuman</strong> selambat-lambatnya hari <strong>
+                                                <p>Melakukan registrasi pekerjaan sebagai tanda keikutsertaan {{ $tenders->nama_paket }}, pada sistem e-Procurement PT IAS Property Indonesia yang dapat diakses di website: <strong> http://eproc.approperti.co.id/pengumuman</strong> selambat-lambatnya hari <strong>
                                                     {{ hariIndo(date('l', strtotime($tenders->tgl_daftar))) }},
                                                     {{ date('d M Y', strtotime($tenders->tgl_daftar)) }}
                                                     Pukul
@@ -87,7 +87,7 @@
                             </div>
                             <div class="card-footer text-muted">
                                 Vice President Supply Chain Management <br>
-                                PT a <br>
+                                PT IAS Property Indonesia <br>
                                 TTD
                             </div>
                         </div>

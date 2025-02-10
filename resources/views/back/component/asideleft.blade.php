@@ -18,18 +18,18 @@
             class="m-menu__link "><i class="m-menu__link-icon flaticon-folder-1"></i><span
             class="m-menu__link-title"> <span class="m-menu__link-wrap"> <span
             class="m-menu__link-text">Tender</span> <span class="m-menu__link-badge"></span> </span></span></a></li>
-            
+
         {{-- <li class="m-menu__item " aria-haspopup="true"><a href="/vendor/historytender"
             class="m-menu__link "><i class="m-menu__link-icon flaticon-time"></i><span
             class="m-menu__link-title"> <span class="m-menu__link-wrap"> <span
             class="m-menu__link-text">History Tender</span> <span class="m-menu__link-badge"></span> </span></span></a></li> --}}
        {{-- @foreach ($users as $item)
-       
+
     <li class="m-menu__item " aria-haspopup="true"><a href="{{ $item->menu->link }}"
         class="m-menu__link "><i class="m-menu__link-icon {{ $item->menu->icon }}"></i><span
         class="m-menu__link-title"> <span class="m-menu__link-wrap"> <span
         class="m-menu__link-text">{{ $item->menu->deskripsi }}</span> <span class="m-menu__link-badge"></span> </span></span></a></li>
-    
+
     @endforeach          --}}
     </ul>
 </div>

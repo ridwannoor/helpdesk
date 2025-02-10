@@ -1,4 +1,4 @@
-<p>Terima kasih telah mendaftar pada EPROC PT.a</p>
+<p>Terima kasih telah mendaftar pada EPROC PT.IAS Property Indonesia</p>
 
 <p> Silahkan klik <a href="{{ route('vendor.profileverify', $token) }}">Disini</a>  untuk aktivasi akun anda.
 </p>

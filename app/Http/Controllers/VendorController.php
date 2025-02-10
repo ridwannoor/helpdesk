@@ -106,7 +106,7 @@ class VendorController extends Controller
         $vend3 = collect($request->jenisusaha_id);
         $vend4 = collect($request->category_id);
         $vend5 = collect($request->vendorsertifikasi_id);
-       
+
         $jenispekerjaan = Jenispekerjaan::all();
         $pref = Preference::first();
         $users = Auth::user()->userdetails()->with('menu')->get();
@@ -126,7 +126,7 @@ class VendorController extends Controller
           $Ass =  $vendors->jenispekerjaans->where('jenispekerjaans_id', '=', $vend1)->get();
           dd($Ass);
         }
-       
+
         return view('vendor.search', compact('judul','pref','users', 'vend1', 'jensa', 'crud', 'cat', 'provinsi', 'jns', 'jpeks', 'bids' ));
     }
 
@@ -140,7 +140,7 @@ class VendorController extends Controller
     //     $data = $request->all();
     //     dd($data);
     //     return view('vendor.add',compact('data'));
-    // }   
+    // }
 
     public function create()
     {
@@ -178,16 +178,16 @@ class VendorController extends Controller
         $users = Auth::user()->userdetails()->with('menu')->get();
         $lokasis = Lokasi::all();
         $judul = 'Add Vendor BOD';
-        $cat   = Category::pluck('detail', 'id')->all(); 
-        $jns = Jenisusaha::pluck('detail', 'id')->all(); 
-        $jpeks = Jenispekerjaan::pluck('name', 'id')->all(); 
+        $cat   = Category::pluck('detail', 'id')->all();
+        $jns = Jenisusaha::pluck('detail', 'id')->all();
+        $jpeks = Jenispekerjaan::pluck('name', 'id')->all();
         $badan = Badanusaha::orderBy('kode','ASC')->get();
         $bank = Bank::orderBy('name','ASC')->get();
         $vendorbods = Vendor::with('vendorbod')->find($id);
         return view('vendor.vendorbod.add', compact('judul', 'cat', 'jns', 'users','pref', 'badan', 'lokasis', 'bank', 'vendorbods', 'jpeks'));
     }
 
-    
+
     public function storebod(Request $request)
     {
         $vendorbods = new Vendorbod();
@@ -196,14 +196,14 @@ class VendorController extends Controller
         $vendorbods->jabatan = $request->jabatan;
         $vendorbods->status = $request->status;
         $vendorbods->save();
-        \LogActivity::addToLog($vendorbods->nama); 
+        \LogActivity::addToLog($vendorbods->nama);
         return redirect('/vendor/show' . $vendorbods->vendor_id)->with('success', 'Data berhasil disimpan .. !!');
     }
 
     public function editbod($id)
     {
         $vendors = Vendor::all();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $pref = Preference::first();
         $vendorbods = Vendorbod::find($id);
         $judul = 'Edit Vendor BOD' ;
@@ -219,15 +219,15 @@ class VendorController extends Controller
         $vendorbods->jabatan = $request->jabatan;
         $vendorbods->status = $request->status;
         $vendorbods->save();
-        \LogActivity::addToLog($vendorbods->nama); 
-        return redirect('/vendor/show' . $vendorbods->vendor_id)->with('success', 'Data berhasil disimpan .. !!');        
+        \LogActivity::addToLog($vendorbods->nama);
+        return redirect('/vendor/show' . $vendorbods->vendor_id)->with('success', 'Data berhasil disimpan .. !!');
     }
 
     public function destroybod($id)
     {
         $data = Vendorbod::find($id);
         $data->delete($data);
-        \LogActivity::addToLog($data->id); 
+        \LogActivity::addToLog($data->id);
         return redirect('/vendor')->with('message', 'Data Maintenance Berhasil Dihapus');
     }
 
@@ -254,7 +254,7 @@ class VendorController extends Controller
         return view('vendor.vendorbank.add', compact('judul', 'cat', 'jns', 'users','pref', 'badan', 'lokasis', 'bank', 'vendors', 'vendorbanks'));
     }
 
-    
+
     public function storebank(Request $request)
     {
         $vendorbanks = new Vendorbank();
@@ -263,14 +263,14 @@ class VendorController extends Controller
         $vendorbanks->nomor_rek = $request->nomor_rek;
         $vendorbanks->nama_pemilik = $request->nama_pemilik;
         $vendorbanks->save();
-        \LogActivity::addToLog($vendorbanks->bank_id); 
+        \LogActivity::addToLog($vendorbanks->bank_id);
         return redirect('/vendor/show/' . $vendorbanks->vendor_id)->with('success', 'Data berhasil disimpan .. !!');
     }
 
     public function editbank($id)
     {
         $vendors = Vendor::all();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $pref = Preference::first();
         $vendorbanks = Vendorbank::find($id);
         $banks = Bank::all();
@@ -287,24 +287,24 @@ class VendorController extends Controller
         $vendorbanks->nomor_rek = $request->nomor_rek;
         $vendorbanks->nama_pemilik = $request->nama_pemilik;
         $vendorbanks->save();
-        \LogActivity::addToLog($vendorbanks->bank_id); 
-        return redirect('/vendor/show'. $vendorbanks->vendor_id)->with('success', 'Data berhasil disimpan .. !!');        
+        \LogActivity::addToLog($vendorbanks->bank_id);
+        return redirect('/vendor/show'. $vendorbanks->vendor_id)->with('success', 'Data berhasil disimpan .. !!');
     }
 
     public function destroybank($id)
     {
         $data = Vendorbank::find($id);
         $data->delete($data);
-        \LogActivity::addToLog($data->id); 
+        \LogActivity::addToLog($data->id);
         return redirect('/vendor/show/' . $data->vendor_id)->with('message', 'Data Maintenance Berhasil Dihapus');
     }
 
-  
+
     public function publish($id)
-    {       
+    {
         $banegos = Vendor::find($id);
         $banegos->is_published = !$banegos->is_published;
-        $banegos->save();  
+        $banegos->save();
         return redirect('/vendor');
     }
 
@@ -326,8 +326,8 @@ class VendorController extends Controller
             $vendors->alamat = $request->alamat;
             // $vendors->alamat_domisili = $request->alamat_domisili;
             $vendors->provinsi_id = $request->provinsi_id;
-            $vendors->product = $request->product;   
-            // $vendors->lokasi_id = $request->lokasi_id;              
+            $vendors->product = $request->product;
+            // $vendors->lokasi_id = $request->lokasi_id;
             $vendors->email = $request->email;
             $vendors->contactperson = $request->contactperson;
             $vendors->notelp = $request->notelp;
@@ -342,12 +342,12 @@ class VendorController extends Controller
             $vendors->jenisusahas()->attach($request->jenisusahas);
             $vendors->jenispekerjaans()->attach($request->jenispekerjaans);
 
-            \LogActivity::addToLog($vendors->namaperusahaan); 
+            \LogActivity::addToLog($vendors->namaperusahaan);
             return redirect('/vendor')->with('success', 'Data Berhasil Disimpan'  );
         }
 
-           
-        
+
+
     }
 
 
@@ -400,14 +400,14 @@ class VendorController extends Controller
 
                 // mengampil data guru yang sudah dihapus
             $judul = "Vendor Terhapus";
-          
+
                 // $pref = Preference::first();
                 // $vendors = Vendor::onlyTrashed()->get();
             // return view('vendor.trash', compact('vendors','judul','users','pref','badan', 'crud', 'cat', 'provinsi', 'jns', 'jpeks', 'sert', 'lisens'));
 
                 // $guru = Guru::onlyTrashed();
-            
-        
+
+
                 return redirect('/vendor/trash');
         }
 
@@ -437,7 +437,7 @@ class VendorController extends Controller
                 // hapus permanen data guru
                 // $guru = Guru::onlyTrashed()->where('id',$id);
                 // $guru->forceDelete();
-        
+
                 return redirect('/vendor/trash');
         }
     /**
@@ -488,11 +488,11 @@ class VendorController extends Controller
         $vendordokcount = $vendors->vendordoc->count();
         // dd($details);
  	//$parent = $users->menu->where(['parentmenu' => 0])->get();
-        return view('vendor.show', compact('vendors','judul','users', 'crud', 'pref','vendorjenis', 'vendorlisensi', 
+        return view('vendor.show', compact('vendors','judul','users', 'crud', 'pref','vendorjenis', 'vendorlisensi',
         'vendorpengurus','vendorpengurus1','vendorlap', 'vendorlap1', 'vendorsertifikat', 'vendorsertifikat1',
         'vendortenaga', 'vendortenaga1', 'vendorfasilitas', 'vendorfasilitas1', 'vendorpengalaman', 'vendorpengalaman1', 'vendordok', 'vendordok1',
-        'vendorlisensi1',  'bank', 'vendortipe', 'vendorjenisdoc', 'currency', 'vendorlisensicount', 
-        'vendorpenguruscount', 'vendorlapcount', 'vendorsertifikatcount', 'vendortenagacount', 'vendorfasilitascount', 
+        'vendorlisensi1',  'bank', 'vendortipe', 'vendorjenisdoc', 'currency', 'vendorlisensicount',
+        'vendorpenguruscount', 'vendorlapcount', 'vendorsertifikatcount', 'vendortenagacount', 'vendorfasilitascount',
         'vendorpengalamancount', 'vendordokcount'));
     }
 
@@ -511,10 +511,10 @@ class VendorController extends Controller
         $details = $vendors->itemdetails()->get();
         $lokasis = Lokasi::orderBy('kode','ASC')->get();
         $badan = Badanusaha::orderBy('kode','ASC')->get();
-        $categories = Category::pluck('detail', 'id')->all(); 
-        $jenisusahas = Jenisusaha::pluck('detail', 'id')->all(); 
+        $categories = Category::pluck('detail', 'id')->all();
+        $jenisusahas = Jenisusaha::pluck('detail', 'id')->all();
         $provinsi   = Provinsi::orderBy('name','ASC')->get();
-        $jenispekerjaans = Jenispekerjaan::pluck('name', 'id')->all(); 
+        $jenispekerjaans = Jenispekerjaan::pluck('name', 'id')->all();
         $bank = Bank::orderBy('name','ASC')->get();
  	//$parent = $users->menu->where(['parentmenu' => 0])->get();
         return view('vendor.edit', compact('vendors','judul', 'provinsi', 'users','pref', 'badan', 'categories', 'jenisusahas','bank', 'details','lokasis', 'jenispekerjaans'));
@@ -525,10 +525,10 @@ class VendorController extends Controller
         $file = $request->file('filename');
         // $file = $request->file('image');
         $extension = $file->getClientOriginalExtension();
-        $filename = 'VEN_'. date('YmdHis').".".$extension; 
+        $filename = 'VEN_'. date('YmdHis').".".$extension;
         // $ext = $file->getClientOriginalExtension();
         // $name = $file->getClientOriginalName();
-        // $filename = $name.".".$ext; 
+        // $filename = $name.".".$ext;
         // $filename = $name;
         $tujuan_upload = 'data_file/pdf';
         $file->move($tujuan_upload,$filename);
@@ -537,7 +537,7 @@ class VendorController extends Controller
         $vendorfiles->vendor_id = $request->vendor_id;
         $vendorfiles->filename = $filename;
         $vendorfiles->save();
-        \LogActivity::addToLog($vendorfiles->vendor_id); 
+        \LogActivity::addToLog($vendorfiles->vendor_id);
         return redirect()->route('vendorindex', ['id' => $vendorfiles->id]);
     }
 
@@ -545,11 +545,11 @@ class VendorController extends Controller
     {
         $file = $request->file('filepdf');
         $extension = $file->getClientOriginalExtension();
-        $filename = 'VEN_'. date('YmdHis').".".$extension; 
+        $filename = 'VEN_'. date('YmdHis').".".$extension;
         // $ext = $file->getClientOriginalExtension();
         // $name = $file->getClientOriginalName();
-        // $filename = $name.".".$ext; 
-        // $filename = $request->id.$name; 
+        // $filename = $name.".".$ext;
+        // $filename = $request->id.$name;
         $tujuan_upload = 'data_file/pdf';
         $file->move($tujuan_upload,$filename);
 
@@ -559,7 +559,7 @@ class VendorController extends Controller
         $vendorkontraks->pekerjaan = $request->pekerjaan;
         $vendorkontraks->filepdf = $filename;
         $vendorkontraks->save();
-        \LogActivity::addToLog($vendorkontraks->vendor_id); 
+        \LogActivity::addToLog($vendorkontraks->vendor_id);
         return redirect()->route('vendorindex', ['id' => $vendorkontraks->id]);
     }
 
@@ -580,8 +580,8 @@ class VendorController extends Controller
         $vendors->alamat = $request->alamat;
         // $vendors->alamat_domisili = $request->alamat_domisili;
         $vendors->provinsi_id = $request->provinsi_id;
-        $vendors->product = $request->product;   
-        // $vendors->lokasi_id = $request->lokasi_id;       
+        $vendors->product = $request->product;
+        // $vendors->lokasi_id = $request->lokasi_id;
         $vendors->email = $request->email;
         $vendors->contactperson = $request->contactperson;
         $vendors->notelp = $request->notelp;
@@ -599,9 +599,9 @@ class VendorController extends Controller
         // if($request->hasfile('filename'))
         // {
         //    foreach ($request->filename as $file) {
-               
+
         //        $name = $file->getClientOriginalName();
-        //        $filename = $request->id.$name; 
+        //        $filename = $request->id.$name;
         //        $tujuan_upload = 'data_file/pdf';
         //        $file->move($tujuan_upload,$filename);
 
@@ -612,8 +612,8 @@ class VendorController extends Controller
         //        Itemdetail::insert($data);
         //    }
         // }
-        \LogActivity::addToLog($vendors->namaperusahaan); 
-        return redirect('/vendor')->with('success', 'Data Berhasil Diupdate'); 
+        \LogActivity::addToLog($vendors->namaperusahaan);
+        return redirect('/vendor')->with('success', 'Data Berhasil Diupdate');
     }
 
     /**
@@ -638,28 +638,28 @@ class VendorController extends Controller
         $data->vendorkontrak()->delete();
         $data->delete($data);
 
-        \LogActivity::addToLog($data->id); 
+        \LogActivity::addToLog($data->id);
         return redirect('/vendor')->with('sukses','Data Berhasil di Hapus');
     }
 
     public function destroyfile($id){
         $data = Itemdetail::find($id);
         $data->delete($data);
-        \LogActivity::addToLog($data->id); 
+        \LogActivity::addToLog($data->id);
         return redirect()->back()->with('message', 'Data berhasil Dihapus');
     }
 
     public function destroyfilekontrak($id){
         $data = Vendorkontrak::find($id);
         $data->delete($data);
-        \LogActivity::addToLog($data->id); 
+        \LogActivity::addToLog($data->id);
         return redirect()->back()->with('message', 'Data berhasil Dihapus');
     }
 
     public function exportXLS(Request $request) {
-    
+
         return Excel::download(new VendorExport($request), 'vendor-collection.xlsx');
-       
+
     }
 
     public function exportPDF(Request $request) {
@@ -668,15 +668,15 @@ class VendorController extends Controller
         $vendors = Vendor::whereDate('created_at','>=',$start)->whereDate('created_at','<=',$end)->get();
     	$pdf = PDF::loadview('vendor.exportpdf', compact('vendors', 'start', 'end'))->setPaper('A4','landscape');
     	return $pdf->stream();
-       
+
     }
 
     public function cetak($id) {
-      
+
         $vendors = Vendor::find($id);
     	$pdf = PDF::loadview('vendor.cetak', compact('vendors'))->setPaper('A4','portrait');
     	return $pdf->stream();
-       
+
     }
 
     public function sendemail(Request $request)
@@ -684,23 +684,23 @@ class VendorController extends Controller
         // $emails = new Emailvendor();
         $posts = new Emailvendor();
         $postersemail = $posts->to;
-     
+
         $this->validate($request, [
             'to' => 'required|email',
             'keterangan' => 'required'
             ]);
-    
+
         $data = array(
             'to' => $postersemail,
             'keterangan' => $request->keterangan
             );
-    
+
         Mail::send('vendor.sendmail', $data, function($message) use ($data){
             // $message->from($data['email']);
             $message->to( $data['postersemail'] );
             $message->subject('Informasi Eproc PT IAS Property Indonesia');
         });
-    
+
         dd($data);
 
         return redirect()->back()->with('success', 'Email berhasil Dikirim');
@@ -714,8 +714,8 @@ class VendorController extends Controller
         $vendors->name = $request->name ;
         $vendors->deskripsi = $request->deskripsi ;
         $vendors->save();
-        \LogActivity::addToLog($vendors->vendor_id); 
-        
+        \LogActivity::addToLog($vendors->vendor_id);
+
         Mail::send('vendor.sendmaillog', ['name' => $vendors->name , 'deskripsi' => $vendors->deskripsi], function($message) use($request){
             $message->to($request->email);
             $message->subject($request->name);
@@ -733,7 +733,7 @@ class VendorController extends Controller
         $vendors = Vendor::find($id);
         // $bulan = $this->tanggal_local();
         $pdf = PDF::loadView('vendor.certificate',compact('judul', 'pref', 'bods', 'vendors'))->setPaper('A4', 'landscape');
-        return $pdf->stream();  
+        return $pdf->stream();
     }
 
 }

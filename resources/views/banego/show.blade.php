@@ -101,7 +101,7 @@
                                     {{ $lok->lokasi_nego }},
                                     telah diadakan Rapat Klarifikasi dan Negosiasi Harga terhadap Dokumen Penawaran
                                     Harga untuk Pekerjaan tersebut diatas yang dihadiri oleh : </p>
-                                <p><strong>I. PT a :</strong></p>
+                                <p><strong>I. PT IAS Property Indonesia :</strong></p>
                                 <p>
                                     <div class="container">
                                         <table class="table table-striped- table-bordered table-hover table-checkabl">
@@ -251,7 +251,7 @@
                                                 @endif
 
                                                 ke rekening BNI nomor : 03333-55569
-                                                a/n PT. a.
+                                                a/n PT. IAS Property Indonesia.
                                                 @endif
                                             @endforeach
 
@@ -278,7 +278,7 @@
                                     </div>
                                 </p>
                                 <br>
-                                <p><strong>PT a</strong></p>
+                                <p><strong>PT IAS Property Indonesia</strong></p>
                                 <p>
                                     <table class="table table-striped- table-bordered table-hover table-checkabl">
                                         @foreach ($lok->divisis as $item)

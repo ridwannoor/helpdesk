@@ -90,7 +90,7 @@
           <strong>Nomor : {{ $tenders->nomor_pr }}</strong>
         </p>
         <p>
-          PT a mengundang Calon Penyedia Barang dan/atau Jasa untuk mengikuti
+          PT IAS Property Indonesia mengundang Calon Penyedia Barang dan/atau Jasa untuk mengikuti
           Pengadaan Pekerjaan sebagai berikut :
         </p>
         <table class="table" style="border: 1px; border-color: black">
@@ -125,7 +125,7 @@
             <li>Calon Peserta harus memiliki klasifikasi dan kualifikasi usaha yang
               dipersyaratkan;
               </li>
-              <li>Calon Peserta wajib terverifikasi di e-procurement PT a
+              <li>Calon Peserta wajib terverifikasi di e-procurement PT IAS Property Indonesia
                 pada website: http://eproc.approperti.co.id bagi perusahaan yang belum mendaftar,
                 dipersilahkan mendaftar terlebih dahulu;</li>
                 <li>Pelelangan ini menggunakan Peraturan berdasarkan Keputusan Direksi PT Angkasa Pura
@@ -139,7 +139,7 @@
                  </li>
                  @endif
                   <li>
-                    Melakukan registrasi pekerjaan sebagai tanda keikutsertaan {{ $tenders->nama_paket }}, pada sistem e-Procurement PT a yang dapat diakses di website: <strong> http://eproc.approperti.co.id/pengumuman</strong> selambat-lambatnya hari <strong>
+                    Melakukan registrasi pekerjaan sebagai tanda keikutsertaan {{ $tenders->nama_paket }}, pada sistem e-Procurement PT IAS Property Indonesia yang dapat diakses di website: <strong> http://eproc.approperti.co.id/pengumuman</strong> selambat-lambatnya hari <strong>
                       {{ hariIndo(date('l', strtotime($tenders->tgl_daftar))) }},
                       {{ date('d M Y', strtotime($tenders->tgl_daftar)) }}
                       Pukul
@@ -153,7 +153,7 @@
           <p>Jakarta,  {{ date('d M Y', strtotime($tenders->tgl_paket)) }}</p>
 
         <p> Vice President Supply Chain Management <br>
-        PT a <br>
+        PT IAS Property Indonesia <br>
         TTD
       </p>
       <div class="page-break"></div>

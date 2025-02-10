@@ -30,7 +30,7 @@
     .tab1 {
             tab-size: 2;
         }
-  
+
     .tab2 {
         tab-size: 4;
     }
@@ -38,7 +38,7 @@
     .tab4 {
         tab-size: 8;
     }
-    
+
     .container {
         margin: 0 auto;
         margin-top: 100px;
@@ -83,9 +83,9 @@
     }
 
     footer {
-                position: fixed; 
-                bottom: 0cm; 
-                left: 0cm; 
+                position: fixed;
+                bottom: 0cm;
+                left: 0cm;
                 right: 0cm;
                 height: 2cm;
             }
@@ -100,24 +100,24 @@
 {{-- @include('component.head') --}}
 
 <body>
-     
-    <footer> 
+
+    <footer>
         <hr>
         <p>
           {{-- <span style="text-align: left; font-size: 8pt"> {{ "BA." . $spp->bakesepakatan->nomor_bak }} <br>
         {{ "Tanggal " . $spp->tanggal }}
         </span>   --}}
-     
+
         </p>
         <p style="text-align: right; font-size: 8pt">  <span class="pagenum"></span></p>
-          
+
                             {{-- {{ strtoupper( "BERITA ACARA KESEPAKATAN " . $spp->bakesepakatan->banegopengadaans->bapengadaan->judul_pekerjaan)  }}</i> </p> --}}
         {{-- <img src="{{ url('data_file/' . $pref->image) }}" width="100%" height="100%"/> --}}
     </footer>
     <div class="container">
         <header class="mt-0">
             <p style="text-align: right; font-size: 8pt"><img src="{{ public_path('data_file/'.$pref->image) }}" width="300px" alt=""></p>
-        </header>   
+        </header>
         <div class="row">
             <table class="table table-borderless">
                 <tbody>
@@ -139,7 +139,7 @@
                 </tbody>
              </table>
 
-           
+
                 <p>Kepada Yth.</p>
                 <p>{{ $spp->banegopengadaan->vendor->namaperusahaan . ", " . $spp->banegopengadaan->vendor->badanusaha->kode }}</p>
                 <p>Up. Pimpinan Perusahaan</p>
@@ -155,7 +155,7 @@
                     {{-- <li style="text-align: justify">Nota Dinas Vice President Supply Chain Management Pengadaan Nomor : {{ $spp->no_nodin }}, tanggal {{ date('d-m-Y', strtotime($spp->tanggal))  }} perihal  {{ $spp->perihal }}.</li>
                     <li style="text-align: justify">Disposisi Persetujuan {{ $spp->bod->jabatan }} tanggal {{ date('d-m-Y', strtotime($spp->tgl_dispo)) }}.</li> --}}
                 </ol>
-                <p style="text-align: justify">Dengan ini diberitahukan bahwa dengan memperhatikan ketentuan Prosedur Pengadaan Barang dan /atau Jasa yang berlaku dilingkungan PT IAS Property Indonesia, 
+                <p style="text-align: justify">Dengan ini diberitahukan bahwa dengan memperhatikan ketentuan Prosedur Pengadaan Barang dan /atau Jasa yang berlaku dilingkungan PT IAS Property Indonesia,
                     maka ditunjuk sebagai Pemenang pelaksana pekerjaan, adalah :</p>
                 <table class="table table-borderless">
                 <tbody>
@@ -193,26 +193,26 @@
              </table>
              @php
                  $jampel = $spp->banegopengadaan->jml_nego * 5/100 ;
-                 
+
              @endphp
              <p style="text-align: justify"> Sehubungan dengan hal tersebut, dimohon untuk
                 @if ( $spp->banegopengadaan->jaminan == '1')
-                    <span> melakukan pembayaran biaya administrasi kontrak pengadaan barang dan 
-                        jasa sebesar Rp {{ number_format($jampel) }},- ({{ terbilang($jampel)  }} rupiah) ke rekening BNI nomor : 03333-55569 a/n PT IAS Property Indonesia. </span> 
+                    <span> melakukan pembayaran biaya administrasi kontrak pengadaan barang dan
+                        jasa sebesar Rp {{ number_format($jampel) }},- ({{ terbilang($jampel)  }} rupiah) ke rekening BNI nomor : 03333-55569 a/n PT IAS Property Indonesia. </span>
                 @elseif ( $spp->banegopengadaan->jaminan = '2')
-                <span> melakukan pembayaran jaminan pelaksanaan sebesar 5% (lima persen) dari nilai kontrak 
-                    atau senilai {{ number_format($jampel) }},- ({{ terbilang($jampel)  }} rupiah) dan 
-                    jasa sebesar {{ number_format($spp->bidok) }},- ({{ terbilang($spp->bidok)  }} rupiah) ke rekening BNI nomor : 03333-55569 a/n PT IAS Property Indonesia. </span> 
+                <span> melakukan pembayaran jaminan pelaksanaan sebesar 5% (lima persen) dari nilai kontrak
+                    atau senilai {{ number_format($jampel) }},- ({{ terbilang($jampel)  }} rupiah) dan
+                    jasa sebesar {{ number_format($spp->bidok) }},- ({{ terbilang($spp->bidok)  }} rupiah) ke rekening BNI nomor : 03333-55569 a/n PT IAS Property Indonesia. </span>
                 @elseif ( $spp->banegopengadaan->jaminan = '3')
-              <span> melakukan pembayaran jaminan pelaksanaan sebesar 5% (lima persen) dari nilai kontrak 
-                atau senilai Rp {{ number_format($jampel) }},- ({{ terbilang($jampel)  }} rupiah) dan biaya administrasi kontrak pengadaan barang dan 
-                jasa sebesar Rp {{ number_format($spp->bidok) }},- ({{ terbilang($spp->bidok)  }} rupiah) ke rekening BNI nomor : 03333-55569 a/n PT IAS Property Indonesia. </span> 
+              <span> melakukan pembayaran jaminan pelaksanaan sebesar 5% (lima persen) dari nilai kontrak
+                atau senilai Rp {{ number_format($jampel) }},- ({{ terbilang($jampel)  }} rupiah) dan biaya administrasi kontrak pengadaan barang dan
+                jasa sebesar Rp {{ number_format($spp->bidok) }},- ({{ terbilang($spp->bidok)  }} rupiah) ke rekening BNI nomor : 03333-55569 a/n PT IAS Property Indonesia. </span>
                 @else
-              
+
                 @endif
                  </p>
 
-             <p style="text-align: justify">Dengan terbitnya Surat Penunjukan Pemenang ini, maka Pekerjaan sudah dapat segera dimulai dilaksanakan. 
+             <p style="text-align: justify">Dengan terbitnya Surat Penunjukan Pemenang ini, maka Pekerjaan sudah dapat segera dimulai dilaksanakan.
                 Dan diharapkan agar pelaksana pekerjaan dapat menghubungi Unit Spesifikasi Teknis (UST) untuk dapat melakukan koordinasi persiapan pekerjaan.</p>
 
             <p style="text-align: justify">Demikian diberitahukan sebagaimana mestinya, atas perhatian dan kerjasamanya diucapkan terima kasih.</p>
@@ -230,7 +230,7 @@
         </div>
     </div>
 
-    
+
 </body>
 
 

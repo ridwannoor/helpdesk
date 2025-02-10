@@ -23,7 +23,7 @@
         page-break-after: always;
     }
 
-    
+
     .pagenum:before {
         content: counter(page);
     }
@@ -70,11 +70,11 @@
         /* padding: 5px; */
         margin-bottom: 15px;
     }
-            
+
     footer {
-                position: fixed; 
-                bottom: 0cm; 
-                left: 0cm; 
+                position: fixed;
+                bottom: 0cm;
+                left: 0cm;
                 right: 0cm;
                 height: 2cm;
             }
@@ -89,7 +89,7 @@
 {{-- @include('component.head') --}}
 
 <body>
-     
+
     <footer>
         <hr>
         <p style="text-align: right; font-size: 6pt"><i>
@@ -101,9 +101,9 @@
     <div class="container">
         <header class="mt-0">
             <p style="text-align: right; font-size: 8pt"><img src="{{ public_path('data_file/'.$pref->image) }}" width="300px" alt=""></p>
-        </header>   
+        </header>
         <div class="row">
-             
+
             <table border="1" class="table">
                 <tbody>
                     <tr>
@@ -116,10 +116,10 @@
                     </tr>
                 </tbody>
             </table>
-        </div>       
+        </div>
 
         <p style="text-align: justify ; text-transform: capitalize">Pada hari {{ hariIndo(date('l', strtotime($banegopengadaans->tanggal))) }}, tanggal
-            {{ terbilang(date('d', strtotime($banegopengadaans->tanggal))) }} bulan {{ bulanIndo(date('F', strtotime($banegopengadaans->tanggal)))}} tahun 
+            {{ terbilang(date('d', strtotime($banegopengadaans->tanggal))) }} bulan {{ bulanIndo(date('F', strtotime($banegopengadaans->tanggal)))}} tahun
             {{ terbilang(date('Y', strtotime($banegopengadaans->tanggal))) }}
             ({{ date("d-m-Y", strtotime($banegopengadaans->tanggal)) }}) lokasi  {{ $banegopengadaans->lokasi_nego }},
             telah diadakan Rapat Klarifikasi & Negosiasi Harga terhadap Dokumen Penawaran Harga untuk pekerjaan tersebut di atas yang dihadiri oleh: </p>
@@ -131,7 +131,7 @@
             @foreach ($banegopengadaans->divisis as $item)
             {{-- <tbody> --}}
                 {{-- <tr> --}}
-                   <li style="margin: 20px">{{ strtoupper($item->detail) }}</li>     
+                   <li style="margin: 20px">{{ strtoupper($item->detail) }}</li>
                 {{-- </tr> --}}
             {{-- </tbody> --}}
             @endforeach
@@ -141,9 +141,9 @@
         {{-- </div> --}}
         {{-- </p> --}}
         <p><strong>II. Pihak Calon Mitra :</strong></p>
-      
+
         <ol type="1">
-            <li style="margin: 20px">{{ $banegopengadaans->vendor->namaperusahaan }}, {{ $banegopengadaans->vendor->badanusaha->kode }}</li>     
+            <li style="margin: 20px">{{ $banegopengadaans->vendor->namaperusahaan }}, {{ $banegopengadaans->vendor->badanusaha->kode }}</li>
         </ol>
         {{-- <table class="table">
             <tbody>
@@ -157,68 +157,68 @@
         @endphp
         <p style="text-transform: capitalize"> Dihasilkan kesepakatan sebagai berikut:</p>
           <ol>
-                <li style="text-align: justify"><span> Rencana Anggaran Pelaksanaan (RAP) yang diterima yaitu sebesar {{ "Rp " . format_uang($banegopengadaans->bapengadaan->nilai_rap)  }}- 
+                <li style="text-align: justify"><span> Rencana Anggaran Pelaksanaan (RAP) yang diterima yaitu sebesar {{ "Rp " . format_uang($banegopengadaans->bapengadaan->nilai_rap)  }}-
                     ({{ terbilang($banegopengadaans->bapengadaan->nilai_rap) . " rupiah" }}) harga termasuk pajak.</span></li>
 
             <li style="text-transform: capitalize"><span>Penawaran harga sebelum negosiasi:</span>   <br>
             <table class="table">
-                <tbody>	 
+                <tbody>
                     <tr>
                          <td>Nama Perusahaan</td>
                          <td>{{ $banegopengadaans->vendor->namaperusahaan }}, {{ $banegopengadaans->vendor->badanusaha->kode }}</td>
-                    </tr>	
+                    </tr>
                     <tr>
                          <td>NPWP</td>
                          <td>{{ $banegopengadaans->vendor->npwp }}</td>
-                    </tr>	
+                    </tr>
                     @if ($banegopengadaans->spph)
                         <tr>
                             <td>No SPPH</td>
                             <td>{{ $banegopengadaans->spph }}</td>
-                        </tr>	
-                    @endif                  
+                        </tr>
+                    @endif
                     <tr>
                         <td>Jumlah Penawaran</td>
                         <td>{{ "Rp ". format_uang($banegopengadaans->jml_penawaran)  }}
                             ({{ terbilang($banegopengadaans->jml_penawaran) . " rupiah" }}) harga sudah termasuk pajak. </td>
-                    </tr>							 
-                </tbody> 
+                    </tr>
+                </tbody>
             </table>
-        </li> 
+        </li>
             <li style="text-transform: capitalize"><span>Penawaran harga sesudah negosiasi :</span>   <br>
 
             <table class="table">
-                <tbody>	 
+                <tbody>
                     <tr>
                          <td>Nama Perusahaan</td>
                          <td>{{ $banegopengadaans->vendor->namaperusahaan }}, {{ $banegopengadaans->vendor->badanusaha->kode }}</td>
-                    </tr>	
+                    </tr>
                     <tr>
                          <td>NPWP</td>
                          <td>{{ $banegopengadaans->vendor->npwp }}</td>
-                    </tr>	
+                    </tr>
                     @if ($banegopengadaans->spph_nego)
                         <tr>
                             <td>No SPPH</td>
                             <td>{{ $banegopengadaans->spph_nego }}</td>
-                        </tr>	
-                    @endif                   
+                        </tr>
+                    @endif
                     <tr>
                         <td>Jumlah Penawaran</td>
                         <td>{{ "Rp ". format_uang($banegopengadaans->jml_nego)  }}
                             ({{ terbilang($banegopengadaans->jml_nego) . " rupiah" }}) harga sudah termasuk pajak.</td>
-                    </tr>							 
-                </tbody> 
+                    </tr>
+                </tbody>
             </table>
         </li>
             <li><span>Jangka Waktu Pelaksanaan :   {{ $banegopengadaans->bapengadaan->jangkawaktu_pelaksanaan . " (" . $banegopengadaans->bapengadaan->jangka_pelaksanaan . ") Hari Kalender Terhitung Sejak Terbit Kontrak / PO / SPK" }} </span> </li>
             <li><span> Jangka Waktu Pemeliharaan : {{ $banegopengadaans->bapengadaan->jangka_pemeliharaan . " (" . terbilang($banegopengadaans->bapengadaan->jangka_pemeliharaan) . " ) " }}  hari kalender</span>  </li>
             <li><span> Cara Pembayaran :</span> <br>
                <ol type="I">
-                @foreach ($banegopengadaans->bapengadaan->badetailpengadaans as $item)   
+                @foreach ($banegopengadaans->bapengadaan->badetailpengadaans as $item)
 
-                <li style="margin-top:14px; text-align: justify">  {{ $item->termin }}   </li>    
-                      
+                <li style="margin-top:14px; text-align: justify">  {{ $item->termin }}   </li>
+
                 @endforeach
              </ol>
             </li>
@@ -234,14 +234,14 @@
             <li style="text-align: justify ; text-transform: capitalize"><span>Pihak Kedua membayarkan Jaminan DP {{ $banegopengadaans->jaminandp1 . "%" }} sebesar {{ "Rp " . format_uang($banegopengadaans->jaminandp2)  }} dapat berupa bank garansi, asuransi, ataupun tunai.</span></li>
             @endif --}}
             {{-- <li style="text-align: justify ; text-transform: capitalize"><span>Pihak Kedua membayarkan Jaminan pelaksanaan sebesar 5% (lima persen) dari nilai pekerjaan atau senilai {{ $banegopengadaans->jaminandp1 . " %" }} sebesar {{ "Rp " . format_uang($jam) . " (" . terbilang($jam) . ") "  }} dapat berupa bank garansi, asuransi, ataupun tunai.
-            dengan jangka waktu jaminan pelaksanaan {{ $banegopengadaans->bapengadaan->jangka_pelaksanaan }} hari kalender dengan jangka waktu Jaminan Pelaksanaan selama jangka waktu 
+            dengan jangka waktu jaminan pelaksanaan {{ $banegopengadaans->bapengadaan->jangka_pelaksanaan }} hari kalender dengan jangka waktu Jaminan Pelaksanaan selama jangka waktu
             pelaksanaan ditambah 30 hari kalender dan membayarkan biaya dokument kontrak sebesar {{ "Rp " . format_uang($banegopengadaans->bapengadaan->biaya_dokumen)  }} ke rekening BNI nomor : 03333-55569 a/n PT IAS Property Indonesia</span></li>
              --}}
             <li style="text-align: justify ; text-transform: capitalize"><span>Berita Acara Klarifikasi dan Negosiasi Harga ini merupakan satu kesatuan dan menjadi bagian yang tidak terpisahkan dari Kontrak serta mempunyai kekuatan hukum yang mengikat Para Pihak.</span></li>
-            
-        </ol>                         
+
+        </ol>
         <p>Demikian Berita Acara ini dibuat dengan sebenar-benarnya untuk dipergunakan sebagaimana mestinya.</p>
-      
+
         <p><strong>I. IAS Property Indonesia, PT</strong></p>
         {{-- <table class="table"> --}}
             <ol>
@@ -272,7 +272,7 @@
         {{-- </table> --}}
     </div>
 
-    
+
 </body>
 
 
