@@ -427,7 +427,7 @@
                                                 @foreach ($item->tender->tenderpenawaran as $item)
                                                     {{-- @foreach ($item->vendor as $v) --}}
                                                         {{-- @foreach ($v as $c) --}}
-                                                        {{ " - " . $item->namaperusahaan . ", "  }} <br>
+                                                        {{ " - " . $item->namaperusahaan . ", " . ($item->badanusaha ? $item->badanusaha->kode : '') }} <br>
                                                         {{-- @endforeach                                  --}}
                                                     {{-- @endforeach --}}
                                                 @endforeach
