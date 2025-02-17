@@ -28,10 +28,10 @@
                         <span class="m-nav__link-text">{{ $judul }}</span>
                     </a>
                 </li>
-                
+
             </ul>
         </div>
-        
+
     </div>
 </div>
 @endsection
@@ -39,7 +39,7 @@
 @section('m-content')
 <div class="m-content">
         @include('component.alertnotification')
-    
+
         <div class="m-portlet m-portlet--mobile">
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
@@ -49,7 +49,7 @@
                         </h3>
                     </div>
                 </div>
-                
+
             </div>
             <div class="m-portlet__body">
                 <ul class="nav nav-pills nav-fill" role="tablist">
@@ -62,14 +62,14 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#m_tabs_5_3">Timeline</a>
                     </li>
-                </ul>                    
+                </ul>
 
                 <div class="tab-content">
                     <div class="tab-pane active" id="m_tabs_5_1" role="tabpanel">
                         <div class="row">
-                   
+
                             <div class="col-lg-6">
-                                <table class="table table-striped- table-bordered table-hover table-checkable">                                   
+                                <table class="table table-striped- table-bordered table-hover table-checkable">
                                     <tbody>
                                         <td>No Pengumuman</td>
                                         <td>{{ date('d-m-Y', strtotime($tenders->tgl_paket))  }} <br>
@@ -87,7 +87,7 @@
                                     <tbody>
                                         <td>Nama Paket</td>
                                         <td>{{$tenders->nama_paket}}</td>
-                                    </tbody>                       
+                                    </tbody>
                                     <tbody>
                                         <td>Uraian Pekerjaan</td>
                                         <td>{!! $tenders->uraian_pek !!}</td>
@@ -116,7 +116,7 @@
                                         <td>Evaluasi Pekerjaan</td>
                                         <td>{{$tenders->metodeevaluasi->name}}</td>
                                     </tbody>
-                                    
+
                                </table>
                             </div>
                             <div class="col-lg-6">
@@ -157,7 +157,7 @@
                                         <td>Kategori Tender</td>
                                         <td>
                                             {{-- @foreach ($tenders->catender as $item)
-                                                
+
                                             @endforeach --}}
                                           {{ $tenders->catender }}
                                         </td>
@@ -179,9 +179,9 @@
                                                 <td scope="row">{{ $item->vendorklasifikasi->kode }}</td>
                                                 <td>{{ $item->vendorklasifikasi->name }}</td>
                                             </tr>
-                                         
-                                            @endforeach  
-                                            
+
+                                            @endforeach
+
                                         </tbody>
                                 </table>
                             </div>
@@ -200,12 +200,12 @@
                                             <tr>
                                                 <td scope="row">{{ $item->syarattender->kode_syarat }}</td>
                                                 <td>{{ $item->syarattender->detail_syarat }}</td>
-                                                <td>  
-                                                    <a href="{{ url('data_file/pdf/'.$item->file_syarat) }}" target="_blank"><span class="m-widget4__text">  {{ $item->syarattender->file_syarat }}</span></a> 
+                                                <td>
+                                                    <a href="{{ url('data_file/pdf/'.$item->file_syarat) }}" target="_blank"><span class="m-widget4__text">  {{ $item->syarattender->file_syarat }}</span></a>
                                                     </td>
                                             </tr>
                                             @endforeach
-                                         
+
                                         </tbody>
                                 </table>
                             </div>
@@ -214,7 +214,7 @@
                                     <thead>
                                         <th style="background: rgb(192, 226, 43)">
                                              File Pendukung
-                                        </th>                      
+                                        </th>
                                     </thead>
                                     <tbody>
                                                  <td>
@@ -227,7 +227,7 @@
                                                                  <div class="m-widget4__ext" >
                                                                      <a href="/tender/destroyfile/{{$item->id}}" class="m-widget4__icon delete-confirm">
                                                                          <i class="la la-close"></i>
-                                                                         
+
                                                                      </a>
                                                                  </div>
                                                              </div>
@@ -235,7 +235,7 @@
                                                      </div>
                                                  </td>
                                     </tbody>
-                 
+
                                 </table>
                             </div>
                         </div>
@@ -243,9 +243,9 @@
                     <div class="tab-pane" id="m_tabs_5_2" role="tabpanel">
                        <div class="row">
                         <div class="col-lg-12 mt-4">
-                            {{-- <h5>Qoutation Vendor</h5> --}}     
+                            {{-- <h5>Qoutation Vendor</h5> --}}
                             @foreach ($tenders->tenderpenawaran as $v)
-                            <div class="m-portlet m-portlet--collapsed m-portlet--head-sm mt-4  " m-portlet="true" id="m_portlet_tools_7">                                                          
+                            <div class="m-portlet m-portlet--collapsed m-portlet--head-sm mt-4  " m-portlet="true" id="m_portlet_tools_7">
                                     <div class="m-portlet__head">
                                         <div class="m-portlet__head-caption">
                                             <div class="m-portlet__head-title">
@@ -253,29 +253,29 @@
                                                     <i class="flaticon-buildings"></i>
                                                 </span>
                                                 <h3 class="m-portlet__head-text">
-                                                 
+
                                                         {{ $v->vendor->namaperusahaan . " - " }} <b class="blur-effect">{{ $v->nilai_penawaran }}</b>
-                                                  
+
                                                 </h3>
-                                            </div>			
+                                            </div>
                                         </div>
                                         <div class="m-portlet__head-tools">
                                             <ul class="m-portlet__nav">
                                                 <li class="m-portlet__nav-item">
-                                                    <a href="#"  m-portlet-tool="reload" class="m-portlet__nav-link m-portlet__nav-link--icon"><i class="la la-refresh"></i></a>	
+                                                    <a href="#"  m-portlet-tool="reload" class="m-portlet__nav-link m-portlet__nav-link--icon"><i class="la la-refresh"></i></a>
                                                 </li>
                                                 <li class="m-portlet__nav-item">
-                                                    <a href="#"  m-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon"><i class="la la-angle-down"></i></a>	
+                                                    <a href="#"  m-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon"><i class="la la-angle-down"></i></a>
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>                                 
+                                    </div>
                                     <div class="m-portlet__body">
                                         <form action="/tender/show/qout" method="post" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                                 <input type="hidden" name="_method" value="PUT" />
-                                            </div>  
+                                            </div>
                                         <table class="table table-striped table-inverse table-responsive">
                                             <thead class="thead-inverse">
                                                 <tr>
@@ -290,23 +290,23 @@
                                                     {{-- @if ($v == $tendsod) --}}
                                                  {{-- @foreach ($tendsi as $item)
                                                      @if ($item) --}}
-                                                         
+
                                                      {{-- @endif --}}
-                                                    @foreach ($sorted as $item )    
+                                                    @foreach ($sorted as $item )
                                                      @if ($item->vendor_id == $v->vendor_id)
-                                                     
+
                                                   {{-- {{  $unique = $item->unique('syarattender_id')}} --}}
                                                         {{-- @if ($item->syarattender_id == $tenders->tendersyarat->id ) --}}
                                                             <tr>
                                                                 <td scope="row">
-                                                                    <input type="hidden" name="id[]" value="{{$item->id}} "/>  
+                                                                    <input type="hidden" name="id[]" value="{{$item->id}} "/>
                                                                     <input type="hidden" name="tender_id[]" value="{{$item->tender_id}} "/>
                                                                     <input type="hidden" name="vendor_id[]" value="{{$item->vendor_id}} "/>
                                                                     <input type="hidden" name="file_pdf[]" value="{{ $item->file_pdf }}">
                                                                     <input type="hidden" name="syarattender_id[]" value="{{ $item->syarattender_id }}">
-                                                              
+
                                                                     {{ $item->syarattender->kode_syarat  }}
-                                                                     
+
                                                                 </td>
                                                                 <td >{{ $item->syarattender->detail_syarat }}</td>
                                                                 <td>
@@ -314,25 +314,25 @@
                                                                 </td>
                                                                 <td style="width: 300px"><input type="text" class="form-control" name="adaatautidak[]" value="{{ $item->adaatautidak }}"></td>
                                                                 <td style="width: 300px"><input type="text" class="form-control" name="catatan[]" value="{{ $item->catatan }}"></td>
-                                                            </tr>      
+                                                            </tr>
                                                                {{-- @endif --}}
                                                         {{-- @endforeach --}}
                                                             {{-- @foreach ($item->tender->tendersyarat as $v)                                             --}}
-                                                                                        
+
                                                             {{-- @endforeach --}}
                                                             {{-- @break     --}}
                                                             {{-- @endforeach --}}
                                                         {{-- @endif --}}
                                                         {{-- @break --}}
-                                                  
+
                                                     @endif
-                                                      @endforeach   
+                                                      @endforeach
                                                     {{-- @endif --}}
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
                                                         <td colspan="5" style=""><strong> Kesimpulan</strong></td>
-                                                
+
                                                     </tr>
                                                     {{-- @foreach ($tenders->tenderquot as $item) --}}
                                                     {{-- @foreach ($item->tender->tenderpenawaran as $v) --}}
@@ -355,7 +355,7 @@
                                                             <textarea class="form-control"  name="dok_harga" id="" cols="30" rows="3" required>{{ $v->dok_harga }}</textarea>
                                                         </td>
                                                     </tr>
-                                                  
+
                                                     {{-- @endforeach
                                                     @break --}}
                                                     {{-- @endforeach --}}
@@ -370,13 +370,13 @@
                                                     <div class="btn-group pull-right">
                                                         <button type="submit" class="btn btn-success"><i class="fa fa-save" aria-hidden="true"></i>&nbsp; Simpan</button>
                                                     {{-- <a href="/tender" class="btn btn-default">Back</a> --}}
-                                                    </div>                                        
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>   
-                                </form>                           
-                            </div>  
+                                    </div>
+                                </form>
+                            </div>
                             @endforeach
                         </div>
                        </div>
@@ -394,9 +394,9 @@
                                             <th colspan="5">
                                                 @if ($item->rpp_1)
                                                 Time Line Tender (Metode 2 Sampul)
-                                                @else    
+                                                @else
                                                 Time Line Tender (Metode 1 Sampul)
-                                                @endif                          
+                                                @endif
                                             </th>
                                         </tr>
                                         <tr>
@@ -407,7 +407,7 @@
                                             <th>Keterangan</th>
                                         </tr>
                                     </thead>
-                                    
+
                                     <tbody>
                                         <tr>
                                             <td>{{ $no++ }}</td>
@@ -427,7 +427,7 @@
                                                 @foreach ($item->tender->tenderpenawaran as $item)
                                                     {{-- @foreach ($item->vendor as $v) --}}
                                                         {{-- @foreach ($v as $c) --}}
-                                                        {{ " - " . $item->namaperusahaan . ", " . $item->badanusaha->kode }} <br>
+                                                        {{ " - " . $item->namaperusahaan . ", "  }} <br>
                                                         {{-- @endforeach                                  --}}
                                                     {{-- @endforeach --}}
                                                 @endforeach
@@ -442,7 +442,7 @@
                                             <td><input type="checkbox" name="" id="" checked></td>
                                             <td>{{ $item->ket_undangan }}</td>
                                         </tr>
-                                       
+
                                         <tr>
                                             <td>{{ $no++ }}</td>
                                             <td>Rapat Penjelasan Pekerjaan (Aanwijzing)</td>
@@ -552,17 +552,17 @@
                                         </tr>
                                     </tbody>
                                  </table>
-                           
-                           
+
+
                                 @endforeach
                                </div>
                         </div>
                     </div>
-                </div>      
-            
-             
-             
-             
+                </div>
+
+
+
+
             </div>
         </div>
         <!-- END EXAMPLE TABLE PORTLET-->
