@@ -10,9 +10,9 @@
                         <h4>Subsidiary Of :</h4>
                     </div>
                     <div>
-                        <a href="javascript:void(0)"><img src="../img/logo-ap1.png" alt="" width="400px" /></a>
+                        <a href="javascript:void(0)"><img src="../img/logo-ias.png" alt="" width="400px" /></a>
                     </div>
-                    <div>
+                    {{-- <div>
                         <a href="javascript:void(0)"><img src="../img/logo-ap1-hotels.png" alt="" width="400px" /></a>
                     </div>
                     <div>
@@ -23,7 +23,7 @@
                     </div>
                     <div>
                         <a href="javascript:void(0)"><img src="../img/logo-ap1-support.png" alt="" width="400px"/></a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
