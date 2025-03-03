@@ -158,8 +158,8 @@ header {
                     @foreach ($bapm->dodetails as $item)
                     <tr>
                             <td style="vertical-align : middle;text-align:center;">{{$no++}}</td>
-                            <td style="vertical-align : middle;text-align:left;">{{ html_entity_decode(strip_tags($item->hargabarang->nama_brg)); }}</td>
-                            <td style="vertical-align : middle;text-align:center;">{{ html_entity_decode(strip_tags($item->satuan)); }}</td>
+                            <td style="vertical-align : middle;text-align:left;">{{ html_entity_decode(strip_tags($item->hargabarang->nama_brg)) }}</td>
+                            <td style="vertical-align : middle;text-align:center;">{{ html_entity_decode(strip_tags($item->satuan)) }}</td>
                             <td style="vertical-align : middle;text-align:center;">{{ html_entity_decode(strip_tags($item->qty)) }}</td>
                             <td style="vertical-align : middle;text-align:center;">{{ html_entity_decode(strip_tags($item->catatan)) }}</td>
                             {{-- <td style="vertical-align : middle;text-align:center;">
