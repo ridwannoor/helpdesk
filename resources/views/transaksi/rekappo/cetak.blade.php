@@ -86,7 +86,7 @@
 
 <body>
     <header>
-        <p style="text-align: right; font-size: 8pt"><img
+        <p style="text-align: left; font-size: 8pt"><img
                 src="{{ public_path('data_file/'.$rekappos->preference->image) }}" width="300px" alt=""></p>
     </header>
     <div id="container">
@@ -153,7 +153,7 @@
                             @else
                             <span>Include Tax (V1)</span>
                             @endif
-                            {{-- / Asuransi : 
+                            {{-- / Asuransi :
                             @if ($rekappos->asuransi == 0)
                             <span>Exclude Assurance </span>
                             @else
@@ -183,7 +183,7 @@
                     @foreach ($rekappos->podetails as $item)
                     @php
                         $jumlah = $item->qty*$item->harga ;
-                        $subtotal += $jumlah; 
+                        $subtotal += $jumlah;
                     @endphp
                     <tr>
                         <td style="vertical-align : middle;text-align:center;">{{$no++}}</td>
@@ -196,21 +196,21 @@
                     @endforeach
                 </tbody>
                 @php
-                    if ($rekappos->pajak == "ppn") {                                                    
+                    if ($rekappos->pajak == "ppn") {
                         $subatotal = $subtotal - $rekappos->diskon;
-                        $ppn = $subatotal * 10/100; 
-                        $total = $subatotal + $ppn + $rekappos->biaya_kirim + $rekappos->custom1 - $rekappos->custom3;    
-                    } 
-                    elseif ($rekappos->pajak == "ppn11") {                                                    
+                        $ppn = $subatotal * 10/100;
+                        $total = $subatotal + $ppn + $rekappos->biaya_kirim + $rekappos->custom1 - $rekappos->custom3;
+                    }
+                    elseif ($rekappos->pajak == "ppn11") {
                         $subatotal = $subtotal - $rekappos->diskon;
-                        $ppn = $subatotal * 11/100; 
-                        $total = $subatotal + $ppn + $rekappos->biaya_kirim + $rekappos->custom1 - $rekappos->custom3;    
-                    } 
-                    elseif ($rekappos->pajak == "pph") {                                                    
+                        $ppn = $subatotal * 11/100;
+                        $total = $subatotal + $ppn + $rekappos->biaya_kirim + $rekappos->custom1 - $rekappos->custom3;
+                    }
+                    elseif ($rekappos->pajak == "pph") {
                         $subatotal = $subtotal - $rekappos->diskon;
-                        $ppn = $subatotal * 1/100; 
-                        $total = $subatotal + $ppn + $rekappos->biaya_kirim + $rekappos->custom1 - $rekappos->custom3;    
-                    } 
+                        $ppn = $subatotal * 1/100;
+                        $total = $subatotal + $ppn + $rekappos->biaya_kirim + $rekappos->custom1 - $rekappos->custom3;
+                    }
                     elseif ($rekappos->pajak == "other") {
                         $subatotal = $subtotal - $rekappos->diskon;
                         $ppn = $subatotal * $rekappos->pajak1/100;
@@ -240,14 +240,14 @@
                     @endif
                     @if($rekappos->pajak != "exclude")
                     <tr>
-                        
+
                         <td colspan="7" style="vertical-align : middle;text-align:right;">
                             @if ($rekappos->pajak == "ppn")
                             PPN 10%
                             @elseif ($rekappos->pajak == "ppn11")
-                            PPN 11%   
+                            PPN 11%
                             @elseif ($rekappos->pajak == "pph")
-                            PPN 1%                            
+                            PPN 1%
                             @elseif ($rekappos->pajak == "other")
                             PPN {{ $rekappos->pajak1 . "%" }}
                             @endif
@@ -257,11 +257,11 @@
                         @if ($rekappos->pajak == "ppn")
                           {{$rekappos->currency->name . " " . format_uang($ppn = $subatotal * 10/100)   }}
                           @elseif ($rekappos->pajak == "ppn11")
-                          {{$rekappos->currency->name . " " . format_uang($ppn = $subatotal * 11/100)   }} 
+                          {{$rekappos->currency->name . " " . format_uang($ppn = $subatotal * 11/100)   }}
                         @elseif ($rekappos->pajak == "pph")
-                        {{$rekappos->currency->name . " " . format_uang($ppn = $subatotal * 1/100)   }}                 
+                        {{$rekappos->currency->name . " " . format_uang($ppn = $subatotal * 1/100)   }}
                         @elseif ($rekappos->pajak == "other")
-                        {{$rekappos->currency->name . " " . format_uang($ppn = $subatotal *  $rekappos->pajak1 / 100)   }}  
+                        {{$rekappos->currency->name . " " . format_uang($ppn = $subatotal *  $rekappos->pajak1 / 100)   }}
                         @endif
                         {{-- @endif --}}
                             {{-- {{ format_uang($ppn) }} --}}
@@ -318,9 +318,9 @@
                             <i>Notes </i> <br>
                             <ol type="I">
                                 @if ($rekappos->asuransi == "include")
-                                <li>                                      
-                                    <span>Termasuk Asuransi</span>                                    
-                                </li> 
+                                <li>
+                                    <span>Termasuk Asuransi</span>
+                                </li>
                                 @endif
  				@if ($rekappos->catatan)
                                 <li>{!! $rekappos->catatan !!}</li>
@@ -332,7 +332,7 @@
                                    <li> <span>Sesuai Surat Penawaran Harga Nego No {{ $rekappos->desc }} Tanggal  {{  date("d-m-Y", strtotime($rekappos->desc_tgl)) }} </span></li>
                                 @endif
                                    <li> <span>Mohon dapat diemail ke logistik@approperti.co.id setelah PO diterima, ditandatangan dan stempel perusahaan paling lambat 3 hari kerja.  </span>  </li>
-                            </ol> 
+                            </ol>
                         </td>
                     </tr>
                 </tfoot>
@@ -361,7 +361,7 @@
                         </td>
                         <td style="vertical-align : top;text-align:center;">
                             <strong> {{ $rekappos->bod->name }}</strong> <br>
-                          
+
                             {{ $rekappos->bod->jabatan }}
                         </td>
                     </tr>

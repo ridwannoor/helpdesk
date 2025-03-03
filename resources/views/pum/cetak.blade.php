@@ -25,7 +25,7 @@
           line-height: 1.75em;
           font-size:   1rem ;
         }
-        i { 
+        i {
           font-family: sans;
           color: orange;
         }
@@ -69,13 +69,13 @@
 
 <body>
     <header>
-        <p style="text-align: right; font-size: 8pt"><img src="{{ public_path('data_file/'.$pums->preference->image) }}"
+        <p style="text-align: left; font-size: 8pt"><img src="{{ public_path('data_file/'.$pums->preference->image) }}"
                 width="300px" alt=""></p>
     </header>
 
     <div id="container">
         {{-- <div class="container-fluid"> --}}
-        {{-- <div class="row" style="margin:3em">      
+        {{-- <div class="row" style="margin:3em">
        <div class="col-sm-12">
          <img src="{{ public_path('data_file/'.$pums->preference->image) }}" class="pull-right" width="300px" alt="">
     </div>
@@ -109,22 +109,22 @@
                             <tr>
                                 <td>Nama Pekerjaan </td>
                                 <td>:</td>
-                                <td>{{$pums->nama_pek}}</td>    
-                            </tr>   
+                                <td>{{$pums->nama_pek}}</td>
+                            </tr>
                             <tr>
                                 <td>Tanggal :</td>
                                 <td>:</td>
-                                <td>{{date("d-m-Y", strtotime($pums->tanggal))}}</td>    
-                            </tr>   
+                                <td>{{date("d-m-Y", strtotime($pums->tanggal))}}</td>
+                            </tr>
                             <tr>
                                 <td>Lokasi :</td>
                                 <td>:</td>
-                                <td>{{$pums->lokasi->kode}}</td>    
-                            </tr>     
-                        </tbody>   
+                                <td>{{$pums->lokasi->kode}}</td>
+                            </tr>
+                        </tbody>
                     </table>
                 {{-- </div> --}}
-             
+
                 {{-- <strong>Service Order : </strong><span>{{$pums->no_pum}}</span><br> --}}
                 {{-- <strong>Nama Pekerjaan : </strong><span>{{$pums->nama_pek}}</span><br>
                 <strong>Tanggal : </strong><span>{{  date("d-m-Y", strtotime($pums->tanggal))}}</span><br>
@@ -136,7 +136,7 @@
         {{-- <div class="col-sm-6">
             <address class="satu">
                 {{-- <strong>Waktu Pelaksanaan : </strong><span>{{  date("d-m-Y", strtotime($pums->start_date))}} /
-                {{  date("d-m-Y", strtotime($pums->end_date))}}</span><br> 
+                {{  date("d-m-Y", strtotime($pums->end_date))}}</span><br>
                 <strong>Tanggal : </strong><span>{{  date("d-m-Y", strtotime($pums->tanggal))}}</span><br>
                 <strong>Lokasi : </strong><span>{{ $pums->lokasi->kode }}</span>
             </address>
@@ -187,7 +187,7 @@
         </div>
     </div>
     <div class="row" style="padding:5rem">
-        
+
         <div class="col-sm-4">
             <address class="text-uppercase">
                 <p class="satu">Diajukan Oleh :</p>

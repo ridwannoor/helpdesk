@@ -60,7 +60,7 @@ header {
 
 <body>
     <header>
-        <p style="text-align: right; font-size: 8pt"><img src="{{ public_path('data_file/'.$bapm->preference->image) }}" width="300px" alt=""></p>
+        <p style="text-align: left; font-size: 8pt"><img src="{{ public_path('data_file/'.$bapm->preference->image) }}" width="300px" alt=""></p>
     </header>
 
     <div id="container">
