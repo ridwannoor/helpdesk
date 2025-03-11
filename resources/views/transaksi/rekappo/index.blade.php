@@ -32,14 +32,14 @@
     <div class="m-grid__item m-grid__item--fluid m-grid  m-error-6" style="background-image: url(assets/app/media/img/error/bg6.jpg);">
         <div class="m-error_container">
             <div class="m-error_subtitle m--font-light">
-                <h1>Oops...</h1>		 
-            </div> 		 
+                <h1>Oops...</h1>
+            </div>
             <p class="m-error_description m--font-light">
                 Looks like something went wrong.<br>
-                We're working on it			 
-            </p>		 
-        </div>	 
-    </div> 
+                We're working on it
+            </p>
+        </div>
+    </div>
     @else
     <div class="m-portlet ">
         <div class="m-portlet__body  m-portlet__body--no-padding">
@@ -105,7 +105,7 @@
                             </h4><br>
                             <span class="m-widget24__stats m--font-success">
                                 {{ $tenders->where('pagu')->sum() }}
-                               
+
                             </span>
                             <div class="m--space-10"></div>
                             <div class="progress m-progress--sm">
@@ -131,21 +131,21 @@
                     <li class="m-portlet__nav-item">
                         {{-- @foreach ($users as $item) --}}
                             {{-- @if ($users('userdetail')->create == 1) --}}
-                            @if ($crud->create == 1) 
+                            @if ($crud->create == 1)
                                 <a href="/rekappo/create" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
                                 <span>
                                     <i class="la la-plus"></i>
                                     <span>New record</span>
                                 </span>
                             </a>
-                            @endif 
-                            
+                            @endif
+
                            {{-- @endif --}}
                         {{-- @endforeach --}}
                         {{-- @if (Auth::user()->userdetails->create != 0) --}}
-                       
+
                         {{-- @endif --}}
-                        
+
                     </li>
                     {{-- <li class="m-portlet__nav-item">
                         <a href="/rekappo/exportXLS" target="_blank" class="btn btn-success m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air" rel="noopener noreferrer"> <i class="fa fa-file-excel"></i> Export </a>
@@ -154,8 +154,8 @@
                     <li class="m-portlet__nav-item">
                         <a href="#"  data-toggle="modal" data-target="#poMdl" target="__blank" class="btn btn-danger m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air" rel="noopener noreferrer"> <i class="fa fa-file-pdf"></i>&nbsp; Export PDF</a>
                         </span></a>
-                       
-                        
+
+
                         <!-- Modal -->
                         <div class="modal fade" id="poMdl" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -185,7 +185,7 @@
                                             <button type="submit" class="btn btn-primary">Save</button>
                                         </div>
                                     </form>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -196,7 +196,7 @@
         </div>
         <div class="m-portlet__body">
             <!--begin: Datatable -->
-            
+
             <table class="table table-striped- table-bordered table-hover table-checkable" id="m_table_1_wrapper">
                 <thead>
                     <tr>
@@ -213,17 +213,17 @@
                         <th style="vertical-align : middle;text-align:center;">Action</th>
                         {{-- <th rowspan="2" style="vertical-align : middle;text-align:center;">Actions</th> --}}
                     </tr>
-                   
+
                 </thead>
                 @php
                     $no = 1 ;
                 @endphp
                 <tbody>
-                                        
+
                     @foreach ($rekappos as $item)
                         {{-- @if ($item->is_published == '1' )    --}}
                     <tr>
-                        
+
                         <td style="vertical-align : middle;text-align:center;">{{ $no++ }}</td>
                         <td>
                             <div class="m-stack m-stack--ver m-stack--tablet m-stack--demo p-2">
@@ -235,24 +235,24 @@
                             <a href="/rekappo/show/{{ $item->id }}"><strong>{{ $item->no_po }}</strong></a><br>
                             {{ $item->nama_pekerjaan }}
                         </td>
-                        <td style="vertical-align : middle;text-align:center;"> 
+                        <td style="vertical-align : middle;text-align:center;">
                         @if ($item->vendor)
-                            {{ $item->vendor->namaperusahaan }}, {{ $item->vendor->badanusaha->kode }}
+                            {{ $item->vendor->namaperusahaan }}, {{ optional(optional($item->vendor)->badanusaha)->kode }}
                         @else
                             Vendor Sudah Dihapus
                         @endif
                         </td>
-                        <td style="vertical-align : middle;text-align:center;"> 
+                        <td style="vertical-align : middle;text-align:center;">
                             <span class="m-badge m-badge--metal  m-badge--wide">{{ $item->lokasi->kode }}</span>
                         </td>
-                        <td style="vertical-align : middle;text-align:center;"> 
+                        <td style="vertical-align : middle;text-align:center;">
                         @if ($item->is_published == 0)
                             <span class="m-badge m-badge--warning m-badge--wide">Draft</span>
                          @else
                             <span class="m-badge m-badge--success m-badge--wide">Publish</span>
                          @endif
                         </td>
-                        {{-- <td style="vertical-align : middle;text-align:center;"> 
+                        {{-- <td style="vertical-align : middle;text-align:center;">
                             @if ($item->status == 0)
                                 <span class="m-badge m-badge--accent m-badge--wide">Open</span>
                              @else
@@ -267,49 +267,49 @@
                                 <div class="m-dropdown__wrapper">
                                         <span class="m-dropdown__arrow m-dropdown__arrow--left m-dropdown__arrow--adjust"></span>
                                         <div class="m-dropdown__inner">
-                                            <div class="m-dropdown__body">              
+                                            <div class="m-dropdown__body">
                                                 <div class="m-dropdown__content">
                                                     <ul class="m-nav">
-                                                   
-                                                        @if ($crud->publish)  
-                                                            @if ($item->is_published == 1)         
+
+                                                        @if ($crud->publish)
+                                                            @if ($item->is_published == 1)
                                                             <li class="m-nav__item">
                                                                 <a href="/rekappo/publish/{{$item->id}}" class="m-nav__link publish-confirm"><i class="m-nav__link-icon flaticon-circle"></i>  <span class="m-nav__link-text">Draft</span></a>
-                                                            </li>     
+                                                            </li>
                                                             @else
                                                             <li class="m-nav__item">
                                                                 <a href="/rekappo/publish/{{$item->id}}" class="m-nav__link publish-confirm"><i class="m-nav__link-icon flaticon-interface-5"></i>  <span class="m-nav__link-text">Publish</span></a>
-                                                            </li>     
-                                                            @endif 
-                                                        @endif             
-                                                        @if ($crud->cetak)                       
+                                                            </li>
+                                                            @endif
+                                                        @endif
+                                                        @if ($crud->cetak)
                                                         <li class="m-nav__item">
                                                             <a href="/rekappo/cetak/{{$item->id}}" class="m-nav__link"><i class="m-nav__link-icon flaticon-technology"></i>  <span class="m-nav__link-text">Print</span></a>
-                                                        </li>  
+                                                        </li>
                                                         @if ($item->no_kontrak)
                                                         <li class="m-nav__item">
                                                             <a href="/rekappo/kontrak/{{$item->id}}" class="m-nav__link"><i class="m-nav__link-icon flaticon-technology"></i>  <span class="m-nav__link-text">Print Kontrak</span></a>
-                                                        </li>  
+                                                        </li>
                                                         @endif
-                                                        @endif  
+                                                        @endif
 
                                                         {{-- @if ($crud->upload) --}}
                                                         <li class="m-nav__item">
                                                             <a href="/rekappo/upload/{{$item->id}}" class="m-nav__link"><i class="m-nav__link-icon flaticon-upload"></i>  <span class="m-nav__link-text">Upload File</span></a>
-                                                        </li>                                                          
+                                                        </li>
                                                         {{-- @endif               --}}
                                                         @if ($item->is_published == 0)
                                                             @if ($crud->edit)
                                                             <li class="m-nav__item">
                                                                 <a href="/rekappo/edit/{{$item->id}}" class="m-nav__link"><i class="m-nav__link-icon flaticon-edit"></i>  <span class="m-nav__link-text">Edit</span></a>
-                                                            </li>  
-                                                            @endif              
+                                                            </li>
+                                                            @endif
                                                             @if ($crud->destroy)
                                                             <li class="m-nav__item">
                                                                 <a href="/rekappo/destroy/{{$item->id}}" class="m-nav__link delete-confirm"><i class="m-nav__link-icon flaticon-delete"></i>  <span class="m-nav__link-text">Hapus</span></a>
                                                             </li>
-                                                            @endif    
-                                                        @endif                                                                                       
+                                                            @endif
+                                                        @endif
                                                     </ul>
                                                 </div>
                                             </div>
@@ -317,15 +317,15 @@
                                 </div>
                             </div>
                         </td>
-                    </tr>        
-                     
+                    </tr>
+
                     {{-- @endif    --}}
-                            
-                    @endforeach       
-                     
+
+                    @endforeach
+
                 </tbody>
 
-                
+
             </table>
         </div>
     </div>
@@ -395,11 +395,11 @@
                 </label>
                 <select name="tahun" class="form-control m-bootstrap-select m_selectpicker">
                     <option value="">Please Select</option>
-             
+
                 </select>
             </div>
-            {{-- <input type="text" class="form-control" id="recipient-name"> --}} 
-            {{-- </div> --}} 
+            {{-- <input type="text" class="form-control" id="recipient-name"> --}}
+            {{-- </div> --}}
             {{-- <div class="form-group">
               <label for="message-text" class="form-control-label">Message:</label>
               <textarea class="form-control" id="message-text"></textarea>
