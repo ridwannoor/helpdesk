@@ -33,14 +33,14 @@
     <div class="m-grid__item m-grid__item--fluid m-grid  m-error-6" style="background-image: url(assets/app/media/img/error/bg6.jpg);">
         <div class="m-error_container">
             <div class="m-error_subtitle m--font-light">
-                <h1>Oops...</h1>		 
-            </div> 		 
+                <h1>Oops...</h1>
+            </div>
             <p class="m-error_description m--font-light">
                 Looks like something went wrong.<br>
-                We're working on it			 
-            </p>		 
-        </div>	 
-    </div> 
+                We're working on it
+            </p>
+        </div>
+    </div>
     @else
     <div class="m-portlet m-portlet--mobile">
         <div class="m-portlet__head">
@@ -98,7 +98,7 @@
                 </div>
 
                 <br>
-           
+
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -132,14 +132,14 @@
                     @foreach ($hargabrgs as $item)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td> 
+                        <td>
 			 <div class="row">
 			    <div class="col-sm-3">
                     <img src="{{ url('data_file/'.$item->image) }}" alt="image" width="30px" height="30px">
                 </div>
                 <div class="col-sm-9">
                     <strong><a href="/hargabarang/show/{{ $item->id }}">{!! $item->nama_brg !!}</a></strong><br>
-                    {{ $item->vendor->namaperusahaan }}, {{ $item->lokasi->kode }}
+                    {{ optional($item->vendor)->namaperusahaan }}, {{ optional($item->lokasi)->kode }}
                 </div>
 			 </div>
 			</td>
@@ -158,24 +158,24 @@
                                 <div class="m-dropdown__wrapper">
                                         <span class="m-dropdown__arrow m-dropdown__arrow--left m-dropdown__arrow--adjust"></span>
                                         <div class="m-dropdown__inner">
-                                            <div class="m-dropdown__body">              
+                                            <div class="m-dropdown__body">
                                                 <div class="m-dropdown__content">
                                                     <ul class="m-nav">
-                                                        {{-- @if ($crud->publish)     
+                                                        {{-- @if ($crud->publish)
                                                             @if ($item->is_published)
                                                                 <li class="m-nav__item">
                                                                     <a href="/hargabarang/publish/{{$item->id}}" class="m-nav__link"><i class="m-nav__link-icon flaticon-multimedia-5"></i>  <span class="m-nav__link-text">Draft</span></a>
-                                                                </li> 
+                                                                </li>
                                                             @else
                                                                 <li class="m-nav__item">
                                                                     <a href="/hargabarang/publish/{{$item->id}}" class="m-nav__link"><i class="m-nav__link-icon flaticon-multimedia-5"></i>  <span class="m-nav__link-text">Publish</span></a>
-                                                                </li> 
-                                                            @endif   
+                                                                </li>
+                                                            @endif
                                                         @endif               --}}
-                                                        {{-- @if ($crud->cetak)                       
+                                                        {{-- @if ($crud->cetak)
                                                         <li class="m-nav__item">
                                                             <a href="/hargabarang/cetak/{{$item->id}}" class="m-nav__link"><i class="m-nav__link-icon flaticon-technology"></i>  <span class="m-nav__link-text">Print</span></a>
-                                                        </li>  
+                                                        </li>
                                                         @endif               --}}
                                                         {{-- @if ($crud->upload) --}}
                                                         {{-- <li class="m-nav__item">
@@ -185,13 +185,13 @@
                                                         @if ($crud->edit)
                                                         <li class="m-nav__item">
                                                             <a href="/hargabarang/edit/{{$item->id}}" class="m-nav__link"><i class="m-nav__link-icon flaticon-edit"></i>  <span class="m-nav__link-text">Edit</span></a>
-                                                        </li>  
-                                                        @endif              
+                                                        </li>
+                                                        @endif
                                                         @if ($crud->destroy)
                                                         <li class="m-nav__item">
                                                             <a href="/hargabarang/destroy/{{$item->id}}" class="m-nav__link"><i class="m-nav__link-icon flaticon-delete"></i>  <span class="m-nav__link-text">Hapus</span></a>
                                                         </li>
-                                                        @endif                                       
+                                                        @endif
                                                     </ul>
                                                 </div>
                                             </div>
