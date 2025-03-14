@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 
 @section('content')
-    
+
     <!-- START SLIDER -->
     <div id="main-slider">
         <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel"
@@ -21,7 +21,7 @@
 
                 <!-- Slider 1 -->
                 @foreach ($sliders as $item)
-                    
+
                 <div class="carousel-item {{ $loop->first ? 'active' :'' }}" style="background-image: url('{{ url('data_file/'.$item->image) }}')">
                     <div class="carousel-caption text-left">
                         <div class="container">
@@ -48,11 +48,11 @@
         </div>
     </div>
     <!-- END SLIDER -->
-   
 
-    
+
+
 <!-- START NEW PROJECT -->
-	
+
 <div id="new-project">
     <div class="container mt-4">
         <div class="row d-flex align-items-center ">
@@ -78,8 +78,8 @@
                 <div class="card">
                     <div class="row d-flex">
                         <div class="col-lg-3">
-                            <img src="{{ asset('/front/assets/images/tuv_label.png') }}" alt="" width="100px" class="mb-2"> <br> 
-                            <img src="{{ asset('/front/assets/images/smk3.png') }}" alt="" width="100px"> 
+                            <img src="{{ asset('/front/assets/images/tuv_label.png') }}" alt="" width="100px" class="mb-2"> <br>
+                            <img src="{{ asset('/front/assets/images/smk3.png') }}" alt="" width="100px">
                             {{-- <i class="mdi mdi-certificate mdi-48px"></i> --}}
                         </div>
                         <div class="col-lg-9">
@@ -102,7 +102,7 @@
                             {{-- <p class="mb-0" >{{ $pref->email }}</p> --}}
                         </div>
                         <div class="col-lg-12">
-                          
+
                             <p class="mb-0" >{{ $pref->email }}</p>
                         </div>
                     </div>
@@ -118,16 +118,16 @@
                         </div>
                         <div class="col-lg-9">
                             <h4 class="mb-2">Senin - Jum'at <br> 09.00 s/d 16.00 WIB</h4>
-                          
+
                         </div>
                         <div class="col-lg-12">
-                          
+
                             <p class="mb-0">{{ $pref->phone }}</p>
                         </div>
                     </div>
                 </div>
             </div>
-     
+
         </div>
     </div>
 </div>
@@ -146,13 +146,14 @@
                         <h5 class="card-title" style="color: blue">PERSYARATAN PRAKUALIFIKASI</h5>
                         <p class="card-text"> <a href="#">Prosedur dan persyaratan dokumen prakualifikasi</a> <br><hr></p>
 
-                       
-                      
+                        <h5 class="card-title" style="color: blue">PENGUMUMAN</h5>
+                        <p class="card-text"> <a href="/data_file/dokument/pemberitahuan_perubahan_nama_perseroan.pdf">IASP.0889/DU/2025/PST-B - Penyampaian Pemberitahuan Perubahan Nama Perseroan</a> <br><hr></p>
+
                       </div>
                     </div>
     			</div>
     			<!-- Video -->
-			  
+
 
 			    <!-- Right Side -->
 				<div class="col-lg-8">
@@ -167,23 +168,23 @@
                                @endphp
                                 @foreach ($tenders as $item)
                                 <blockquote class="blockquote" >
-                                   <p> 
-                                    
-                                        <span class="btn btn-sm" style="color: white; background-color:rgb(205, 148, 234)"> {{ date('d M Y', strtotime($item->tgl_paket))  }} </span>  
-                                     
+                                   <p>
+
+                                        <span class="btn btn-sm" style="color: white; background-color:rgb(205, 148, 234)"> {{ date('d M Y', strtotime($item->tgl_paket))  }} </span>
+
                                            <span class="m-badge m-badge--warning m-badge--wide">
                                                 @if ($item->tgl_daftar <= $now )
-                                                  <span style="color:blue !important; float:right">Close </span>  
+                                                  <span style="color:blue !important; float:right">Close </span>
                                                 @else
-                                                <span style="color:#691295 !important; float:right">Open </span>  
+                                                <span style="color:#691295 !important; float:right">Open </span>
                                                     {{-- {{ $item->statustender->name }} --}}
                                                 @endif
                                             </span>
                                        <br>
                                   <strong><a href="/pengumuman/detail/{{ $item->id }}" style="color: #691295;"> {{ $item->nomor_pr }} </a></strong>  <br>
-                                     {{ Str::limit($item->nama_paket, 200)  }}  
+                                     {{ Str::limit($item->nama_paket, 200)  }}
                                      <br>
-                                   
+
                                         <div class="row" style="background-color: rgb(232, 220, 238); padding: 4px">
                                             <div class="col">
                                                 <i class="fi fi-rr-marker" aria-hidden="true"></i>  <span style="font-size: 8pt"> {{ $item->lokasi->kode }} </span>
@@ -192,39 +193,39 @@
                                                 <i class="fi fi-rr-settings" aria-hidden="true"></i> <span style="font-size: 8pt"> {{ $item->anggaran->kode }} </span>
                                             </div>
                                             <div class="col">
-                                                <i class="fi fi-rr-calendar" aria-hidden="true"></i> <span style="font-size: 8pt">  {{ Str::limit($item->jangka_pelaksanaan , 20)  }} </span> 
+                                                <i class="fi fi-rr-calendar" aria-hidden="true"></i> <span style="font-size: 8pt">  {{ Str::limit($item->jangka_pelaksanaan , 20)  }} </span>
                                             </div>
                                             <div class="col">
-                                                <i class="fi fi-rr-list" aria-hidden="true"></i> <span style="font-size: 8pt"> 
+                                                <i class="fi fi-rr-list" aria-hidden="true"></i> <span style="font-size: 8pt">
                                                     @foreach ($item->tenderdetail as $v)
-                                                     {{ $v->vendorklasifikasi->kode . " , " }} 
+                                                     {{ $v->vendorklasifikasi->kode . " , " }}
                                                      @endforeach
-                                                    </span> 
+                                                    </span>
                                             </div>
                                         </div>
-                                      
+
                                    </p>
                                    {{-- <footer class="card-blockquote">
                                        <a href="#" class="text-right">Selengkapnya..</a>
                                    </footer> --}}
                                </blockquote>
-                              
+
                            @endforeach
-                           
+
                             {{-- <div class="ps__rail-x" style="left: 0px; bottom: -131px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 131px; height: 200px; right: 4px;"><div class="ps__thumb-y" tabindex="0" style="top: 79px; height: 120px;"></div></div></div> --}}
-                            
-                      
+
+
                     </div>
-                   
+
                         <div class="card-footer text-muted">
                             <div class="row">
                                 <div class="col" style="text-align: right">
                                     <a href="/pengumuman">{{ $tenders->links() }}</a>
                                 </div>
-                      
+
                         </div>
                         </div>
-                   
+
                   </div>
     			</div>
 
@@ -232,7 +233,7 @@
         </div>
     </div>
 
-    
+
     {{-- <div id="what-we-do">
         <div class="container">
             <div class="row">
@@ -293,12 +294,12 @@
 
     <!-- START WHO WE ARE -->
     {{-- <div id="who-we-are">
-     
+
 
         <div class="container">
             <div class=" row d-flex align-items-center">
                 <div class="col-lg-12">
-					
+
 				</div>
             </div>
         </div> --}}
@@ -353,24 +354,24 @@
                     </div>
                 </div>
 
-              
+
 
             </div>
         </div> --}}
     {{-- </div> --}}
     <!-- END WHO WE ARE -->
 
-   
-  
-  
 
-    
+
+
+
+
 
 @endsection
 
 @section('script')
-        
-    <script src="{{asset('assets/vendors/custom/datatables/datatables.bundle.js')}}" type="text/javascript"></script>    
+
+    <script src="{{asset('assets/vendors/custom/datatables/datatables.bundle.js')}}" type="text/javascript"></script>
     <script src="{{ asset('assets/demo/default/custom/crud/datatables/search-options/advanced-search.js') }}"></script>
     {{-- <link href="{{ asset('assets/demo/default/base/style.bundle.css') }}" rel="stylesheet" type="text/css" /> --}}
 @endsection
