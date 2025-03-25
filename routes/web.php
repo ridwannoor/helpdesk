@@ -12,15 +12,15 @@
 */
 
 // Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
-Route::post('/vendor/forget-password','Auth\ForgotPasswordController@submitForgetPasswordForm')->name('forget.password.post'); 
+Route::post('/vendor/forget-password','Auth\ForgotPasswordController@submitForgetPasswordForm')->name('forget.password.post');
 Route::get('reset-password/{token}', 'Auth\ForgotPasswordController@showResetPasswordForm')->name('reset.password.get');
 Route::post('reset-password', 'Auth\ForgotPasswordController@submitResetPasswordForm')->name('reset.password.post');
 
-Route::get('account/verify/{token}', 'Auth\VendorAuthController@verifyAccount')->name('vendor.verify'); 
-Route::post('/vendor/profile/lupaverifikasi', 'Back\ProfileController@lupaverifikasi')->name('vendor.lupaverifikasi'); 
-Route::get('vendor/profile/verify/{token}', 'Back\ProfileController@verifyAccount')->name('vendor.profileverify'); 
-// Route::get('/vendor/profile/lupaverifikasi/{token}', 'Back\ProfileController@submitlupaverifikasi')->name('vendor.submitlupaverifikasi'); 
-// Route::get('dashboard', 'Auth\VendorAuthController@dashboard')->middleware(['auth', 'is_verify_email']); 
+Route::get('account/verify/{token}', 'Auth\VendorAuthController@verifyAccount')->name('vendor.verify');
+Route::post('/vendor/profile/lupaverifikasi', 'Back\ProfileController@lupaverifikasi')->name('vendor.lupaverifikasi');
+Route::get('vendor/profile/verify/{token}', 'Back\ProfileController@verifyAccount')->name('vendor.profileverify');
+// Route::get('/vendor/profile/lupaverifikasi/{token}', 'Back\ProfileController@submitlupaverifikasi')->name('vendor.submitlupaverifikasi');
+// Route::get('dashboard', 'Auth\VendorAuthController@dashboard')->middleware(['auth', 'is_verify_email']);
 
 Route::get('/', 'FrontController@index');
 Route::get('/faq', 'FrontController@faq');
@@ -150,6 +150,14 @@ Route::put('/mydrive/update', 'MydriveController@update')->name('mydrive.update'
 Route::get('/mydrive/destroy/{id}', 'MydriveController@destroy')->name('mydrive.destroy');
 Route::get('/mydrive/download/{id}', 'MydriveController@download')->name('mydrive.download');
 
+//Product Information
+Route::get('/productinformation', 'ProductInformationController@index')->name('productinformation');
+Route::post('/productinformation/store', 'ProductInformationController@store')->name('productinformation.store');
+Route::get('/productinformation/edit/{id}', 'ProductInformationController@edit')->name('productinformation.edit');
+Route::put('/productinformation/update', 'ProductInformationController@update')->name('productinformation.update');
+Route::get('/productinformation/destroy/{id}', 'ProductInformationController@destroy')->name('productinformation.destroy');
+Route::get('/productinformation/download/{id}', 'ProductInformationController@download')->name('productinformation.download');
+
 //Vendor
 Route::get('/vendor', 'VendorController@index')->name('vendorindex');
 Route::get('/vendor/all', 'VendorController@indexall')->name('vendorindexall');
@@ -199,7 +207,7 @@ Route::get('/notadinas/progress', 'NotadinasController@progress')->name('notadin
 Route::get('/notadinas/done', 'NotadinasController@done')->name('notadinas.done');
 Route::get('/notadinas/revisi', 'NotadinasController@revisi')->name('notadinas.revisi');
 
-//Nota Dinas
+//Minutes of Meeting
 Route::get('/mom', 'MomController@index')->name('mom');
 Route::get('/mom/create', 'MomController@create')->name('mom.create');
 Route::post('/mom/store', 'MomController@store')->name('mom.store');
@@ -333,7 +341,7 @@ Route::get('/preference', 'PreferenceController@index')->name('preference');
 Route::get('/preference/edit/{id}', 'PreferenceController@edit')->name('preferenceedit');
 Route::put('/preference/update', 'PreferenceController@update')->name('preferenceupdate');
 
-//Slider 
+//Slider
 Route::post('/slider/store', 'PreferenceController@storeslider')->name('preference.storeslider');
 Route::put('/slider/update', 'PreferenceController@updateslider')->name('preference.updateslider');
 Route::get('/slider/destroy/{id}', 'PreferenceController@destroyslider')->name('preference.destroyslider');
