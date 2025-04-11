@@ -33,23 +33,23 @@ class DeliveryOrderController extends Controller
         $this->middleware('auth');
     }
 
-   
+
 
     public function index(Request $request)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();  
+        $users = Auth::user()->userdetails()->with('menu')->get();
 	    $menu = Menu::where('link', '/do')->first();
-        $crud = $users->where('menu_id', $menu->id)->first(); 
+        $crud = $users->where('menu_id', $menu->id)->first();
         $does = Doheader::orderBy('no_do', 'DESC')->get();
         $judul = 'Delivery Order';
-        return view('transaksi.deliveryorder.index', compact('judul','does','users','pref','crud')); 
+        return view('transaksi.deliveryorder.index', compact('judul','does','users','pref','crud'));
     }
 
     public function create()
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
       //  $parent = $users->menu->where(['parentmenu' => 0])->get();
         $now = \Carbon\Carbon::now();
         $noUrutAkhir = $this->GenerateNumber();
@@ -58,7 +58,7 @@ class DeliveryOrderController extends Controller
         $hargabarangs = Hargabarang::orderBy('nama_brg', 'ASC')->get();
         $preferences = Preference::all();
         $judul = 'Add Delivery Order';
-        return view('transaksi.deliveryorder.add', compact('judul', 'preferences', 'hargabarangs', 'noUrutAkhir','lokasis','users','now', 'vendors','pref')); 
+        return view('transaksi.deliveryorder.add', compact('judul', 'preferences', 'hargabarangs', 'noUrutAkhir','lokasis','users','now', 'vendors','pref'));
     }
 
     /**
@@ -69,7 +69,7 @@ class DeliveryOrderController extends Controller
      */
     public function store(Request $request)
     {
-     
+
         $doheaders = new Doheader();
         $doheaders->no_do = $request->no_do;
         $doheaders->tanggal = date('Y-m-d', strtotime($request->tanggal));
@@ -114,26 +114,26 @@ class DeliveryOrderController extends Controller
         // });
 
         return redirect('/do')->with('success','data berhasil disimpan');
-        
-     
-    } 
-    
+
+
+    }
+
     // public function kirim()
     // {
 
-    //     $email =  
+    //     $email =
     // }
 
     public function publish($id)
-    {       
+    {
         $doheaders = Doheader::find($id);
         // dd($doheaders);
         $doheaders->is_published = !$doheaders->is_published;
-        $doheaders->save();  
+        $doheaders->save();
 
+        $do = [];
         foreach ($doheaders->lokasi->lokasimail as $key => $value) {
             $do[] = $value->email;
-           
         }
 
         $data = [
@@ -145,7 +145,7 @@ class DeliveryOrderController extends Controller
         if ($do) {
             $sendmail = Mail::to($do)->send(new Domail($data)) ;
         }
-           
+
             // dd($do);
 
         if (Mail::failures()) {
@@ -156,17 +156,17 @@ class DeliveryOrderController extends Controller
              return redirect('/do')->with('success', 'Berhasil dipublish dan Sukses Mengirim Email');
             // return response()->success('Great! Successfully send in your mail');
           }
-        
-        
-     
+
+
+
     //    return redirect('/do')->with('success', 'Berhasil dipublish');
     }
 
     // public function publish1($id)
-    // {       
+    // {
     //     $doheaders = Doheader::find($id);
-        
-       
+
+
     // }
 
     /**
@@ -178,7 +178,7 @@ class DeliveryOrderController extends Controller
     public function show($id)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
      //   $parent = $users->menu->where(['parentmenu' => 0])->get();
         $judul = 'Show Delivery Order';
         // $preferences = Preference::first();
@@ -191,7 +191,7 @@ class DeliveryOrderController extends Controller
         // $detail = Dodetail::where('doheader_id',$bapm)->first();
     //    dd($bapm,$detail);
         return view('transaksi.deliveryorder.show', compact('judul','detail', 'bapm', 'detailfile', 'hargabarangs', 'users','pref'));
-        
+
     }
 
     public function cetak($id)
@@ -226,7 +226,7 @@ class DeliveryOrderController extends Controller
     public function edit($id)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
       //  $parent = $users->menu->where(['parentmenu' => 0])->get();
         $judul = 'Edit Delivery Order';
         $bapm = Doheader::find($id);
@@ -235,7 +235,7 @@ class DeliveryOrderController extends Controller
         $lokasis = Lokasi::all();
         $preferences = Preference::all();
         $hargabarangs = Hargabarang::orderBy('nama_brg', 'ASC')->get();
-       
+
         // $preferences = Preference::all();
         // dd($bapm,$detail);
         // dd($vendors);
@@ -246,7 +246,7 @@ class DeliveryOrderController extends Controller
     public function track($id)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
       //  $parent = $users->menu->where(['parentmenu' => 0])->get();
         $judul = 'Track Delivery Order';
         $bapm = Doheader::find($id);
@@ -254,7 +254,7 @@ class DeliveryOrderController extends Controller
         $vendor = Vendor::all();
         $lokasis = Lokasi::all();
 
-       
+
         // $preferences = Preference::all();
         // dd($bapm,$detail);
         // dd($vendors);
@@ -267,18 +267,18 @@ class DeliveryOrderController extends Controller
         $doheaders = Doheader::where('id','=', $request->id)->first();
         // $doheaders->no_do = $request->no_do;
         $doheaders->tanggal_sampai = date('Y-m-d', strtotime($request->tanggal_sampai));
-        $doheaders->ket_pengiriman = $request->ket_pengiriman;       
+        $doheaders->ket_pengiriman = $request->ket_pengiriman;
         $doheaders->save();
-        
+
         if ($doheaders) {
             if($request->hasfile('filename'))
          {
             foreach ($request->filename as $file) {
                 // $name = $file->getClientOriginalName();
-                // $filename = $request->id.$name; 
+                // $filename = $request->id.$name;
                 // $file = $request->file('image');
                 $extension = $file->getClientOriginalExtension();
-                $filename = 'DO_'. date('YmdHis').".".$extension; 
+                $filename = 'DO_'. date('YmdHis').".".$extension;
                 $tujuan_upload = 'data_file/pdf';
                 $file->move($tujuan_upload,$filename);
 
@@ -292,8 +292,8 @@ class DeliveryOrderController extends Controller
     }
     \LogActivity::addToLog($doheaders->no_do);
         return redirect('/do')->with('success','data berhasil disimpan');
-        
-      
+
+
     }
 
     /**
@@ -317,15 +317,15 @@ class DeliveryOrderController extends Controller
         $doheaders->ref_po = $request->ref_po;
         $doheaders->tgl_mulai = date('Y-m-d', strtotime($request->tgl_mulai));
         $doheaders->tgl_akhir = date('Y-m-d', strtotime($request->tgl_akhir));
-        $doheaders->tgl_pengiriman = date('Y-m-d', strtotime($request->tgl_pengiriman));        
+        $doheaders->tgl_pengiriman = date('Y-m-d', strtotime($request->tgl_pengiriman));
         $doheaders->save();
-        
+
         $id = $request->id;
-        $dodet = $doheaders::with(['dodetails', 'dofiles'])->find($id);        
+        $dodet = $doheaders::with(['dodetails', 'dofiles'])->find($id);
         $dodet->update($request->toArray());
         $dodet->dodetails()->delete();
         $dodet->dofiles()->delete();
-        
+
         if ($doheaders) {
             foreach ($request->hargabarang_id as $key => $v) {
                 $data = array(
@@ -345,22 +345,22 @@ class DeliveryOrderController extends Controller
                 // // $brgs['harga_lama'] =  $request->harga[$key] ;
                 // // $brgs['harga'] =  $request->harga[$key] ;
                 // // $data2 = array(
-                // //     $brgs->qty => $brgs->qty + $request->qty[$key] 
+                // //     $brgs->qty => $brgs->qty + $request->qty[$key]
                 // // );
                 // $brgs->save();
 
-            }    
+            }
             if($request->hasfile('filename'))
          {
             foreach ($request->filename as $file) {
-                
+
                 // $file = $request->file('filename');
                 // $ext = $file->getClientOriginalExtension();
-                // $filename = $request->id.time().".".$ext; 
+                // $filename = $request->id.time().".".$ext;
                 $extension = $file->getClientOriginalExtension();
-                $filename = 'DO_'. date('YmdHis').".".$extension; 
+                $filename = 'DO_'. date('YmdHis').".".$extension;
                 // $name = $file->getClientOriginalName();
-                // $filename = $request->id.$name; 
+                // $filename = $request->id.$name;
                 $tujuan_upload = 'data_file/pdf';
                 $file->move($tujuan_upload,$filename);
 
@@ -375,8 +375,8 @@ class DeliveryOrderController extends Controller
 
         \LogActivity::addToLog($doheaders->no_do);
         return redirect('/do')->with('success','data berhasil disimpan');
-        
-      
+
+
     }
 
     /**
@@ -418,7 +418,7 @@ class DeliveryOrderController extends Controller
         else {
             $noUrutAkhir = sprintf("%03s", $no). '/' . $AWAL .'/' . $bulanRomawi[date('n')] .'/' . date('Y');
         }
-        
+
         return $noUrutAkhir;
     }
 
