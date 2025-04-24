@@ -36,14 +36,14 @@
     <div class="m-grid__item m-grid__item--fluid m-grid  m-error-6" style="background-image: url(assets/app/media/img/error/bg6.jpg);">
         <div class="m-error_container">
             <div class="m-error_subtitle m--font-light">
-                <h1>Oops...</h1>		 
-            </div> 		 
+                <h1>Oops...</h1>
+            </div>
             <p class="m-error_description m--font-light">
                 Looks like something went wrong.<br>
-                We're working on it			 
-            </p>		 
-        </div>	 
-    </div> 
+                We're working on it
+            </p>
+        </div>
+    </div>
     @else
 
     <div class="row">
@@ -75,7 +75,7 @@
                                         <i class="fa fa-list" aria-hidden="true"></i> &nbsp; Open
                                     </h4><br>
                                     <span class="m-widget24__stats m--font-success">
-                                      <a href="/notadinas/open"> {{ $nodins->where('status', 'open')->count() }}</a> 
+                                      <a href="/notadinas/open"> {{ $nodins->where('status', 'open')->count() }}</a>
                                     </span>
                                     <div class="m--space-10"></div>
                                     <div class="progress m-progress--sm">
@@ -213,8 +213,8 @@
                     </li>
                     <li class="m-portlet__nav-item">
                         <!-- Button trigger modal -->
-                    
-                        
+
+
                         <!-- Modal -->
                         <div class="modal fade" id="NodinMdl" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -244,11 +244,12 @@
                                             <button type="submit" class="btn btn-primary">Save</button>
                                         </div>
                                     </form>
-                                    
+
                                 </div>
                             </div>
                         </div>
                         <a href="#" target="__blank" data-toggle="modal" data-target="#NodinMdl" class="btn btn-danger m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air" rel="noopener noreferrer"> <i class="fa fa-file-pdf"></i>&nbsp; Export PDF</a>
+                        <a href="/notadinas/exportXLS" class="btn btn-success m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air"><i class="fa fa-file-excel"></i>&nbsp; Export XLS</a>
                         </span></a>
                     </li>
 
@@ -298,17 +299,17 @@
                                    <a href="/notadinas/show/{{ $item->id }}"> {{ $item->no_nodin }}</a> <br>
                                     {{ $item->nama_pek }}
                                 </div>
-                              
+
                             </div>
-                        
-                        
+
+
                         </td>
                         <td>{{ $item->divisi->detail }}</td>
                         <td>{{ $item->unit_st }}</td>
-                        <td> 
+                        <td>
                             @foreach ($item->lokasi as $lok)
                                 <span class="m-badge m-badge--metal m-badge--wide">{{ $lok->kode }}</span>
-                            @endforeach  
+                            @endforeach
                         </td>
                         <td>
                             @if ($item->status == "open")
@@ -335,23 +336,23 @@
                                 <div class="m-dropdown__wrapper">
                                         <span class="m-dropdown__arrow m-dropdown__arrow--left m-dropdown__arrow--adjust"></span>
                                         <div class="m-dropdown__inner">
-                                            <div class="m-dropdown__body">              
+                                            <div class="m-dropdown__body">
                                                 <div class="m-dropdown__content">
                                                     <ul class="m-nav">
-                                                        {{-- @if ($crud->publish)           
+                                                        {{-- @if ($crud->publish)
                                                         <li class="m-nav__item">
                                                             <a href="/notadinas/publish/{{$item->id}}" class="m-nav__link"><i class="m-nav__link-icon flaticon-multimedia-5"></i>  <span class="m-nav__link-text">Publish</span></a>
-                                                        </li>             
+                                                        </li>
                                                         @endif               --}}
-                                                        @if ($crud->cetak)                       
+                                                        @if ($crud->cetak)
                                                         <li class="m-nav__item">
                                                             <a href="/notadinas/cetak/{{$item->id}}" class="m-nav__link"><i class="m-nav__link-icon flaticon-technology"></i>  <span class="m-nav__link-text">Print</span></a>
-                                                        </li>  
-                                                        @endif              
+                                                        </li>
+                                                        @endif
                                                         {{-- @if ($crud->upload) --}}
                                                         <li class="m-nav__item">
                                                             <a href="/notadinas/upload/{{$item->id}}" class="m-nav__link"><i class="m-nav__link-icon flaticon-upload"></i>  <span class="m-nav__link-text">Upload File</span></a>
-                                                        </li>                                                          
+                                                        </li>
                                                         {{-- @endif               --}}
                                                         @if ($crud->edit)
                                                             @if ($item->status == 'done')
@@ -359,9 +360,9 @@
                                                             @else
                                                             <li class="m-nav__item">
                                                                 <a href="/notadinas/edit/{{$item->id}}" class="m-nav__link"><i class="m-nav__link-icon flaticon-edit"></i>  <span class="m-nav__link-text">Edit</span></a>
-                                                            </li> 
-                                                            @endif                                                      
-                                                        @endif              
+                                                            </li>
+                                                            @endif
+                                                        @endif
                                                         @if ($crud->destroy)
                                                             @if ($item->status == 'done')
                                                                 <span></span>
@@ -369,8 +370,8 @@
                                                                 <li class="m-nav__item">
                                                                     <a href="/notadinas/destroy/{{$item->id}}" class="m-nav__link"><i class="m-nav__link-icon flaticon-delete"></i>  <span class="m-nav__link-text">Hapus</span></a>
                                                                 </li>
-                                                            @endif  
-                                                        @endif                                     
+                                                            @endif
+                                                        @endif
                                                     </ul>
                                                 </div>
                                             </div>
