@@ -200,6 +200,7 @@ Route::get('/notadinas/upload/{id}', 'NotadinasController@upload')->name('notadi
 Route::put('/notadinas/upload/simpan', 'NotadinasController@uploadsimpan')->name('notadinas.uploadsimpan');
 Route::get('/notadinas/destroyfile/{id}', 'NotadinasController@destroyfile')->name('notadinas.destroyfile');
 Route::get('/notadinas/exportPDF', 'NotadinasController@exportPDF')->name('notadinas.export');
+Route::get('/notadinas/exportXLS', 'NotadinasController@exportXLS')->name('notadinas.export');
 Route::get('/notadinas/pending', 'NotadinasController@pending')->name('notadinas.pending');
 Route::get('/notadinas/open', 'NotadinasController@open')->name('notadinas.open');
 Route::get('/notadinas/cancel', 'NotadinasController@cancel')->name('notadinas.cancel');
