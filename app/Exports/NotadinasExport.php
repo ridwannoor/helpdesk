@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Notaheader;
+use App\Models\Surat\Notaheader;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
