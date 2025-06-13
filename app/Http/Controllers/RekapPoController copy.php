@@ -32,7 +32,7 @@ class RekapPoController extends Controller
     }
 
     public function GenerateNumber(){
-        $AWAL = 'APP-PBJ';
+        $AWAL = 'IASP-PBJ';
         // karna array dimulai dari 0 maka kita tambah di awal data kosong
         // bisa juga mulai dari "1"=>"I"
         $bulanRomawi = array("", "I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
@@ -44,16 +44,16 @@ class RekapPoController extends Controller
         else {
             $noUrutAkhir = sprintf("%03s", $no). '/' . $AWAL .'/' . $bulanRomawi[date('n')] .'/' . date('Y');
         }
-        
+
         return $noUrutAkhir;
     }
 
     public function index()
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();  
+        $users = Auth::user()->userdetails()->with('menu')->get();
 	    $menu = Menu::where('link', '/rekappo')->first();
-        $crud = $users->where('menu_id', $menu->id)->first(); 
+        $crud = $users->where('menu_id', $menu->id)->first();
       //  $parent = $users->menu->where(['parentmenu' => 0])->get();
         $lokasis = Lokasi::orderBy('kode', 'ASC')->get();
         $rekappos = Rekappo::orderBy('created_at', 'DESC')->get();
@@ -69,16 +69,16 @@ class RekapPoController extends Controller
     public function create(Request $request)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
       //  $parent = $users->menu->where(['parentmenu' => 0])->get();
-        $noUrutAkhir = $this->GenerateNumber(); 
+        $noUrutAkhir = $this->GenerateNumber();
         $rekappos = Rekappo::all();
         $lokasis = Lokasi::orderBy('kode', 'ASC')->get();
         $preferences = Preference::all();
         $bods = Bod::all();
         $barangs = Hargabarang::orderBy('nama_brg', 'ASC')->get();
         $vendors = Vendor::orderBy('namaperusahaan', 'ASC')->get();
-        // $temporary = 
+        // $temporary =
         $judul = 'Rekap PO';
         return view('transaksi.rekappo.add', compact('users','judul', 'bods', 'noUrutAkhir', 'barangs', 'rekappos','pref','preferences','lokasis','vendors'));
     }
@@ -101,9 +101,9 @@ class RekapPoController extends Controller
         // $poheaders = Rekappo::where('no_po',$name)->first();
 
         // if ($poheaders) {
-        //     return redirect()->back()->with('message', 'Data Sudah Ada ..!!');            
+        //     return redirect()->back()->with('message', 'Data Sudah Ada ..!!');
         // }
-        // else {          
+        // else {
             $pos = new Rekappo();
             $pos->no_po = $request->no_po;
             $pos->no_kontrak = $request->no_kontrak;
@@ -117,9 +117,9 @@ class RekapPoController extends Controller
             // $pos->pajak = $request->has('pajak');
             $pos->nama_pekerjaan = $request->nama_pekerjaan;
             $pos->vendor_id = $request->vendor_id;
-            $pos->lokasi_id = $request->lokasi_id;            
+            $pos->lokasi_id = $request->lokasi_id;
             $pos->preference_id = $request->preference_id;
-            $pos->bod_id = $request->bod_id;   
+            $pos->bod_id = $request->bod_id;
             $pos->hargapabrik = $request->hargapabrik;
             $pos->deskripsi = $request->deskripsi;
             $pos->suratpenawaran = $request->suratpenawaran;
@@ -132,11 +132,11 @@ class RekapPoController extends Controller
             $pos->save();
 
             // $id = $request->id;
-            // $dodet = $pos::with(['podetails', 'pofiles'])->find($id);        
+            // $dodet = $pos::with(['podetails', 'pofiles'])->find($id);
             // $dodet->update($request->toArray());
             // $dodet->podetails()->delete();
             // $dodet->pofiles()->delete();
-            
+
             if ($pos) {
                 foreach ($request->material as $key => $v) {
                     $data = array(
@@ -154,7 +154,7 @@ class RekapPoController extends Controller
             // {
             //    foreach ($request->filepdf as $file) {
             //     $name = $file->getClientOriginalName();
-            //     $filename = $request->id.$name; 
+            //     $filename = $request->id.$name;
             //     $tujuan_upload = 'data_file/pdf';
             //     $file->move($tujuan_upload,$filename);
             //    $data = array(
@@ -166,14 +166,14 @@ class RekapPoController extends Controller
             // }
 
             // $id = $request->no_po;
-            // $dodet = Poheader::with('potemps')->find($id);        
+            // $dodet = Poheader::with('potemps')->find($id);
             // // $dodet->update($request->toArray());
             // $dodet->potemps()->delete();
             // $dodet->delete($dodet);
         // }
             return redirect('/rekappo')->with('success', 'Data Berhasil disimpan');
-        
-    } 
+
+    }
 
     public function store1(Request $request)
     {
@@ -181,9 +181,9 @@ class RekapPoController extends Controller
         // $poheaders = Poheader::where('no_po',$name)->first();
 
         // if ($poheaders) {
-        //     return redirect()->back()->with('message', 'Data Sudah Ada ..!!');            
+        //     return redirect()->back()->with('message', 'Data Sudah Ada ..!!');
         // }
-        // else {          
+        // else {
             $pos = new Poheader();
             $pos->no_po = $request->no_po;
             $pos->no_kontrak = $request->no_kontrak;
@@ -198,7 +198,7 @@ class RekapPoController extends Controller
             // $pos->pajak = $request->has('pajak');
             $pos->nama_pekerjaan = $request->nama_pekerjaan;
             $pos->vendor_id = $request->vendor_id;
-            $pos->lokasi_id = $request->lokasi_id;            
+            $pos->lokasi_id = $request->lokasi_id;
             $pos->preference_id = $request->preference_id;
             $pos->bod_id = $request->bod_id;
             $pos->hargapabrik = $request->hargapabrik;
@@ -212,13 +212,13 @@ class RekapPoController extends Controller
             $pos->total = $request->total;
             // dd($pos->cara_bayar);
             $pos->save();
-            
+
                 // $id = $request->id;
-                // $dodet = $pos::with(['potemps'])->find($id);        
+                // $dodet = $pos::with(['potemps'])->find($id);
             // $dodet->update($request->toArray());
             // $dodet->potemps()->delete();
             // $dodet->pofiles()->delete();
-            
+
             if ($pos) {
                 foreach ($request->material as $key => $v) {
                     $data = array(
@@ -236,7 +236,7 @@ class RekapPoController extends Controller
             // {
             //    foreach ($request->filepdf as $file) {
             //     $name = $file->getClientOriginalName();
-            //     $filename = $request->id.$name; 
+            //     $filename = $request->id.$name;
             //     $tujuan_upload = 'data_file/pdf';
             //     $file->move($tujuan_upload,$filename);
             //    $data = array(
@@ -248,48 +248,48 @@ class RekapPoController extends Controller
             // }
 
             return redirect()->route('rekappodetail', ['id' => $pos->id]);
-    }      
+    }
 
     public function detail($id)
     {
         $pref = Preference::where('id',1)->get();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $rekappos = Poheader::find($id);
         $lokasis = Lokasi::orderBy('kode', 'ASC')->get();
         $preferences = Preference::all();
         $bods = Bod::all();
         $vendors = Vendor::orderBy('namaperusahaan', 'ASC')->get();
-        // $temporary = 
+        // $temporary =
         $judul = 'Purchase Order';
         return view('transaksi.rekappo.adddetail', compact('users','judul', 'bods',  'rekappos','pref','preferences','lokasis','vendors'));
-    
+
     }
 
     public function editdetail($id)
     {
         $pref = Preference::where('id',1)->get();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $rekappos = Rekappo::find($id);
         $lokasis = Lokasi::orderBy('kode', 'ASC')->get();
         $preferences = Preference::all();
         $bods = Bod::all();
         $vendors = Vendor::orderBy('namaperusahaan', 'ASC')->get();
-        // $temporary = 
+        // $temporary =
         $judul = 'Purchase Order';
         return view('transaksi.rekappo.editdetail', compact('users','judul', 'bods', 'rekappos','pref','preferences','lokasis','vendors'));
-    
+
     }
 
     public function cetak($id)
     {
         $pref = Preference::where('id',1)->get();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $rekappos = Rekappo::find($id);
         $lokasis = Lokasi::orderBy('kode', 'ASC')->get();
         $preferences = Preference::all();
         $bods = Bod::all();
         $vendors = Vendor::orderBy('namaperusahaan', 'ASC')->get();
-        // $temporary = 
+        // $temporary =
         $judul = 'Purchase Order';
         $pdf = PDF::loadView('transaksi.rekappo.cetak', compact('users','judul', 'bods', 'rekappos','pref','preferences','lokasis','vendors'));
         return $pdf->stream();
@@ -298,7 +298,7 @@ class RekapPoController extends Controller
     public function show($id)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
       //  $parent = $users->menu->where(['parentmenu' => 0])->get();
         $judul = 'Show PO';
         $judul1 = 'Purchase Order';
@@ -316,8 +316,8 @@ class RekapPoController extends Controller
     public function edit($id)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
-      //  $parent = $users->menu->where(['parentmenu' => 0])->get();      
+        $users = Auth::user()->userdetails()->with('menu')->get();
+      //  $parent = $users->menu->where(['parentmenu' => 0])->get();
         $pos = Rekappo::find($id);
         $bods = Bod::all();
         $judul = 'Edit Rekap PO';
@@ -330,8 +330,8 @@ class RekapPoController extends Controller
     public function upload($id)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
-      //  $parent = $users->menu->where(['parentmenu' => 0])->get();      
+        $users = Auth::user()->userdetails()->with('menu')->get();
+      //  $parent = $users->menu->where(['parentmenu' => 0])->get();
         $pos = Rekappo::find($id);
         $bods = Bod::all();
         $judul = 'Upload File Rekap PO';
@@ -345,13 +345,13 @@ class RekapPoController extends Controller
         $pos = Rekappo::where('id','=', $request->id)->first();
         $pos->no_po = $request->no_po;
         $pos->save();
-        
-   
+
+
         if($request->hasfile('filepdf'))
         {
            foreach ($request->filepdf as $file) {
             $name = $file->getClientOriginalName();
-            $filename = $request->id.$name; 
+            $filename = $request->id.$name;
             $tujuan_upload = 'data_file/pdf';
             $file->move($tujuan_upload,$filename);
            $data = array(
@@ -366,10 +366,10 @@ class RekapPoController extends Controller
     }
 
     public function publish($id)
-    {       
+    {
         $rekapp = Rekappo::find($id);
         $rekapp->is_published = !$rekapp->is_published;
-        $rekapp->save();  
+        $rekapp->save();
         return redirect('/rekappo');
     }
 
@@ -380,17 +380,17 @@ class RekapPoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
-     
+
+
     public function update(Request $request)
     {
         // $name = $request->no_po;
         // $poheaders = Poheader::where('no_po',$name)->first();
 
         // if ($poheaders) {
-        //     return redirect()->back()->with('message', 'Data Sudah Ada ..!!');            
+        //     return redirect()->back()->with('message', 'Data Sudah Ada ..!!');
         // }
-        // else {          
+        // else {
             $pos = Rekappo::where('id','=', $request->id)->first();
             $pos->no_po = $request->no_po;
             $pos->no_kontrak = $request->no_kontrak;
@@ -404,7 +404,7 @@ class RekapPoController extends Controller
             // $pos->pajak = $request->has('pajak');
             $pos->nama_pekerjaan = $request->nama_pekerjaan;
             $pos->vendor_id = $request->vendor_id;
-            $pos->lokasi_id = $request->lokasi_id;            
+            $pos->lokasi_id = $request->lokasi_id;
             $pos->preference_id = $request->preference_id;
             $pos->bod_id = $request->bod_id;
             $pos->hargapabrik = $request->hargapabrik;
@@ -418,13 +418,13 @@ class RekapPoController extends Controller
             $pos->total = $request->total;
             // dd($pos);
             $pos->save();
-            
+
             $id = $request->id;
-            $dodet = $pos::with(['podetails', 'pofiles'])->find($id);        
+            $dodet = $pos::with(['podetails', 'pofiles'])->find($id);
             $dodet->update($request->toArray());
             $dodet->podetails()->delete();
             $dodet->pofiles()->delete();
-            
+
             if ($pos) {
                 foreach ($request->material as $key => $v) {
                     $data = array(
@@ -442,7 +442,7 @@ class RekapPoController extends Controller
             // {
             //    foreach ($request->filepdf as $file) {
             //     $name = $file->getClientOriginalName();
-            //     $filename = $request->id.$name; 
+            //     $filename = $request->id.$name;
             //     $tujuan_upload = 'data_file/pdf';
             //     $file->move($tujuan_upload,$filename);
             //    $data = array(
@@ -463,9 +463,9 @@ class RekapPoController extends Controller
         // $poheaders = Poheader::where('no_po',$name)->first();
 
         // if ($poheaders) {
-        //     return redirect()->back()->with('message', 'Data Sudah Ada ..!!');            
+        //     return redirect()->back()->with('message', 'Data Sudah Ada ..!!');
         // }
-        // else {          
+        // else {
             $pos = Rekappo::where('id','=', $request->id)->first();
             $pos->no_po = $request->no_po;
             $pos->no_kontrak = $request->no_kontrak;
@@ -479,7 +479,7 @@ class RekapPoController extends Controller
             // $pos->pajak = $request->has('pajak');
             $pos->nama_pekerjaan = $request->nama_pekerjaan;
             $pos->vendor_id = $request->vendor_id;
-            $pos->lokasi_id = $request->lokasi_id;            
+            $pos->lokasi_id = $request->lokasi_id;
             $pos->preference_id = $request->preference_id;
             $pos->bod_id = $request->bod_id;
             $pos->hargapabrik = $request->hargapabrik;
@@ -495,11 +495,11 @@ class RekapPoController extends Controller
             $pos->save();
 
             $id = $request->id;
-            $dodet = $pos::with(['podetails', 'pofiles'])->find($id);        
+            $dodet = $pos::with(['podetails', 'pofiles'])->find($id);
             $dodet->update($request->toArray());
             $dodet->podetails()->delete();
             $dodet->pofiles()->delete();
-            
+
             if ($pos) {
                 foreach ($request->material as $key => $v) {
                     $data = array(
@@ -517,7 +517,7 @@ class RekapPoController extends Controller
             // {
             //    foreach ($request->filepdf as $file) {
             //     $name = $file->getClientOriginalName();
-            //     $filename = $request->id.$name; 
+            //     $filename = $request->id.$name;
             //     $tujuan_upload = 'data_file/pdf';
             //     $file->move($tujuan_upload,$filename);
             //    $data = array(
@@ -564,8 +564,8 @@ class RekapPoController extends Controller
     }
 
     public function exportXLS(Request $request) {
-    
+
         return Excel::download(new PoExport($request), 'po-collection.xlsx');
-       
+
     }
 }

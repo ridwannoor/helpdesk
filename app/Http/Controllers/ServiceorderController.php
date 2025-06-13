@@ -35,7 +35,7 @@ class ServiceorderController extends Controller
     }
 
     public function GenerateNumber(){
-        $AWAL = 'APP-PBJ';
+        $AWAL = 'IASP-PBJ';
         // karna array dimulai dari 0 maka kita tambah di awal data kosong
         // bisa juga mulai dari "1"=>"I"
         $bulanRomawi = array("", "I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
@@ -47,37 +47,37 @@ class ServiceorderController extends Controller
         else {
             $noUrutAkhir = sprintf("SO.%03s", $no). '/' . $AWAL .'/' . $bulanRomawi[date('n')] .'/' . date('Y');
         }
-        
+
         return $noUrutAkhir;
     }
-    
+
     public function index(Request $request)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();  
+        $users = Auth::user()->userdetails()->with('menu')->get();
 	    $menu = Menu::where('link', '/so')->first();
-        $crud = $users->where('menu_id', $menu->id)->first(); 
+        $crud = $users->where('menu_id', $menu->id)->first();
         $soes = Serviceorder::orderBy('tanggal', 'DESC')->get();
         $judul = 'Service Order';
-        return view('serviceorder.index', compact('judul','soes','users','pref','crud')); 
+        return view('serviceorder.index', compact('judul','soes','users','pref','crud'));
     }
 
     public function create()
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get(); 
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $now = \Carbon\Carbon::now();
         $noUrutAkhir = $this->GenerateNumber();
         $vendors = Vendor::orderBy('namaperusahaan', 'ASC')->get();
         $lokasis = Lokasi::orderBy('kode', 'ASC')->get();
         $bods = Bod::orderBy('name', 'ASC')->get();
         $judul = 'Add Service Order';
-        return view('serviceorder.add', compact('judul', 'noUrutAkhir','lokasis','users','now', 'bods', 'vendors','pref')); 
+        return view('serviceorder.add', compact('judul', 'noUrutAkhir','lokasis','users','now', 'bods', 'vendors','pref'));
     }
 
     public function store(Request $request)
     {
-     
+
         $serviceorders = new Serviceorder();
         $serviceorders->no_so = $request->no_so;
         $serviceorders->tanggal = date('Y-m-d', strtotime($request->tanggal));
@@ -108,12 +108,12 @@ class ServiceorderController extends Controller
         }
         \LogActivity::addToLog($serviceorders->no_so);
         return redirect('/so')->with('success','data berhasil disimpan');
-    } 
+    }
 
     public function edit($id)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $judul = 'Edit Service Order';
         $serviceorders = Serviceorder::find($id);
         $detail = $serviceorders->sodetails()->first();
@@ -137,15 +137,15 @@ class ServiceorderController extends Controller
         $serviceorders->no_kontrak = $request->no_kontrak;
         $serviceorders->tgl_kontrak = $request->tgl_kontrak;
         $serviceorders->start_date = date('Y-m-d', strtotime($request->start_date));
-        $serviceorders->end_date = date('Y-m-d', strtotime($request->end_date));       
+        $serviceorders->end_date = date('Y-m-d', strtotime($request->end_date));
         $serviceorders->save();
-        
+
         $id = $request->id;
-        $sodet = $serviceorders::with(['sodetails', 'sofiles'])->find($id);        
+        $sodet = $serviceorders::with(['sodetails', 'sofiles'])->find($id);
         $sodet->update($request->toArray());
         $sodet->sodetails()->delete();
         $sodet->sofiles()->delete();
-        
+
         if ($serviceorders) {
             foreach ($request->deskripsi as $key => $v) {
                 $data = array(
@@ -158,15 +158,15 @@ class ServiceorderController extends Controller
                     'catatan'=>$request->catatan [$key],
                 );
                 Sodetail::insert($data);
-            }    
+            }
             if($request->hasfile('filename'))
          {
             foreach ($request->filename as $file) {
                 $file = $request->file('image');
                 $extension = $file->getClientOriginalExtension();
-                $filename = 'SO_'. date('YmdHis').".".$extension; 
+                $filename = 'SO_'. date('YmdHis').".".$extension;
                 // $name = $file->getClientOriginalName();
-                // $filename = $request->id.$name; 
+                // $filename = $request->id.$name;
                 $tujuan_upload = 'data_file/pdf';
                 $file->move($tujuan_upload,$filename);
 
@@ -188,7 +188,7 @@ class ServiceorderController extends Controller
         $data = Serviceorder::find($id);
         $data->sodetails()->delete();
         $data->sofiles()->delete();
-        $data->delete($data); 
+        $data->delete($data);
         \LogActivity::addToLog($data->no_so);
         return redirect()->back()->with('message', 'Data berhasil Dihapus');
     }
@@ -203,31 +203,31 @@ class ServiceorderController extends Controller
     public function show($id)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $judul = 'Show Service Order';
         $serviceorders = Serviceorder::with(['vendor','preference', 'bod'])->find($id);
         $detail = $serviceorders->sodetails()->first();
         $detailfile = $serviceorders->sofiles()->first();
         // $detail = Dodetail::where('doheader_id',$serviceorders)->first();
     //    dd($serviceorders,$detail);
-        return view('serviceorder.show', compact('judul','detail', 'serviceorders', 'detailfile','users','pref'));       
+        return view('serviceorder.show', compact('judul','detail', 'serviceorders', 'detailfile','users','pref'));
     }
 
     public function publish($id)
-    {       
+    {
         $serviceorders = Serviceorder::find($id);
         // dd($serviceorders);
         $serviceorders->is_published = !$serviceorders->is_published;
-        $serviceorders->save();  
-     
+        $serviceorders->save();
+
        return redirect('/so')->with('success', 'Berhasil dipublish');
     }
 
     public function upload($id)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
-      //  $parent = $users->menu->where(['parentmenu' => 0])->get();      
+        $users = Auth::user()->userdetails()->with('menu')->get();
+      //  $parent = $users->menu->where(['parentmenu' => 0])->get();
         $serviceorders = Serviceorder::find($id);
         // $bods = Bod::all();
         $judul = 'Upload File Service Order';
@@ -236,21 +236,21 @@ class ServiceorderController extends Controller
         $vendors = Vendor::orderBy('namaperusahaan', 'ASC')->get();
         return view('serviceorder.upload', compact('serviceorders','judul', 'pref','lokasis','vendors','users', 'preferences'));
     }
-    
+
     public function simpanupload(Request $request){
         $serviceorders = Serviceorder::where('id','=', $request->id)->first();
         $serviceorders->no_so = $request->no_so;
         $serviceorders->save();
-        
-   
+
+
         if($request->hasfile('filename'))
         {
            foreach ($request->filename as $file) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
-            $filename = 'SO_'. date('YmdHis').".".$extension; 
+            $filename = 'SO_'. date('YmdHis').".".$extension;
             // $name = $file->getClientOriginalName();
-            // $filename = $request->id.$name; 
+            // $filename = $request->id.$name;
             $tujuan_upload = 'data_file/pdf';
             $file->move($tujuan_upload,$filename);
            $data = array(
@@ -277,18 +277,18 @@ class ServiceorderController extends Controller
     }
 
     public function exportXLS(Request $request) {
-    
+
         return Excel::download(new SoExport, 'so-collection.xlsx');
-       
+
     }
-  
+
     public function exportPDF(Request $request) {
         $start = date('Y-m-d',strtotime($request->start));
         $end = date('Y-m-d',strtotime($request->end));
         $serviceorders = Serviceorder::whereDate('created_at','>=',$start)->whereDate('created_at','<=',$end)->get();
     	$pdf = PDF::loadview('serviceorder.exportpdf', compact('serviceorders', 'start', 'end'))->setPaper('A4','landscape');
     	return $pdf->stream();
-       
+
     }
 
 }

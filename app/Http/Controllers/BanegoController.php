@@ -38,7 +38,7 @@ class BanegoController extends Controller
 
     public function index()
     {
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $menu = Menu::where('link', '/banego')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
         //  $parent = $users->menu->where(['parentmenu' => 0])->get();
@@ -47,7 +47,7 @@ class BanegoController extends Controller
         $lok = Banego::orderBy('tanggal', 'DESC')->get();
         $divisis = Divisi::all();
         $judul = 'BA Nego';
-        return view('banego.index', compact('judul','pref','users','userbrg','crud', 'lok', 'divisis')); 
+        return view('banego.index', compact('judul','pref','users','userbrg','crud', 'lok', 'divisis'));
     }
 
     /**
@@ -60,7 +60,7 @@ class BanegoController extends Controller
         $lokasis = Lokasi::all();
         $bidoks = Bidok::all();
         $vendors = Vendor::orderBy('namaperusahaan', 'ASC')->get();
-        $users = Auth::user()->userdetails()->with('menu')->get();           
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $noUrutAkhir = $this->GenerateNumber();
        // $parent = $users->menu->where(['parentmenu' => 0])->get();
         $pref = Preference::first();
@@ -68,7 +68,7 @@ class BanegoController extends Controller
         $doks = Dokpekerjaan::orderBy('detail', 'ASC')->get();
         $judul = 'Tambah BA Nego';
         $jams = Jaminan::all();
-        return view('banego.add', compact('judul','bidoks','users','pref','lokasis', 'vendors', 'doks', 'divisis', 'noUrutAkhir', 'jams')); 
+        return view('banego.add', compact('judul','bidoks','users','pref','lokasis', 'vendors', 'doks', 'divisis', 'noUrutAkhir', 'jams'));
     }
 
     /**
@@ -90,7 +90,7 @@ class BanegoController extends Controller
             $dom = new \DomDocument();
             @$dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
             $imageFile = $dom->getElementsByTagName('imageFile');
-      
+
             foreach($imageFile as $item => $image){
                 $data = $img->getAttribute('src');
                 list($type, $data) = explode(';', $data);
@@ -99,18 +99,18 @@ class BanegoController extends Controller
                 $image_name= 'upload_file' . time().$item.'.png';
                 $path = public_path() . $image_name;
                 file_put_contents($path, $imgeData);
-                
+
                 $image->removeAttribute('src');
                 $image->setAttribute('src', $image_name);
              }
-      
+
             $content = $dom->saveHTML();
 
             $content1 = $request->catatan;
             $dom = new \DomDocument();
             @$dom->loadHtml($content1, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
             $imageFile = $dom->getElementsByTagName('imageFile');
-      
+
             foreach($imageFile as $item => $image){
                 $data = $img->getAttribute('src');
                 list($type, $data) = explode(';', $data);
@@ -119,11 +119,11 @@ class BanegoController extends Controller
                 $image_name= 'upload_file' . time().$item.'.png';
                 $path = public_path() . $image_name;
                 file_put_contents($path, $imgeData);
-                
+
                 $image->removeAttribute('src');
                 $image->setAttribute('src', $image_name);
              }
-      
+
             $content1 = $dom->saveHTML();
 
             $banegos = new Banego();
@@ -160,7 +160,7 @@ class BanegoController extends Controller
             \LogActivity::addToLog($banegos->no_ba);
         return redirect('/banego')->with('success', 'Banego Berhasil dibuat');
         }
-        
+
     }
 
     /**
@@ -171,7 +171,7 @@ class BanegoController extends Controller
      */
     public function show($id)
     {
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
         $menu = Menu::where('link', '/banego')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
         //  $parent = $users->menu->where(['parentmenu' => 0])->get();
@@ -182,12 +182,12 @@ class BanegoController extends Controller
         // return;
         $divisis = Divisi::all();
         $judul = 'BA Nego';
-        return view('banego.show', compact('judul','pref','users','userbrg','crud', 'lok', 'divisis')); 
+        return view('banego.show', compact('judul','pref','users','userbrg','crud', 'lok', 'divisis'));
     }
 
     public function cetak($id)
     {
-         $users = Auth::user()->userdetails()->with('menu')->get();   
+         $users = Auth::user()->userdetails()->with('menu')->get();
         $menu = Menu::where('link', '/banego')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
         //  $parent = $users->menu->where(['parentmenu' => 0])->get();
@@ -200,14 +200,14 @@ class BanegoController extends Controller
         $judul = 'BA Nego';
         // $bulan = $this->tanggal_local();
         $pdf = PDF::loadView('banego.cetak',compact('judul','pref','users','userbrg','crud', 'lok', 'divisis'))->setPaper('a4', 'portrait');
-        return $pdf->stream();    
+        return $pdf->stream();
     }
 
     public function upload($id)
     {
         $pref = Preference::first();
-        $users = Auth::user()->userdetails()->with('menu')->get();   
-      //  $parent = $users->menu->where(['parentmenu' => 0])->get();      
+        $users = Auth::user()->userdetails()->with('menu')->get();
+      //  $parent = $users->menu->where(['parentmenu' => 0])->get();
         $banegos = Banego::find($id);
         // $bods = Bod::all();
         $judul = 'Upload File BA Nego';
@@ -216,20 +216,20 @@ class BanegoController extends Controller
         $vendors = Vendor::orderBy('namaperusahaan', 'ASC')->get();
         return view('banego.upload', compact('banegos','judul', 'pref','lokasis','vendors','users', 'preferences'));
     }
-    
+
     public function baupload(Request $request){
         $banegos = Banego::where('id','=', $request->id)->first();
         $banegos->no_ba = $request->no_ba;
         $banegos->save();
-        
-   
+
+
         if($request->hasfile('filepdf'))
         {
            foreach ($request->filepdf as $file) {
             $name = $file->getClientOriginalName();
-            // $filename = $request->id.$name; 
+            // $filename = $request->id.$name;
             $extension = $file->getClientOriginalExtension();
-            $filename = 'BAN_'. date('YmdHis').".".$extension; 
+            $filename = 'BAN_'. date('YmdHis').".".$extension;
             $tujuan_upload = 'data_file/pdf';
             $file->move($tujuan_upload,$filename);
            $data = array(
@@ -252,14 +252,14 @@ class BanegoController extends Controller
      */
     public function edit($id)
     {
-        $users = Auth::user()->userdetails()->with('menu')->get();   
+        $users = Auth::user()->userdetails()->with('menu')->get();
         // $parent = $users->menu->where(['parentmenu' => 0])->get();
         $pref = Preference::first();
         $vendors = Vendor::orderBy('namaperusahaan', 'ASC')->get();
          $judul = 'Edit Banego';
          $lok = Banego::find($id);
-         $doks = Dokpekerjaan::pluck('kode', 'id')->all();    
-         $divisis = Divisi::pluck('kode', 'id')->all();    
+         $doks = Dokpekerjaan::pluck('kode', 'id')->all();
+         $divisis = Divisi::pluck('kode', 'id')->all();
          $jams = Jaminan::all();
          $bidoks = Bidok::all();
          return view('banego.edit', compact('lok', 'judul','users','pref', 'doks', 'vendors', 'divisis', 'jams', 'bidoks'));
@@ -279,7 +279,7 @@ class BanegoController extends Controller
         $dom = new \DomDocument();
         @$dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $imageFile = $dom->getElementsByTagName('imageFile');
-  
+
         foreach($imageFile as $item => $image){
             $data = $img->getAttribute('src');
             list($type, $data) = explode(';', $data);
@@ -288,18 +288,18 @@ class BanegoController extends Controller
             $image_name= 'upload_file' . time().$item.'.png';
             $path = public_path() . $image_name;
             file_put_contents($path, $imgeData);
-            
+
             $image->removeAttribute('src');
             $image->setAttribute('src', $image_name);
          }
-  
+
         $content = $dom->saveHTML();
 
         $content1 = $request->catatan;
         $dom1 = new \DomDocument();
         @$dom1->loadHtml($content1, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $imageFile = $dom1->getElementsByTagName('imageFile');
-  
+
         foreach($imageFile as $item => $image){
             $data = $img->getAttribute('src');
             list($type, $data) = explode(';', $data);
@@ -308,11 +308,11 @@ class BanegoController extends Controller
             $image_name= 'upload_file' . time().$item.'.png';
             $path = public_path() . $image_name;
             file_put_contents($path, $imgeData);
-            
+
             $image->removeAttribute('src');
             $image->setAttribute('src', $image_name);
          }
-  
+
         $content1 = $dom1->saveHTML();
 
             $banegos = Banego::where('id', $request->id)->first();
@@ -358,10 +358,10 @@ class BanegoController extends Controller
     }
 
     public function publish($id)
-    {       
+    {
         $banegos = Banego::find($id);
         $banegos->is_published = !$banegos->is_published;
-        $banegos->save();  
+        $banegos->save();
         return redirect('/banego');
     }
 
@@ -386,8 +386,8 @@ class BanegoController extends Controller
         return redirect()->back()->with('message', 'Data berhasil Dihapus');
     }
 
-    public function exportXLS() {    
-        return Excel::download(new BanegoExport, 'banego-collection.xlsx');       
+    public function exportXLS() {
+        return Excel::download(new BanegoExport, 'banego-collection.xlsx');
     }
 
     public function exportPDF(Request $request) {
@@ -396,12 +396,12 @@ class BanegoController extends Controller
         $banegos = Banego::whereDate('created_at','>=',$start)->whereDate('created_at','<=',$end)->get();
     	$pdf = PDF::loadview('banego.exportpdf', compact('banegos', 'start', 'end'))->setPaper('A4','landscape');
     	return $pdf->stream();
-       
+
     }
 
     public function GenerateNumber(){
         $AWAL = 'BA';
-        $AKHIR = 'APP-PL';
+        $AKHIR = 'IASP-KGPR';
         $tahun = date('Y');
         // karna array dimulai dari 0 maka kita tambah di awal data kosong
         // bisa juga mulai dari "1"=>"I"
@@ -415,7 +415,7 @@ class BanegoController extends Controller
         else {
             $noUrutAkhir = $AWAL .'.' . sprintf("%03s", $no). '/' .  $AKHIR .'/' . date('Y');
         }
-        
+
         return $noUrutAkhir;
     }
 }
