@@ -96,7 +96,7 @@ class VendorController extends Controller
         $menus = Menu::all();
         $badan = Badanusaha::all();
         $judul = 'Vendor Bahan Baku';
-        return view('vendor_bahan_baku.index', compact('vendors', 'vendors1','judul','users','pref','badan', 'crud', 'cat', 'provinsi', 'jns', 'jpeks', 'sert', 'lisens'));
+        return view('Vendor_bahan_baku.index', compact('vendors', 'vendors1','judul','users','pref','badan', 'crud', 'cat', 'provinsi', 'jns', 'jpeks', 'sert', 'lisens'));
     }
 
     public function create_bahan_baku()
