@@ -13,22 +13,22 @@
 		}
 	</style>
 	{{-- <center> --}}
-	
+
 	{{-- </center> --}}
 <div class="container">
     {{-- <h5>DATA PERUSAHAAN {{ $vendors->namaperusahaan . ", " .  $vendors->badanusaha->kode }}</h4>
       <br> --}}
 		{{-- <h6><a target="_blank" href="https://www.malasngoding.com/membuat-laporan-…n-dompdf-laravel/">www.malasngoding.com</a></h5> --}}
       <div class="col-lg-12">
-  <table class="table">   
+  <table class="table">
     <thead>
       <tr>
         <th colspan="2">DETAIL PERUSAHAAN</th>
       </tr>
-    
+
     </thead>
       <tbody>
-        <tr>         
+        <tr>
             <td >Kode Perusahaan</td>
             <td>{{ $vendors->kode }}</td>
         </tr>
@@ -48,7 +48,7 @@
         <tr>
           <td>Alamat</td>
           <td>{{ $vendors->alamat }} <br>
-            {{ $vendors->provinsi->name }}
+            {{ $vendors->provinsi ? $vendors->provinsi->name : $vendors->cities->provinsi_name }}
           </td>
         </tr>
         <tr>
@@ -70,7 +70,7 @@
         <tr>
           <td>Telephone</td>
           <td>{{ $vendors->notelp }}</td>
-        </tr>        
+        </tr>
         <tr>
           <td>Website</td>
           <td>{{ $vendors->website }}</td>
@@ -96,12 +96,12 @@
               {{ $item->detail . " , " }} <br>
               @endforeach
           </td>
-        </tr>        
+        </tr>
         <tr>
           <td>Produk</td>
           <td>{{ $vendors->product }}</td>
         </tr>
-       
+
         <tr>
           <td>Bank</td>
           <td>

@@ -38,39 +38,39 @@
 
     <div class="row">
         <div class="col-lg-12">
-            @php                              
+            @php
             $now = now();
             // $dt = $now->dayOfMonth();
             @endphp
             @foreach ($vendors->vendorlisensi as $vl)
-           
+
                 @if ($vl->end < $now)
                     <div class="alert alert-danger" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         </button>
-                        <strong>{{ date('d-m-Y', strtotime($vl->end)) . " (Expired)" }} </strong>   {{ "Lisensi, " . $vl->vendorjenis->keterangan }}   
+                        <strong>{{ date('d-m-Y', strtotime($vl->end)) . " (Expired)" }} </strong>   {{ "Lisensi, " . $vl->vendorjenis->keterangan }}
                     </div>
-                    
+
                 @endif
-             
+
             @endforeach
-          
-            @foreach ($vendors->vendorsertifikat as $vs)           
+
+            @foreach ($vendors->vendorsertifikat as $vs)
                 @if ($vs->berlaku_end < $now)
                     <div class="alert alert-danger" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         </button>
-                        <strong>{{ date('d-m-Y', strtotime($vs->berlaku_end)) . " (Expired)" }}  </strong>  
-                           {{ "SBU, " . $vs->vendorklasifikasi->kode . " - " . $vs->vendorklasifikasi->name }}      
+                        <strong>{{ date('d-m-Y', strtotime($vs->berlaku_end)) . " (Expired)" }}  </strong>
+                           {{ "SBU, " . $vs->vendorklasifikasi->kode . " - " . $vs->vendorklasifikasi->name }}
                     </div>
-                @endif                                     
+                @endif
             @endforeach
 
 
-           
+
         </div>
 
-        <div class="col-md-12">          
+        <div class="col-md-12">
             <div class="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--rounded">
                 <div class="m-portlet__head">
                     <div class="m-portlet__head-caption">
@@ -129,7 +129,7 @@
                                 </tbody>
                                 <tbody>
                                     <td>Provinsi</td>
-                                    <td>{{ $vendors->provinsi->name }}</td>
+                                    <td>{{ $vendors->provinsi ? $vendors->provinsi->name : $vendors->cities->provinsi_name }}</td>
                                 </tbody>
                                 <tbody>
                                     <td>NPWP</td>
@@ -142,17 +142,17 @@
                                       <span class="m--font-warning"> <strong> {{ $vendors->email }}</strong></span>  <br>
                                       <span class="m-badge m-badge--warning m-badge--wide">Unverified</span>
                                         {{-- <form action="/vendor/profile/lupaverifikasi" method="POST" enctype="multipart/form-data">
-                                            @csrf   
-                                                                                              
-                                        
+                                            @csrf
+
+
                                             <div class="form-group">
-                                               
+
                                                 <input type="hidden" name="vendor_id" value="{{ Auth::user('vendor')->id}}" />
                                                 <input type="hidden" name="email" value="{{ Auth::user('vendor')->email }}">
                                             </div>
                                             <button type="submit" class="btn btn-warning btn-sm"><i class="fa fa-envelope" aria-hidden="true"></i> Send Verification</button>.
                                         </form> --}}
-                                 
+
                                        {{-- <button type="submit"></button> --}}
                                         @else
                                             <span class="m--font-success"> <strong> {{ $vendors->email }}</strong></span> <br>
@@ -189,7 +189,7 @@
                                         {{ $item->detail . " , " }} <br>
                                         @endforeach
                                     </td>
-                                </tbody>                                
+                                </tbody>
                                 <tbody>
                                     <td>Kategori Usaha</td>
                                     <td>
@@ -210,7 +210,7 @@
                                     <td>Lokasi</td>
                                     <td>{{ $vendors->lokasi->kode }}</td>
                                 </tbody> --}}
-                               
+
 
                                 <tbody>
                                     <td>Tanggal Dibuat</td>
@@ -226,7 +226,7 @@
                                 </tbody>
                             </table>
                         </div>
-                       
+
                         <div class="tab-pane" id="m_tabs_5_2" role="tabpanel">
                             {{-- <a href="/vendorbank/add/{{ $vendors->id }}" class="btn btn-accent m-btn m-btn--custom
                             m-btn--pill m-btn--icon m-btn--air">
@@ -273,7 +273,7 @@
                             </table>
                         </div>
                         <div class="tab-pane" id="m_tabs_5_3" role="tabpanel">
-                            {{-- <a href="#" class="btn btn-accent m-btn m-btn--custom 
+                            {{-- <a href="#" class="btn btn-accent m-btn m-btn--custom
                           m-btn--pill m-btn--icon m-btn--air" data-toggle="modal"
                           data-target="#file_modal">
                           <span>
@@ -293,8 +293,8 @@
                                           <div class="m-widget4">
                                               @foreach ($vendors->itemdetails as $item)
                                               <div class="m-widget4__item">
-                                                  {{-- <div class="m-widget4__img m-widget4__img--icon">							 
-                                                              <img src="assets/app/media/img/files/doc.svg" alt="">  
+                                                  {{-- <div class="m-widget4__img m-widget4__img--icon">
+                                                              <img src="assets/app/media/img/files/doc.svg" alt="">
                                                           </div> --}}
                                                   <div class="m-widget4__info">
                                                       {{-- <span class="m-widget4__text"> --}}
@@ -327,7 +327,7 @@
                               <a class="list-group-item list-group-item-action" data-toggle="list" href="#tender" role="tab">Tender</a>
                               <a class="list-group-item list-group-item-action" data-toggle="list" href="#kontrak" role="tab">Kontrak</a>
                             </div>
-                            
+
                             <!-- Tab panes -->
                             <div class="tab-content">
                               <div class="tab-pane active" id="po" role="tabpanel">
@@ -344,14 +344,14 @@
                                         @php
                                             $no=1;
                                         @endphp
-                                        <tbody> 
+                                        <tbody>
                                             @foreach ($vendors->rekappos as $item)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
                                                     <td>{{ $item->no_po }}</td>
                                                     <td>{{ $item->nama_pekerjaan }}</td>
                                                 </tr>
-                                            @endforeach                                 
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -370,14 +370,14 @@
                                         @php
                                             $no=1;
                                         @endphp
-                                        <tbody> 
+                                        <tbody>
                                             @foreach ($vendors->banegopengadaans as $item)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
                                                     <td>{{ $item->nomor_ba }}</td>
                                                     {{-- <td>{{ $item->bapengadaan->judul_pekerjaan }}</td> --}}
                                                 </tr>
-                                            @endforeach                                 
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -396,14 +396,14 @@
                                         @php
                                             $no=1;
                                         @endphp
-                                        <tbody> 
+                                        <tbody>
                                             @foreach ($vendors->banego as $item)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
                                                     <td>{{ $item->no_ba }}</td>
                                                     <td>{{ $item->nama_pek }}</td>
                                                 </tr>
-                                            @endforeach                                 
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -422,7 +422,7 @@
                                         @php
                                             $no=1;
                                         @endphp
-                                        <tbody> 
+                                        <tbody>
                                             {{-- @foreach ($vendors->rekappos as $item)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
@@ -448,7 +448,7 @@
                                         @php
                                             $no=1;
                                         @endphp
-                                        <tbody> 
+                                        <tbody>
                                             {{-- @foreach ($vendors->rekappos as $item)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
@@ -461,14 +461,14 @@
                                 </div>
                               </div>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
-            </div>             
+            </div>
         </div>
-        
-       
+
+
         <div class="col-md-12">
             <div class="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--rounded">
                 <div class="m-portlet__head">
@@ -518,7 +518,7 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="m_tabs_1_1" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#m_modal_5" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#m_modal_5" >+ Tambah</a>
                                         @endif --}}
                                         <table class="table">
                                             <thead>
@@ -557,9 +557,9 @@
                                                         @if ($vendors->is_published == null)
                                                         <a href="/verifikasivendor/vendorlisensi/publish/{{ $vl->id }}"
                                                             class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
-                                                            <i class="flaticon-multimedia-5"></i> </a> 
+                                                            <i class="flaticon-multimedia-5"></i> </a>
                                                         @endif
-                                                      
+
                                                         {{-- @if ($vl->is_published == 0)
                                                             <a href="#" data-id={{ $vl->id }} data-toggle="modal"
                                                         data-target="#m_modal_7" class="btn btn-accent m-btn m-btn--icon
@@ -579,7 +579,7 @@
                                     </div>
                                     <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#pengurus_modal_1" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#pengurus_modal_1" >+ Tambah</a>
                                             @endif --}}
                                         <table class="table">
                                             <thead>
@@ -619,7 +619,7 @@
                                                         <a href="/verifikasivendor/vendorbod/publishbod/{{ $vp->id }}"
                                                             class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
                                                             <i class="la la-key"></i> </a>
-                                                            
+
                                                         <a href="/verifikasivendor/vendorbod/publish/{{ $vp->id }}"
                                                             class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
                                                             <i class="flaticon-multimedia-5"></i> </a>
@@ -639,11 +639,11 @@
                                                 {{-- @endforeach --}}
                                             </tbody>
                                         </table>
-                                        
+
                                     </div>
                                     <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#lap_modal_1" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#lap_modal_1" >+ Tambah</a>
                                             @endif --}}
                                         <table class="table">
                                             <thead>
@@ -696,11 +696,11 @@
                                                 {{-- @endforeach --}}
                                             </tbody>
                                         </table>
-                                      
+
                                     </div>
                                     <div class="tab-pane" id="m_tabs_1_4" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#sertifikat_modal_1" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#sertifikat_modal_1" >+ Tambah</a>
                                             @endif --}}
                                         <table class="table">
                                             <thead>
@@ -755,11 +755,11 @@
                                                 {{-- @endforeach --}}
                                             </tbody>
                                         </table>
-                                    
+
                                     </div>
                                     <div class="tab-pane" id="m_tabs_1_5" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#tenaga_modal_1" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#tenaga_modal_1" >+ Tambah</a>
                                             @endif --}}
                                         <table class="table">
                                             <thead>
@@ -812,11 +812,11 @@
                                                 {{-- @endforeach --}}
                                             </tbody>
                                         </table>
-                                        
+
                                     </div>
                                     <div class="tab-pane" id="m_tabs_1_6" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#fasil_modal_1" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#fasil_modal_1" >+ Tambah</a>
                                             @endif --}}
                                         <table class="table">
                                             <thead>
@@ -870,11 +870,11 @@
                                                 {{-- @endforeach --}}
                                             </tbody>
                                         </table>
-                                     
+
                                     </div>
                                     <div class="tab-pane" id="m_tabs_1_7" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#pengal_modal_1" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#pengal_modal_1" >+ Tambah</a>
                                             @endif --}}
                                         <table class="table">
                                             <thead>
@@ -928,11 +928,11 @@
                                             </tbody>
                                         </table>
 
-                                      
+
                                     </div>
                                     <div class="tab-pane" id="m_tabs_1_8" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#doc_modal_1" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#doc_modal_1" >+ Tambah</a>
                                             @endif --}}
                                         <table class="table">
                                             <thead>
@@ -970,7 +970,7 @@
                                                         <a href="/verifikasivendor/vendordok/publish/{{ $vd->id }}"
                                                             class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
                                                             <i class="flaticon-multimedia-5"></i> </a>
-`                                                       @endif    
+`                                                       @endif
                                                         {{-- @if ($vl->is_published == 0)
                                                                     <a href="#" data-id={{ $vd->id }}
                                                         data-toggle="modal" data-target="#doc_modal_3" class="btn
@@ -986,7 +986,7 @@
                                                 {{-- @endforeach --}}
                                             </tbody>
                                         </table>
-                                      
+
                                     </div>
 
                                 </div>
@@ -1154,7 +1154,7 @@
 @include('vendor.tenaga')
 @include('vendor.fasilitas')
 @include('vendor.pengalaman')
-@include('vendor.doc') 
+@include('vendor.doc')
     {{-- @include('vendor.fileupload')  --}}
 
     <!-- END EXAMPLE TABLE PORTLET-->

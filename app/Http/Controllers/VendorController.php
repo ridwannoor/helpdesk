@@ -44,6 +44,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\VendorExport;
 use App\Models\Po\Rekappo;
 use App\Models\Provinsi;
+use App\Models\Cities;
 // use App\Models\Po\Poheader;
 use App\Models\Po\Podetail;
 // use App\Models\Po\Potemp;
@@ -63,8 +64,8 @@ class VendorController extends Controller
         $users = Auth::user()->userdetails()->with('menu')->get();
 	    $menu = Menu::where('link', '/vendor')->first();
         $crud = $users->where('menu_id', $menu->id)->first();
-        $vendors = Vendor::orderBy('is_published', 'DESC')->paginate(200);
-        $vendors1 = Vendor::orderBy('is_published', 'DESC')->get();
+        $vendors = Vendor::where('is_bahan_baku', 0)->orderBy('is_published', 'DESC')->paginate(200);
+        $vendors1 = Vendor::where('is_bahan_baku', 0)->orderBy('is_published', 'DESC')->get();
         $cat   = Category::orderBy('kode','ASC')->get();
         $provinsi   = Provinsi::orderBy('name','ASC')->get();
         $jns = Jenisusaha::orderBy('kode','ASC')->get();
@@ -76,6 +77,44 @@ class VendorController extends Controller
         $badan = Badanusaha::all();
         $judul = 'Vendor';
         return view('vendor.index', compact('vendors', 'vendors1','judul','users','pref','badan', 'crud', 'cat', 'provinsi', 'jns', 'jpeks', 'sert', 'lisens'));
+    }
+
+    public function vendor_bahan_baku(Request $request){
+        $pref = Preference::first();
+        $users = Auth::user()->userdetails()->with('menu')->get();
+	    $menu = Menu::where('link', '/vendor')->first();
+        $crud = $users->where('menu_id', $menu->id)->first();
+        $vendors = Vendor::where('is_bahan_baku', 1)->orderBy('is_published', 'DESC')->paginate(200);
+        $vendors1 = Vendor::where('is_bahan_baku', 1)->orderBy('is_published', 'DESC')->get();
+        $cat   = Category::orderBy('kode','ASC')->get();
+        $provinsi   = Provinsi::orderBy('name','ASC')->get();
+        $jns = Jenisusaha::orderBy('kode','ASC')->get();
+        $jpeks = Jenispekerjaan::orderBy('name','ASC')->get();
+        $sert = Vendorklasifikasi::orderBy('kode','ASC')->get();
+        $lisens = Vendorjenis::orderBy('keterangan','ASC')->get();
+	//dd($vendors);
+        $menus = Menu::all();
+        $badan = Badanusaha::all();
+        $judul = 'Vendor Bahan Baku';
+        return view('vendor_bahan_baku.index', compact('vendors', 'vendors1','judul','users','pref','badan', 'crud', 'cat', 'provinsi', 'jns', 'jpeks', 'sert', 'lisens'));
+    }
+
+    public function create_bahan_baku()
+    {
+        $pref = Preference::first();
+        $users = Auth::user()->userdetails()->with('menu')->get();
+        $lokasis = Lokasi::all();
+        $judul = 'Add Vendor Bahan Baku';
+        $cat   = Category::orderBy('kode','ASC')->get();
+        $provinsi   = Provinsi::orderBy('name','ASC')->get();
+        $cities   = Cities::orderBy('city_name','ASC')->get();
+        $jns = Jenisusaha::orderBy('kode','ASC')->get();
+        $jpeks = Jenispekerjaan::orderBy('name','ASC')->get();
+        $badan = Badanusaha::orderBy('kode','ASC')->get();
+        $banks = Bank::orderBy('name','ASC')->get();
+        // var_dump($bank);
+        // return false;
+        return view('vendor_bahan_baku.add', compact('judul', 'cat', 'jns', 'users','pref', 'badan', 'provinsi', 'cities', 'lokasis', 'banks', 'jpeks'));
     }
 
     public function indexall(Request $request)
@@ -345,9 +384,110 @@ class VendorController extends Controller
             \LogActivity::addToLog($vendors->namaperusahaan);
             return redirect('/vendor')->with('success', 'Data Berhasil Disimpan'  );
         }
+    }
 
+    public function store_bahan_baku(Request $request)
+    {
 
+        // return json_encode($request->all());
+        $name = $request->namaperusahaan;
+        $ven = Vendor::where('namaperusahaan',$name)->first();
 
+        if ($ven) {
+            return redirect()->back()->with('message', 'Data Sudah Ada');
+        }
+        else {
+            \DB::beginTransaction();
+
+            $vendors = new Vendor();
+            $vendors->kode = $request->kode;
+            $vendors->is_bahan_baku = 1;
+            $vendors->badanusaha_id = $request->badanusaha_id;
+            $vendors->namaperusahaan = $request->namaperusahaan;
+            $vendors->alamat = $request->alamat;
+            $vendors->terms = 1;
+            $vendors->tgl_request = date('Y-m-d');
+            // $vendors->alamat_domisili = $request->alamat_domisili;
+            $vendors->city_id = $request->city_id;
+            $vendors->product = $request->product;
+            // $vendors->lokasi_id = $request->lokasi_id;
+            $vendors->email = $request->email;
+            $vendors->contactperson = $request->contactperson;
+            $vendors->notelp = $request->notelp;
+            $vendors->handphone = $request->handphone;
+            $vendors->npwp = $request->nomor_11;
+            $vendors->alternative_person = $request->alternative_person;
+            $vendors->alternative_phone = $request->alternative_phone;
+            $vendors->website = $request->website;
+            $vendors->catatan = $request->catatan;
+            $vendors->save();
+            \LogActivity::addToLog($vendors->namaperusahaan);
+
+            $vendorpengurus = new Vendorpengurus;
+            $vendorpengurus->vendor_id = $vendors->id;
+            $vendorpengurus->nama = $request->nama_pimpinan;
+            $vendorpengurus->jabatan = $request->jabatan_pimpinan;
+            if ($request->file('filepengurus')) {
+                $filepengurus = $request->file('filepengurus');
+                $extension = $filepengurus->getClientOriginalExtension();
+                $filename = 'PROFPEN_'. date('YmdHis').".".$extension;
+                $filepengurus->move('data_file/profile/doc',$filename);
+                $vendorpengurus->file = $filename;
+            }
+            $vendorpengurus->save();
+            \LogActivity::addToLog($vendorpengurus->nama);
+
+            $vendorbanks = new Vendorbank();
+            $vendorbanks->vendor_id = $vendors->id;
+            $vendorbanks->bank_id = $request->bank_id;
+            $vendorbanks->nomor_rek = $request->nomor_rek;
+            $vendorbanks->nama_pemilik = $request->nama_pemilik;
+            if ($request->file('image')) {
+                $filebank = $request->file('image');
+                $extension = $filebank->getClientOriginalExtension();
+                $filename = 'PROFBANK_'. date('YmdHis').".".$extension;
+                $filebank->move('data_file/profile/doc',$filename);
+                $vendorbanks->image = $filename;
+            }
+            $vendorbanks->save();
+            \LogActivity::addToLog($vendorbanks->bank_id);
+
+            $vendorjenisData = [
+                ['vendorjenis_id' => 1, 'nomor' => $request->nomor_1, 'penerbit' => $request->penerbit_1, 'file' => $request->file('file_1')],
+                ['vendorjenis_id' => 2, 'nomor' => $request->nomor_2, 'penerbit' => $request->penerbit_2, 'file' => $request->file('file_2')],
+                ['vendorjenis_id' => 3, 'nomor' => $request->nomor_3, 'penerbit' => $request->penerbit_3, 'file' => $request->file('file_3')],
+                ['vendorjenis_id' => 11, 'nomor' => $request->nomor_11, 'penerbit' => $request->penerbit_11, 'file' => $request->file('file_11')],
+                ['vendorjenis_id' => 20, 'nomor' => $request->nomor_20, 'penerbit' => $request->penerbit_20, 'file' => $request->file('file_20')]
+            ];
+
+            foreach ($vendorjenisData as $data) {
+                // if (isset($_FILES['file'.$i]) && $_FILES['file'.$i]['error'] == UPLOAD_ERR_OK && $_FILES['file'.$i]['size'] > 0) {
+                //     $extension = pathinfo($_FILES['file'.$i]['name'], PATHINFO_EXTENSION);
+                //     $filename = 'TL_'.$i. date('YmdHis').".".$extension;
+                //     $tujuan_upload = 'data_file/pdf/'.$filename;
+                //     move_uploaded_file($_FILES['file'.$i]['tmp_name'], $tujuan_upload);
+                // }
+
+                $vendorlisensi = new Vendorlisensi();
+                $vendorlisensi->vendor_id = $vendors->id;
+                $vendorlisensi->vendorjenis_id = $data['vendorjenis_id'];
+                $vendorlisensi->nomor = $data['nomor'];
+                $vendorlisensi->penerbit = $data['penerbit'];
+                if ($data['file']) {
+                    $filelisensi = $data['file'];
+                    $extension = $filelisensi->getClientOriginalExtension();
+                    $filename = 'PROFLIS_'. date('YmdHis').".".$extension;
+                    $filelisensi->move('data_file/profile/doc',$filename);
+                    $vendorlisensi->file = $filename;
+                }
+                $vendorlisensi->save();
+                \LogActivity::addToLog($vendorlisensi->nomor);
+            }
+
+            \DB::commit();
+
+            return redirect('/vendor-bahan-baku')->with('success', 'Data Berhasil Disimpan'  );
+        }
     }
 
 
@@ -460,7 +600,8 @@ class VendorController extends Controller
         $vendortipe = Vendortipe::all();
         $currency = Currency::all();
         $bank = Bank::all();
-        $vendors = Vendor::with('vendorlisensi', 'vendorbod', 'itemdetails', 'vendorbank', 'vendorpengurus', 'vendorlap', 'vendorsertifikat', 'vendortenaga', 'vendorfasilitas', 'vendorpengalaman', 'vendordoc')->find($id);
+        $vendors = Vendor::with('cities','vendorlisensi', 'vendorbod', 'itemdetails', 'vendorbank', 'vendorpengurus', 'vendorlap', 'vendorsertifikat', 'vendortenaga', 'vendorfasilitas', 'vendorpengalaman', 'vendordoc')->find($id);
+
         $vendorlisensicount = $vendors->vendorlisensi->count();
         $vendorlisensi = $vendors->vendorlisensi->where('is_published', 0)->count();
         $vendorlisensi1 = $vendors->vendorlisensi->where('is_published', 1)->count();
@@ -486,6 +627,8 @@ class VendorController extends Controller
         $vendorfasilitascount = $vendors->vendorfasilitas->count();
         $vendorpengalamancount = $vendors->vendorpengalaman->count();
         $vendordokcount = $vendors->vendordoc->count();
+
+
         // dd($details);
  	//$parent = $users->menu->where(['parentmenu' => 0])->get();
         return view('vendor.show', compact('vendors','judul','users', 'crud', 'pref','vendorjenis', 'vendorlisensi',

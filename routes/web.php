@@ -160,10 +160,13 @@ Route::get('/productinformation/download/{id}', 'ProductInformationController@do
 
 //Vendor
 Route::get('/vendor', 'VendorController@index')->name('vendorindex');
+Route::get('/vendor-bahan-baku', 'VendorController@vendor_bahan_baku')->name('vendor_bahan_baku');
 Route::get('/vendor/all', 'VendorController@indexall')->name('vendorindexall');
 Route::get('/vendor/add', 'VendorController@create')->name('vendoradd');
+Route::get('/vendor-bahan-baku/add', 'VendorController@create_bahan_baku')->name('vendoradd_bahan_baku');
 Route::post('/vendor/confirmation', 'VendorController@confirmation')->name('Vendorconfirm');
 Route::post('/vendor/store', 'VendorController@store')->name('Vendorstore');
+Route::post('/vendor-bahan-baku/store', 'VendorController@store_bahan_baku')->name('Vendorstore_bahan_baku');
 Route::post('/vendor/store1', 'VendorController@store1')->name('Vendorstore1');
 Route::get('/vendor/edit/{id}', 'VendorController@edit')->name('Vendoredit');
 Route::put('/vendor/update', 'VendorController@update')->name('Vendorupdate');

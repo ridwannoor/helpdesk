@@ -1,6 +1,12 @@
 @extends('layouts.app2')
 
 @section('m-subheader')
+<?php
+
+// var_dump($vendors->cities);
+//         return false;
+
+?>
 <div class="m-subheader ">
     <div class="d-flex align-items-center">
         <div class="mr-auto">
@@ -104,7 +110,11 @@
                                 </tbody>
                                 <tbody>
                                     <td>Provinsi</td>
-                                    <td>{{ $vendors->provinsi->name }}</td>
+                                    <td>{{ $vendors->provinsi ? $vendors->provinsi->name : $vendors->cities->provinsi_name }}</td>
+                                </tbody>
+                                <tbody>
+                                    <td>Kota</td>
+                                    <td>{{ $vendors->cities ? $vendors->cities->city_name : '-'}}</td>
                                 </tbody>
                                 <tbody>
                                     <td>NPWP</td>
@@ -117,17 +127,17 @@
                                       <span class="m--font-warning"> <strong> {{ $vendors->email }}</strong></span>  <br>
                                       <span class="m-badge m-badge--warning m-badge--wide">Unverified</span>
                                         {{-- <form action="/vendor/profile/lupaverifikasi" method="POST" enctype="multipart/form-data">
-                                            @csrf   
-                                                                                              
-                                        
+                                            @csrf
+
+
                                             <div class="form-group">
-                                               
+
                                                 <input type="hidden" name="vendor_id" value="{{ Auth::user('vendor')->id}}" />
                                                 <input type="hidden" name="email" value="{{ Auth::user('vendor')->email }}">
                                             </div>
                                             <button type="submit" class="btn btn-warning btn-sm"><i class="fa fa-envelope" aria-hidden="true"></i> Send Verification</button>.
                                         </form> --}}
-                                 
+
                                        {{-- <button type="submit"></button> --}}
                                         @else
                                             <span class="m--font-success"> <strong> {{ $vendors->email }}</strong></span> <br>
@@ -162,7 +172,7 @@
                                         {{ $item->detail . " , " }} <br>
                                         @endforeach
                                     </td>
-                                </tbody>                                
+                                </tbody>
                                 <tbody>
                                     <td>Kategori Usaha</td>
                                     <td>
@@ -183,7 +193,7 @@
                                     <td>Lokasi</td>
                                     <td>{{ $vendors->lokasi->kode }}</td>
                                 </tbody> --}}
-                               
+
 
                                 <tbody>
                                     <td>Tanggal Dibuat</td>
@@ -247,14 +257,14 @@
                         <div class="tab-pane" id="m_tabs_5_3" role="tabpanel">
                             {{-- @if ($vendors->is_published == null) --}}
                                 @if ($crud->create > 0)
-                                    
+
                                 <a href="#" data-toggle="modal" data-target="#fileupload_modal_10" class="btn btn-primary m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air mb-3">
                                     <span>
                                         <i class="la la-plus"></i>
                                         <span>New record</span>
                                     </span>
                                 </a>
-                            
+
                                 @endif
                             {{-- @endif --}}
 
@@ -270,8 +280,8 @@
                                             <div class="m-widget4">
                                                 @foreach ($vendors->itemdetails as $item)
                                                 <div class="m-widget4__item">
-                                                    {{-- <div class="m-widget4__img m-widget4__img--icon">							 
-                                                             <img src="assets/app/media/img/files/doc.svg" alt="">  
+                                                    {{-- <div class="m-widget4__img m-widget4__img--icon">
+                                                             <img src="assets/app/media/img/files/doc.svg" alt="">
                                                          </div> --}}
                                                     <div class="m-widget4__info">
                                                         {{-- <span class="m-widget4__text"> --}}
@@ -288,7 +298,7 @@
 
                                                             </a>
                                                         </div>
-                                                    @endif                                                  
+                                                    @endif
                                                 </div>
                                                 @endforeach
                                             </div>
@@ -297,7 +307,7 @@
                                 </tbody>
                             </table>
                         </div>
-                     
+
                         <div class="tab-pane" id="m_tabs_5_4" role="tabpanel">
                             <!-- List group -->
                             <ul class="nav nav-tabs" role="tablist">
@@ -331,7 +341,7 @@
                               <a class="list-group-item list-group-item-action" data-toggle="list" href="#tender" role="tab">Tender</a>
                               <a class="list-group-item list-group-item-action" data-toggle="list" href="#kontrak" role="tab">Kontrak</a>
                             </div> --}}
-                            
+
                             <!-- Tab panes -->
                             <div class="tab-content">
                               <div class="tab-pane active" id="m_1_1" role="tabpanel">
@@ -345,7 +355,7 @@
                                                     <span class="m-list-timeline__badge m-list-timeline__badge--success"></span>
                                                     <span class="m-list-timeline__text">
                                                       <span class="text-uppercase">{{ $item->no_po }}</span>   <br>
-                                                      <span class="text-uppercase"><strong><a href="#">{{ $item->nama_pekerjaan }}</a> </strong> </span> 
+                                                      <span class="text-uppercase"><strong><a href="#">{{ $item->nama_pekerjaan }}</a> </strong> </span>
                                                     </span>
                                                 </div>
                                                 @endforeach
@@ -371,14 +381,14 @@
                               <div class="tab-pane" id="m_1_3" role="tabpanel">
                                 <div class="col-lg-12">
                                     @if ($crud->create)
-                                    
+
                                     <a href="#" data-toggle="modal" data-target="#fileupload_modal_11" class="btn btn-primary m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air mb-3">
                                         <span>
                                             <i class="la la-plus"></i>
                                             <span>New record</span>
                                         </span>
                                     </a>
-                                
+
                                     @endif
                                 </div>
                                 <div class="col-lg-12">
@@ -391,9 +401,9 @@
                                                     <span class="m-list-timeline__badge m-list-timeline__badge--success"></span>
                                                     <span class="m-list-timeline__text">
                                                       <span class="text-uppercase">{{ $item->name }}</span>   <br>
-                                                      <span class="text-uppercase"><strong><a href="{{ url('data_file/pdf/'.$item->filepdf) }}">{{ $item->pekerjaan }}</a> </strong> </span> 
+                                                      <span class="text-uppercase"><strong><a href="{{ url('data_file/pdf/'.$item->filepdf) }}">{{ $item->pekerjaan }}</a> </strong> </span>
                                                     </span>
-                                                    @if ($crud->destroy)                                                        
+                                                    @if ($crud->destroy)
                                                     <span class="m-widget4__ext">
                                                         <a href="/vendor/destroyfilekontrak/{{$item->id}}"
                                                             class="m-widget4__icon delete-confirm">
@@ -420,7 +430,7 @@
                             <div class="tab-pane" id="m_1_7" role="tabpanel">
                             </div>
                             </div>
-                           
+
                         </div>
                         <div class="tab-pane" id="m_tabs_5_5" role="tabpanel">
                             <div class="m-scrollable m-scroller ps ps--active-y" data-scrollable="true" style="height: 600px; overflow: hidden;">
@@ -431,7 +441,7 @@
                                             <span class="m-list-timeline__badge m-list-timeline__badge--success"></span>
                                             <span class="m-list-timeline__text">
                                               <span class="text-uppercase">{{ $item->name }}</span>   <br>
-                                              <span class="text-uppercase"><strong><a href="#">{{ $item->deskripsi }}</a> </strong> </span> 
+                                              <span class="text-uppercase"><strong><a href="#">{{ $item->deskripsi }}</a> </strong> </span>
                                             </span>
                                         </div>
                                         @endforeach
@@ -445,7 +455,7 @@
             </div>
         </div>
 
-        
+
         <div class="col-md-12">
             <div class="m-portlet m-portlet--brand m-portlet--head-solid-bg m-portlet--rounded">
                 <div class="m-portlet__head">
@@ -495,7 +505,7 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="m_tabs_1_1" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#m_modal_5" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#m_modal_5" >+ Tambah</a>
                                         @endif --}}
                                         <table class="table">
                                             <thead>
@@ -553,7 +563,7 @@
                                     </div>
                                     <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#pengurus_modal_1" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#pengurus_modal_1" >+ Tambah</a>
                                             @endif --}}
                                         <table class="table">
                                             <thead>
@@ -611,11 +621,11 @@
                                                 {{-- @endforeach --}}
                                             </tbody>
                                         </table>
-                                        
+
                                     </div>
                                     <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#lap_modal_1" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#lap_modal_1" >+ Tambah</a>
                                             @endif --}}
                                         <table class="table">
                                             <thead>
@@ -666,11 +676,11 @@
                                                 {{-- @endforeach --}}
                                             </tbody>
                                         </table>
-                                      
+
                                     </div>
                                     <div class="tab-pane" id="m_tabs_1_4" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#sertifikat_modal_1" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#sertifikat_modal_1" >+ Tambah</a>
                                             @endif --}}
                                         <table class="table">
                                             <thead>
@@ -724,11 +734,11 @@
                                                 {{-- @endforeach --}}
                                             </tbody>
                                         </table>
-                                    
+
                                     </div>
                                     <div class="tab-pane" id="m_tabs_1_5" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#tenaga_modal_1" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#tenaga_modal_1" >+ Tambah</a>
                                             @endif --}}
                                         <table class="table">
                                             <thead>
@@ -780,11 +790,11 @@
                                                 {{-- @endforeach --}}
                                             </tbody>
                                         </table>
-                                        
+
                                     </div>
                                     <div class="tab-pane" id="m_tabs_1_6" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#fasil_modal_1" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#fasil_modal_1" >+ Tambah</a>
                                             @endif --}}
                                         <table class="table">
                                             <thead>
@@ -838,11 +848,11 @@
                                                 {{-- @endforeach --}}
                                             </tbody>
                                         </table>
-                                     
+
                                     </div>
                                     <div class="tab-pane" id="m_tabs_1_7" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#pengal_modal_1" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#pengal_modal_1" >+ Tambah</a>
                                             @endif --}}
                                         <table class="table">
                                             <thead>
@@ -895,11 +905,11 @@
                                             </tbody>
                                         </table>
 
-                                      
+
                                     </div>
                                     <div class="tab-pane" id="m_tabs_1_8" role="tabpanel">
                                         {{-- @if (Auth::user('vendor')->is_published == 0)
-                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#doc_modal_1" >+ Tambah</a> 
+                                            <a href="#" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#doc_modal_1" >+ Tambah</a>
                                             @endif --}}
                                         <table class="table">
                                             <thead>
@@ -952,7 +962,7 @@
                                                 {{-- @endforeach --}}
                                             </tbody>
                                         </table>
-                                      
+
                                     </div>
 
                                 </div>
@@ -1101,7 +1111,7 @@
                     <div class="m-portlet__head-caption">
                         <div class="col-lg-12">
                             <div class="form-group m-form__group row">
-                                    @if ($vendors->is_published)                                          
+                                    @if ($vendors->is_published)
                                     <a href="/verifikasivendor/unpublish/{{ $vendors->id }}" class="btn btn-warning confirm" ><i class="fa fa-window-close" aria-hidden="true"></i>&nbsp; Open Verifikasi</a>
                                     @endif
                             </div>

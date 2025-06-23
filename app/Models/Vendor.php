@@ -16,25 +16,26 @@ class Vendor extends Authenticatable
     use SoftDeletes;
 
     protected $guard = 'vendor';
-   
+
     protected $table = 'vendors';
     protected $dates = ['deleted_at'];
-    protected $fillable = 
+    protected $fillable =
     [
     'badanusaha_id',
-    'namaperusahaan', 
+    'namaperusahaan',
     'kode',
     'terms',
-    'alamat', 
+    'alamat',
     'provinsi_id',
+    'city_id',
     // 'alamat_domisili',
     'npwp',
-    'product', 
-    // 'jenisusaha_id', 
-    // 'category_id', 
-    // 'lokasi_id', 
-    'email', 
-    'contactperson',     
+    'product',
+    // 'jenisusaha_id',
+    // 'category_id',
+    // 'lokasi_id',
+    'email',
+    'contactperson',
     'notelp',
     'handphone',
     'alternative_person',
@@ -48,7 +49,7 @@ class Vendor extends Authenticatable
     ];
 
     protected $hidden = [
-        'password', 
+        'password',
         'remember_token'
     ];
 
@@ -78,7 +79,7 @@ class Vendor extends Authenticatable
     {
         return $query->where(['is_published'], false);
     }
- 
+
     public function getPublishedAttribute()
     {
         return ([$this->is_published]) ? 'Yes' : 'No';
@@ -88,7 +89,7 @@ class Vendor extends Authenticatable
     {
         return $this->hasMany('App\Models\SO\serviceorder');
     }
-    
+
     public function doheaders()
     {
         return $this->hasMany('App\Models\Transaksi\Doheader');
@@ -130,6 +131,15 @@ class Vendor extends Authenticatable
         return $this->belongsTo('App\Models\Provinsi');
     }
 
+    // public function cities(){
+    //     return $this->belongsTo('App\Models\Cities');
+    // }
+
+    public function cities()
+    {
+        return $this->belongsTo(Cities::class, 'city_id');
+    }
+
     public function barangs(){
         return $this->hasMany('App\Models\Barang');
     }
@@ -150,7 +160,7 @@ class Vendor extends Authenticatable
         return $this->hasMany('App\Models\Barangmaintenance');
     }
 
-    
+
     public function tender()
     {
         return $this->hasMany('App\Models\Pengadaan\Tender');
