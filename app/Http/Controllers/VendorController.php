@@ -114,7 +114,7 @@ class VendorController extends Controller
         $banks = Bank::orderBy('name','ASC')->get();
         // var_dump($bank);
         // return false;
-        return view('vendor_bahan_baku.add', compact('judul', 'cat', 'jns', 'users','pref', 'badan', 'provinsi', 'cities', 'lokasis', 'banks', 'jpeks'));
+        return view('Vendor_bahan_baku.add', compact('judul', 'cat', 'jns', 'users','pref', 'badan', 'provinsi', 'cities', 'lokasis', 'banks', 'jpeks'));
     }
 
     public function indexall(Request $request)
