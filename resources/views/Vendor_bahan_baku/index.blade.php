@@ -120,7 +120,7 @@
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
-                        {{ $judul }} | &nbsp;  <a href="/vendor-bahan-baku/trash"><span style="font-size: 10px; color: darkgray"><i class="fa fa-trash" aria-hidden="true"></i> Trash Vendor Bahan Baku</span> </a>
+                        {{ $judul }} | &nbsp;  <a href="/vendor-bahan-baku/trash"><span style="font-size: 10px; color: darkgray"><i class="fa fa-trash" aria-hidden="true"></i> Trash Vendor Strategic Business Unit</span> </a>
                     </h3>
                 </div>
             </div>

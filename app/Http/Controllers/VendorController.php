@@ -95,7 +95,7 @@ class VendorController extends Controller
 	//dd($vendors);
         $menus = Menu::all();
         $badan = Badanusaha::all();
-        $judul = 'Vendor Bahan Baku';
+        $judul = 'Vendor Strategic Business Unit';
         return view('Vendor_bahan_baku.index', compact('vendors', 'vendors1','judul','users','pref','badan', 'crud', 'cat', 'provinsi', 'jns', 'jpeks', 'sert', 'lisens'));
     }
 
@@ -104,7 +104,7 @@ class VendorController extends Controller
         $pref = Preference::first();
         $users = Auth::user()->userdetails()->with('menu')->get();
         $lokasis = Lokasi::all();
-        $judul = 'Add Vendor Bahan Baku';
+        $judul = 'Add Vendor Strategic Business Unit';
         $cat   = Category::orderBy('kode','ASC')->get();
         $provinsi   = Provinsi::orderBy('name','ASC')->get();
         $cities   = Cities::orderBy('city_name','ASC')->get();
