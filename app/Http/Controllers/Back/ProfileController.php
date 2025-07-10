@@ -39,6 +39,7 @@ use App\Models\Bank;
 use App\Models\VendorVerify;
 use App\Models\Vendorklasifikasi;
 use App\Models\Vendorsubkla;
+use App\Models\Cities;
 use Carbon\Carbon;
 
 class ProfileController extends Controller
@@ -84,7 +85,10 @@ class ProfileController extends Controller
         $now = Carbon::now();
         // dd($now);
         $vendors = Auth::user('vendor')->with( 'vendorlisensi', 'vendorbank', 'itemdetails', 'vendorpengurus', 'vendorlap', 'vendorsertifikat', 'vendortenaga', 'vendorfasilitas', 'vendorpengalaman', 'vendordoc')->get();
-        
+        if (Auth::user('vendor')->is_bahan_baku == 1) {
+            $vendorjenis = Vendorjenis::whereIn('id', [1, 2, 3, 11, 20])->get();
+        }
+
         $vendorlisensicount = Auth::user('vendor')->vendorlisensi->count();
         $vendorpenguruscount = Auth::user('vendor')->vendorpengurus->count();
         $vendorlapcount =  Auth::user('vendor')->vendorlap->count();
@@ -116,13 +120,13 @@ class ProfileController extends Controller
         //                      ->get();
 
         // $vendorlisensi = Vendorlisensi::with($vendors)->get();
-        return view('back.profile.index', compact('pref', 'judul', 'vendorjenis', 
+        return view('back.profile.index', compact('pref', 'judul', 'vendorjenis',
         'vendorlisensi',  'vendorpengurus','vendorpengurus1','vendorlap', 'vendorlap1', 'vendorsertifikat', 'vendorsertifikat1',
         'vendortenaga', 'vendortenaga1', 'vendorfasilitas', 'vendorfasilitas1', 'vendorpengalaman', 'vendorpengalaman1', 'vendordok', 'vendordok1',
-        'vendorlisensi1', 'vendors', 'bank', 'vendortipe', 'vendorjenisdoc', 'currency', 'vendorlisensicount', 
+        'vendorlisensi1', 'vendors', 'bank', 'vendortipe', 'vendorjenisdoc', 'currency', 'vendorlisensicount',
          'vendorpenguruscount', 'vendorlapcount', 'vendorsertifikatcount', 'vendortenagacount', 'vendorklasifikasi', 'vendorsubkla',
          'vendorfasilitascount', 'vendorpengalamancount', 'vendordokcount', 'now'));
-    }   
+    }
 
     public function certificate($id)
     {
@@ -131,43 +135,81 @@ class ProfileController extends Controller
         $bods = BOD::get();
         // $bulan = $this->tanggal_local();
         $pdf = PDF::loadView('back.profile.certificate',compact('judul', 'pref', 'bods'))->setPaper('a4', 'landscape');
-        return $pdf->stream();  
+        return $pdf->stream();
     }
 
     public function edit($id)
     {
         $judul = "Profile Edit";
         $pref = Preference::first();
-        $vendors = Vendor::find($id);
+        $id = Auth::user('vendor')->id;
+        // $vendors = Vendor::find($id);
+        $vendors = Auth::user('vendor')->with( 'vendorlisensi', 'vendorbank', 'vendorpengurus')->find($id);
+        $banks = Bank::orderBy('name','ASC')->get();
+        $cities   = Cities::orderBy('city_name','ASC')->get();
         $badanusaha = Badanusaha::all();
-        $jenisusahas = Jenisusaha::pluck('detail', 'id')->all();  
-        $categories = Category::pluck('detail', 'id')->all();  
+        $jenisusahas = Jenisusaha::pluck('detail', 'id')->all();
+        $categories = Category::pluck('detail', 'id')->all();
         $provinsi = Provinsi::all();
-        $jenispekerjaans = Jenispekerjaan::pluck('name', 'id')->all();  
+        $jenispekerjaans = Jenispekerjaan::pluck('name', 'id')->all();
         $lokasi = Lokasi::all();
+        if ($vendors->is_bahan_baku == 1) {
+            // var_dump(Auth::user()->id);
+            // var_dump($vendors->vendorbank[0]->vendor_id);
+            // return true;
+            return view('back.profile.edit-bahan-baku', compact('banks', 'cities', 'pref', 'judul', 'vendors', 'provinsi', 'badanusaha', 'categories', 'lokasi', 'jenisusahas', 'jenispekerjaans'));
+        }
         return view('back.profile.edit', compact('pref', 'judul', 'vendors', 'provinsi', 'badanusaha', 'categories', 'lokasi', 'jenisusahas', 'jenispekerjaans'));
     }
 
     public function update(Request $request)
     {
+        // var_dump($request);
+        // return true;
         $vendors = Vendor::where('id', $request->id)->first();
-        $vendors->namaperusahaan = $request->namaperusahaan;
-        $vendors->alamat = $request->alamat;
-        $vendors->provinsi_id = $request->provinsi_id;
-        $vendors->product = $request->product;
-        $vendors->npwp = $request->npwp;
-        $vendors->contactperson = $request->contactperson;
-        $vendors->notelp = $request->notelp;
-        $vendors->handphone = $request->handphone;
-        $vendors->alternative_person = $request->alternative_person;
-        $vendors->alternative_phone = $request->alternative_phone;
-        $vendors->website = $request->website;
-        $vendors->catatan = $request->catatan;
-        $vendors->badanusaha_id = $request->badanusaha_id;
-        $vendors->save();
-        $vendors->categories()->sync($request->categories);
-        $vendors->jenisusahas()->sync($request->jenisusahas);
-        $vendors->jenispekerjaans()->sync($request->jenispekerjaans);
+        if ($vendors->is_bahan_baku == 1) {
+            \DB::beginTransaction();
+
+            $vendors->badanusaha_id = $request->badanusaha_id;
+            $vendors->alamat = $request->alamat;
+            // $vendors->alamat_domisili = $request->alamat_domisili;
+            $vendors->provinsi_id = null;
+            $vendors->city_id = $request->city_id;
+            $vendors->product = $request->product;
+            // $vendors->lokasi_id = $request->lokasi_id;
+            $vendors->email = $request->email;
+            $vendors->contactperson = $request->contactperson;
+            $vendors->notelp = $request->notelp;
+            $vendors->handphone = $request->handphone;
+            $vendors->npwp = $request->nomor_11;
+            $vendors->alternative_person = $request->alternative_person;
+            $vendors->alternative_phone = $request->alternative_phone;
+            $vendors->website = $request->website;
+            $vendors->catatan = $request->catatan;
+            $vendors->npwp = $request->npwp;
+            $vendors->save();
+            \LogActivity::addToLog($vendors->namaperusahaan);
+
+            \DB::commit();
+        }else{
+            $vendors->namaperusahaan = $request->namaperusahaan;
+            $vendors->alamat = $request->alamat;
+            $vendors->provinsi_id = $request->provinsi_id;
+            $vendors->product = $request->product;
+            $vendors->npwp = $request->npwp;
+            $vendors->contactperson = $request->contactperson;
+            $vendors->notelp = $request->notelp;
+            $vendors->handphone = $request->handphone;
+            $vendors->alternative_person = $request->alternative_person;
+            $vendors->alternative_phone = $request->alternative_phone;
+            $vendors->website = $request->website;
+            $vendors->catatan = $request->catatan;
+            $vendors->badanusaha_id = $request->badanusaha_id;
+            $vendors->save();
+            $vendors->categories()->sync($request->categories);
+            $vendors->jenisusahas()->sync($request->jenisusahas);
+            $vendors->jenispekerjaans()->sync($request->jenispekerjaans);
+        }
 
         return redirect()->route('vendor.profile', ['id' => $vendors->id]);
     }
@@ -180,9 +222,9 @@ class ProfileController extends Controller
         if ($brg_chek) {
             $file = $request->file('file');
             $extension = $file->getClientOriginalExtension();
-            $filename = 'PROF_'. date('YmdHis').".".$extension; 
+            $filename = 'PROF_'. date('YmdHis').".".$extension;
             // $ext = $file->getClientOriginalExtension();
-            // $filename = $request->id.time().".".$ext; 
+            // $filename = $request->id.time().".".$ext;
             $tujuan_upload = 'data_file/profile/doc';
             $file->move($tujuan_upload,$filename);
 
@@ -194,16 +236,16 @@ class ProfileController extends Controller
             $vendors->penerbit = $request->penerbit;
             $vendors->telp = $request->telp;
             $vendors->start = $request->start;
-            $vendors->end = $request->end;   
+            $vendors->end = $request->end;
             $vendors->file = $filename;
             $vendors->save();
             return redirect()->back();
         } else {
             $file = $request->file('file');
             $extension = $file->getClientOriginalExtension();
-            $filename = 'PROF_'. date('YmdHis').".".$extension; 
+            $filename = 'PROF_'. date('YmdHis').".".$extension;
             // $ext = $file->getClientOriginalExtension();
-            // $filename = $request->id.time().".".$ext; 
+            // $filename = $request->id.time().".".$ext;
             $tujuan_upload = 'data_file/profile/doc';
             $file->move($tujuan_upload,$filename);
 
@@ -215,12 +257,12 @@ class ProfileController extends Controller
             $vendors->penerbit = $request->penerbit;
             $vendors->telp = $request->telp;
             $vendors->start = $request->start;
-            $vendors->end = $request->end;   
+            $vendors->end = $request->end;
             $vendors->file = $filename;
             $vendors->save();
             return redirect()->back();
         }
-        
+
     }
 
     public function destroyfile($id){
@@ -233,14 +275,14 @@ class ProfileController extends Controller
     {
         $file = $request->file('filename');
         $extension = $file->getClientOriginalExtension();
-        $filename = 'PROF_'. date('YmdHis').".".$extension; 
+        $filename = 'PROF_'. date('YmdHis').".".$extension;
         // $ext = $file->getClientOriginalExtension();
-        // $filename = $request->id.time().".".$ext; 
+        // $filename = $request->id.time().".".$ext;
         $tujuan_upload = 'data_file/pdf';
         $file->move($tujuan_upload,$filename);
 
         // $name = $file->getClientOriginalName();
-        // $filename = $request->id.$name;  
+        // $filename = $request->id.$name;
         // $tujuan_upload = 'data_file/pdf';
         // $file->move($tujuan_upload,$filename);
 
@@ -248,7 +290,7 @@ class ProfileController extends Controller
         $vendorfiles->vendor_id = $request->vendor_id;
         $vendorfiles->filename = $filename;
         $vendorfiles->save();
-        
+
         return redirect()->route('vendor.profile', ['id' => $vendorfiles->id]);
     }
 
@@ -260,14 +302,14 @@ class ProfileController extends Controller
 
         $file = $request->file('image');
         $extension = $file->getClientOriginalExtension();
-        $filename = 'PROF_'. date('YmdHis').".".$extension; 
+        $filename = 'PROF_'. date('YmdHis').".".$extension;
         // $ext = $file->getClientOriginalExtension();
-        // $filename = $request->id.time().".".$ext; 
+        // $filename = $request->id.time().".".$ext;
         $tujuan_upload = 'data_file/pdf';
         $file->move($tujuan_upload,$filename);
 
         // $name = $file->getClientOriginalName();
-        // $filename = $request->id.$name;  
+        // $filename = $request->id.$name;
         // $tujuan_upload = 'data_file/pdf';
         // $file->move($tujuan_upload,$filename);
 
@@ -275,7 +317,7 @@ class ProfileController extends Controller
         // $vendorfiles->vendor_id = $request->vendor_id;
         $vendorfiles->image = $filename;
         $vendorfiles->save();
-        
+
         return redirect()->route('vendor.profile', ['id' => $vendorfiles->id]);
     }
 
@@ -290,26 +332,26 @@ class ProfileController extends Controller
             return redirect()->back()->with('success', 'Permohonan Verifikasi Berhasil Dikirim');
         } else {
             return redirect()->back()->with('message', 'Checklist Syarat & Ketentuan');
-        }        
+        }
    }
 
    public function lupaverifikasi(Request $request)
     {
         $token = Str::random(64);
-        
+
 
         $vendorverifys = new VendorVerify();
         $vendorverifys->vendor_id = $request->vendor_id;
         $vendorverifys->token = $token;
         // dd($vendorverifys);
-        
+
         $vendorverifys->save();
 
         Mail::send('back.profile.emailVerification', ['token' => $token], function($message) use($request){
             $message->to($request->email);
             $message->subject('Email Verification Mail');
         });
-       
+
         // dd($vendorverifys);
       return redirect()->route('vendor.login')->with('success', 'Verifikasi Berhasil Dikirimkan');
     }
@@ -317,12 +359,12 @@ class ProfileController extends Controller
     public function verifyAccount($token)
     {
         $verifyVendor = VendorVerify::where('token', $token)->first();
-  
+
         $message = 'Sorry your email cannot be identified.';
-  
+
         if(!is_null($verifyVendor) ){
             $vendor = $verifyVendor->vendor;
-           
+
             if($vendor->is_email_verified == null) {
                 $vendor->is_email_verified = 1;
                 $vendor->save();
@@ -331,10 +373,10 @@ class ProfileController extends Controller
                 // dd( $verifyVendor);
                 $message = "Your e-mail is verified. You can now login.";
             } else {
-                $message = "Your e-mail is already verified. You can now login.";   
+                $message = "Your e-mail is already verified. You can now login.";
             }
         }
-  
+
         // dd(vendor);
       return redirect()->route('vendor.login')->with('message', $message);
     }

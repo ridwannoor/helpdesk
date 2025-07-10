@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row d-flex">
 
-              
+
 
                 <!-- Left Side -->
                 <div class="col-lg-6">
@@ -46,13 +46,24 @@
                         <input class="form-control" type="hidden" name="provinsi_id" value="1">
 
                         <div class="form-group row">
+                            <label for="is_bahan_baku" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Usaha') }}</label>
+                            <div class="col-md-6">
+                                <select name="is_bahan_baku" class="form-control" required>
+                                    <option value="null" selected>---Please Select---</option>
+                                    <option value="0">Vendor Barang dan Jasa</option>
+                                    <option value="1">Vendor Bahan Baku</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Badan Usaha') }}</label>
                             <div class="col-md-6">
                                 <select name="badanusaha_id" class="form-control" required>
                                     @foreach ($badan as $item)
                                         <option value="{{ $item->id }}">{{ $item->kode }}</option>
                                     @endforeach
-                                   
+
                                 </select>
                             </div>
                         </div>
@@ -99,7 +110,7 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-                        
+
                         {{-- <div class="form-group row">
                             <label for="jenis" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Usaha') }}</label>
 
@@ -150,10 +161,10 @@
     </div>
     <!-- END WHO WE ARE -->
 
-   
-  
-  
 
-    
+
+
+
+
 
 @endsection

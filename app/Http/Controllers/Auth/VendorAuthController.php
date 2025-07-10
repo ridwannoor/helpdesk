@@ -42,7 +42,7 @@ class VendorAuthController extends Controller
     // }
 
     // protected $guard = 'vendor';
-    
+
     // protected function guard(){
     //     return Auth::guard('vendor');
     // }
@@ -70,7 +70,7 @@ class VendorAuthController extends Controller
 
     public function home(Request $request)
     {
-        
+
         $email = $request->email;
         $pwd   = $request->password;
 
@@ -81,12 +81,12 @@ class VendorAuthController extends Controller
             return back()->withErrors(['email' => 'Email or password are wrong.']);
             // return redirect
         }
-        
+
     }
 
     public function api_login(Request $request)
     {
-        
+
         $email = $request->email;
         $pwd   = $request->password;
         Auth::guard('vendor')->logout();
@@ -97,17 +97,23 @@ class VendorAuthController extends Controller
             // return redirect()->intended('/vendor/dashboard')->with('success', 'You Have Successfully Login');
             return response()->json([
                 'status' => true,
-                'data' => $email 
+                'data' => $email
             ]);
         }else{
             // return back()->withErrors(['email' => 'Email or password are wrong.']);
             return response()->json([
                 'status' => false,
-                'data' => null 
+                'data' => null
             ]);
             // return redirect
         }
-        
+
+    }
+
+    public function CreateVendorKode($is_bahan_baku = 0){
+        $lastVendor = Vendor::where('is_bahan_baku', $is_bahan_baku)->count();
+        $newKode = 'V' . str_pad(($lastVendor + 1), 4, '0', STR_PAD_LEFT);
+        return $newKode;
     }
 
        public function create(Request $request)
@@ -126,6 +132,8 @@ class VendorAuthController extends Controller
 	{
         $vendors = new Vendor();
         $vendors->namaperusahaan = $request->namaperusahaan ;
+        $vendors->is_bahan_baku = $request->is_bahan_baku ;
+        $vendors->kode = $this->CreateVendorKode($request->is_bahan_baku);
         $vendors->email = $request->email ;
         $vendors->password = bcrypt($request->password) ;
         $vendors->badanusaha_id = $request->badanusaha_id ;
@@ -133,41 +141,41 @@ class VendorAuthController extends Controller
         $vendors->save();
 
         $token = Str::random(64);
-  
+
         VendorVerify::create([
-              'vendor_id' => $vendors->id, 
+              'vendor_id' => $vendors->id,
               'token' => $token
             ]);
-  
+
         Mail::send('front.emailVerification', ['token' => $token], function($message) use($request){
               $message->to($request->email);
               $message->subject('Email Verification Mail');
           });
-         
+
         return redirect()->back()->with('success', 'Great! You have Successfully loggedin');
 	}
     }
 
-    
+
 
     public function verifyAccount($token)
     {
         $verifyVendor = VendorVerify::where('token', $token)->first();
-  
+
         $message = 'Sorry your email cannot be identified.';
-  
+
         if(!is_null($verifyVendor) ){
             $vendor = $verifyVendor->vendor;
-           
+
             if(!$vendor->is_email_verified) {
                 $verifyVendor->vendor->is_email_verified = 1;
                 $verifyVendor->vendor->save();
                 $message = "Your e-mail is verified. You can now login.";
             } else {
-                $message = "Your e-mail is already verified. You can now login.";   
+                $message = "Your e-mail is already verified. You can now login.";
             }
         }
-  
+
         // dd(vendor);
       return redirect()->route('vendor.login')->with('message', $message);
     }
@@ -176,15 +184,15 @@ class VendorAuthController extends Controller
     {
         Auth::guard('vendor')->logout();
         session()->flush();
-     
+
         return redirect()->route('vendor.login');
     }
-    
 
-   
 
-    
 
-   
 
-} 
+
+
+
+
+}

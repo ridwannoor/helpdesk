@@ -84,7 +84,11 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Provinsi</td>
-                                                    <td>{{ Auth::user('vendor')->provinsi->name }}</td>
+                                                    <td>{{ Auth::user('vendor')->provinsi ? Auth::user('vendor')->provinsi->name : Auth::user('vendor')->cities->provinsi_name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kota</td>
+                                                    <td>{{ Auth::user('vendor')->cities ? Auth::user('vendor')->cities->city_name : '-'}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>NPWP *</td>
@@ -126,6 +130,8 @@
                                                     <td>Website</td>
                                                     <td>{{ Auth::user('vendor')->website }}</td>
                                                 </tr>
+
+                                                @if (Auth::user('vendor')->is_bahan_baku == 0)
                                                 <tr>
                                                     <td>Bidang Pekerjaan *</td>
                                                    <td>
@@ -150,6 +156,7 @@
                                                         @endforeach
                                                     </td>
                                                 </tr>
+                                                @endif
                                                 <tr>
                                                     <td>Product</td>
                                                     <td>{{ Auth::user('vendor')->product }}</td>
@@ -331,24 +338,26 @@
                                             <li class="nav-item">
                                                 <a class="nav-link" data-toggle="tab" href="#m_tabs_1_2"><i class="fa fa-file" aria-hidden="true"></i> Pengurus</a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3"><i class="fa fa-file" aria-hidden="true"></i> Lap Keuangan</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#m_tabs_1_4"><i class="fa fa-file" aria-hidden="true"></i> Setifikat Badan Usaha (SBU)</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#m_tabs_1_5"><i class="fa fa-file" aria-hidden="true"></i> Tenaga Ahli</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#m_tabs_1_6"><i class="fa fa-file" aria-hidden="true"></i> Peralatan Kerja</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#m_tabs_1_7"><i class="fa fa-file" aria-hidden="true"></i> Pengalaman</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#m_tabs_1_8"><i class="fa fa-file" aria-hidden="true"></i> Dok Lainnya</a>
-                                            </li>
+                                            @if (Auth::user('vendor')->is_bahan_baku == 0)
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3"><i class="fa fa-file" aria-hidden="true"></i> Lap Keuangan</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_4"><i class="fa fa-file" aria-hidden="true"></i> Setifikat Badan Usaha (SBU)</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_5"><i class="fa fa-file" aria-hidden="true"></i> Tenaga Ahli</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_6"><i class="fa fa-file" aria-hidden="true"></i> Peralatan Kerja</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_7"><i class="fa fa-file" aria-hidden="true"></i> Pengalaman</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_8"><i class="fa fa-file" aria-hidden="true"></i> Dok Lainnya</a>
+                                                </li>
+                                            @endif
                                         </ul>
 
                                         <div class="tab-content">
@@ -449,8 +458,15 @@
                                                 </table>
                                             </div>
                                             <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
-                                                @if (Auth::user('vendor')->is_published == null)
-                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#lap_modal_1" >+ Tambah</a>
+                                                @if (Auth::user('vendor')->is_bahan_baku == 1)
+                                                    <div class="alert m-alert--default" role="alert">
+                                                        <strong>Perhatian!</strong> <br>
+                                                        - Upload dokumen pada menu edit dibagian atas.
+                                                    </div>
+                                                @else
+                                                    @if (Auth::user('vendor')->is_published == null)
+                                                    <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#lap_modal_1" >+ Tambah</a>
+                                                    @endif
                                                 @endif
                                                 <table class="table">
                                                     <thead>
@@ -492,8 +508,15 @@
                                                 </table>
                                             </div>
                                             <div class="tab-pane" id="m_tabs_1_4" role="tabpanel">
-                                                @if (Auth::user('vendor')->is_published == null)
-                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#sertifikat_modal_1" >+ Tambah</a>
+                                                @if (Auth::user('vendor')->is_bahan_baku == 1)
+                                                    <div class="alert m-alert--default" role="alert">
+                                                        <strong>Perhatian!</strong> <br>
+                                                        - Upload dokumen pada menu edit dibagian atas.
+                                                    </div>
+                                                @else
+                                                    @if (Auth::user('vendor')->is_published == null)
+                                                    <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#sertifikat_modal_1" >+ Tambah</a>
+                                                    @endif
                                                 @endif
                                                 <table class="table">
                                                     <thead>
@@ -541,8 +564,15 @@
                                                 </table>
                                             </div>
                                             <div class="tab-pane" id="m_tabs_1_5" role="tabpanel">
-                                                @if (Auth::user('vendor')->is_published == null)
-                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#tenaga_modal_1" >+ Tambah</a>
+                                                @if (Auth::user('vendor')->is_bahan_baku == 1)
+                                                    <div class="alert m-alert--default" role="alert">
+                                                        <strong>Perhatian!</strong> <br>
+                                                        - Upload dokumen pada menu edit dibagian atas.
+                                                    </div>
+                                                @else
+                                                    @if (Auth::user('vendor')->is_published == null)
+                                                    <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#tenaga_modal_1" >+ Tambah</a>
+                                                    @endif
                                                 @endif
                                                 <table class="table">
                                                     <thead>
@@ -584,8 +614,15 @@
                                                 </table>
                                             </div>
                                             <div class="tab-pane" id="m_tabs_1_6" role="tabpanel">
-                                                @if (Auth::user('vendor')->is_published == null)
-                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#fasil_modal_1" >+ Tambah</a>
+                                                @if (Auth::user('vendor')->is_bahan_baku == 1)
+                                                    <div class="alert m-alert--default" role="alert">
+                                                        <strong>Perhatian!</strong> <br>
+                                                        - Upload dokumen pada menu edit dibagian atas.
+                                                    </div>
+                                                @else
+                                                    @if (Auth::user('vendor')->is_published == null)
+                                                    <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#fasil_modal_1" >+ Tambah</a>
+                                                    @endif
                                                 @endif
                                                 <table class="table">
                                                     <thead>
@@ -627,8 +664,15 @@
                                                 </table>
                                             </div>
                                             <div class="tab-pane" id="m_tabs_1_7" role="tabpanel">
-                                                @if (Auth::user('vendor')->is_published == null)
-                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#pengal_modal_1" >+ Tambah</a>
+                                                @if (Auth::user('vendor')->is_bahan_baku == 1)
+                                                    <div class="alert m-alert--default" role="alert">
+                                                        <strong>Perhatian!</strong> <br>
+                                                        - Upload dokumen pada menu edit dibagian atas.
+                                                    </div>
+                                                @else
+                                                    @if (Auth::user('vendor')->is_published == null)
+                                                    <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#pengal_modal_1" >+ Tambah</a>
+                                                    @endif
                                                 @endif
                                                 <table class="table">
                                                     <thead>
@@ -670,8 +714,15 @@
                                                 </table>
                                             </div>
                                             <div class="tab-pane" id="m_tabs_1_8" role="tabpanel">
-                                                @if (Auth::user('vendor')->is_published == null)
-                                                <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#doc_modal_1" >+ Tambah</a>
+                                                @if (Auth::user('vendor')->is_bahan_baku == 1)
+                                                    <div class="alert m-alert--default" role="alert">
+                                                        <strong>Perhatian!</strong> <br>
+                                                        - Upload dokumen pada menu edit dibagian atas.
+                                                    </div>
+                                                @else
+                                                    @if (Auth::user('vendor')->is_published == null)
+                                                    <a href="javascript:void(0)" class="btn m-btn--pill m-btn--air btn-success m-btn m-btn--custom m-4 pull-right" data-toggle="modal" data-target="#doc_modal_1" >+ Tambah</a>
+                                                    @endif
                                                 @endif
                                                 <table class="table">
                                                     <thead>
@@ -713,7 +764,6 @@
                                                 </table>
 
                                             </div>
-
                                         </div>
 
                                     </div>

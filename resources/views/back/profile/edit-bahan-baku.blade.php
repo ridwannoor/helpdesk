@@ -1,7 +1,10 @@
-@extends('layouts.app2')
+@extends('back.layouts.app')
 
-@section('m-subheader')
+@section('header-script')
 
+@endsection
+
+@section('m-content')
 <style>
     .required:after {
         content: "*";
@@ -31,9 +34,7 @@
 
     </div>
 </div>
-@endsection
 
-@section('m-content')
 <div class="m-content">
     <div class="row">
         <div class="col-lg-12">
@@ -60,11 +61,12 @@
                 </div>
             </div>
             <!--begin::Form-->
-            <form class="m-form m-form--label-align-right" method="POST" action="/vendor-bahan-baku/store"
+            <form class="m-form m-form--label-align-right" method="POST" action="/vendor/profile/update"
                 enctype="multipart/form-data">
                 <div class="form-group">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                    <input type="hidden" name="_method" value="POST" />
+                    <input type="hidden" name="_method" value="PUT" />
+                    <input type="hidden" name="id" value="{{$vendors->id}}" />
                     {{-- <input type="hidden" name="id" value="{{$dept->id}}" /> --}}
                 </div>
                 <div class="m-portlet__body">
@@ -82,21 +84,23 @@
                         <div class="form-group m-form__group row">
                             <div class="col-lg-4">
                                 <label>Kode Perusahaan</label>
-                                    <input type="text" name="kode" class="form-control m-input" value="Kode Perusahaan akan diisi otomatis" disabled>
+                                    <input type="text" name="kode" class="form-control m-input" value="{{ isset($vendors) ? $vendors->kode : 'Kode Perusahaan akan diisi otomatis' }}" disabled>
                             </div>
                             <div class="col-lg-4">
                             <label class="required">Badan Usaha</label>
                                 <select name="badanusaha_id" class="form-control m-bootstrap-select m_selectpicker" id="badanusaha_id" required>
                                     <option value="">Please Select</option>
-                                    @foreach ($badan as $item)
-                                    <option value="{{$item->id}}">{{$item->detail}} ({{ $item->kode }})</option>
+                                    @foreach ($badanusaha as $item)
+                                        <option value="{{ $item->id }}" {{ (isset($vendors) && $vendors->badanusaha_id == $item->id) ? 'selected' : '' }}>
+                                            {{ $item->detail }} ({{ $item->kode }})
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-lg-4">
                             <label class="required">Nama Perusahaan</label>
                                 <div class="input-group">
-                                    <input type="text" name="namaperusahaan" class="form-control m-input" style="text-transform: uppercase" required>
+                                    <input type="text" name="namaperusahaan" class="form-control m-input" style="text-transform: uppercase" value="{{ isset($vendors) ? $vendors->namaperusahaan : '' }}" disabled>
                                     <div class="input-group-append">
                                         <button class="btn btn btn-secondary" id="basic-addon2" type="button"><i class="flaticon-home"></i></button>
                                     </div>
@@ -111,7 +115,7 @@
                                 <label class="required">Telepon Perusahaan</label>
 
                                     <div class="input-group control-group">
-                                        <input type="text" name="notelp" onkeypress="return hanyaAngka(event)" class="form-control m-input" required>
+                                        <input type="text" name="notelp" onkeypress="return hanyaAngka(event)" class="form-control m-input" value="{{ isset($vendors) ? $vendors->notelp : '' }}" required>
                                         <div class="input-group-append">
                                             {{-- <a href="javascript:void(0);" class="btn btn-secondary add_button">+</a> --}}
                                             <button class="btn btn btn-secondary" id="basic-addon2" type="button"><i class="fa fa-phone"></i></button>
@@ -125,7 +129,7 @@
                                     <label class="required">Email Perusahaan</label>
 
                                       <div class="input-group">
-                                          <input type="email" name="email" class="form-control m-input" required>
+                                          <input type="email" name="email" class="form-control m-input" value="{{ isset($vendors) ? $vendors->email : '' }}" required>
                                           <div class="input-group-append">
                                               <button class="btn btn btn-secondary" id="basic-addon2" type="button"><i class="flaticon-mail-1"></i></button>
                                           </div>
@@ -135,7 +139,7 @@
                                     <label>Alamat Website Perusahaan</label>
 
                                         <div class="input-group">
-                                            <input type="text" name="website" class="form-control m-input" >
+                                            <input type="text" name="website" class="form-control m-input" value="{{ isset($vendors) ? $vendors->website : '' }}" >
                                             <div class="input-group-append">
                                                 <button class="btn btn btn-secondary" id="basic-addon2" type="button"><i class="flaticon-globe"></i></button>
                                             </div>
@@ -167,7 +171,7 @@
                                 <select name="city_id" id="provinsi" data-live-search="true" class="form-control m-bootstrap-select m_selectpicker" required>
                                     <option value="0" selected>Please Select</option>
                                     @foreach ($cities as $item)
-                                    <option value="{{ $item->id }}">{{ $item->city_name }}</option>
+                                    <option value="{{ $item->id }}" {{ (isset($vendors) && $vendors->city_id == $item->id) ? 'selected' : '' }}>{{ $item->city_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -176,7 +180,7 @@
                             <div class="col-lg-12">
                                 <label class="required">Alamat Lengkap Perusahaan</label>
                                 <textarea name="alamat" class="form-control m-input" cols="30"
-                                    rows="5" required></textarea>
+                                    rows="5" required>{{ isset($vendors) ? $vendors->alamat : '' }}</textarea>
                             </div>
                         </div>
                      <div class="form-group m-form__group row">
@@ -186,7 +190,7 @@
                         <label class="required">Contact Person</label>
 
                             <div class="input-group">
-                                <input type="text" name="contactperson" class="form-control m-input" required>
+                                <input type="text" name="contactperson" class="form-control m-input" value="{{ isset($vendors) ? $vendors->contactperson : '' }}" required>
                                 <div class="input-group-append">
                                     {{-- <a href="javascript:void(0);" class="btn btn-secondary add_button">+</a> --}}
                                     <button class="btn btn btn-secondary" id="basic-addon2" type="button"><i class="flaticon-user"></i></button>
@@ -198,7 +202,7 @@
                         <label class="required">Handphone</label>
 
                             <div class="input-group control-group">
-                                <input type="text" name="handphone" onkeypress="return hanyaAngka(event)" class="form-control m-input" required>
+                                <input type="text" name="handphone" onkeypress="return hanyaAngka(event)" class="form-control m-input" value="{{ isset($vendors) ? $vendors->handphone : '' }}" required>
                                 <div class="input-group-append">
                                     {{-- <a href="javascript:void(0);" class="btn btn-secondary add_button">+</a> --}}
                                     <button class="btn btn btn-secondary" id="basic-addon2" type="button"><i class="fa fa-phone"></i></button>
@@ -212,7 +216,7 @@
                             <label>Contact Person Alternative</label>
 
                                 <div class="input-group">
-                                    <input type="text" name="alternative_person" class="form-control m-input"  >
+                                    <input type="text" name="alternative_person" class="form-control m-input" value="{{ isset($vendors) ? $vendors->alternative_person : '' }}">
                                     <div class="input-group-append">
                                         {{-- <a href="javascript:void(0);" class="btn btn-secondary add_button">+</a> --}}
                                         <button class="btn btn btn-secondary" id="basic-addon2" type="button"><i class="flaticon-user"></i></button>
@@ -224,7 +228,7 @@
                             <label>Handphone Alternative</label>
 
                                 <div class="input-group control-group">
-                                    <input type="text" name="alternative_phone" onkeypress="return hanyaAngka(event)" class="form-control m-input">
+                                    <input type="text" name="alternative_phone" onkeypress="return hanyaAngka(event)" class="form-control m-input" value="{{ isset($vendors) ? $vendors->alternative_phone : '' }}">
                                     <div class="input-group-append">
                                         {{-- <a href="javascript:void(0);" class="btn btn-secondary add_button">+</a> --}}
                                         <button class="btn btn btn-secondary" id="basic-addon2" type="button"><i class="fa fa-phone"></i></button>
@@ -238,9 +242,15 @@
 
                     <div class="form-group m-form__group row">
                       <div class="col-lg-6">
+                       <label class="required">Nomor NPWP</label>
+
+                         <input type="text" name="npwp" class="form-control m-input" value="{{ isset($vendors) ? $vendors->npwp : '' }}" required>
+                         {{-- <span class="m-form__help">We'll never share your email with anyone else</span> --}}
+                     </div>
+                     <div class="col-lg-6">
                        <label class="required">Product</label>
 
-                         <input type="text" name="product" class="form-control m-input" required>
+                         <input type="text" name="product" class="form-control m-input" value="{{ isset($vendors) ? $vendors->product : '' }}" required>
                          {{-- <span class="m-form__help">We'll never share your email with anyone else</span> --}}
                      </div>
                  </div>
@@ -250,7 +260,7 @@
                        <label>Catatan</label>
 
                            <div class="input-group">
-                               <textarea name="catatan" id="catatan" cols="30" rows="5" class="form-control m-input"></textarea>
+                               <textarea name="catatan" id="catatan" cols="30" rows="5" class="form-control m-input">{{ isset($vendors) ? $vendors->catatan : '' }}</textarea>
                                {{-- <input type="text" name="website" class="form-control m-input" > --}}
                                {{-- <div class="input-group-append">
                                    <button class="btn btn btn-secondary" id="basic-addon2" type="button"><i class="flaticon-globe"></i></button>
@@ -271,23 +281,23 @@
 
                     <hr>
 
-                    <div class="form-group m-form__group row">
+                    {{-- <div class="form-group m-form__group row d-none">
                         <div class="col-lg-3">
                             <label class="required">Bank</label>
                             <select name="bank_id" id="bank" data-live-search="true" class="form-control m-bootstrap-select m_selectpicker" required>
                                 <option value="0" selected>Please Select</option>
                                 @foreach ($banks as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                <option value="{{ $item->id }}" {{ (isset($vendors->vendorbank[0]) && $vendors->vendorbank[0]->bank_id == $item->id) ? 'selected' : '' }}>{{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-lg-3">
                             <label class="required">Nomor Rekening</label>
-                            <input type="text" name="nomor_rek" onkeypress="return hanyaAngka(event)" class="form-control m-input" required>
+                            <input type="text" name="nomor_rek" onkeypress="return hanyaAngka(event)" class="form-control m-input" value="{{ isset($vendors->vendorbank[0]) ? $vendors->vendorbank[0]->nomor_rek : '' }}" required>
                         </div>
                         <div class="col-lg-3">
                             <label class="required">Atas Nama Rekening</label>
-                            <input type="text" name="nama_pemilik" class="form-control m-input" required>
+                            <input type="text" name="nama_pemilik" class="form-control m-input" value="{{ isset($vendors->vendorbank[0]) ? $vendors->vendorbank[0]->nama_pemilik : '' }}" required>
                         </div>
                         <div class="col-lg-3">
                             <label>Scan Buku Tabungan</label>
@@ -295,17 +305,18 @@
                                 <input type="file" class="custom-file-input" name="image" id="customFile">
                                 <label class="custom-file-label" for="customFile">Choose file</label>
                             </div>
+
                         </div>
                     </div>
 
-                    <div class="form-group m-form__group row">
+                    <div class="form-group m-form__group row d-none">
                         <div class="col-lg-4">
                             <label class="required">Nama Pimpinan / Pemilik Usaha</label>
-                            <input type="text" name="nama_pimpinan" class="form-control m-input" required>
+                            <input type="text" name="nama_pimpinan" class="form-control m-input" value="{{ isset($vendors->vendorpengurus[0]) ? $vendors->vendorpengurus[0]->nama : '' }}" required>
                         </div>
                         <div class="col-lg-4">
                             <label class="required">Jabatan</label>
-                            <input type="text" name="jabatan_pimpinan" class="form-control m-input" required>
+                            <input type="text" name="jabatan_pimpinan" class="form-control m-input" value="{{ isset($vendors->vendorpengurus[0]) ? $vendors->vendorpengurus[0]->jabatan : '' }}" required>
                         </div>
                         <div class="col-lg-4">
                             <label class="required">Scan KTP</label>
@@ -314,10 +325,10 @@
                                 <label class="custom-file-label" for="customFile">Choose file</label>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <hr>
-                    <div class="form-group m-form__group row">
+                    {{-- <div class="form-group m-form__group row d-none">
                         <table class="table table-striped-table-bordered table-hover">
                             <thead>
                                 <tr style="text-align:center;">
@@ -330,8 +341,8 @@
                             <tbody>
                                 <tr>
                                     <td><input type="text" disabled name="" id="" class="form-control m-input" value="Akta Pendirian Perusahaan"></td>
-                                    <td><input type="text" name="nomor_1" id="nomor" class="form-control m-input" placeholder="Nomor"></td>
-                                    <td><input type="text" name="penerbit_1" id="penerbit" class="form-control m-input" placeholder="Penerbit"></td>
+                                    <td><input type="text" name="nomor_1" id="nomor" class="form-control m-input" placeholder="Nomor" value="{{ isset($vendors) ? $vendors->nomor_1 : '' }}"></td>
+                                    <td><input type="text" name="penerbit_1" id="penerbit" class="form-control m-input" placeholder="Penerbit" value="{{ isset($vendors) ? $vendors->penerbit_1 : '' }}"></td>
                                     <td>
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" name="file_1" id="customFile">
@@ -385,7 +396,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div> --}}
 
                 </div>
                 <div class="m-portlet__foot m-portlet__foot--fit">
@@ -413,6 +424,11 @@
 @endsection
 
 @section('footer-script')
+<script>
+    $(document).ready(function() {
+
+    });
+</script>
 {{--
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script type="text/javascript">
