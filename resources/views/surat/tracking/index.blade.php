@@ -73,7 +73,7 @@
                         <th>Nomor Nota Dinas</th>
                         <th>Nama Pekerjaan </th>
                         <th>Unit ST</th>
-                        <th>Keterangan</th>
+                        {{-- <th>Keterangan</th> --}}
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -103,7 +103,7 @@
                             </div>
                         </td>
                         <td>{{ $item->divisi->detail }}</td>
-                        <td>{{ $item->divisi->detail }}</td>
+                        {{-- <td>{{ $item->divisi->detail }}</td> --}}
                         <td>
                             @if ($item->status == "open")
                                 <span class="m-badge m-badge--default m-badge--wide">Open</span>
