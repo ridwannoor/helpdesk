@@ -35,8 +35,8 @@ class TrackingController extends Controller
     {
         $pref = Preference::first();
         $users = Auth::user()->userdetails()->with('menu')->get();
-        $menu = Menu::where('link', '/tracking')->first();
-        $crud = $users->where('menu_id', $menu->id)->first();
+        // $menu = Menu::where('link', '/tracking')->first();
+        // $crud = $users->where('menu_id', $menu->id)->first();
         $nodins = Notaheader::with('notafile')->orderBy('created_at','DESC')->get();
 
         foreach ($nodins as $nodin) {
@@ -55,7 +55,7 @@ class TrackingController extends Controller
         }
 
         $judul = 'Tracking Proses Pengadaan';
-        return view('surat.tracking.index', compact('judul','nodins','users','pref', 'crud' ));
+        return view('surat.tracking.index', compact('judul','nodins','users','pref'));
     }
 
     public function create()
