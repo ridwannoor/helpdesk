@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Notaheader extends Model
 {
     protected $table = 'notaheaders';
-    protected $fillable = 
+    protected $fillable =
     [
-        'no_nodin', 
-        'nama_pek', 
-        'tgl_terima', 
+        'no_nodin',
+        'nama_pek',
+        'tgl_terima',
         'tgl_surat',
-        'unit_st',      
+        'unit_st',
         'divisi_id',
-        'lokasi_id', 
-        'pic',     
-        'pic_off',   
+        'lokasi_id',
+        'pic',
+        'pic_off',
         'user_id',
         'status',
         'keterangan',
@@ -53,6 +53,11 @@ class Notaheader extends Model
 
     public function notatimelines()
     {
-        return $this->hasMany('App\Models\Surat\Notatimelines');
+        return $this->hasMany('App\Models\Surat\Notatimelines')->whereNull('deleted_at');
+    }
+
+    public function notatimelineswithdeleted()
+    {
+        return $this->hasMany('App\Models\Surat\Notatimelines')->orderBy('created_at', 'desc');
     }
 }

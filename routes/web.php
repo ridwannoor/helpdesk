@@ -191,6 +191,10 @@ Route::get('/vendor/trash', 'VendorController@trash')->name('vendor.trash');
 Route::get('/vendor/restore/{id}', 'VendorController@restore')->name('vendor.restore');
 Route::get('/vendor/deletepermanent/{id}', 'VendorController@deletepermanent')->name('vendor.deletepermanent');
 
+//Tracking
+Route::get('/tracking', 'TrackingController@index')->name('tracking');
+Route::get('/tracking/show/{id}', 'TrackingController@show')->name('tracking.show');
+
 //Nota Dinas
 Route::get('/notadinas', 'NotadinasController@index')->name('notadinas');
 Route::get('/notadinas/create', 'NotadinasController@create')->name('notadinas.create');
