@@ -117,7 +117,6 @@
             </table>
         </div>
     </div>
-    @endif
     <!-- END EXAMPLE TABLE PORTLET-->
 </div>
 @endsection
