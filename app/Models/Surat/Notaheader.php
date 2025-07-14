@@ -58,6 +58,8 @@ class Notaheader extends Model
 
     public function notatimelineswithdeleted()
     {
-        return $this->hasMany('App\Models\Surat\Notatimelines')->orderBy('created_at', 'desc');
+        return $this->hasMany('App\Models\Surat\Notatimelines')
+            ->orderBy('created_at', 'desc')
+            ->orderBy('tanggal', 'desc');
     }
 }
