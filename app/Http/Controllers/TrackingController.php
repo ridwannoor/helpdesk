@@ -37,7 +37,10 @@ class TrackingController extends Controller
         $users = Auth::user()->userdetails()->with('menu')->get();
         // $menu = Menu::where('link', '/tracking')->first();
         // $crud = $users->where('menu_id', $menu->id)->first();
-        $nodins = Notaheader::with('notafile')->orderBy('created_at','DESC')->get();
+        $nodins = Notaheader::with('notafile')
+            ->whereYear('tgl_surat', 2025)
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
         foreach ($nodins as $nodin) {
             $temp = [];
@@ -54,7 +57,7 @@ class TrackingController extends Controller
             $nodin->lokasi = $temp;
         }
 
-        $judul = 'Tracking Proses Pengadaan';
+        $judul = 'Tracking 2025';
         return view('surat.tracking.index', compact('judul','nodins','users','pref'));
     }
 
