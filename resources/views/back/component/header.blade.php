@@ -74,8 +74,11 @@
                                         @if (Auth::user('vendor')->image)
                                             <img src="{{ url('data_file/pdf/'.Auth::user('vendor')->image) }}"
                                             class="m--img-rounded m--marginless" alt="image" />
-                                        @else
+                                        @elseif
                                             <img src="{{ url('data_file/'.$pref->image) }}"
+                                            class="m--img-rounded m--marginless" alt="image" />
+                                            @else
+                                            <img src="public/img/1.png"
                                             class="m--img-rounded m--marginless" alt="image" />
                                         @endif
                                         

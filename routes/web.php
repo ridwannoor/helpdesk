@@ -12,7 +12,7 @@
 */
 
 // Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
-Route::post('/vendor/forget-password','Auth\ForgotPasswordController@submitForgetPasswordForm')->name('forget.password.post');
+Route::post('/vendor/forget-password', 'Auth\ForgotPasswordController@submitForgetPasswordForm')->name('forget.password.post');
 Route::get('reset-password/{token}', 'Auth\ForgotPasswordController@showResetPasswordForm')->name('reset.password.get');
 Route::post('reset-password', 'Auth\ForgotPasswordController@submitResetPasswordForm')->name('reset.password.post');
 
@@ -22,12 +22,38 @@ Route::get('vendor/profile/verify/{token}', 'Back\ProfileController@verifyAccoun
 // Route::get('/vendor/profile/lupaverifikasi/{token}', 'Back\ProfileController@submitlupaverifikasi')->name('vendor.submitlupaverifikasi');
 // Route::get('dashboard', 'Auth\VendorAuthController@dashboard')->middleware(['auth', 'is_verify_email']);
 
-Route::get('/', 'FrontController@index');
+Route::get('/', 'Client\HomeController@index')->name('client.home');
+Route::get('/client/login', 'Client\HomeController@login')->name('client.login');
+Route::post('/client/login', 'Client\HomeController@home')->name('client.submit');
+Route::post('/client/register', 'Client\HomeController@register')->name('client.register');
+Route::get('/client/dashboard', 'Client\ClientController@dashboard')->name('client.dashboard');
+Route::post('/client/logout', 'Client\ClientController@logout')->name('client.logout');
+
+
+Route::get('/client/ticket', 'Client\TicketController@index')->name('client.ticket');
+
+Route::get('account/verify/{token}', 'Client\HomeController@verifyAccount')->name('client.verify');
+Route::post('/client/profile/lupaverifikasi', 'Client\HomeController@lupaverifikasi')->name('client.lupaverifikasi');
+Route::get('client/profile/verify/{token}', 'Client\HomeController@verifyAccount')->name('client.profileverify');
+// Route::get('/client/register', 'ClientController@register');
+
+// Route::get('/', 'FrontController@index');
 Route::get('/faq', 'FrontController@faq');
 Route::get('/pengumuman', 'FrontController@pengumuman');
 Route::get('/pengumuman/detail/{id}', 'FrontController@pengdetail');
 Route::get('/paket', 'FrontController@paket');
 
+// Route::get('/client/login', 'Auth\VendorAuthController@login')->name('vendor.login');
+// Route::post('/client/login', 'Auth\VendorAuthController@home')->name('vendor.submit');
+// Route::get('/client/api_login', 'Auth\VendorAuthController@api_login');
+
+// Route::get('/client/dashboard', 'Back\HomepageController@index')->name('vendor.dashboard');
+// Route::post('/client/logout', 'Auth\VendorAuthController@logout')->name('vendor.logout');
+// Route::get('/client/lupapassword', 'Auth\VendorAuthController@lupapassword')->name('vendor.lupa');
+// Route::get('/client/register', 'FrontController@register')->name('vendor.register');
+// Route::post('/client/registersave', 'Auth\VendorAuthController@create')->name('vendor.registersave');
+// Route::post('/client/resetpassword', 'Auth\VendorAuthController@resetPassword')->name('vendor.resetpassword');
+// Route::post('/client/dashboard/resend', 'Back\HomepageController@resend')->name('vendor.resend');
 Route::get('/vendor/login', 'Auth\VendorAuthController@login')->name('vendor.login');
 Route::post('/vendor/login', 'Auth\VendorAuthController@home')->name('vendor.submit');
 Route::get('/vendor/api_login', 'Auth\VendorAuthController@api_login');

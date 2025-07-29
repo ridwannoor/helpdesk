@@ -34,7 +34,7 @@ class VendorAuthController extends Controller
     use AuthenticatesUsers;
 
     protected $maxAttempts = 3;
-    protected $decayMinutes =2;
+    protected $decayMinutes = 2;
 
     // protected function broker()
     // {
@@ -42,7 +42,7 @@ class VendorAuthController extends Controller
     // }
 
     // protected $guard = 'vendor';
-    
+
     // protected function guard(){
     //     return Auth::guard('vendor');
     // }
@@ -58,35 +58,34 @@ class VendorAuthController extends Controller
     {
         $judul = "Login Vendor";
         $pref = Preference::first();
-        return view('front.login', compact('judul','pref'));
+        return view('front.login', compact('judul', 'pref'));
     }
 
     public function lupapassword()
     {
         $judul = "Lupa Password Vendor";
         $pref = Preference::first();
-        return view('front.email', compact('judul','pref'))->with('user_type', request()->user_type);;
+        return view('front.email', compact('judul', 'pref'))->with('user_type', request()->user_type);;
     }
 
     public function home(Request $request)
     {
-        
+
         $email = $request->email;
         $pwd   = $request->password;
 
         if (Auth::guard('vendor')->attempt(['email' => $email, 'password' => $pwd])) {
             // return redirect('/vendor/dashboard');
             return redirect()->intended('/vendor/dashboard')->with('success', 'You Have Successfully Login');
-        }else{
+        } else {
             return back()->withErrors(['email' => 'Email or password are wrong.']);
             // return redirect
         }
-        
     }
 
     public function api_login(Request $request)
     {
-        
+
         $email = $request->email;
         $pwd   = $request->password;
         Auth::guard('vendor')->logout();
@@ -97,94 +96,81 @@ class VendorAuthController extends Controller
             // return redirect()->intended('/vendor/dashboard')->with('success', 'You Have Successfully Login');
             return response()->json([
                 'status' => true,
-                'data' => $email 
+                'data' => $email
             ]);
-        }else{
+        } else {
             // return back()->withErrors(['email' => 'Email or password are wrong.']);
             return response()->json([
                 'status' => false,
-                'data' => null 
+                'data' => null
             ]);
             // return redirect
         }
-        
     }
 
-       public function create(Request $request)
+    public function create(Request $request)
     {
-	$name = $request->namaperusahaan ;
-	$mail = $request->email;
+        $name = $request->namaperusahaan;
+        $mail = $request->email;
 
-	$vend = Vendor::where('namaperusahaan', $name)->orWhere('email',$mail)->first();
+        $vend = Vendor::where('namaperusahaan', $name)->orWhere('email', $mail)->first();
 
-	if($vend)
-	{
-	   return back()->withErrors(['namaperusahaan' => 'Perusahaan / Email Anda sudah terdaftar, silahkan lupa password']);
+        if ($vend) {
+            return back()->withErrors(['namaperusahaan' => 'Perusahaan / Email Anda sudah terdaftar, silahkan lupa password']);
+        } else {
+            $vendors = new Vendor();
+            $vendors->namaperusahaan = $request->namaperusahaan;
+            $vendors->email = $request->email;
+            $vendors->password = bcrypt($request->password);
+            $vendors->badanusaha_id = $request->badanusaha_id;
+            $vendors->provinsi_id = $request->provinsi_id;
+            $vendors->save();
 
-	}
-	else
-	{
-        $vendors = new Vendor();
-        $vendors->namaperusahaan = $request->namaperusahaan ;
-        $vendors->email = $request->email ;
-        $vendors->password = bcrypt($request->password) ;
-        $vendors->badanusaha_id = $request->badanusaha_id ;
-        $vendors->provinsi_id = $request->provinsi_id ;
-        $vendors->save();
+            $token = Str::random(64);
 
-        $token = Str::random(64);
-  
-        VendorVerify::create([
-              'vendor_id' => $vendors->id, 
-              'token' => $token
+            VendorVerify::create([
+                'vendor_id' => $vendors->id,
+                'token' => $token
             ]);
-  
-        Mail::send('front.emailVerification', ['token' => $token], function($message) use($request){
-              $message->to($request->email);
-              $message->subject('Email Verification Mail');
-          });
-         
-        return redirect()->back()->with('success', 'Great! You have Successfully loggedin');
-	}
+
+            Mail::send('front.emailVerification', ['token' => $token], function ($message) use ($request) {
+                $message->to($request->email);
+                $message->subject('Email Verification Mail');
+            });
+
+            return redirect()->back()->with('success', 'Great! You have Successfully loggedin');
+        }
     }
 
-    
+
 
     public function verifyAccount($token)
     {
         $verifyVendor = VendorVerify::where('token', $token)->first();
-  
+
         $message = 'Sorry your email cannot be identified.';
-  
-        if(!is_null($verifyVendor) ){
+
+        if (!is_null($verifyVendor)) {
             $vendor = $verifyVendor->vendor;
-           
-            if(!$vendor->is_email_verified) {
+
+            if (!$vendor->is_email_verified) {
                 $verifyVendor->vendor->is_email_verified = 1;
                 $verifyVendor->vendor->save();
                 $message = "Your e-mail is verified. You can now login.";
             } else {
-                $message = "Your e-mail is already verified. You can now login.";   
+                $message = "Your e-mail is already verified. You can now login.";
             }
         }
-  
+
         // dd(vendor);
-      return redirect()->route('vendor.login')->with('message', $message);
+        return redirect()->route('vendor.login')->with('message', $message);
     }
 
     public function logout()
     {
         Auth::guard('vendor')->logout();
         session()->flush();
-     
-        return redirect()->route('vendor.login');
+
+        return redirect()->route('client.login');
     }
-    
-
-   
-
-    
-
-   
-
-} 
+}

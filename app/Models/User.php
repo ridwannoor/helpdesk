@@ -9,7 +9,7 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens,Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +17,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'image', 'status'
+        'name',
+        'email',
+        'password',
+        'image',
+        'status'
     ];
 
     /**
@@ -26,7 +30,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token'
+        'password',
+        'remember_token'
     ];
 
     /**
@@ -43,38 +48,46 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Userdetail');
     }
 
-    public function hargabarangs(){
+    public function hargabarangs()
+    {
         return $this->hasMany('App\Models\Hargabarang');
     }
 
-    public function shoppingcart(){
+    public function shoppingcart()
+    {
         return $this->hasMany('App\Models\Orderlist\Shoppingcart');
     }
 
-    public function orderdetails(){
+    public function orderdetails()
+    {
         return $this->hasMany('App\Models\Orderlist\Orderdetail');
     }
 
-    public function orderheaders(){
+    public function orderheaders()
+    {
         return $this->hasMany('App\Models\Orderlist\Orderheader');
     }
 
-    public function pjpumheaders(){
+    public function pjpumheaders()
+    {
         return $this->hasMany('App\Models\Pum\Pjpum\Pjpumheader');
     }
-    public function pumheaders(){
+    public function pumheaders()
+    {
         return $this->hasMany('App\Models\Pum\Pumheader');
     }
 
-    public function logactivity(){
+    public function logactivity()
+    {
         return $this->hasMany('App\Models\LogActivity');
     }
     // public function vendor(){
     //     return $this->hasMany('App\Models\Vendor');
     // }
 
-    public function lokasis(){
-        return $this->belongsToMany('App\Models\Lokasi','lokasi_user','user_id', 'lokasi_id');
+    public function lokasis()
+    {
+        return $this->belongsToMany('App\Models\Lokasi', 'lokasi_user', 'user_id', 'lokasi_id');
     }
 
     public function baadendumheaders()
@@ -108,7 +121,8 @@ class User extends Authenticatable
     //     return $this->hasMany('App\Data','user_id');
     // }
 
-    public function barangs(){
+    public function barangs()
+    {
         return $this->hasMany('App\Models\Barang');
     }
 
@@ -146,8 +160,13 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Barangmaintenance');
     }
 
-    public function banego(){
+    public function banego()
+    {
         return $this->hasMany('App\Models\Banego');
     }
 
+    public function ticket()
+    {
+        return $this->hasMany('App\Models\Ticket');
+    }
 }

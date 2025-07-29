@@ -17,9 +17,10 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             return route('login');
-        }
-        else if (Auth::guard('vendor')->check()) {
+        } else if (Auth::guard('vendor')->check()) {
             return redirect('/vendor/login');
+        } else if (Auth::guard('client')->check()) {
+            return redirect('/client/login');
         }
     }
 }

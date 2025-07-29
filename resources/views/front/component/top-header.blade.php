@@ -13,7 +13,7 @@
             </div>
 
             <!-- Right Side -->
-            <div class="col-lg-6">
+            {{-- <div class="col-lg-6">
                 <div class="t-right-side">
                     <div class="social-icons ml-3">
                         <ul>
@@ -23,7 +23,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>

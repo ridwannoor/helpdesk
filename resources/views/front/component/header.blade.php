@@ -10,7 +10,7 @@
         <nav class="navbar navbar-expand-lg">
             {{-- @foreach ($pref as $item) --}}
             <a class="navbar-brand" href="/">
-                <img src="{{ url('data_file/'.$pref->image) }}" height="70px" alt="image" />
+                <img src="{{ url('data_file/'.$pref->image) }}" height="50px" alt="image" />
             </a>    
             {{-- @endforeach --}}
             
@@ -36,9 +36,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/faq">FAQ</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="/pengumuman">PENGUMUMAN</a>
-                    </li>
+                    </li> --}}
                     {{-- <li class="nav-item">
                         <a class="nav-link" href="/paket">Paket Pengadaan</a>
                     </li> --}}

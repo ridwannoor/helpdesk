@@ -24,7 +24,8 @@
                     <div class="m-login__logo">
                         <a href="#">
                             @foreach ($pref as $item)
-                             <img alt="" src="{{ url('data_file/'.$item->image) }}" width="300px"/>
+                            <img src="assets/app/media/img/logos/logo-1.png">
+                             {{-- <img alt="" src="{{ url('data_file/'.$item->image) }}" width="300px"/> --}}
                             @endforeach
                             {{-- <img src="assets/app/media/img/logos/logo-1.png"> --}}
                         </a>

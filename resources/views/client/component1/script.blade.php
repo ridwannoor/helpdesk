@@ -1,0 +1,17 @@
+<script src="{{ asset('client/assets/js/modernizr-2.6.2.min.js') }}"></script>
+
+<script src="{{ asset('client/assets/js/jquery-1.10.2.min.js') }}"></script> 
+<script src="{{ asset('client/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('client/assets/js/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('client/assets/js/bootstrap-hover-dropdown.js') }}"></script>
+
+<script src="{{ asset('client/assets/js/easypiechart.min.js') }}"></script>
+<script src="{{ asset('client/assets/js/jquery.easypiechart.min.js') }}"></script>
+
+<script src="{{ asset('client/assets/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('client/assets/js/wow.js') }}"></script>
+
+<script src="{{ asset('client/assets/js/icheck.min.js') }}"></script>
+<script src="{{ asset('client/assets/js/price-range.js') }}"></script>
+
+<script src="{{ asset('client/assets/js/main.js') }}"></script>

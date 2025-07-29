@@ -20,6 +20,11 @@ class RedirectIfAuthenticated
         if ($guard == "vendor" && Auth::guard($guard)->check()) {
             return redirect()->route('vendor.dashboard');
         }
+
+        if ($guard == "client" && Auth::guard($guard)->check()) {
+            return redirect()->route('client.dashboard');
+        }
+
         if (Auth::guard($guard)->check()) {
             return redirect()->route('home');
         }

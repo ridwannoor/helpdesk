@@ -20,9 +20,17 @@ class VerifyEmail
         if (Auth::user('vendor')->email_verified_at === null) {
             return new JsonResponse(
                 [
-                    'success' => false, 
+                    'success' => false,
                     'message' => 'Please verify your email before you can continue'
-                ], 
+                ],
+                401
+            );
+        } else if (Auth::user('client')->email_verified_at === null) {
+            return new JsonResponse(
+                [
+                    'success' => false,
+                    'message' => 'Please verify your email before you can continue'
+                ],
                 401
             );
         }
