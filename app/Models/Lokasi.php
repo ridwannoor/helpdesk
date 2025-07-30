@@ -13,6 +13,10 @@ class Lokasi extends Model
     {
         return $this->hasMany('App\Models\Po\Rekappo');
     }
+    public function ticket()
+    {
+        return $this->hasMany('App\Models\Ticket');
+    }
 
     public function pums()
     {
@@ -39,7 +43,8 @@ class Lokasi extends Model
         return $this->hasMany('App\Models\Transaksi\Doheader');
     }
 
-    public function barang(){
+    public function barang()
+    {
         return $this->hasMany('App\Models\Barang');
     }
 
@@ -52,7 +57,8 @@ class Lokasi extends Model
     //     return $this->hasMany('App\Models\Vendor');
     // }
 
-    public function hargabarang(){
+    public function hargabarang()
+    {
         return $this->hasMany('App\Models\Hargabarang');
     }
 
@@ -60,14 +66,15 @@ class Lokasi extends Model
     {
         return $this->hasMany('App\Models\SO\serviceorder');
     }
-    
+
     public function barangmutasi()
     {
         return $this->hasMany('App\Models\Barangmutasi');
     }
-    
-    public function users(){
-        return $this->belongsToMany('App\Models\User','lokasi_user','user_id', 'lokasi_id');
+
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User', 'lokasi_user', 'user_id', 'lokasi_id');
     }
 
     public function tender()

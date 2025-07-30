@@ -376,6 +376,8 @@ class VendorController extends Controller
             $vendors->alternative_phone = $request->alternative_phone;
             $vendors->website = $request->website;
             $vendors->catatan = $request->catatan;
+            $vendors->terms = 1;
+            $vendors->tgl_request = date('Y-m-d');
             $vendors->save();
             $vendors->categories()->attach($request->categories);
             $vendors->jenisusahas()->attach($request->jenisusahas);
@@ -384,6 +386,12 @@ class VendorController extends Controller
             \LogActivity::addToLog($vendors->namaperusahaan);
             return redirect('/vendor')->with('success', 'Data Berhasil Disimpan'  );
         }
+    }
+
+    public function CreateVendorKode($is_bahan_baku = 0){
+        $lastVendor = Vendor::where('is_bahan_baku', $is_bahan_baku)->count();
+        $newKode = 'V' . str_pad(($lastVendor + 1), 4, '0', STR_PAD_LEFT);
+        return $newKode;
     }
 
     public function store_bahan_baku(Request $request)
@@ -400,7 +408,7 @@ class VendorController extends Controller
             \DB::beginTransaction();
 
             $vendors = new Vendor();
-            $vendors->kode = $request->kode;
+            $vendors->kode = $this->CreateVendorKode(1);
             $vendors->is_bahan_baku = 1;
             $vendors->badanusaha_id = $request->badanusaha_id;
             $vendors->namaperusahaan = $request->namaperusahaan;
@@ -423,19 +431,21 @@ class VendorController extends Controller
             $vendors->save();
             \LogActivity::addToLog($vendors->namaperusahaan);
 
-            $vendorpengurus = new Vendorpengurus;
-            $vendorpengurus->vendor_id = $vendors->id;
-            $vendorpengurus->nama = $request->nama_pimpinan;
-            $vendorpengurus->jabatan = $request->jabatan_pimpinan;
-            if ($request->file('filepengurus')) {
-                $filepengurus = $request->file('filepengurus');
-                $extension = $filepengurus->getClientOriginalExtension();
-                $filename = 'PROFPEN_'. date('YmdHis').".".$extension;
-                $filepengurus->move('data_file/profile/doc',$filename);
-                $vendorpengurus->file = $filename;
+            if ($request->nama_pimpinan || $request->jabatan_pimpinan || $request->file('filepengurus')) {
+                $vendorpengurus = new Vendorpengurus;
+                $vendorpengurus->vendor_id = $vendors->id;
+                $vendorpengurus->nama = $request->nama_pimpinan;
+                $vendorpengurus->jabatan = $request->jabatan_pimpinan;
+                if ($request->file('filepengurus')) {
+                    $filepengurus = $request->file('filepengurus');
+                    $extension = $filepengurus->getClientOriginalExtension();
+                    $filename = 'PROFPEN_'. date('YmdHis').".".$extension;
+                    $filepengurus->move('data_file/profile/doc',$filename);
+                    $vendorpengurus->file = $filename;
+                }
+                $vendorpengurus->save();
+                \LogActivity::addToLog($vendorpengurus->nama);
             }
-            $vendorpengurus->save();
-            \LogActivity::addToLog($vendorpengurus->nama);
 
             $vendorbanks = new Vendorbank();
             $vendorbanks->vendor_id = $vendors->id;

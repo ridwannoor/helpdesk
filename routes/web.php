@@ -30,12 +30,24 @@ Route::get('/client/dashboard', 'Client\ClientController@dashboard')->name('clie
 Route::post('/client/logout', 'Client\ClientController@logout')->name('client.logout');
 
 
-Route::get('/client/ticket', 'Client\TicketController@index')->name('client.ticket');
+
 
 Route::get('account/verify/{token}', 'Client\HomeController@verifyAccount')->name('client.verify');
 Route::post('/client/profile/lupaverifikasi', 'Client\HomeController@lupaverifikasi')->name('client.lupaverifikasi');
 Route::get('client/profile/verify/{token}', 'Client\HomeController@verifyAccount')->name('client.profileverify');
 // Route::get('/client/register', 'ClientController@register');
+
+//Ticket
+Route::get('/client/ticket', 'Client\TicketController@index')->name('client.ticket');
+Route::get('/client/ticket/create', 'Client\TicketController@create')->name('ticket.create');
+Route::post('/client/ticket/store', 'Client\TicketController@store')->name('ticket.store');
+Route::get('/client/ticket/edit/{id}', 'Client\TicketController@edit')->name('ticket.edit');
+Route::put('/client/ticket/update', 'Client\TicketController@update')->name('ticket.update');
+Route::get('/client/ticket/show/{id}', 'Client\TicketController@show')->name('ticket.show');
+Route::get('/client/ticket/destroy/{id}', 'Client\TicketController@destroy')->name('ticket.destroy');
+
+
+
 
 // Route::get('/', 'FrontController@index');
 Route::get('/faq', 'FrontController@faq');
@@ -216,6 +228,10 @@ Route::post('/vendor/sendmaillog', 'VendorController@sendmaillog')->name('vendor
 Route::get('/vendor/trash', 'VendorController@trash')->name('vendor.trash');
 Route::get('/vendor/restore/{id}', 'VendorController@restore')->name('vendor.restore');
 Route::get('/vendor/deletepermanent/{id}', 'VendorController@deletepermanent')->name('vendor.deletepermanent');
+
+//Tracking
+Route::get('/tracking', 'TrackingController@index')->name('tracking');
+Route::get('/tracking/show/{id}', 'TrackingController@show')->name('tracking.show');
 
 //Nota Dinas
 Route::get('/notadinas', 'NotadinasController@index')->name('notadinas');

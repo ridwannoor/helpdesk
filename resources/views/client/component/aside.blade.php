@@ -26,7 +26,7 @@
                             <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('client.ticket') }}" class="m-menu__link "><i
                                        class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
                                        class="m-menu__link-text">All Tickets</span></a></li>
-                           <li class="m-menu__item " aria-haspopup="true"><a href="#" class="m-menu__link "><i
+                           <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('ticket.create') }}" class="m-menu__link "><i
                                        class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
                                        class="m-menu__link-text">Create Tickets</span></a></li>
 

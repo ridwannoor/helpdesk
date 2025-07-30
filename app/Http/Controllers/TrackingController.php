@@ -24,7 +24,7 @@ use App\Exports\NotadinasExport;
 use App\Models\LogActivity as LogActivityModel;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class NotadinasController extends Controller
+class TrackingController extends Controller
 {
     public function __construct()
     {
@@ -35,9 +35,12 @@ class NotadinasController extends Controller
     {
         $pref = Preference::first();
         $users = Auth::user()->userdetails()->with('menu')->get();
-        $menu = Menu::where('link', '/notadinas')->first();
-        $crud = $users->where('menu_id', $menu->id)->first();
-        $nodins = Notaheader::with('notafile')->orderBy('created_at','DESC')->get();
+        // $menu = Menu::where('link', '/tracking')->first();
+        // $crud = $users->where('menu_id', $menu->id)->first();
+        $nodins = Notaheader::with('notafile')
+            ->whereYear('tgl_surat', 2025)
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
         foreach ($nodins as $nodin) {
             $temp = [];
@@ -54,17 +57,8 @@ class NotadinasController extends Controller
             $nodin->lokasi = $temp;
         }
 
-
-        // var_dump($menu);
-        // return true;
-        // $pendings = Notaheader::where('status', 'pending')->get();
-        // $opens = Notaheader::where('status', 'open')->get();
-        // $progress = Notaheader::where('status', 'proses')->get();
-        // $dones = Notaheader::where('status', 'done')->get();
-        // $cancels = Notaheader::where('status', 'cancel')->get();        // dd( $counts);
-        // dd($lokerences);
-        $judul = 'Nota Dinas';
-        return view('surat.notadinas.index', compact('judul','nodins','users','pref', 'crud' ));
+        $judul = 'Tracking 2025';
+        return view('surat.tracking.index', compact('judul','nodins','users','pref'));
     }
 
     public function create()
@@ -157,7 +151,7 @@ class NotadinasController extends Controller
     {
           $users = Auth::user()->userdetails()->with('menu')->get();
           $pref = Preference::first();
-          $judul = 'Detail Nota Dinas';
+          $judul = 'Detail Proses Pengadaan';
         //   $lokasis = Lokasi::orderBy('kode', 'ASC')->get();
         //   $vendors = Vendor::orderBy('namaperusahaan', 'ASC')->get();
         //   $brgmaintenances = Barangmaintenance::all();
@@ -177,7 +171,7 @@ class NotadinasController extends Controller
             }
             $nodins->lokasi = $temp;
 
-        return view('surat.notadinas.show', compact('nodins','users','pref','judul'));
+        return view('surat.tracking.show', compact('nodins','users','pref','judul'));
     }
 
     /**
@@ -266,7 +260,7 @@ class NotadinasController extends Controller
         $nodins->kesimpulan = $request->kesimpulan;
         $nodins->save();
 
-        Notatimelines::where('notaheader_id', $nodins->id)->update(['deleted_at' => now()]);
+        Notatimelines::where('notaheader_id', $nodins->id)->delete();
         for ($i=0; $i <= $request->jml_timeline; $i++) {
             if (isset($_POST['tanggal'.$i])) {
                 $filename = $_POST['attach_file'.$i];

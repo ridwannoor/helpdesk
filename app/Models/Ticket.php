@@ -7,24 +7,40 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $table = 'tickets';
-    protected $fillable = ['deskripsi', 'file_upload', 'jenisticket_id', 'typeticket_id', 'statusticket_id', 'client_id', 'user_id'];
+    protected $fillable = ['deskripsi', 'file_upload', 'jenisticket_id', 'typeticket_id', 'statusticket_id', 'lokasi_id', 'client_id', 'user_id'];
 
-    public function statustickets()
+    protected static function boot()
     {
-        return $this->hasMany('App\Models\Statusticket');
+        parent::boot();
+
+        static::creating(function ($ticket) {
+            if (is_null($ticket->client_id)) {
+                $ticket->client_id = auth()->user('client')->id;
+            }
+        });
     }
 
-    public function typetickets()
+    public function statusticket()
     {
-        return $this->hasMany('App\Models\Typeticket');
+        return $this->belongsTo('App\Models\Statusticket');
     }
-    public function clients()
+
+    public function typeticket()
     {
-        return $this->hasMany('App\Models\Client');
+        return $this->belongsTo('App\Models\Typeticket');
     }
-    public function jenistickets()
+    public function client()
     {
-        return $this->hasMany('App\Models\Jenisticket');
+        return $this->belongsTo('App\Models\Client');
+    }
+    public function jenisticket()
+    {
+        return $this->belongsTo('App\Models\Jenisticket');
+    }
+
+    public function lokasi()
+    {
+        return $this->belongsTo('App\Models\Lokasi');
     }
 
     public function user()

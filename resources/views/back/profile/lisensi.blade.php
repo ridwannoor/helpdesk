@@ -15,7 +15,7 @@
                 {{-- <input type="hidden" name="id" value="{{$vendors->id}}" /> --}}
                 <input type="hidden" name="vendor_id" value="{{Auth::user('vendor')->id}}" />
             </div>
-            
+
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">*Jenis :</label>
               <select name="vendorjenis_id" id="jenis" class="form-control m-bootstrap-select m_selectpicker" required>
@@ -37,7 +37,7 @@
                 <label for="recipient-name" class="form-control-label">*Penerbit :</label>
                 <input type="text" name="penerbit" class="form-control" id="penerbit" required>
               </div>
-            
+
               <div class="form-group">
                 <label for="recipient-name" class="form-control-label">*Tgl Mulai Terbit :</label>
                 <input type="date" class="form-control m-input" name="start">
@@ -60,9 +60,9 @@
                     <input type="checkbox" name="expired" id="exp" value="1">  No Expired Date
                     <span></span>
                     </label>
-                
+
               </div>
-              
+
               <div class="form-group">
                 <label for="recipient-name" class="form-control-label">*File Upload :</label>
                 <input type="file" name="file" class="form-control" id="file" >
@@ -71,7 +71,7 @@
                 <small class="error">{{ $errors->first('file') }}</small>
                 @endif
               </div>
-        
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -82,8 +82,8 @@
     </div>
   </div>
 
- 
-  @foreach (Auth::user('vendor')->vendorlisensi as $vl)      
+
+  @foreach (Auth::user('vendor')->vendorlisensi as $vl)
   <div class="modal fade" id="m_modal_6{{ $vl->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -93,7 +93,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">         
+        <div class="modal-body">
             <form>
                 <table class="table">
                     <tbody>
@@ -117,7 +117,7 @@
                             <td scope="row">Penerbit</td>
                             <td>{{ $vl->penerbit }}</td>
                         </tr>
-                       
+
                         <tr>
                             <td scope="row">Start Date</td>
                             <td>{{ date('d-m-Y', strtotime($vl->start))  }}</td>
@@ -127,15 +127,15 @@
                             <td>
                               {{-- {{ date('d-m-Y', strtotime($vl->end))  }} --}}
                               @if ($vl->expired)
-                                <span class="m--font-success">No Expired</span> 
+                                <span class="m--font-success">No Expired</span>
                               @else
-                                @php                              
+                                @php
                                   $now = now();
                                 @endphp
-                                @if ($vl->end > $now)                              
-                                    <span class="m--font-success">{{ date('d-m-Y', strtotime($vl->end)) . " (Active)"  }} </span> 
-                                @else                              
-                                    <span class="m--font-danger">{{ date('d-m-Y', strtotime($vl->end)) . " (Expired)" }} </span> 
+                                @if ($vl->end > $now)
+                                    <span class="m--font-success">{{ date('d-m-Y', strtotime($vl->end)) . " (Active)"  }} </span>
+                                @else
+                                    <span class="m--font-danger">{{ date('d-m-Y', strtotime($vl->end)) . " (Expired)" }} </span>
                                 @endif
                               @endif
                            </td>
@@ -149,10 +149,10 @@
             </form>
       </div>
     </div>
-  </div>  
+  </div>
   </div>
   @endforeach
-  
+
   @foreach (Auth::user('vendor')->vendorlisensi as $vl)
   <div class="modal fade" id="m_modal_7{{ $vl->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -171,7 +171,7 @@
                 <input type="hidden" name="id" value="{{$vl->id}}" />
                 <input type="hidden" name="vendor_id" value="{{Auth::user('vendor')->id}}" />
             </div>
-            
+
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">*Jenis :</label>
               <select name="vendorjenis_id" id="jenis" class="form-control m-bootstrap-select m_selectpicker" required>
@@ -195,12 +195,12 @@
                 <label for="recipient-name" class="form-control-label">*Penerbit :</label>
                 <input type="text" name="penerbit" class="form-control" id="penerbit" value="{{ $vl->penerbit }}" required>
               </div>
-              
+
               <div class="form-group">
                 <label for="recipient-name" class="form-control-label">*Tgl Mulai Terbit :</label>
                 <input class="form-control m-input" type="date" name="start" value="{{ $vl->start  }}" id="example-date-input" required>
                 {{-- <div class="input-group date">
-                    <input type="text" class="form-control m-input" name="start" 
+                    <input type="text" class="form-control m-input" name="start"
                         placeholder="Select Date" id="starte" value="{{ $vl->start  }}"  required/>
                     <div class="input-group-append">
                         <span class="input-group-text">
@@ -215,20 +215,20 @@
                 <input class="form-control m-input" type="date" name="end" value="" id="expired1">
                 <br>
                 <label class="m-checkbox m-checkbox--bold">
-                    <input type="checkbox" name="expired" id="exp1" value="1" checked="checked"> No Expired Date            
+                    <input type="checkbox" name="expired" id="exp1" value="1" checked="checked"> No Expired Date
                   <span></span>
                 </label>
                 @else
                 <input class="form-control m-input" type="date" name="end" value="{{ $vl->end}}" id="expired1">
                 <br>
                 <label class="m-checkbox m-checkbox--bold">
-                    <input type="checkbox" name="expired" id="exp1" value="1"> No Expired Date            
+                    <input type="checkbox" name="expired" id="exp1" value="1"> No Expired Date
                   <span></span>
                 </label>
                 @endif
-                
+
                 {{-- <div class="input-group date">
-                    <input type="text" class="form-control m-input" name="end" 
+                    <input type="text" class="form-control m-input" name="end"
                         placeholder="Select Date" id="ende" value="{{ $vl->end }}" />
                     <div class="input-group-append">
                         <span class="input-group-text">
@@ -241,17 +241,17 @@
                 <label for="recipient-name" class="form-control-label">File Upload:</label>
                 <input type="file" name="file" class="form-control" id="file" >
                 <span class="m-form__help m--font-primary">Upload File Format : .pdf | max: 10Mbps</span><br>
-                
+
                 <div class="alert alert-default alert-dismissible fade show m-alert m-alert--square m-alert--air" role="alert">
                   <span><a href="{{ url('data_file/profile/doc/'.$vl->file) }}">{{ $vl->file }}</a></span>
-                </div>   
+                </div>
 
                 {{-- <span class="m-form__help m--font-focus">{{ $vl->file }}</span>  --}}
                 @if($errors->has('file'))
                 <small class="error">{{ $errors->first('file') }}</small>
                 @endif
               </div>
-        
+
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Update</button>
@@ -259,18 +259,18 @@
     </form>
       </div>
     </div>
-  </div> 
-  
+  </div>
+
   @endforeach
 
-  
-  
+
+
 @section('footer-script')
 <script src="{{ asset('assets/demo/default/custom/crud/forms/widgets/bootstrap-datepicker.js') }}" type="text/javascript"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
        $(document).ready(function () {
-        
+
         $("#start").datepicker({
                 autoclose: true,
                 format: "yyyy-mm-dd"
@@ -289,8 +289,8 @@
             format: "yyyy-mm-dd",
             // startDate:new Date
         });
-       
-       
+
+
         $('#exp').change(function() {
           if($(this).prop("checked")){
           $('#expired').prop('disabled', true);
@@ -300,7 +300,7 @@
           $('#expired').prop('disabled',false)
           }
         });
-      
+
         $('#exp1').change(function() {
           if($(this).prop("checked")){
           $('#expired1').prop('disabled', true);

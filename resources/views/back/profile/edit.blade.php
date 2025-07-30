@@ -29,7 +29,7 @@
                     <input type="hidden" name="_method" value="PUT" />
                     <input type="hidden" name="id" value="{{$vendors->id}}" />
                 </div>
-				<div class="m-portlet__body">	
+				<div class="m-portlet__body">
 					<div class="form-group m-form__group row">
                         <div class="col-lg-2">
                             <label for="badanusaha">Badan Usaha *</label>
@@ -37,9 +37,9 @@
                                 <option value="{{ $vendors->badanusaha_id }}">{{ $vendors->badanusaha->kode }}</option>
                                 @foreach ($badanusaha as $item)
                                     @if ($vendors->badanusaha_id != $item->id)
-                                           <option value="{{ $item->id }}">{{ $item->kode }}</option>    
-                                    @endif                                 
-                                @endforeach                                
+                                           <option value="{{ $item->id }}">{{ $item->kode }}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
 						<div class="col-lg-4">
@@ -63,8 +63,8 @@
 							</div>
 							{{-- <span class="m-form__help">Please enter your postcode</span> --}}
 						</div>
-					</div>	 
-                  
+					</div>
+
 					<div class="form-group m-form__group row">
 						{{-- <div class="col-lg-4">
 							<label>Product:</label>
@@ -85,15 +85,15 @@
                                 <option value="{{ $vendors->provinsi_id }}">{{ $vendors->provinsi->name }}</option>
                                 @foreach ($provinsi as $item)
                                     @if ($vendors->provinsi_id != $item->id)
-                                           <option value="{{ $item->id }}">{{ $item->name }}</option>    
-                                    @endif                                 
-                                @endforeach                                
+                                           <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
 						{{-- <div class="col-lg-4">
 							<label class="">Alamat Domisili</label>
                             <textarea name="alamat_domisili" class="form-control m-input" id="alamat_domisili" cols="30" rows="4">{{ $vendors->alamat_domisili }}</textarea>
-							
+
 						</div> --}}
                         <div class="col-lg-4">
 							<label>Email *</label>
@@ -103,9 +103,9 @@
 							</div>
 							{{-- <span class="m-form__help">Please enter your address</span> --}}
 						</div>
-						
-					</div>	 
-                    <div class="form-group m-form__group row">		
+
+					</div>
+                    <div class="form-group m-form__group row">
 						<div class="col-lg-4">
 							<label class="">Website </label>
 							<div class="m-input-icon m-input-icon--right">
@@ -113,7 +113,7 @@
 								<span class="m-input-icon__icon m-input-icon__icon--right"><span><i class="la la-globe"></i></span></span>
 							</div>
 							{{-- <span class="m-form__help">Please enter your postcode</span> --}}
-						</div>				
+						</div>
 						<div class="col-lg-4">
 							<label class="">Contact Person *</label>
 							<div class="m-input-icon m-input-icon--right">
@@ -122,7 +122,7 @@
 							</div>
 							{{-- <span class="m-form__help">Please enter your postcode</span> --}}
 						</div>
-                       
+
                         <div class="col-lg-4">
 							<label class="">Handphone *</label>
 							<div class="m-input-icon m-input-icon--right">
@@ -131,8 +131,8 @@
 							</div>
 							{{-- <span class="m-form__help">Please enter your postcode</span> --}}
 						</div>
-					</div>	 
-                    <div class="form-group m-form__group row">						
+					</div>
+                    <div class="form-group m-form__group row">
 						<div class="col-lg-4">
 							<label class="">Contact Person Alternative </label>
 							<div class="m-input-icon m-input-icon--right">
@@ -149,18 +149,18 @@
 							</div>
 							{{-- <span class="m-form__help">Please enter your postcode</span> --}}
 						</div>
-                       
+
 					</div>
-					<div class="form-group m-form__group row">						
+					<div class="form-group m-form__group row">
 						{{-- <div class="col-lg-3">
 							<label class="">Lokasi:</label>
                             <select name="lokasi_id" id="lokasi" class="form-control m-bootstrap-select m_selectpicker">
                                 <option value="{{ $vendors->lokasi_id }}">{{ $vendors->lokasi->kode }}</option>
                                 @foreach ($lokasi as $item)
                                     @if ($vendors->lokasi_id != $item->id)
-                                           <option value="{{ $item->id }}">{{ $item->kode }}</option>    
-                                    @endif                                 
-                                @endforeach                                
+                                           <option value="{{ $item->id }}">{{ $item->kode }}</option>
+                                    @endif
+                                @endforeach
                             </select>
 						</div> --}}
 						@php
@@ -173,7 +173,7 @@
                         <div class="col-lg-3">
 							<label class="">Bidang Pekerjaan *</label>
 							<div class="input-group m-input-group m-input-group--square">
-							{!! Form::select('jenispekerjaans[]', $jenispekerjaans, $jpek, ['class' => 'form-control m-bootstrap-select m_selectpicker', 'required', 'multiple']) !!} 
+							{!! Form::select('jenispekerjaans[]', $jenispekerjaans, $jpek, ['class' => 'form-control m-bootstrap-select m_selectpicker', 'required', 'multiple']) !!}
 							</div>
 							<span class="m-form__help">Lebih dari 1 Pilihan</span>
 						</div>
@@ -187,7 +187,7 @@
                         <div class="col-lg-3">
 							<label class="">Kategori Usaha *</label>
 							<div class="input-group m-input-group m-input-group--square">
-                            {!! Form::select('categories[]', $categories, $cates, ['class' => 'form-control m-bootstrap-select m_selectpicker', 'required', 'multiple']) !!} 
+                            {!! Form::select('categories[]', $categories, $cates, ['class' => 'form-control m-bootstrap-select m_selectpicker', 'required', 'multiple']) !!}
 							</div>
 								<span class="m-form__help">Lebih dari 1 Pilihan</span>
 						</div>
@@ -201,7 +201,7 @@
                         <div class="col-lg-3">
 							<label class="">Jenis Usaha *</label>
 							<div class="input-group m-input-group m-input-group--square">
-							{!! Form::select('jenisusahas[]', $jenisusahas, $jen, ['class' => 'form-control m-bootstrap-select m_selectpicker', 'required', 'multiple']) !!} 
+							{!! Form::select('jenisusahas[]', $jenisusahas, $jen, ['class' => 'form-control m-bootstrap-select m_selectpicker', 'required', 'multiple']) !!}
 							</div>
 								<span class="m-form__help">Lebih dari 1 Pilihan</span>
 						</div>
@@ -213,14 +213,14 @@
 							</div>
 							{{-- <span class="m-form__help">Please enter your address</span> --}}
 						</div>
-					</div>	 	 
-                    <div class="form-group m-form__group row">						
+					</div>
+                    <div class="form-group m-form__group row">
 						<div class="col-lg-12">
 							<label class="">Catatan:</label>
 							<textarea name="catatan" id="catatan" class="form-control m-input" cols="30" rows="5">{{ $vendors->catatan }}</textarea>
 						</div>
-                       
-					</div>	
+
+					</div>
 	            </div>
 	            <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
 					<div class="m-form__actions m-form__actions--solid">
@@ -237,7 +237,7 @@
 			</form>
 			<!--end::Form-->
 		</div>
-       </div>            
+       </div>
     </div>
 </div>
 @endsection

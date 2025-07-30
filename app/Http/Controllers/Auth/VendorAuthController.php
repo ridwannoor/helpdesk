@@ -81,6 +81,10 @@ class VendorAuthController extends Controller
             return back()->withErrors(['email' => 'Email or password are wrong.']);
             // return redirect
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 53cfbbbc08d912e0518321ff1864a317026cf79f
     }
 
     public function api_login(Request $request)
@@ -106,6 +110,16 @@ class VendorAuthController extends Controller
             ]);
             // return redirect
         }
+<<<<<<< HEAD
+=======
+
+    }
+
+    public function CreateVendorKode($is_bahan_baku = 0){
+        $lastVendor = Vendor::where('is_bahan_baku', $is_bahan_baku)->count();
+        $newKode = 'V' . str_pad(($lastVendor + 1), 4, '0', STR_PAD_LEFT);
+        return $newKode;
+>>>>>>> 53cfbbbc08d912e0518321ff1864a317026cf79f
     }
 
     public function create(Request $request)
@@ -126,6 +140,7 @@ class VendorAuthController extends Controller
             $vendors->provinsi_id = $request->provinsi_id;
             $vendors->save();
 
+<<<<<<< HEAD
             $token = Str::random(64);
 
             VendorVerify::create([
@@ -140,6 +155,35 @@ class VendorAuthController extends Controller
 
             return redirect()->back()->with('success', 'Great! You have Successfully loggedin');
         }
+=======
+	}
+	else
+	{
+        $vendors = new Vendor();
+        $vendors->namaperusahaan = $request->namaperusahaan ;
+        $vendors->is_bahan_baku = $request->is_bahan_baku ;
+        $vendors->kode = $this->CreateVendorKode($request->is_bahan_baku);
+        $vendors->email = $request->email ;
+        $vendors->password = bcrypt($request->password) ;
+        $vendors->badanusaha_id = $request->badanusaha_id ;
+        $vendors->provinsi_id = $request->provinsi_id ;
+        $vendors->save();
+
+        $token = Str::random(64);
+
+        VendorVerify::create([
+              'vendor_id' => $vendors->id,
+              'token' => $token
+            ]);
+
+        Mail::send('front.emailVerification', ['token' => $token], function($message) use($request){
+              $message->to($request->email);
+              $message->subject('Email Verification Mail');
+          });
+
+        return redirect()->back()->with('success', 'Great! You have Successfully loggedin');
+	}
+>>>>>>> 53cfbbbc08d912e0518321ff1864a317026cf79f
     }
 
 
@@ -150,10 +194,17 @@ class VendorAuthController extends Controller
 
         $message = 'Sorry your email cannot be identified.';
 
+<<<<<<< HEAD
         if (!is_null($verifyVendor)) {
             $vendor = $verifyVendor->vendor;
 
             if (!$vendor->is_email_verified) {
+=======
+        if(!is_null($verifyVendor) ){
+            $vendor = $verifyVendor->vendor;
+
+            if(!$vendor->is_email_verified) {
+>>>>>>> 53cfbbbc08d912e0518321ff1864a317026cf79f
                 $verifyVendor->vendor->is_email_verified = 1;
                 $verifyVendor->vendor->save();
                 $message = "Your e-mail is verified. You can now login.";
@@ -171,6 +222,19 @@ class VendorAuthController extends Controller
         Auth::guard('vendor')->logout();
         session()->flush();
 
+<<<<<<< HEAD
         return redirect()->route('client.login');
     }
+=======
+        return redirect()->route('vendor.login');
+    }
+
+
+
+
+
+
+
+
+>>>>>>> 53cfbbbc08d912e0518321ff1864a317026cf79f
 }

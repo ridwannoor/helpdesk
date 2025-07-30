@@ -56,8 +56,7 @@
                         <li class="m-portlet__nav-item">
 
                             {{-- @if ($crud->create ) --}}
-                            <a href="/ticket/add"
-                                class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
+                            <a href="{{ route('ticket.create') }}" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
                                 <span>
                                     <i class="la la-plus"></i>
                                     <span>New record</span>
@@ -80,11 +79,11 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Subject</th>
+                            <th>Title</th>
                             <th>Deskripsi</th>
                             <th>Kategori</th>
                             <th>Lokasi Awal</th>
-                            <th>Lokasi Terakhir</th>
+                            <th>Priority</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -96,9 +95,14 @@
 
                         @foreach ($tickets as $item)
                             <tr>
-                                <td></td>
+                                {{-- <td></td> --}}
                                   <td>{{ $no++ }}</td>
-                                    <td style="vertical-align : middle;text-align:center;">{{ $item->deskripsi }}</td>
+                                    <td style="vertical-align : middle;text-align:center;">{{ $item->title }}</td>
+                                      <td style="vertical-align : middle;text-align:center;">{{ $item->deskripsi }}</td>
+                            <td>Lokasi Awal</td>
+                            <td>Lokasi Terakhir</td>
+                              <td style="vertical-align : middle;text-align:center;">{{ $item->jenisticket->deskripsi }}</td>
+                                  <td style="vertical-align : middle;text-align:center;">{{ $item->statusticket->deskripsi }}</td>
                                       <td width='150px'>
                                 <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-left m-dropdown--align-push" m-dropdown-toggle="click" aria-expanded="true">
                                     <a href="#" class="m-portlet__nav-link m-dropdown__toggle btn m-btn m-btn--link m-btn--hover-brand m-btn--pill">

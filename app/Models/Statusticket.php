@@ -11,6 +11,6 @@ class Statusticket extends Model
 
     public function ticket()
     {
-        return $this->belongsTo('App\Models\Ticket');
+        return $this->hasMany('App\Models\Ticket');
     }
 }

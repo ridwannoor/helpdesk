@@ -6,4 +6,6 @@
  <script src="{{ asset('client/metro/assets/app/js/dashboard.js') }}" type="text/javascript"></script>
     <!--begin::Page Scripts -->
     <script src="{{ asset('client/metro/assets/demo/default/custom/crud/forms/widgets/summernote.js') }}" type="text/javascript"></script>
+       <script src="{{ asset('client/metro/assets/demo/default/custom/crud/forms/validation/form-widgets.js') }}" type="text/javascript"></script>
+       <script src="{{asset('client/metro/assets/demo/default/custom/crud/forms/widgets/bootstrap-select.js')}}" type="text/javascript"></script>    
     <!--end::Page Scripts -->

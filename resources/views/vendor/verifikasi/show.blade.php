@@ -44,7 +44,7 @@
             @endphp
             @foreach ($vendors->vendorlisensi as $vl)
 
-                @if ($vl->end < $now)
+                @if ($vl->end < $now AND $vl->expired == null)
                     <div class="alert alert-danger" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         </button>
@@ -56,7 +56,7 @@
             @endforeach
 
             @foreach ($vendors->vendorsertifikat as $vs)
-                @if ($vs->berlaku_end < $now)
+                @if ($vs->berlaku_end < $now AND $vl->expired == null)
                     <div class="alert alert-danger" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         </button>
